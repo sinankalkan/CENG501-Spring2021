@@ -32,4 +32,30 @@ Results from the original paper are presented alongside the results obtained fro
 |ODENet (ours)  | xx | xx | xx | xx | xx | xx
 |===
 
+.Models trained with original images along with perturbed images
+|===
+|      | Gaussian noise     4+| Adversarial attack
+
+|*MNIST*       | *σ = 100* | *FGSM-0.3* | *FGSM-0.5* | *PGD-0.2* | *PGD-0.3*
+|CNN (paper) | 98.7±0.1 | 54.2±1.1 | 15.8±1.3 | 32.9±3.7 | 0.0±0.0
+|CNN (ours)  | xx | xx | xx | xx | xx
+|ODENet (paper) | 99.4±0.1 | 71.5±1.1 | 19.9±1.2 | 64.7±1.8 | 13.0±0.2
+|ODENet (ours)  | xx | xx | xx | xx | xx
+|TisODE (paper) | 99.6±0.0 | 75.7±1.4 | 26.5±3.8 | 67.4±1.5 | 13.2±1.0
+|TisODE (ours)  | xx | xx | xx | xx | xx
+|*SVHN*       | *σ = 35* | *FGSM-5/255* | *FGSM-8/255* | *PGD-3/255* | *PGD-5/255*
+|CNN (paper) | 90.6±0.2 | 25.3±0.6 | 12.3±0.7 | 32.4±0.4 | 14.0±0.5
+|CNN (ours)  | xx | xx | xx | xx | xx
+|ODENet (paper) | 95.1±0.1 | 49.4±1.0 | 34.7±0.5 | 50.9±1.3 | 27.2±1.4
+|ODENet (ours)  | xx | xx | xx | xx | xx
+|TisODE (paper) | 94.9±0.1 | 51.6±1.2 | 38.2±1.9 | 52.0±0.9 | 28.2±0.3
+|TisODE (ours)  | xx | xx | xx | xx | xx
+|*ImgNet10*       | *σ = 25* | *FGSM-5/255* | *FGSM-8/255* | *PGD-3/255* | *PGD-5/255*
+|CNN (paper) | 92.6±0.6 | 40.9±1.8 | 26.7±1.7 | 28.6±1.5 | 11.2±1.2
+|CNN (ours)  | xx | xx | xx | xx | xx
+|ODENet (paper) | 92.6±0.5 | 42.0±0.4 | 29.0±1.0 | 29.8±0.4 | 12.3±0.6
+|ODENet (ours)  | xx | xx | xx | xx | xx
+|TisODE (paper) | 92.8±0.4 | 44.3±0.7 | 31.4±1.1 | 31.1±1.2 | 14.5±1.1
+|TisODE (ours)  | xx | xx | xx | xx | xx
+|===
 

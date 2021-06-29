@@ -12,23 +12,24 @@ Implementation of the paper by Yan, "Robustness of Neural Ordinary Differential 
 Results from the original paper are presented alongside the results obtained from our implementation. For ease of comparison, the results are are interleaved so that results from our implementation immediately follow results from the original paper.
 
 .Models trained with non-perturbed images
-|==
+|===
 |      3+| Gaussian noise     3+| Adversarial attack
 
-|MNIST       | σ = 50 | σ = 75 | σ = 100 | FGSM-0.15 | FGSM-0.3 | FGSM-0.5
+|*MNIST*       | *σ = 50* | *σ = 75* | *σ = 100* | *FGSM-0.15* | *FGSM-0.3* | *FGSM-0.5*
 |CNN (paper) | 98.1±0.7 | 85.1±4.3 | 56.4±5.6 | 63.4±2.3 | 24.0±8.9 | 8.3±3.2
 |CNN (ours)  | xx | xx | xx | xx | xx | xx
 |ODENet (paper) | 98.7±0.6 | 90.6±5.4 | 73.2±8.6 | 83.5±0.9 | 42.1±2.4 | 14.3±2.1
 |ODENet (ours)  | xx | xx | xx | xx | xx | xx
-|SVHN       | σ = 15 | σ = 25 | σ = 35 | FGSM-3/255 | FGSM-5/255 | FGSM-8/255
+|*SVHN*       | *σ = 15* | *σ = 25* | *σ = 35* | *FGSM-3/255* | *FGSM-5/255* | *FGSM-8/255*
 |CNN (paper) | 90.0±1.2 | 76.3±2.7 | 60.9±3.9 | 29.2±2.9 | 13.7±1.9 | 5.4±1.5
 |CNN (ours)  | xx | xx | xx | xx | xx | xx
 |ODENet (paper) | 95.7±0.7 | 88.1±1.5 | 78.2±2.1 | 58.2±2.3 | 43.0±1.3 | 30.9±1.4
 |ODENet (ours)  | xx | xx | xx | xx | xx | xx
-|ImgNet10       | σ = 10 | σ = 15 | σ = 25 | FGSM-5/255 | FGSM-8/255 | FGSM-16/255
+|*ImgNet10*       | *σ = 10* | *σ = 15* | *σ = 25* | *FGSM-5/255* | *FGSM-8/255* | *FGSM-16/255*
 |CNN (paper) | 80.1±1.8 | 63.3±2.0 | 40.8±2.7 | 28.5±0.5 | 18.1±0.7 | 9.4±1.2
 |CNN (ours)  | xx | xx | xx | xx | xx | xx
 |ODENet (paper) | 81.9±2.0 | 67.5±2.0 | 48.7±2.6 | 36.2±1.0 | 27.2±1.1 | 14.4±1.7
 |ODENet (ours)  | xx | xx | xx | xx | xx | xx
+|===
 
 

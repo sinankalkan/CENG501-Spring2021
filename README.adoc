@@ -6,6 +6,32 @@ Implementation of the paper by Yan, "Robustness of Neural Ordinary Differential 
 
 == Implementation & assumptions
 
+We implemented the networks using https://pytorch.org/[PyTorch] and https://www.pytorchlightning.ai/[PyTorch Lightning]. Gaussian noise was added with a custom function written using PyTorch random number generator. Neural ODE equations were solved using the https://github.com/rtqichen/torchdiffeq[torchdiffeq] Neural ODE library. FGSM and PGD adversarial attack samples were created using the https://github.com/bethgelab/foolbox[FoolBox] library. https://colab.research.google.com/[Google Colab] with GPU runtime was used for running the notebooks.
+
+Training and robustness evaluation was done in Colab notebooks with separate notebooks for each of the three datasets and some common code in a utils.py file. Trained models were saved and subsequently loaded for robustness evaluation.
+
+=== Hyperparameters
+
+Some hyperparameters are given in the paper.
+
+- Neural ODE network configurations are described.
+- Weight decay = 0.0005. Able to use directly.
+- The TisODE steady-state loss weight is specified as 0.1. Using the formula for L_ss as given in Equation 5 in the paper this weight overwhelms the negative-log likelihood loss, so we used batch mean of the steady-state norm rather than the batch sum of the steady-state norm. With this change, the given loss weight worked to train the network.
+- The feature denoising method is specified as dot-product non-local. This method is described in the referenced paper.
+
+Other hyperparameters are not given in the paper, so we made our own choices for them.
+
+- The random seed values for initialization aren't provided, so three arbitrary seed values were selected.
+- Input randomization output size was selected to be 40 for the MNIST networks, 36 for the SVHN networks, and xx for the ImageNet networks.
+- Group norm number of channels in each group is set to the lesser of the number of channels or 32, matching the implementation of the torchdiffeq Neural ODE library demo network.
+- Normalization. Each dataset is assumed to be normalized to mean of 0 and standard deviation of 1.
+- CNN network configuration not specified. Assumed to be the same as the ODE network.
+- Training batch size. Set to 128.
+- Loss function. Since the problem is classification, negative-log likelihood (NLL) loss function is used.
+- Optimization method. Using Adams method.
+- Learning rate. Set to initial rate of 0.015 and decrease by 20% when validation loss doesn't decrease for 2 epochs.
+- Number of epochs for training set to 150.
+- Training vs validation split not specified but we decided to do one.
 
 == Results
 

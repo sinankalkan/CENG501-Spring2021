@@ -16,7 +16,7 @@ Some hyperparameters are given in the paper.
 
 - Neural ODE network configurations are described.
 - Weight decay = 0.0005. Able to use directly.
-- The TisODE steady-state loss weight is specified as 0.1. Using the formula for L_ss as given in Equation 5 in the paper this weight overwhelms the negative-log likelihood loss, so we used batch mean of the steady-state norm rather than the batch sum of the steady-state norm. With this change, the given loss weight worked to train the network.
+- The TisODE steady-state loss weight is specified as 0.1. Using the formula for L_ss as given in Equation 5 in the paper this weight overwhelms the negative-log likelihood loss, so we used batch mean of the steady-state norm rather than the batch sum of the steady-state norm. With this change, the given loss weight worked to train the network. Correspondence with the author confirmed that the original work was implemented this way. We also learned that the steady-state loss was not always set to 0.1 but sometimes other values such as 0.05 or 0.01 were used. Due to issues with training, we used 0.01.
 - The feature denoising method is specified as dot-product non-local. This method is described in the referenced paper.
 
 Other hyperparameters are not given in the paper, so we made our own choices for them.
@@ -28,9 +28,9 @@ Other hyperparameters are not given in the paper, so we made our own choices for
 - CNN network configuration not specified. Assumed to be the same as the ODE network.
 - Training batch size. Set to 128.
 - Loss function. Since the problem is classification, negative-log likelihood (NLL) loss function is used.
-- Optimization method. Using Adams method.
-- Learning rate. Set to initial rate of 0.015 and decrease by 20% when validation loss doesn't decrease for 2 epochs.
-- Number of epochs for training set to 150.
+- Optimization method. Using Adams method with pytorch default hyperparameters.
+- Learning rate. Set to initial rate of 0.015 for MNIST and 0.001 for SVHN and decrease by 20% when validation loss doesn't decrease for 2 epochs.
+- Maximum number of epochs for training set to 250 but with early stopping if at least 0.001 improvement in validation loss is not seen in 10 epochs.
 - Training vs validation split not specified but we decided to do one.
 
 == Results

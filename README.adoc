@@ -131,3 +131,15 @@ The results show some cases where our results were similar to the published resu
 - random variances due to using different seeds
 
 Apart from the correctness of the output of our implementation, as an educational exercise, we were able to implement a deep learning project including adversarial attacks and neural ODE blocks. We learned to customize the training loop using PyTorch Lightning. We went through many iterations of troubleshooting in the implementation phase. In some cases, it was remarkable how well the network was able to learn even when coding errors caused it to be wrongly configured.
+
+== Division of Work
+
+Paul
+- Set up initial notebooks on Google Colab
+- Download ImageNet 2012 dataset and extract relevant image classes to directories
+- Code MNIST & SVHN models and training loop using PyTorch Lightning
+- Code testing loop and integrate Foolbox adversarial attack
+- Create GitHub repo and begin drafting report
+
+Abdullah
+- Code parameterized additive Gaussian noise image transform

@@ -135,6 +135,7 @@ Apart from the correctness of the output of our implementation, as an educationa
 == Division of Work
 
 Paul
+
 - Set up initial notebooks on Google Colab
 - Download ImageNet 2012 dataset and extract relevant image classes to directories
 - Code MNIST & SVHN models and training loop using PyTorch Lightning
@@ -142,4 +143,5 @@ Paul
 - Create GitHub repo and begin drafting report
 
 Abdullah
+
 - Code parameterized additive Gaussian noise image transform

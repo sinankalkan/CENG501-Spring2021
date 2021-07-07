@@ -38,7 +38,7 @@ Other hyperparameters are not given in the paper, so we made our own choices for
 - Training batch size. Set to 128.
 - Loss function. Since the problem is classification, negative-log likelihood (NLL) loss function is used.
 - Optimization method. Using Adams method with pytorch default hyperparameters.
-- Learning rate. Set to initial rate of 0.015 for MNIST and 0.001 for SVHN and decrease by 25% when validation loss doesn't decrease for 2 epochs.
+- Learning rate. Set to initial rate of 0.015 for MNIST and 0.001 for SVHN and decrease by 25% when validation loss doesn't decrease for 3 epochs.
 - Maximum number of epochs for training set to 250 but with early stopping if at least 0.001 improvement in validation loss is not seen in 10 epochs.
 - Training vs validation split not specified but we decided to use such a split for monitoring training progress. Approximately 10% of the training data was set used for validation.
 
@@ -124,3 +124,10 @@ Results from the original paper are presented alongside the results obtained fro
 |===
 
 == Conclusions
+
+The results show some cases where our results were similar to the published results, but there are also many cases where the results are quite different. These differences could be due to various factors including
+- assumptions made to fill in information not provided in the original paper that actually don't match the original author's implementation
+- implementation errors on our part
+- random variances due to using different seeds
+
+Apart from the correctness of the output of our implementation, as an educational exercise, we were able to implement a deep learning project including adversarial attacks and neural ODE blocks. We learned to customize the training loop using PyTorch Lightning. We went through many iterations of troubleshooting in the implementation phase. In some cases, it was remarkable how well the network was able to learn even when coding errors caused it to be wrongly configured.

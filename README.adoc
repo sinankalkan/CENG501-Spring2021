@@ -11,6 +11,8 @@ In addition to the robustness analysis, the authors of the paper present a novel
 
 We implemented the networks using https://pytorch.org/[PyTorch] and https://www.pytorchlightning.ai/[PyTorch Lightning]. Gaussian noise was added with a custom function written using PyTorch random number generator. Neural ODE equations were solved using the https://github.com/rtqichen/torchdiffeq[torchdiffeq] Neural ODE library. FGSM and PGD adversarial attack samples were created using the https://github.com/bethgelab/foolbox[FoolBox] library. https://colab.research.google.com/[Google Colab] with GPU runtime was used for running the notebooks.
 
+The MNIST and SVHN datasets were loaded using torchvision.datasets. The subset of the ImageNet dataset was created by downloading all of the ImageNet 2012 dataset and then extracting images in the stated categories off-line using a combination of custom Python scripts and manually moving files. This "ImageNet10" dataset was uploaded to Google Drive and can be downloaded from https://drive.google.com/drive/folders/16x-aUfBRtH6BD-fbJB-DqTRtl6S2X-MW?usp=sharing[this link].
+
 Training and robustness evaluation was done in Colab notebooks with separate notebooks for each of the three datasets and some common code in a utils.py file. Trained models were saved and subsequently loaded for robustness evaluation.
 
 === Hyperparameters
@@ -116,3 +118,5 @@ Results from the original paper are presented alongside the results obtained fro
 |TisODE-IRd (paper) | 91.7±0.5 | 74.4±1.2 | 61.9±1.8 | 81.6±0.8 | 71.0±0.5
 |TisODE-IRd (ours)  | xx | xx | xx | xx | xx
 |===
+
+== Conclusions

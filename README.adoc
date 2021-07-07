@@ -3,6 +3,9 @@ Implementation of the paper by Yan, "Robustness of Neural Ordinary Differential 
 
 == Summary of paper
 
+This paper examines the robustness of deep networks based on neural ordinary differential equations (NeuralODE) compared to convolutional neural networks. Robustness is evaluated using classification accuracy of networks trained using three different datasets and three attacks. The three datasets used for the study are MNIST digits, street view house numbers (SVHN), and a subset of ImageNet. The three attacks used were addition of Gaussian noise, FGSM, and PGD. While Gaussian noise is random input corruption not tailored at all to the network under attack, FGSM and PGD utilize knowledge of the network model for gradients (i.e. they are "white box" attacks).
+
+In addition to the robustness analysis, the authors of the paper present a novel modification to the NeuralODE network. They call their new network as "time invariant steady-state ODE" or TisODE. This new network seeks to increase the range of inputs which tend toward the same output by utilizing a time invariant ODE layer with regularization to encourage the ODE layer function to have a small values at the end of the integration range.
 
 == Implementation & assumptions
 

@@ -132,7 +132,13 @@ The results show some cases where our results were similar to the published resu
 
 Apart from the correctness of the output of our implementation, as an educational exercise, we were able to implement a deep learning project including adversarial attacks and neural ODE blocks. We learned to customize the training loop using PyTorch Lightning. We went through many iterations of troubleshooting in the implementation phase. In some cases, it was remarkable how well the network was able to learn even when coding errors caused it to be wrongly configured.
 
-== Division of Work
+The TisODE model proved to be very difficult to train due to the steady-state regularization term. Sometimes with a too low value for the learning rate, the Adam optimizer would diverge with steadily increasing loss values. Without "tricks" like the delayed inclusion of the regularization term, the model could not exceed very poor test accuracies. Even with delayed inclusion of steady-state regularization, the model often stayed "stuck" at relatively poor accuracies due to the regularization. It seemed to be more sensitive to the initial seed value and training hyperparameters than other models. One possible explanation is that the regularization term is trying to drive the output of the ODE function toward zero where the output matches a classified image. However, if the output is zero everywhere, then this layer is not doing anything to help with classification.
+
+With the caveat that our implementation of the TisODE model may not be correct, our results did not confirm the usefulness of this model. It was difficult to train and had poor accuracy on unmodified input images and no significant improvement for adversarial attacks. In this regard, we were not able to confirm one of the original authors' main contributions presented in their paper.
+
+With regard to the original paper's conclusion that Neural ODE networks have improved robustness compared to CNNs, while our results do not closely match the original paper's, the output that we obtained seems to confirm the robustness improvement of using Neural ODEs rather than CNNs.
+
+== Contributions
 
 Paul
 

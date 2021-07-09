@@ -28,11 +28,15 @@ Describe the setup of the original paper and whether you changed any settings.
 
 ## 3.2. Results
 
-Present your results and compare them to the original paper.
+Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
 
 # 4. Conclusion
 
 Discuss the paper in relation to the results in the paper and your results.
+
+# 5. References
+
+Provide your references here.
 
 # Contact
 

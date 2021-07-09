@@ -20,13 +20,17 @@ Explain the original method.
 
 Explain the parts that were not clearly explained in the original paper and how you interpreted them.
 
-# 3. Experiments and Results
+# 3. Experiments and results
 
-## 3.1. Experimental Setup
+## 3.1. Experimental setup
 
 Describe the setup of the original paper and whether you changed any settings.
 
-## 3.2. Results
+## 3.2. Running the code
+
+Explain your code & directory structure and how other people can run it.
+
+## 3.3. Results
 
 Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
 

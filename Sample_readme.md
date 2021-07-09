@@ -1,5 +1,7 @@
 # Paper title
 
+This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.metu.edu.tr/~sinan/DL/) project for reproducing a paper without an implementation. See [CENG501 (Spring 2021) Project List](https://github.com/sinankalkan/CENG501-Spring2021) for a complete list of all paper reproduction projects.
+
 # 1. Introduction
 
 Introduce the paper (inc. where it is published) and describe your goal (reproducibility).

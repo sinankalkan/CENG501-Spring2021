@@ -1,0 +1,37 @@
+# Paper title
+
+# 1. Introduction
+
+Introduce the paper (inc. where it is published) and describe your goal (reproducibility).
+
+## 1.1. Paper summary
+
+Summarize the paper, the method & its contributions in relation with the existing literature.
+
+# 2. The method and my interpretation
+
+## 2.1. The original method
+
+Explain the original method.
+
+## 2.2. My interpretation 
+
+Explain the parts that were not clearly explained in the original paper and how you interpreted them.
+
+# 3. Experiments and Results
+
+## 3.1. Experimental Setup
+
+Describe the setup of the original paper and whether you changed any settings.
+
+## 3.2. Results
+
+Present your results and compare them to the original paper.
+
+# 4. Conclusion
+
+Discuss the paper in relation to the results in the paper and your results.
+
+# Contact
+
+Provide your names & email addresses and any other info with which people can contact you.

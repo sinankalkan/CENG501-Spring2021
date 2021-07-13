@@ -1,25 +1,22 @@
-= NeuralODERobustnessPaper
-Implementation of the paper by Yan, "Robustness of Neural Ordinary Differential Equations" from ICLR 2020
+= Robustness of Neural Ordinary Differential Equations
 
-== Summary of paper
+This readme file is an outcome of the http://kovan.ceng.metu.edu.tr/~sinan/DL/[CENG501 (Spring 2021)] project for reproducing a paper without an implementation. See https://github.com/sinankalkan/CENG501-Spring2021[CENG501 (Spring 2021) Project List] for a complete list of all paper reproduction projects.
+
+
+= 1. Introduction
+
+This document describes the project to implement and reproduce results from the paper https://openreview.net/forum?id=B1e9Y2NYvS["Robustness of Neural Ordinary Differential Equations" by Yan, et al. from ICLR 2020].
+
+
+== 1.1. Paper summary 
 
 This paper examines the robustness of deep networks based on neural ordinary differential equations (NeuralODE) compared to convolutional neural networks. Robustness is evaluated using classification accuracy of networks trained using three different datasets and three attacks. The three datasets used for the study are MNIST digits, street view house numbers (SVHN), and a subset of ImageNet. The three attacks used were addition of Gaussian noise, FGSM, and PGD. While Gaussian noise is random input corruption not tailored at all to the network under attack, FGSM and PGD utilize knowledge of the network model for gradients (i.e. they are "white box" attacks).
 
 In addition to the robustness analysis, the authors of the paper present a novel modification to the NeuralODE network. They call their new network as "time invariant steady-state ODE" or TisODE. This new network seeks to increase the range of inputs which tend toward the same output by utilizing a time invariant ODE layer with regularization to encourage the ODE layer function to have a small values at the end of the integration range.
 
-== Implementation & assumptions
+= 2. The method and my interpretation
 
-We implemented the networks using https://pytorch.org/[PyTorch] and https://www.pytorchlightning.ai/[PyTorch Lightning]. Gaussian noise was added with a custom function written using PyTorch random number generator. Neural ODE equations were solved using the https://github.com/rtqichen/torchdiffeq[torchdiffeq] Neural ODE library. FGSM and PGD adversarial attack samples were created using the https://github.com/bethgelab/foolbox[FoolBox] library. https://colab.research.google.com/[Google Colab] with GPU runtime was used for running the notebooks.
-
-The MNIST and SVHN datasets were loaded using torchvision.datasets. The subset of the ImageNet dataset was created by downloading all of the ImageNet 2012 dataset and then extracting images in the stated categories off-line using a combination of custom Python scripts and manually moving files. This "ImageNet10" dataset was uploaded to Google Drive and can be downloaded from https://drive.google.com/drive/folders/16x-aUfBRtH6BD-fbJB-DqTRtl6S2X-MW?usp=sharing[this link].
-
-Training and robustness evaluation was done in Colab notebooks with separate notebooks for each of the three datasets and some common code in a utils.py file. Trained models were saved and subsequently loaded for robustness evaluation.
-
-PyTorch Lightning callbacks were used to save the top 3 models during each training run and the best model saved for the robustness analysis. Training progress metrics were saved to TensorBoard logs for further analysis.
-
-Implementing the TisODE model was particularly challenging. Using the formula for L_ss as given in Equation 5 in the paper, the steady-state regularization loss term overwhelms the negative-log likelihood loss such that training frequently diverged for practical learning rates. We used batch mean of the steady-state norm rather than the batch sum of the steady-state norm. With this change, the given loss weight worked to train the network. Correspondence with the author confirmed that the original work was implemented this way. The author also trained the network for several epochs without the steady-state regularization term included before adding it in. We likewise adopted this practice, delaying the inclusion of the steady-state regularization loss term for 5 epochs, then adding it with a 0.01 multiplier for 2 epochs, then adding it with a 0.1 multiplier for 2 epochs, then adding it at the full specified weight for the remainder of training. Since this naturally bumps up the loss value when regularization kicks in, the early stopping class was sub-classed to delay when it would start monitoring for loss decreases.
-
-=== Hyperparameters
+== 2.1. The original method
 
 Some hyperparameters are given in the paper.
 
@@ -28,7 +25,9 @@ Some hyperparameters are given in the paper.
 - The TisODE steady-state loss weight is specified as 0.1. From correspondence with the paper's author, we learned that the steady-state loss was not always set to 0.1 but sometimes other values such as 0.05 or 0.01 were used. Due to issues with training, we used 0.01.
 - The feature denoising method is specified as dot-product non-local. This method is described in the referenced paper.
 
-Other hyperparameters are not given in the paper, so we made our own choices for them.
+== 2.2. My interpretation
+
+Some implementation details and hyperparameters are not given in the paper, so we made our own choices for them.
 
 - The random seed values for initialization aren't provided, so three arbitrary seed values were selected.
 - Input randomization output size was selected to be 40 for the MNIST networks, 36 for the SVHN networks, and xx for the ImageNet networks.
@@ -41,8 +40,29 @@ Other hyperparameters are not given in the paper, so we made our own choices for
 - Learning rate. Set to initial rate of 0.015 for MNIST and 0.001 for SVHN and decrease by 25% when validation loss doesn't decrease for 3 epochs.
 - Maximum number of epochs for training set to 250 but with early stopping if at least 0.001 improvement in validation loss is not seen in 10 epochs.
 - Training vs validation split not specified but we decided to use such a split for monitoring training progress. Approximately 10% of the training data was set used for validation.
+- PGD adversarial attack uses a number of iterations to optimize the attack. The number of iterations is not specified in the paper. We used the Foolbox default, which https://foolbox.readthedocs.io/en/stable/modules/attacks.html#foolbox.attacks.LinfProjectedGradientDescentAttack[according to the documentation] is 40.
 
-== Results
+
+= 3. Experiments and results
+
+
+== 3.1. Experimental setup
+
+We implemented the networks using https://pytorch.org/[PyTorch] and https://www.pytorchlightning.ai/[PyTorch Lightning]. Gaussian noise was added with a custom function written using PyTorch random number generator. Neural ODE equations were solved using the https://github.com/rtqichen/torchdiffeq[torchdiffeq] Neural ODE library. FGSM and PGD adversarial attack samples were created using the https://github.com/bethgelab/foolbox[FoolBox] library. https://colab.research.google.com/[Google Colab] with GPU runtime was used for running the notebooks.
+
+The MNIST and SVHN datasets were loaded using torchvision.datasets. The subset of the ImageNet dataset was created by downloading all of the ImageNet 2012 dataset and then extracting images in the stated categories off-line using a combination of custom Python scripts and manually moving files. This "ImageNet10" dataset was uploaded to Google Drive and can be downloaded from https://drive.google.com/drive/folders/16x-aUfBRtH6BD-fbJB-DqTRtl6S2X-MW?usp=sharing[this link].
+
+Training and robustness evaluation was done in Colab notebooks with separate notebooks for each of the three datasets and some common code in a utils.py file. Trained models were saved and subsequently loaded for robustness evaluation.
+
+PyTorch Lightning callbacks were used to save the top 3 models during each training run and the best model saved for the robustness analysis. Training progress metrics were saved to TensorBoard logs for further analysis.
+
+Implementing the TisODE model was particularly challenging. Using the formula for L_ss as given in Equation 5 in the paper, the steady-state regularization loss term overwhelms the negative-log likelihood loss such that training frequently diverged for practical learning rates. We used batch mean of the steady-state norm rather than the batch sum of the steady-state norm. With this change, the given loss weight worked to train the network. Correspondence with the author confirmed that the original work was implemented this way. The author also trained the network for several epochs without the steady-state regularization term included before adding it in. We likewise adopted this practice, delaying the inclusion of the steady-state regularization loss term for 5 epochs, then adding it with a 0.01 multiplier for 2 epochs, then adding it with a 0.1 multiplier for 2 epochs, then adding it at the full specified weight for the remainder of training. Since this naturally bumps up the loss value when regularization kicks in, the early stopping class was sub-classed to delay when it would start monitoring for loss decreases.
+
+== 3.2. Running the code
+
+
+
+== 3.3. Results
 
 Results from the original paper are presented alongside the results obtained from our implementation. For ease of comparison, the results are are interleaved so that results from our implementation immediately follow results from the original paper.
 
@@ -123,7 +143,7 @@ Results from the original paper are presented alongside the results obtained fro
 |TisODE-IRd (ours)  | xx | xx | xx | xx | xx
 |===
 
-== Conclusions
+= 4. Conclusions
 
 The results show some cases where our results were similar to the published results, but there are also many cases where the results are quite different. These differences could be due to various factors including
 - assumptions made to fill in information not provided in the original paper that actually don't match the original author's implementation
@@ -137,6 +157,17 @@ The TisODE model proved to be very difficult to train due to the steady-state re
 With the caveat that our implementation of the TisODE model may not be correct, our results did not confirm the usefulness of this model. It was difficult to train and had poor accuracy on unmodified input images and no significant improvement for adversarial attacks. In this regard, we were not able to confirm one of the original authors' main contributions presented in their paper.
 
 With regard to the original paper's conclusion that Neural ODE networks have improved robustness compared to CNNs, while our results do not closely match the original paper's, the output that we obtained seems to confirm the robustness improvement of using Neural ODEs rather than CNNs.
+
+= 5. References
+
+. https://openreview.net/forum?id=B1e9Y2NYvS[YAN, Hanshu, Jiawei DU, Vincent TAN, Jiashi FENG. On Robustness of Neural Ordinary Differential Equations. International Conference on Learning Representations, 2020]
+
+
+= Contact
+
+https://github.com/pdb5627/[Paul Brown]
+
+https://github.com/SABDULLAHJ/[Syed Abdullah Jelani]
 
 == Contributions
 

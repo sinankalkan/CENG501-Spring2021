@@ -8,7 +8,7 @@ The paper is a preprint available [here](https://arxiv.org/abs/2105.03716) that 
 
 ## 1.1. Paper summary
 
-The paper introduces the notion of intent space and proposes a new zero-shot detection algorithm. It uses recurrent neural network sturctures and an open-source [dataset](https://github.com/sonos/nlu-benchmark). The evaluation metric is accuracy and the results are reported after 1-fold evaluation.
+The paper introduces the notion of intent space and proposes a new zero-shot detection algorithm. It uses recurrent neural network sturctures and an open-source [dataset](https://github.com/sonos/nlu-benchmark). The evaluation metric is accuracy and the results are reported after single fold evaluation.
 
 # 2. The method and my interpretation
 
@@ -18,19 +18,25 @@ The original method is described in rather generic terms where an intent space w
 
 ## 2.2. My interpretation 
 
-Based on the explanations in the paper, I assumed there exist several different RNN modules for each intent class available during training since the base matrix for a given intent needs to be specific to that intent. The paper also states there exit different initial hidden vectors for each intent class, therefore, I assumed every RNN module uses a different initial hidden state vector (randomly initialized).
+Based on the explanations in the paper, I assumed there exist several different RNN modules for each intent class available during training since the base for a given intent needs to be specific to that intent. The paper also states there exit different initial hidden vectors for each intent class, therefore, I assumed every RNN module uses a different initial hidden state vector (randomly initialized).
 
-I assumed that the output of each RNN module is a single value which multiplies
+I assumed that the output of each RNN module is a base vector (I did not implement base matrices for the sake of simplicity) whose size is equal to the number of seen classes during training. This size constraint is also mentioned in the paper. In order to achieve this, a fully connected layer maps the 128 dimensional output to the number of seen intents (6 for the SNIPS dataset).
+
+The obtained base matrices for a given input is multiplied by the coordinate matrix which is initialized as the identity matrix. During training, the base matrices are learned for the first 5 epochs and coordinates are frozen, after which base matrices are frozen and coordinates are learned  for another 5 epochs. Lastly, base matrices are updated again while coordinates are frozen for 5 epochs. This training procedure uses only seen intents during training.
+
+After 15 epochs, the regularization term calculated over a small set of unseen intents is used to update the parameters of what is described as the expansion matrices in the paper. These matrices are of the same size with the base matrices and allow higher modeling power with introduction of extra parameters. During this second training phase, which lasts for another 15 epochs, bases and coordinates are frozen and only the expansion matrices are updated. I implemented an expansion matrix for every base although expansion matrices are defined only for unseen intents in the paper. In my implementation, every base matrix is multiplied by a distinct expansion matrix which increases modeling power even further.
+
+The regularization term on the unseen intents described in the paper fails to train the model in my experiments, so I emplyed Cross Entropy Loss for the set of unseen intents as well.
 
 # 3. Experiments and results
 
 ## 3.1. Experimental setup
 
-Describe the setup of the original paper and whether you changed any settings.
+SGD optimizer with learning rate 0.1 is used for the experiments. I observed Adam to be failing possibly due to the weight decay introduced on the coordinate parameters. At each epoch, early stopping is employed with 0.85 accuracy on the validation set, calculated every 1000 steps. The batch size is chosen as 1 for the experiments in order to simplify calculations of matrix multiplications. Weight decay on the coordinate parameters is chosen as 1e-5. The unseen intent is chosen as "GetWeather" as in the paper.
 
 ## 3.2. Running the code
 
-Explain your code & directory structure and how other people can run it.
+`python model.py` should run the code using data_loader.py as a module so, expect \_\_pycahce\_\_ to appear. If there is a 
 
 ## 3.3. Results
 

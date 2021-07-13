@@ -36,7 +36,7 @@ SGD optimizer with learning rate 0.1 is used for the experiments. I observed Ada
 
 ## 3.2. Running the code
 
-`python model.py` should run the code using data_loader.py as a module so, expect \_\_pycahce\_\_ to appear. If there is an available GPU, the code will attempt to use it.
+`python model.py` should run the code using data_loader.py as a module so, expect \_\_pycache\_\_ to appear. If there is an available GPU, the code will attempt to use it.
 
 ## 3.3. Results
 

@@ -1,0 +1,153 @@
+= NeuralODERobustnessPaper
+Implementation of the paper by Yan, "Robustness of Neural Ordinary Differential Equations" from ICLR 2020
+
+== Summary of paper
+
+This paper examines the robustness of deep networks based on neural ordinary differential equations (NeuralODE) compared to convolutional neural networks. Robustness is evaluated using classification accuracy of networks trained using three different datasets and three attacks. The three datasets used for the study are MNIST digits, street view house numbers (SVHN), and a subset of ImageNet. The three attacks used were addition of Gaussian noise, FGSM, and PGD. While Gaussian noise is random input corruption not tailored at all to the network under attack, FGSM and PGD utilize knowledge of the network model for gradients (i.e. they are "white box" attacks).
+
+In addition to the robustness analysis, the authors of the paper present a novel modification to the NeuralODE network. They call their new network as "time invariant steady-state ODE" or TisODE. This new network seeks to increase the range of inputs which tend toward the same output by utilizing a time invariant ODE layer with regularization to encourage the ODE layer function to have a small values at the end of the integration range.
+
+== Implementation & assumptions
+
+We implemented the networks using https://pytorch.org/[PyTorch] and https://www.pytorchlightning.ai/[PyTorch Lightning]. Gaussian noise was added with a custom function written using PyTorch random number generator. Neural ODE equations were solved using the https://github.com/rtqichen/torchdiffeq[torchdiffeq] Neural ODE library. FGSM and PGD adversarial attack samples were created using the https://github.com/bethgelab/foolbox[FoolBox] library. https://colab.research.google.com/[Google Colab] with GPU runtime was used for running the notebooks.
+
+The MNIST and SVHN datasets were loaded using torchvision.datasets. The subset of the ImageNet dataset was created by downloading all of the ImageNet 2012 dataset and then extracting images in the stated categories off-line using a combination of custom Python scripts and manually moving files. This "ImageNet10" dataset was uploaded to Google Drive and can be downloaded from https://drive.google.com/drive/folders/16x-aUfBRtH6BD-fbJB-DqTRtl6S2X-MW?usp=sharing[this link].
+
+Training and robustness evaluation was done in Colab notebooks with separate notebooks for each of the three datasets and some common code in a utils.py file. Trained models were saved and subsequently loaded for robustness evaluation.
+
+PyTorch Lightning callbacks were used to save the top 3 models during each training run and the best model saved for the robustness analysis. Training progress metrics were saved to TensorBoard logs for further analysis.
+
+Implementing the TisODE model was particularly challenging. Using the formula for L_ss as given in Equation 5 in the paper, the steady-state regularization loss term overwhelms the negative-log likelihood loss such that training frequently diverged for practical learning rates. We used batch mean of the steady-state norm rather than the batch sum of the steady-state norm. With this change, the given loss weight worked to train the network. Correspondence with the author confirmed that the original work was implemented this way. The author also trained the network for several epochs without the steady-state regularization term included before adding it in. We likewise adopted this practice, delaying the inclusion of the steady-state regularization loss term for 5 epochs, then adding it with a 0.01 multiplier for 2 epochs, then adding it with a 0.1 multiplier for 2 epochs, then adding it at the full specified weight for the remainder of training. Since this naturally bumps up the loss value when regularization kicks in, the early stopping class was sub-classed to delay when it would start monitoring for loss decreases.
+
+=== Hyperparameters
+
+Some hyperparameters are given in the paper.
+
+- Neural ODE network configurations are described.
+- Weight decay = 0.0005. Able to use directly.
+- The TisODE steady-state loss weight is specified as 0.1. From correspondence with the paper's author, we learned that the steady-state loss was not always set to 0.1 but sometimes other values such as 0.05 or 0.01 were used. Due to issues with training, we used 0.01.
+- The feature denoising method is specified as dot-product non-local. This method is described in the referenced paper.
+
+Other hyperparameters are not given in the paper, so we made our own choices for them.
+
+- The random seed values for initialization aren't provided, so three arbitrary seed values were selected.
+- Input randomization output size was selected to be 40 for the MNIST networks, 36 for the SVHN networks, and xx for the ImageNet networks.
+- Group norm number of channels in each group is set to the lesser of the number of channels or 32, matching the implementation of the torchdiffeq Neural ODE library demo network.
+- Normalization. Each dataset is pre-processed by normalizing to a mean of 0 and standard deviation of 1.
+- CNN network configuration not specified. Assumed to be the same as the ODE network.
+- Training batch size. Set to 128.
+- Loss function. Since the problem is classification, negative-log likelihood (NLL) loss function is used.
+- Optimization method. Using Adams method with pytorch default hyperparameters.
+- Learning rate. Set to initial rate of 0.015 for MNIST and 0.001 for SVHN and decrease by 25% when validation loss doesn't decrease for 3 epochs.
+- Maximum number of epochs for training set to 250 but with early stopping if at least 0.001 improvement in validation loss is not seen in 10 epochs.
+- Training vs validation split not specified but we decided to use such a split for monitoring training progress. Approximately 10% of the training data was set used for validation.
+
+== Results
+
+Results from the original paper are presented alongside the results obtained from our implementation. For ease of comparison, the results are are interleaved so that results from our implementation immediately follow results from the original paper.
+
+.Models trained with non-perturbed images
+|===
+|      3+| Gaussian noise     3+| Adversarial attack
+
+|*MNIST*       | *σ = 50* | *σ = 75* | *σ = 100* | *FGSM-0.15* | *FGSM-0.3* | *FGSM-0.5*
+|CNN (paper) | 98.1±0.7 | 85.1±4.3 | 56.4±5.6 | 63.4±2.3 | 24.0±8.9 | 8.3±3.2
+|CNN (ours)  | 98.5±0.1 | 95.6±1.4 | 82.2±5.5 | 69.9±0.9 | 26.3±4.1 | 8.0±2.2
+|ODENet (paper) | 98.7±0.6 | 90.6±5.4 | 73.2±8.6 | 83.5±0.9 | 42.1±2.4 | 14.3±2.1
+|ODENet (ours)  | 98.9±0.3 | 96.5±1.4 | 87.3±2.8 | 84.7±0.2 | 53.0±2.0 | 22.0±2.2
+|*SVHN*       | *σ = 15* | *σ = 25* | *σ = 35* | *FGSM-3/255* | *FGSM-5/255* | *FGSM-8/255*
+|CNN (paper) | 90.0±1.2 | 76.3±2.7 | 60.9±3.9 | 29.2±2.9 | 13.7±1.9 | 5.4±1.5
+|CNN (ours)  | xx | xx | xx | xx | xx | xx
+|ODENet (paper) | 95.7±0.7 | 88.1±1.5 | 78.2±2.1 | 58.2±2.3 | 43.0±1.3 | 30.9±1.4
+|ODENet (ours)  | xx | xx | xx | xx | xx | xx
+|*ImgNet10*       | *σ = 10* | *σ = 15* | *σ = 25* | *FGSM-5/255* | *FGSM-8/255* | *FGSM-16/255*
+|CNN (paper) | 80.1±1.8 | 63.3±2.0 | 40.8±2.7 | 28.5±0.5 | 18.1±0.7 | 9.4±1.2
+|CNN (ours)  | xx | xx | xx | xx | xx | xx
+|ODENet (paper) | 81.9±2.0 | 67.5±2.0 | 48.7±2.6 | 36.2±1.0 | 27.2±1.1 | 14.4±1.7
+|ODENet (ours)  | xx | xx | xx | xx | xx | xx
+|===
+
+.Models trained with original images along with perturbed images
+|===
+|      | Gaussian noise     4+| Adversarial attack
+
+|*MNIST*       | *σ = 100* | *FGSM-0.3* | *FGSM-0.5* | *PGD-0.2* | *PGD-0.3*
+|CNN (paper) | 98.7±0.1 | 54.2±1.1 | 15.8±1.3 | 32.9±3.7 | 0.0±0.0
+|CNN (ours)  | 97.8±0.1 | 51.8±3.7 | 17.3±2.7 | 49.0±3.4 | 1.8±1.0
+|ODENet (paper) | 99.4±0.1 | 71.5±1.1 | 19.9±1.2 | 64.7±1.8 | 13.0±0.2
+|ODENet (ours)  | 98.3±0.1 | 69.3±2.2 | 27.9±8.5 | 72.9±2.0 | 20.2±2.9
+|TisODE (paper) | 99.6±0.0 | 75.7±1.4 | 26.5±3.8 | 67.4±1.5 | 13.2±1.0
+|TisODE (ours)  | xx | xx | xx | xx | xx
+|*SVHN*       | *σ = 35* | *FGSM-5/255* | *FGSM-8/255* | *PGD-3/255* | *PGD-5/255*
+|CNN (paper) | 90.6±0.2 | 25.3±0.6 | 12.3±0.7 | 32.4±0.4 | 14.0±0.5
+|CNN (ours)  | xx | xx | xx | xx | xx
+|ODENet (paper) | 95.1±0.1 | 49.4±1.0 | 34.7±0.5 | 50.9±1.3 | 27.2±1.4
+|ODENet (ours)  | xx | xx | xx | xx | xx
+|TisODE (paper) | 94.9±0.1 | 51.6±1.2 | 38.2±1.9 | 52.0±0.9 | 28.2±0.3
+|TisODE (ours)  | xx | xx | xx | xx | xx
+|*ImgNet10*       | *σ = 25* | *FGSM-5/255* | *FGSM-8/255* | *PGD-3/255* | *PGD-5/255*
+|CNN (paper) | 92.6±0.6 | 40.9±1.8 | 26.7±1.7 | 28.6±1.5 | 11.2±1.2
+|CNN (ours)  | xx | xx | xx | xx | xx
+|ODENet (paper) | 92.6±0.5 | 42.0±0.4 | 29.0±1.0 | 29.8±0.4 | 12.3±0.6
+|ODENet (ours)  | xx | xx | xx | xx | xx
+|TisODE (paper) | 92.8±0.4 | 44.3±0.7 | 31.4±1.1 | 31.1±1.2 | 14.5±1.1
+|TisODE (ours)  | xx | xx | xx | xx | xx
+|===
+
+
+.Models with drop-in robustness improvement techniques
+|===
+|      | Gaussian noise     4+| Adversarial attack
+
+|*MNIST*       | *σ = 100* | *FGSM-0.3* | *FGSM-0.5* | *PGD-0.2* | *PGD-0.3*
+|CNN (paper) | 98.7±0.1 | 54.2±1.1 | 15.8±1.3 | 32.9±3.7 | 0.0±0.0
+|CNN (ours)  | 97.8±0.1 | 51.8±3.7 | 17.3±2.7 | 49.0±3.4 | 1.8±1.0
+|CNN-FDn (paper) | 99.0±0.1 | 74.0±4.1 | 32.6±5.3 | 58.9±4.0 | 8.2±2.6
+|CNN-FDn (ours)  | 97.7±0.2 | 52.5±1.2 | 16.4±4.9 | 53.2±2.0 | 3.3±0.8
+|TisODE-FDn (paper) | 99.4±0.0 | 80.6±2.3 | 40.4±5.7 | 72.6±2.4 | 28.2±3.6
+|TisODE-FDn (ours)  | xx | xx | xx | xx | xx
+|CNN-IRd (paper) | 95.3±0.9 | 78.1±2.2 | 36.7±2.1 | 79.6±1.9 | 55.5±2.9
+|CNN-IRd (ours)  | 92.4±0.5 | 29.7±3.9 | 8.7±1.5 | 39.6±6.3 | 1.8±1.7
+|TisODE-IRd (paper) | 97.6±0.1 | 86.8±2.3 | 49.1±0.2 | 88.8±0.9 | 66.0±0.9
+|TisODE-IRd (ours)  | xx | xx | xx | xx | xx
+|*SVHN*       | *σ = 35* | *FGSM-5/255* | *FGSM-8/255* | *PGD-3/255* | *PGD-5/255*
+|CNN (paper) | 90.6±0.2 | 25.3±0.6 | 12.3±0.7 | 32.4±0.4 | 14.0±0.5
+|CNN (ours)  | xx | xx | xx | xx | xx
+|CNN-FDn (paper) | 92.4±0.1 | 43.8±1.4 | 31.5±3.0 | 40.0±2.6 | 19.6±3.4
+|CNN-FDn (ours)  | xx | xx | xx | xx | xx
+|TisODE-FDn (paper) | 95.2±0.1 | 57.8±1.7 | 48.2±2.0 | 53.4±2.9 | 32.3±1.0
+|TisODE-FDn (ours)  | xx | xx | xx | xx | xx
+|CNN-IRd (paper) | 84.9±1.2 | 65.8±0.4 | 54.7±1.2 | 74.0±0.5 | 64.5±0.8
+|CNN-IRd (ours)  | xx | xx | xx | xx | xx
+|TisODE-IRd (paper) | 91.7±0.5 | 74.4±1.2 | 61.9±1.8 | 81.6±0.8 | 71.0±0.5
+|TisODE-IRd (ours)  | xx | xx | xx | xx | xx
+|===
+
+== Conclusions
+
+The results show some cases where our results were similar to the published results, but there are also many cases where the results are quite different. These differences could be due to various factors including
+- assumptions made to fill in information not provided in the original paper that actually don't match the original author's implementation
+- implementation errors on our part
+- random variances due to using different seeds
+
+Apart from the correctness of the output of our implementation, as an educational exercise, we were able to implement a deep learning project including adversarial attacks and neural ODE blocks. We learned to customize the training loop using PyTorch Lightning. We went through many iterations of troubleshooting in the implementation phase. In some cases, it was remarkable how well the network was able to learn even when coding errors caused it to be wrongly configured.
+
+The TisODE model proved to be very difficult to train due to the steady-state regularization term. Sometimes with a too low value for the learning rate, the Adam optimizer would diverge with steadily increasing loss values. Without "tricks" like the delayed inclusion of the regularization term, the model could not exceed very poor test accuracies. Even with delayed inclusion of steady-state regularization, the model often stayed "stuck" at relatively poor accuracies due to the regularization. It seemed to be more sensitive to the initial seed value and training hyperparameters than other models. One possible explanation is that the regularization term is trying to drive the output of the ODE function toward zero where the output matches a classified image. However, if the output is zero everywhere, then this layer is not doing anything to help with classification.
+
+With the caveat that our implementation of the TisODE model may not be correct, our results did not confirm the usefulness of this model. It was difficult to train and had poor accuracy on unmodified input images and no significant improvement for adversarial attacks. In this regard, we were not able to confirm one of the original authors' main contributions presented in their paper.
+
+With regard to the original paper's conclusion that Neural ODE networks have improved robustness compared to CNNs, while our results do not closely match the original paper's, the output that we obtained seems to confirm the robustness improvement of using Neural ODEs rather than CNNs.
+
+== Contributions
+
+Paul
+
+- Set up initial notebooks on Google Colab
+- Download ImageNet 2012 dataset and extract relevant image classes to directories
+- Code MNIST & SVHN models and training loop using PyTorch Lightning
+- Code testing loop and integrate Foolbox adversarial attack
+- Create GitHub repo and begin drafting report
+
+Abdullah
+
+- Code parameterized additive Gaussian noise image transform

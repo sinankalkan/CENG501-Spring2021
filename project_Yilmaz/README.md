@@ -8,7 +8,7 @@ The paper "Continuous Representations of Intents for Dialogue Systems" \[1\] add
 
 ## 1.1. Paper summary
 
-The paper introduces the notion of intent space and proposes a new zero-shot detection algorithm. It uses recurrent neural network sturctures and an open-source [dataset](https://github.com/sonos/nlu-benchmark). The evaluation metric is accuracy and the results are reported after single fold evaluation.
+The paper introduces the notion of intent space and proposes a new zero-shot detection algorithm. It uses recurrent neural network structures and an open-source [dataset](https://github.com/sonos/nlu-benchmark). The evaluation metric is accuracy and the results are reported after single fold evaluation.
 
 # 2. The method and my interpretation
 

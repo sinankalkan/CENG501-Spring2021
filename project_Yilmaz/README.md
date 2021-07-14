@@ -26,7 +26,7 @@ The obtained base matrices for a given input is multiplied by the coordinate mat
 
 After 15 epochs, the regularization term calculated over a small set of unseen intents is used to update the parameters of what is described as the expansion matrices in the paper. These matrices are of the same size with the base matrices and allow higher modeling power with introduction of extra parameters. During this second training phase, which lasts for another 15 epochs, bases and coordinates are frozen and only the expansion matrices are updated. I implemented an expansion matrix for every base although expansion matrices are defined only for unseen intents in the paper. In my implementation, every base matrix is multiplied by a distinct expansion matrix which increases modeling power even further.
 
-The regularization term on the unseen intents described in the paper fails to train the model in my experiments, so I employed Cross Entropy Loss for the set of unseen intents as well.
+The regularization term on the unseen intents described in the paper fails to train the model in my experiments, so I employed Cross Entropy Loss for the set of unseen intents as well. I used all available unseen intent data in the training set.
 
 # 3. Experiments and results
 

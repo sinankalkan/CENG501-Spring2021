@@ -42,7 +42,7 @@ Based on this observation, I abandoned the 15-epoch training schedule explained 
 
 `python model.py` should run the code using data_loader.py as a module so, expect \_\_pycache\_\_ to appear. If there is an available GPU, the code will attempt to use it. The output printed on screen is the `sklearn.metrics.classification_report` calculated on the seen and unseen intents, separately.
 
-`python model_run_all.py` runs an iteration over the list of all intents, leaving one as unseen intents at each iteration and calculates the accuracies over the seen and unseen intents and wirtes them to "results.csv" file. This output is expected to be similar to the results in Table 2 in the paper, which is shown below.
+`python model_run_all.py` runs an iteration over the list of all intents, leaving one as the unseen intent at each iteration and calculates the accuracies over the seen and unseen intents and wirtes them to "results.csv" file. This output is expected to be similar to the results in Table 2 in the paper, which is shown below.
 
 ## 3.3. Results
 

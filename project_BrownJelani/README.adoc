@@ -37,8 +37,8 @@ Some implementation details and hyperparameters are not given in the paper, so w
 - Training batch size. Set to 128.
 - Loss function. Since the problem is classification, negative-log likelihood (NLL) loss function is used.
 - Optimization method. Using Adams method with pytorch default hyperparameters.
-- Learning rate. Set to initial rate of 0.015 for MNIST and 0.001 for SVHN and decrease by 25% when validation loss doesn't decrease for 3 epochs.
-- Maximum number of epochs for training set to 250 but with early stopping if at least 0.001 (MNIST) or 0.01 (SVHN) improvement in validation loss is not seen in 10 epochs.
+- Learning rate. Set to initial rate of 0.015 for MNIST and 0.001 for SVHN and decrease by 25% when validation loss doesn't decrease by 0.001 (MNIST) or 0.02 (SVHN) for 2 epochs.
+- Maximum number of epochs for training set to 250 but with early stopping if at least 0.002 (MNIST) or 0.02 (SVHN) improvement in validation loss is not seen in 5 epochs for CNN and ODENet models and 10 epochs for TisODE models.
 - Training vs validation split not specified but we decided to use such a split for monitoring training progress. Approximately 10% of the training data was set used for validation.
 - PGD adversarial attack uses a specified number of iterations to optimize the attack. The number of iterations is not specified in the paperm but the author clarifies in https://openreview.net/forum?id=B1e9Y2NYvS&noteId=r1xirtM4tB[a comment] during the review process that 10 steps were used. However, the Foolbox default is 40 https://foolbox.readthedocs.io/en/stable/modules/attacks.html#foolbox.attacks.LinfProjectedGradientDescentAttack[according to the documentation], but decreasing the step size alone and leaving the other Foolbox PGD attack parameters the same resulted in relatively ineffective attack, so all Foolbox defaults were left.
 
@@ -56,7 +56,7 @@ Training and robustness evaluation was done in Colab notebooks with separate not
 
 PyTorch Lightning callbacks were used to save the top 3 models during each training run and the best model saved for the robustness analysis. Training progress metrics were saved to TensorBoard logs for further analysis.
 
-Implementing the TisODE model was particularly challenging. Using the formula for L_ss as given in Equation 5 in the paper, the steady-state regularization loss term overwhelms the negative-log likelihood loss such that training frequently diverged for practical learning rates. We used batch mean of the steady-state norm rather than the batch sum of the steady-state norm. With this change, the given loss weight worked to train the network. Correspondence with the author confirmed that the original work was implemented this way. The author also trained the network for several epochs without the steady-state regularization term included before adding it in. We likewise adopted this practice, delaying the inclusion of the steady-state regularization loss term for 5 epochs, then adding it with a 0.01 multiplier for 2 epochs, then adding it with a 0.1 multiplier for 2 epochs, then adding it at the full specified weight for the remainder of training. Since this naturally bumps up the loss value when regularization kicks in, the early stopping class was sub-classed to delay when it would start monitoring for loss decreases.
+Implementing the TisODE model was particularly challenging. Using the formula for L_ss as given in Equation 5 in the paper, the steady-state regularization loss term overwhelms the negative-log likelihood loss such that training frequently diverged for practical learning rates. We used batch mean of the steady-state norm rather than the batch sum of the steady-state norm. With this change, the given loss weight worked to train the network. Correspondence with the author confirmed that the original work was implemented this way. The author also trained the network for several epochs without the steady-state regularization term included before adding it in. We likewise adopted this practice, delaying the inclusion of the steady-state regularization loss term for 5 epochs, then adding it with a 0.01 multiplier for 2 epochs, then adding it with a 0.1 multiplier for 2 epochs, then adding it at the full specified weight for the remainder of training. Since this naturally bumps up the loss value when regularization kicks in, large constant values were added to the loss so that overall the loss would be decreasing and not confuse the plateau or early stopping monitors.
 
 === 3.2. Running the code
 
@@ -67,6 +67,16 @@ All dependencies are available within the current runtime available for Google C
 There are three code notebooks--one for each dataset--and a shared project library `utils.py` that comprise the code of this projct. Each notebook can be run using "Run All", but the run time may be excessive to complete it all in one run. To accomodate training the models over the course of multiple sessions, in the Setup section at the top of each notebook, there is a cell named `models_to_train` that defines a set of which models are to be trained.
 
 === 3.3. Results
+
+The MNIST and SVHN datasets each have 4 CNN models, 2 ODENet models, and 3 TisODE models, each trained with three different seeds for a total of 27 models for each dataset to train. Even with plateau-based learning rate scheduling and early stopping, using Google Colab high-memory GPU instances, for each random number seed, the CNN models take 3-6 minutes to train, ODENet models take about 10 minutes to train, and the TisODE models take about 15-30 minutes to train. Total training time for the final MNIST and SVHN models on Google Colab is estimated to have been approximately 13 hours. The tensorboard logs and three best models of the final training runs are available in this repository. The testing routine also took significant time to run. Specifically, the PDG adversarial attack tests take approximately 50% of the time that it took to train the models.
+
+Below is the adjusted learning rate and loss curve from TensorBoard for one training run, presented as an example. This training run is for the CNN Net model with seed value of 23, trained with the augmented data set (started at 2021/07/14 at 10:15:25 UTC).
+
+.Example Learning Rate Curve
+image::figs/learning_rate (CNN Net).png[Example Learning Rate Curve]
+
+.Example Training Loss Curve
+image::figs/train_loss (CNN Net).png[Example Training Loss Curve]
 
 Results from the original paper are presented alongside the results obtained from our implementation. For ease of comparison, the results are are interleaved so that results from our implementation immediately follow results from the original paper.
 
@@ -81,14 +91,14 @@ Results from the original paper are presented alongside the results obtained fro
 |ODENet (ours)  | 98.9±0.2 | 96.9±0.3 | 87.5±1.1 | 83.8±1.7 | 51.2±6.7 | 18.2±5.5
 |*SVHN*       | *σ = 15* | *σ = 25* | *σ = 35* | *FGSM-3/255* | *FGSM-5/255* | *FGSM-8/255*
 |CNN (paper) | 90.0±1.2 | 76.3±2.7 | 60.9±3.9 | 29.2±2.9 | 13.7±1.9 | 5.4±1.5
-|CNN (ours)  | 86.0±1.1 | 72.2±2.7 | 58.3±3.2 | 29.4±2.2 | 14.0±1.8 | 5.4±1.3
+|CNN (ours)  | 87.4±0.4 | 75.2±1.0 | 61.8±1.4 | 35.2±0.7 | 18.0±0.3 | 7.7±0.3
 |ODENet (paper) | 95.7±0.7 | 88.1±1.5 | 78.2±2.1 | 58.2±2.3 | 43.0±1.3 | 30.9±1.4
-|ODENet (ours)  | 89.9±0.8 | 80.3±1.9 | 68.8±2.9 | 62.9±1.2 | 46.5±1.3 | 31.5±1.1
-|*ImgNet10*       | *σ = 10* | *σ = 15* | *σ = 25* | *FGSM-5/255* | *FGSM-8/255* | *FGSM-16/255*
-|CNN (paper) | 80.1±1.8 | 63.3±2.0 | 40.8±2.7 | 28.5±0.5 | 18.1±0.7 | 9.4±1.2
-|CNN (ours)  | xx±xx | xx±xx | xx±xx | xx±xx | xx±xx | xx±xx
-|ODENet (paper) | 81.9±2.0 | 67.5±2.0 | 48.7±2.6 | 36.2±1.0 | 27.2±1.1 | 14.4±1.7
-|ODENet (ours)  | xx±xx | xx±xx | xx±xx | xx±xx | xx±xx | xx±xx
+|ODENet (ours)  | 90.8±0.7 | 82.7±1.6 | 72.1±2.2 | 62.8±0.9 | 46.2±0.5 | 31.0±0.6
+//|*ImgNet10*       | *σ = 10* | *σ = 15* | *σ = 25* | *FGSM-5/255* | *FGSM-8/255* | *FGSM-16/255*
+//|CNN (paper) | 80.1±1.8 | 63.3±2.0 | 40.8±2.7 | 28.5±0.5 | 18.1±0.7 | 9.4±1.2
+//|CNN (ours)  | xx±xx | xx±xx | xx±xx | xx±xx | xx±xx | xx±xx
+//|ODENet (paper) | 81.9±2.0 | 67.5±2.0 | 48.7±2.6 | 36.2±1.0 | 27.2±1.1 | 14.4±1.7
+//|ODENet (ours)  | xx±xx | xx±xx | xx±xx | xx±xx | xx±xx | xx±xx
 |===
 
 .Models trained with original images along with perturbed images
@@ -104,18 +114,19 @@ Results from the original paper are presented alongside the results obtained fro
 |TisODE (ours)  | 82.7±6.7 | 12.4±16.5 | 3.6±5.1 | 14.5±24.8 | 1.7±3.0
 |*SVHN*       | *σ = 35* | *FGSM-5/255* | *FGSM-8/255* | *PGD-3/255* | *PGD-5/255*
 |CNN (paper) | 90.6±0.2 | 25.3±0.6 | 12.3±0.7 | 32.4±0.4 | 14.0±0.5
-|CNN (ours)  | 86.9±0.2 | 28.3±1.7 | 14.0±1.1 | 41.4±2.3 | 18.6±1.8
+|CNN (ours)  | 85.5±0.3 | 32.4±0.8 | 16.7±0.8 | 48.1±0.1 | 24.5±0.3
 |ODENet (paper) | 95.1±0.1 | 49.4±1.0 | 34.7±0.5 | 50.9±1.3 | 27.2±1.4
-|ODENet (ours)  | 87.7±1.4 | 55.7±2.0 | 38.8±2.0 | 70.4±1.4 | 49.8±1.2
+|ODENet (ours)  | 86.0±1.7 | 53.4±4.0 | 36.7±4.0 | 67.9±3.6 | 47.5±4.2
 |TisODE (paper) | 94.9±0.1 | 51.6±1.2 | 38.2±1.9 | 52.0±0.9 | 28.2±0.3
 |TisODE (ours)  | 66.4±5.4 | 38.2±5.3 | 24.6±4.1 | 51.7±5.7 | 34.8±5.2
-|*ImgNet10*       | *σ = 25* | *FGSM-5/255* | *FGSM-8/255* | *PGD-3/255* | *PGD-5/255*
-|CNN (paper) | 92.6±0.6 | 40.9±1.8 | 26.7±1.7 | 28.6±1.5 | 11.2±1.2
-|CNN (ours)  | xx±xx | xx±xx | xx±xx | xx±xx | xx±xx
-|ODENet (paper) | 92.6±0.5 | 42.0±0.4 | 29.0±1.0 | 29.8±0.4 | 12.3±0.6
-|ODENet (ours)  | xx±xx | xx±xx | xx±xx | xx±xx | xx±xx
-|TisODE (paper) | 92.8±0.4 | 44.3±0.7 | 31.4±1.1 | 31.1±1.2 | 14.5±1.1
-|TisODE (ours)  | xx±xx | xx±xx | xx±xx | xx±xx | xx±xx
+//|*ImgNet10*       | *σ = 25* | *FGSM-5/255* | *FGSM-8/255* | *PGD-3/255* | *PGD-5/255*
+//|CNN (paper) | 92.6±0.6 | 40.9±1.8 | 26.7±1.7 | 28.6±1.5 | 11.2±1.2
+//|CNN (ours)  | xx±xx | xx±xx | xx±xx | xx±xx | xx±xx
+//|ODENet (paper) | 92.6±0.5 | 42.0±0.4 | 29.0±1.0 | 29.8±0.4 | 12.3±0.6
+//|ODENet (ours)  | xx±xx | xx±xx | xx±xx | xx±xx | xx±xx
+//|TisODE (paper) | 92.8±0.4 | 44.3±0.7 | 31.4±1.1 | 31.1±1.2 | 14.5±1.1
+//|TisODE (ours)  | xx±xx | xx±xx | xx±xx | xx±xx | xx±xx
+
 |===
 
 
@@ -129,11 +140,11 @@ Results from the original paper are presented alongside the results obtained fro
 |CNN-FDn (paper) | 99.0±0.1 | 74.0±4.1 | 32.6±5.3 | 58.9±4.0 | 8.2±2.6
 |CNN-FDn (ours)  | 98.4±0.0 | 62.7±5.2 | 22.5±8.2 | 52.9±6.6 | 3.3±1.5
 |TisODE-FDn (paper) | 99.4±0.0 | 80.6±2.3 | 40.4±5.7 | 72.6±2.4 | 28.2±3.6
-|TisODE-FDn (ours)  | 89.7±2.2 | 13.9±11.2 | 4.7±3.8 | 11.3±10.9 | 0.3±0.5
+|TisODE-FDn (ours)  | 87.0±6.0 | 26.9±19.5 | 12.5±7.9 | 23.6±23.8 | 2.5±3.2
 |CNN-IRd (paper) | 95.3±0.9 | 78.1±2.2 | 36.7±2.1 | 79.6±1.9 | 55.5±2.9
 |CNN-IRd (ours)  | 92.4±0.5 | 29.7±3.9 | 8.7±1.5 | 39.6±6.3 | 1.8±1.7
 |TisODE-IRd (paper) | 97.6±0.1 | 86.8±2.3 | 49.1±0.2 | 88.8±0.9 | 66.0±0.9
-|TisODE-IRd (ours)  | xx±xx | xx±xx | xx±xx | xx±xx | xx±xx
+|TisODE-IRd (ours)  | 57.6±9.7 | 6.2±4.3 | 4.3±2.3 | 2.5±3.8 | 0.1±0.2
 |*SVHN*       | *σ = 35* | *FGSM-5/255* | *FGSM-8/255* | *PGD-3/255* | *PGD-5/255*
 |CNN (paper) | 90.6±0.2 | 25.3±0.6 | 12.3±0.7 | 32.4±0.4 | 14.0±0.5
 |CNN (ours)  | 86.9±0.2 | 28.3±1.7 | 14.0±1.1 | 41.4±2.3 | 18.6±1.8
@@ -158,7 +169,7 @@ Our implementation of feature denoising and input randomization do not seem to i
 
 Apart from the correctness of the output of our implementation, as an educational exercise, we were able to implement a deep learning project including adversarial attacks and neural ODE blocks. We learned to customize the training loop using PyTorch Lightning. We went through many iterations of troubleshooting in the implementation phase. In some cases, it was remarkable how well the network was able to learn even when coding errors caused it to be wrongly configured.
 
-The TisODE model proved to be very difficult to train due to the steady-state regularization term. Sometimes with a too low value for the learning rate, the Adam optimizer would diverge with steadily increasing loss values. Without "tricks" like the delayed inclusion of the regularization term, the model could not exceed very poor test accuracies. Even with delayed inclusion of steady-state regularization, the model often stayed "stuck" at relatively poor accuracies due to the regularization. It seemed to be more sensitive to the initial seed value and training hyperparameters than other models. One possible explanation is that the regularization term is trying to drive the output of the ODE function toward zero where the output matches a classified image. However, if the output is zero everywhere, then this layer is not doing anything to help with classification.
+The TisODE model proved to be very difficult to train due to the steady-state regularization term and long training times. Sometimes with a too low value for the learning rate, the Adam optimizer would diverge with steadily increasing loss values. Without "tricks" like the delayed inclusion of the regularization term, the model could not exceed very poor test accuracies. Even with delayed inclusion of steady-state regularization, the model often stayed "stuck" at relatively poor accuracies due to the regularization. It seemed to be more sensitive to the initial seed value and training hyperparameters than other models. One possible explanation is that the regularization term is trying to drive the output of the ODE function toward zero where the output matches a classified image. However, if the output is zero everywhere, then this layer is not doing anything to help with classification.
 
 With the caveat that our implementation of the TisODE model may not be correct, our results did not confirm the usefulness of this model. It was difficult to train and had poor accuracy on unmodified input images and no significant improvement for adversarial attacks. In this regard, we were not able to confirm one of the original authors' main contributions presented in their paper.
 
@@ -194,6 +205,7 @@ Paul
 - Code MNIST & SVHN models and training loop using PyTorch Lightning
 - Code testing loop and integrate Foolbox adversarial attack
 - Create GitHub repo and begin drafting report (later moved to Sinan Hoca's repo)
+- Adjust hyperparameters for MNIST & SVHN models, train models, and copy results into output report
 
 Abdullah
 

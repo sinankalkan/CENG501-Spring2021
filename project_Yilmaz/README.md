@@ -4,7 +4,7 @@ This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.
 
 # 1. Introduction
 
-The paper is a preprint available [here](https://arxiv.org/abs/2105.03716) that addresses the problem of representing user intents in conversational assistants. The main idea is to map every intent class to a point in space that is available through a set of coordinates and base matrices. In case of an encounter with an unseen intent, the model is able to represent it within the calculated space and classify it in the zero-shot learning setup.
+The paper "Continuous Representations of Intents for Dialogue Systems" \[1\] addresses the problem of representing user intents in conversational assistants. The main idea is to map every intent class to a point in space that is available through a set of coordinates and base matrices. In case of an encounter with an unseen intent, the model is able to represent it within the calculated space and classify it in the zero-shot learning setup.
 
 ## 1.1. Paper summary
 
@@ -40,7 +40,9 @@ Based on this observation, I abandoned the 15-epoch training schedule explained 
 
 ## 3.2. Running the code
 
-`python model.py` should run the code using data_loader.py as a module so, expect \_\_pycache\_\_ to appear. If there is an available GPU, the code will attempt to use it.
+`python model.py` should run the code using data_loader.py as a module so, expect \_\_pycache\_\_ to appear. If there is an available GPU, the code will attempt to use it. The output printed on screen is the `sklearn.metrics.classification_report` calculated on the seen and unseen intents, separately.
+
+`python model_run_all.py` runs an iteration over the list of all intents, leaving one as unseen intents at each iteration and calculates the accuracies over the seen and unseen intents and wirtes them to "results.csv" file. This output is expected to be similar to the results in Table 2 in the paper, which is shown below.
 
 ## 3.3. Results
 
@@ -48,12 +50,16 @@ Present your results and compare them to the original paper. Please number your 
 
 # 4. Conclusion
 
-Discuss the paper in relation to the results in the paper and your results.
+The paper presents and approach to model intent classes in an intent space using RNN structures which is claimed to help few-shot modeling of unseen intents. The classification architecture is quite dissimilar to what is customary in the literature and the training procedure calls for careful scheduling, although it is stated that no sophisticated parameter tuning is done, in the paper. With introduction of weight decay on the coordinate parameters of the model and use of SGD optimizer with early stopping, the model achieves accuracy levels close to those reported in the paper. 
+
+As for my critisisms on the paper, the choice of accuracy as the evaluation metric is limiting. The results are reported over a single fold which raises questions about statistical significance of the reported results. There is no baseline method evaluated against the proposed approach. Use of a single dataset in the experiments (the results on the ATIS dataset are not provided in detail and not elaborated on rigorously).
 
 # 5. References
 
-Provide your references here.
+\[1\] [Jacobsen, S. A., & Ragni, A. (2021). Continuous representations of intents for dialogue systems. arXiv preprint arXiv:2105.03716.](https://arxiv.org/pdf/2105.03716.pdf)
 
 # Contact
 
-Provide your names & email addresses and any other info with which people can contact you.
+Eyüp Halit Yılmaz
+
+yilmaz.eyup@metu.edu.tr

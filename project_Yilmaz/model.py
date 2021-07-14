@@ -297,7 +297,6 @@ with torch.no_grad():
 print(classification_report(test_label_seen.numpy(), pred))
 
 
-
 with torch.no_grad():
 	if padded:
 		pred = model(test_data_unseen.to(device)).argmax(dim=1)
@@ -306,4 +305,17 @@ with torch.no_grad():
 		for i in range(len(test_data_unseen)):
 			pred.append(model(test_data_unseen[i].unsqueeze(1).to(device)).argmax(dim=1).item())
 
+
 print(classification_report(test_label_unseen.numpy(), pred))
+
+
+with torch.no_grad():
+	test = test_data_seen + test_data_unseen
+	label = torch.cat((test_label_seen, test_label_unseen))
+	pred = []
+	for i in range(len(test)):
+		pred.append(model(test[i].unsqueeze(1).to(device)).argmax(dim=1).item())
+
+
+print(classification_report(label.numpy(), pred))
+

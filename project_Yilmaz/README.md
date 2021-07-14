@@ -34,6 +34,8 @@ The regularization term on the unseen intents described in the paper fails to tr
 
 SGD optimizer with learning rate 0.1 is used for the experiments. I observed Adam to be failing possibly due to the weight decay introduced on the coordinate parameters. At each epoch, early stopping is employed with 0.85 accuracy on the validation set, calculated every 1000 steps. The batch size is chosen as 1 for the experiments in order to simplify calculations of matrix multiplications. Weight decay on the coordinate parameters is chosen as 1e-5. The unseen intent is chosen as "GetWeather" as in the paper.
 
+During training I observe a severe drop in validation accuracy at the start of 11th epoch, which happens after the bases are learned for 5 epochs and coordinates are learned in the following 5 epochs. For this 10-epoch period, validation accuracy increases monotonically but at the start of the 11th epoch, there is a dramatical drop. This is not reported in the paper since the reported accuracy values are those at the end of the epoch, which increases back to its initial values in my experiments as well.
+
 ## 3.2. Running the code
 
 `python model.py` should run the code using data_loader.py as a module so, expect \_\_pycache\_\_ to appear. If there is an available GPU, the code will attempt to use it.

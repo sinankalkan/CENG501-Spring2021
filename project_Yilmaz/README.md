@@ -45,8 +45,38 @@ Based on this observation, I abandoned the 15-epoch training schedule explained 
 `python model_run_all.py` runs an iteration over the list of all intents, leaving one as the unseen intent at each iteration and calculates the accuracies over the seen and unseen intents and wirtes them to "results.csv" file. This output is expected to be similar to the results in Table 2 in the paper, which is shown below.
 
 ## 3.3. Results
+Table 1: The results taken from \[1\]
+| Unseen Intent | Unseen Acc. | Seen Acc. |
+| --- | --- | --- |
+| AddToPlaylist | 0.9750 | 0.9500 |
+| BookRestaurant | 0.9717 | 0.9600 |
+| PlayMusic | 0.9683 | 0.8200 |
+| RateBook | 0.9500 | 0.8800 |
+| SearchCreativeWork | 0.8500 | 0.9200 |
+| SearchScreeningEvent | 0.9867 | 0.7900 |
+| GetWeather | 0.9733 | 0.9500 |
 
-Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
+Table 2: The results of my experiments
+| Unseen Intent | Unseen Acc. | Seen Acc. |
+| --- | --- | --- |
+| AddToPlaylist | 0.9194 | 0.9219 |
+| BookRestaurant | 0.9565 | 0.8914 |
+| PlayMusic | 0.8605 | 0.8730 |
+| RateBook | 0.9875 | 0.9113 |
+| SearchCreativeWork | 0.8879 | 0.9359 |
+| SearchScreeningEvent | 0.8131 | 0.9224 |
+| GetWeather | 0.9808 | 0.8993 |
+
+Table 3: The difference between my experiment results and the results from \[1\]
+| Unseen Intent | Unseen Acc. | Seen Acc. |
+| --- | --- | --- |
+| AddToPlaylist | -0.0556 | -0.0281 |
+| BookRestaurant | -0.0152 | -0.0686 |
+| PlayMusic | -0.1078 | 0.0530 |
+| RateBook | 0.0375 | 0.0313 |
+| SearchCreativeWork | 0.0379 | 0.0159 |
+| SearchScreeningEvent | -0.1736 | 0.1324 |
+| GetWeather | 0.0075 | -0.0507 |
 
 # 4. Conclusion
 

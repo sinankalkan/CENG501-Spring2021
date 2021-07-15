@@ -1,0 +1,13 @@
+L_ss_weight: 0.01
+early_stopping_min_delta: 0.002
+early_stopping_patience: 10
+epochs: 50
+learning_rate: 0.015
+optimizer: Adam
+plateau_cooldown: 0
+plateau_min_delta: 0.001
+plateau_patience: 2
+robustness: FDn
+start_regularization: 5
+step_size: 0.1
+weight_decay: 0.0005

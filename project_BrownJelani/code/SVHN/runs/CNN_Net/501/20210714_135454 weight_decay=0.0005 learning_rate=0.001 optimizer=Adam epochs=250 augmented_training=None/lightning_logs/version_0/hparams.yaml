@@ -1,0 +1,10 @@
+early_stopping_min_delta: 0.02
+early_stopping_patience: 5
+epochs: 250
+learning_rate: 0.001
+optimizer: Adam
+plateau_cooldown: 0
+plateau_min_delta: 0.01
+plateau_patience: 2
+robustness: null
+weight_decay: 0.0005

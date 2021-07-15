@@ -5,7 +5,7 @@ This readme file is an outcome of the http://kovan.ceng.metu.edu.tr/~sinan/DL/[C
 
 == 1. Introduction
 
-This document describes the project to implement and reproduce results from the paper "Robustness of Neural Ordinary Differential Equations"^<<1>>^. Technically, the goal is to implement the models described in the paper
+This document describes the project to implement and reproduce results from the paper "Robustness of Neural Ordinary Differential Equations"^<<1>>^. Technically, the goal is to implement the models described in the paper. Additionally, this project aims to educate the investigators about the subjects involved in the work and provide practical experience in implementing state-of-the-art deep learning models.
 
 
 === 1.1. Paper summary 
@@ -20,6 +20,7 @@ In addition to the robustness analysis, the authors of the paper present a novel
 
 Some hyperparameters are given in the paper.
 
+- Classification accuracy (%) is reported as the evaluation metric of the various models.
 - Neural ODE network configurations are described.
 - Weight decay = 0.0005. Able to use directly.
 - The TisODE steady-state loss weight is specified as 0.1. From correspondence with the paper's author, we learned that the steady-state loss was not always set to 0.1 but sometimes other values such as 0.05 or 0.01 were used. Due to issues with training, we used 0.01.
@@ -40,6 +41,7 @@ Some implementation details and hyperparameters are not given in the paper, so w
 - Learning rate. Set to initial rate of 0.015 for MNIST and 0.001 for SVHN and decrease by 25% when validation loss doesn't decrease by 0.001 (MNIST) or 0.02 (SVHN) for 2 epochs.
 - Maximum number of epochs for training set to 250 but with early stopping if at least 0.002 (MNIST) or 0.02 (SVHN) improvement in validation loss is not seen in 5 epochs for CNN and ODENet models and 10 epochs for TisODE models.
 - Training vs validation split not specified but we decided to use such a split for monitoring training progress. Approximately 10% of the training data was set used for validation.
+- Classification accuracy was calculated over the test set for each dataset. (The original public "validation" set is used as the test set by the PyTorch dataset modules.)
 - PGD adversarial attack uses a specified number of iterations to optimize the attack. The number of iterations is not specified in the paperm but the author clarifies in https://openreview.net/forum?id=B1e9Y2NYvS&noteId=r1xirtM4tB[a comment] during the review process that 10 steps were used. However, the Foolbox default is 40 https://foolbox.readthedocs.io/en/stable/modules/attacks.html#foolbox.attacks.LinfProjectedGradientDescentAttack[according to the documentation], but decreasing the step size alone and leaving the other Foolbox PGD attack parameters the same resulted in relatively ineffective attack, so all Foolbox defaults were left.
 
 
@@ -86,9 +88,9 @@ Results from the original paper are presented alongside the results obtained fro
 
 |*MNIST*       | *σ = 50* | *σ = 75* | *σ = 100* | *FGSM-0.15* | *FGSM-0.3* | *FGSM-0.5*
 |CNN (paper) | 98.1±0.7 | 85.1±4.3 | 56.4±5.6 | 63.4±2.3 | 24.0±8.9 | 8.3±3.2
-|CNN (ours)  | 98.3±0.1 | 93.7±1.3 | 75.7±1.2 | 63.7±2.8 | 26.1±2.3 | 10.0±2.6
+|CNN (ours)  | 98.5±0.0 | 94.5±1.1 | 77.8±4.2 | 67.7±3.7 | 27.7±3.6 | 9.9±2.0
 |ODENet (paper) | 98.7±0.6 | 90.6±5.4 | 73.2±8.6 | 83.5±0.9 | 42.1±2.4 | 14.3±2.1
-|ODENet (ours)  | 98.9±0.2 | 96.9±0.3 | 87.5±1.1 | 83.8±1.7 | 51.2±6.7 | 18.2±5.5
+|ODENet (ours)  | 98.9±0.1 | 96.5±0.8 | 87.4±4.8 | 84.6±1.5 | 49.6±3.0 | 18.5±1.2
 |*SVHN*       | *σ = 15* | *σ = 25* | *σ = 35* | *FGSM-3/255* | *FGSM-5/255* | *FGSM-8/255*
 |CNN (paper) | 90.0±1.2 | 76.3±2.7 | 60.9±3.9 | 29.2±2.9 | 13.7±1.9 | 5.4±1.5
 |CNN (ours)  | 87.4±0.4 | 75.2±1.0 | 61.8±1.4 | 35.2±0.7 | 18.0±0.3 | 7.7±0.3
@@ -107,11 +109,11 @@ Results from the original paper are presented alongside the results obtained fro
 
 |*MNIST*       | *σ = 100* | *FGSM-0.3* | *FGSM-0.5* | *PGD-0.2* | *PGD-0.3*
 |CNN (paper) | 98.7±0.1 | 54.2±1.1 | 15.8±1.3 | 32.9±3.7 | 0.0±0.0
-|CNN (ours)  | 98.0±0.2 | 56.6±5.5 | 18.0±3.1 | 41.6±4.8 | 0.5±0.6
+|CNN (ours)  | 97.9±0.4 | 52.4±2.7 | 16.5±2.2 | 43.3±1.1 | 0.6±0.3
 |ODENet (paper) | 99.4±0.1 | 71.5±1.1 | 19.9±1.2 | 64.7±1.8 | 13.0±0.2
-|ODENet (ours)  | 98.4±0.1 | 71.3±1.4 | 31.0±4.7 | 71.9±1.0 | 17.5±2.0
+|ODENet (ours)  | 98.4±0.1 | 69.3±2.4 | 28.4±1.2 | 72.8±0.5 | 20.2±0.6
 |TisODE (paper) | 99.6±0.0 | 75.7±1.4 | 26.5±3.8 | 67.4±1.5 | 13.2±1.0
-|TisODE (ours)  | 82.7±6.7 | 12.4±16.5 | 3.6±5.1 | 14.5±24.8 | 1.7±3.0
+|TisODE (ours)  | 77.5±19.9 | 35.3±24.8 | 14.7±7.1 | 36.2±35.2 | 7.3±9.6
 |*SVHN*       | *σ = 35* | *FGSM-5/255* | *FGSM-8/255* | *PGD-3/255* | *PGD-5/255*
 |CNN (paper) | 90.6±0.2 | 25.3±0.6 | 12.3±0.7 | 32.4±0.4 | 14.0±0.5
 |CNN (ours)  | 85.5±0.3 | 32.4±0.8 | 16.7±0.8 | 48.1±0.1 | 24.5±0.3
@@ -136,24 +138,24 @@ Results from the original paper are presented alongside the results obtained fro
 
 |*MNIST*       | *σ = 100* | *FGSM-0.3* | *FGSM-0.5* | *PGD-0.2* | *PGD-0.3*
 |CNN (paper) | 98.7±0.1 | 54.2±1.1 | 15.8±1.3 | 32.9±3.7 | 0.0±0.0
-|CNN (ours)  | 98.0±0.2 | 56.6±5.5 | 18.0±3.1 | 41.6±4.8 | 0.5±0.6
+|CNN (ours)  | 97.9±0.4 | 52.4±2.7 | 16.5±2.2 | 43.3±1.1 | 0.6±0.3
 |CNN-FDn (paper) | 99.0±0.1 | 74.0±4.1 | 32.6±5.3 | 58.9±4.0 | 8.2±2.6
-|CNN-FDn (ours)  | 98.4±0.0 | 62.7±5.2 | 22.5±8.2 | 52.9±6.6 | 3.3±1.5
+|CNN-FDn (ours)  | 98.1±0.1 | 60.6±5.2 | 23.8±4.7 | 49.0±7.4 | 4.1±1.4
 |TisODE-FDn (paper) | 99.4±0.0 | 80.6±2.3 | 40.4±5.7 | 72.6±2.4 | 28.2±3.6
 |TisODE-FDn (ours)  | 87.0±6.0 | 26.9±19.5 | 12.5±7.9 | 23.6±23.8 | 2.5±3.2
 |CNN-IRd (paper) | 95.3±0.9 | 78.1±2.2 | 36.7±2.1 | 79.6±1.9 | 55.5±2.9
-|CNN-IRd (ours)  | 92.4±0.5 | 29.7±3.9 | 8.7±1.5 | 39.6±6.3 | 1.8±1.7
+|CNN-IRd (ours)  | 97.5±0.2 | 53.5±5.9 | 13.5±3.4 | 58.1±5.3 | 3.8±1.7
 |TisODE-IRd (paper) | 97.6±0.1 | 86.8±2.3 | 49.1±0.2 | 88.8±0.9 | 66.0±0.9
 |TisODE-IRd (ours)  | 57.6±9.7 | 6.2±4.3 | 4.3±2.3 | 2.5±3.8 | 0.1±0.2
 |*SVHN*       | *σ = 35* | *FGSM-5/255* | *FGSM-8/255* | *PGD-3/255* | *PGD-5/255*
 |CNN (paper) | 90.6±0.2 | 25.3±0.6 | 12.3±0.7 | 32.4±0.4 | 14.0±0.5
-|CNN (ours)  | 86.9±0.2 | 28.3±1.7 | 14.0±1.1 | 41.4±2.3 | 18.6±1.8
+|CNN (ours)  | 85.5±0.3 | 32.4±0.8 | 16.7±0.8 | 48.1±0.1 | 24.5±0.3
 |CNN-FDn (paper) | 92.4±0.1 | 43.8±1.4 | 31.5±3.0 | 40.0±2.6 | 19.6±3.4
-|CNN-FDn (ours)  | 87.2±0.1 | 27.3±0.4 | 13.5±0.7 | 39.8±0.7 | 17.4±0.4
+|CNN-FDn (ours)  | 85.7±1.4 | 39.4±0.4 | 24.5±0.7 | 49.9±2.3 | 27.1±2.2
 |TisODE-FDn (paper) | 95.2±0.1 | 57.8±1.7 | 48.2±2.0 | 53.4±2.9 | 32.3±1.0
-|TisODE-FDn (ours)  | xx±xx | xx±xx | xx±xx | xx±xx | xx±xx
+|TisODE-FDn (ours)  | 66.7±1.1 | 39.3±0.2 | 26.5±0.6 | 51.7±0.7 | 34.5±0.7
 |CNN-IRd (paper) | 84.9±1.2 | 65.8±0.4 | 54.7±1.2 | 74.0±0.5 | 64.5±0.8
-|CNN-IRd (ours)  | xx±xx | xx±xx | xx±xx | xx±xx | xx±xx
+|CNN-IRd (ours)  | 83.4±2.1 | 39.1±2.3 | 22.1±1.9 | 56.9±1.4 | 32.6±1.5
 |TisODE-IRd (paper) | 91.7±0.5 | 74.4±1.2 | 61.9±1.8 | 81.6±0.8 | 71.0±0.5
 |TisODE-IRd (ours)  | xx±xx | xx±xx | xx±xx | xx±xx | xx±xx
 |===

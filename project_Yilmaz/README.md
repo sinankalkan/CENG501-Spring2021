@@ -90,7 +90,7 @@ As for my critisisms on the paper, the choice of accuracy as the evaluation metr
 
 \[1\] [Jacobsen, S. A., & Ragni, A. (2021). Continuous representations of intents for dialogue systems. arXiv preprint arXiv:2105.03716.](https://arxiv.org/pdf/2105.03716.pdf)
 
-\[2\] [Pennington, J., Socher, R., & Manning, C. D. (2014, October). Glove: Global vectors for word representation. In Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP) (pp. 1532-1543).] (https://aclanthology.org/D14-1162.pdf)
+\[2\] [Pennington, J., Socher, R., & Manning, C. D. (2014, October). Glove: Global vectors for word representation. In Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP) (pp. 1532-1543).](https://aclanthology.org/D14-1162.pdf)
 
 # Contact
 

@@ -44,4 +44,4 @@ Provide your references here.
 
 # Contact
 
-Provide your names & email addresses and any other info with which people can contact you.
+Göksu Anıl KIZILDOĞAN - goksu.kizildogan@gmail.com (or just add me on https://www.linkedin.com/in/goksu-anil-kizildogan-b90aa3116/)

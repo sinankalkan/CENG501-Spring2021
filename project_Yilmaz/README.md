@@ -84,6 +84,8 @@ Table 3: The difference between my experiment results and the results from \[1\]
 
 The paper presents and approach to model intent classes in an intent space using RNN structures which is claimed to help zero-shot modeling of unseen intents. The classification architecture is quite dissimilar to what is customary in the literature and the training procedure calls for careful scheduling, although it is stated that no sophisticated parameter tuning is done, in the paper. With introduction of weight decay on the coordinate parameters of the model and use of SGD optimizer with early stopping, the model achieves accuracy levels close to those reported in the paper. 
 
+My results are close to those reported in the paper, although there are some discrepancies. This can be attributed to the early stopping threshold of 0.85 evaluation accuracy. Additionally, the training schedule limits the extent to which some parameters are learned, such as the coordinates, which might be another reason for this discrepancy. For some unseen intents, such as RateBook and SearchCreativeWork, my experiments yield in higher accuracy scores than those in the paper, which validates my application of the algorithm.
+
 As for my critisisms on the paper, the choice of accuracy as the evaluation metric is limiting. The results are reported over a single fold which raises questions about statistical significance of the reported results. There is no baseline method evaluated against the proposed approach. Use of a single dataset in the experiments (the results on the ATIS dataset are not provided in detail and not elaborated on rigorously) is also limiting the generalizability of the proposed method.
 
 # 5. References

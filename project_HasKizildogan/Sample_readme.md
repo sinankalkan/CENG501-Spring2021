@@ -4,7 +4,7 @@ This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.
 
 # 1. Introduction
 
-Introduce the paper (inc. where it is published) and describe your goal (reproducibility).
+Our paper is named "Semi-Supervised Learning under Class Distribution Mismatch". The paper whose authors are Yanbei Chen, Xiatian Zhu, Wei Li and Shaogang Gong was published at The Thirthy-Fourth AAAI Conference on Artificial Intelligence (AAAI-2020). 
 
 ## 1.1. Paper summary
 

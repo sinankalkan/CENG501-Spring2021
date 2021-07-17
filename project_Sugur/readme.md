@@ -32,7 +32,7 @@ Code is implemented and can be run on Colab.
 
 ## 3.3. Results
 
-Unfortunately, I could not implement the vagualy explained loss function hence could not compare the proposed network with other FCN's. But all comparisons can be seen from the COlab file. 
+Unfortunately, I could not implement the vagualy explained loss function hence could not compare the proposed network with other FCN's. But all comparisons can be seen from the Colab file. 
 
 # 4. Conclusion
 

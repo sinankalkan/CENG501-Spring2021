@@ -4,7 +4,7 @@ This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.
 
 # 1. Introduction
 
-Introduce the paper (inc. where it is published) and describe your goal (reproducibility).
+This repository describes and contains unoffical implementation of the paper "Calibrating CNNs for Lifelong Learning" published in NeurIPS 2020. Paper presents a way to train CNNs for different tasks contiually without getting caugt in the catastrophic forgetting phenomenon. Aim of the project is to implement the models described in the paper (Provided notebooks contains some of the experiments in the paper, the uncovered experiments can be realized by the reader by using the provided notebooks as reference) and shift the attention of the reader to the subject of "Continual Learning".
 
 ## 1.1. Paper summary
 

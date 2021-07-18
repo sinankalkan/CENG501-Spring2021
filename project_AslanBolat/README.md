@@ -193,39 +193,24 @@ For assembly quality:
   - Obtained 3.991 mse 
   - 0.1 IoU
     
-### Part assembly results: (Predicted - Correct)  
-<img src="./assembly_results/predicted_assembly0.png" alt="Predicted0" width="450" height="300" />
-<img src="./assembly_results/correct_assembly0.png" alt="Correct0" width="450" height="300" />  
-<img src="./assembly_results/predicted_assembly33.png" alt="Predicted33" width="450" height="300" />
-<img src="./assembly_results/correct_assembly33.png" alt="Correct33" width="450" height="300" />  
-<img src="./assembly_results/predicted_assembly53.png" alt="Predicted53" width="450" height="300" />
-<img src="./assembly_results/correct_assembly53.png" alt="Correct53" width="450" height="300" />  
-<img src="./assembly_results/predicted_assembly67.png" alt="Predicted67." width="450" height="300" />
-<img src="./assembly_results/correct_assembly67.png" alt="Correct67" width="450" height="300" />    
-<img src="./assembly_results/predicted_assembly75.png" alt="Predicted75." width="450" height="300" />
-<img src="./assembly_results/correct_assembly75.png" alt="Correct75" width="450" height="300" />    
+### Part assembly results: 
+Predicted                  |  Correct
+:-------------------------:|:-------------------------:
+![Predicted0](./assembly_results/predicted_assembly0.png)  |  ![Correct0](./assembly_results/correct_assembly0.png)
+![Predicted33](./assembly_results/predicted_assembly33.png)  |  ![Correct33](./assembly_results/correct_assembly33.png)
+![Predicted53](./assembly_results/predicted_assembly53.png)  |  ![Correct53](./assembly_results/correct_assembly53.png)
+![Predicted67](./assembly_results/predicted_assembly67.png)  |  ![Correct67](./assembly_results/correct_assembly67.png)
+![Predicted75](./assembly_results/predicted_assembly75.png)  |  ![Correct75](./assembly_results/correct_assembly75.png)
 
 
-### Part generation results: (MSE Reconstruction Loss - BCE Reconstruction Loss - Target)
-<img src="./generation_results/mu_1_3_mse.png" width="300" height="200" />
-<img src="./generation_results/mu_1_3_bce.png" width="300" height="200" />
-<img src="./generation_results/mu_1_3_real.png" width="300" height="200" />  
-
-<img src="./generation_results/mu_1_61_mse.png" width="300" height="200" />
-<img src="./generation_results/mu_1_61_bce.png" width="300" height="200" />
-<img src="./generation_results/mu_1_61_real.png" width="300" height="200" />  
-
-<img src="./generation_results/mu_1_148_mse.png" width="300" height="200" />
-<img src="./generation_results/mu_1_148_bce.png" width="300" height="200" />
-<img src="./generation_results/mu_1_148_real.png" width="300" height="200" />   
-
-<img src="./generation_results/mu_1_190_mse.png" width="300" height="200" />
-<img src="./generation_results/mu_1_190_bce.png" width="300" height="200" />
-<img src="./generation_results/mu_1_190_real.png" width="300" height="200" />   
-
-<img src="./generation_results/mu_1_389_mse.png" width="300" height="200" />
-<img src="./generation_results/mu_1_389_bce.png" width="300" height="200" />
-<img src="./generation_results/mu_1_389_real.png" width="300" height="200" /> 
+### Part generation results: 
+MSE Reconstruction Loss    |  BCE Reconstruction Loss  |  Target
+:-------------------------:|:-------------------------:|:-------------------------:
+![mse1](./generation_results/mu_1_3_mse.png)    |  ![bce1](./generation_results/mu_1_3_bce.png)   |    ![real1](./generation_results/mu_1_3_real.png)
+![mse2](./generation_results/mu_1_61_mse.png)   |  ![bce2](./generation_results/mu_1_61_bce.png)  |  ![real2](./generation_results/mu_1_61_real.png)
+![mse3](./generation_results/mu_1_148_mse.png)  |  ![bce3](./generation_results/mu_1_148_bce.png) |  ![real3](./generation_results/mu_1_148_real.png)
+![mse4](./generation_results/mu_1_190_mse.png)  |  ![bce4](./generation_results/mu_1_190_bce.png) |  ![real4](./generation_results/mu_1_190_real.png)
+![mse5](./generation_results/mu_1_389_mse.png)  |  ![bce5](./generation_results/mu_1_389_bce.png) |  ![real5](./generation_results/mu_1_389_real.png)
 
 # 4. Conclusion
 

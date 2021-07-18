@@ -153,6 +153,14 @@ project
 │   train_assembler.py
 │   train_vaegan.py
 │   utils.py
+│
+│─── assembly_results 
+│
+│─── generation_results
+│
+│─── wgan_gp_results
+│
+│─── plots
 ```
 
 [datasets.py](./dataset.py) contains Dataset structures for VAE-GAN and Assembler. There are two dataset class: PartNetDataset (for VAE-GAN) and AssemblerDataset (for Assembler).  
@@ -165,21 +173,66 @@ project
 [train_assembler.py](./train_assembler.py) trains the Assembler. Saves the model at each n epochs.  
 [train_vaegan.py](./train_vaegan.py) trains VAE-GANs before the VAE-GAN training. Saves the model at each n epochs.  
 [utils.py](./utils.py) contains code visualizing and saving voxels, voxels to pointcloud and pointcloud to voxels transformations, tranlating and scaling voxel data. Used for processing dataset with our own voxelization method.
-
-Each code can be run with "python3 python_file_name.py".
+[generation_results](./generation_results) contains png files for generated parts using the generative networks with bce and mse reconstruction losses and target parts.  
+[assembly_results](./assembly_results) contains png files for predicted assembly and correct assembly of models.  
+[wgan_gp_results](./wgan_gp_results) contains png files for generated parts (failed training) using Wasserstein Gan with gradient penalty.
+Each code can be run with "python3 python_file_name.py".  
+[plots](./plots) contains png files for lossxiteration plots for VAE, Discriminator and Assembler network trainings.
    
-
-
-
 
 
 ## 3.3. Results
 
-Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
+Due to implementation differences and omitted implementation details in the paper, we cannot compare our results with the results in the paper directly.  
+
+For assembly quality:
+- Using the back part of the chair as the anchor:
+  - Obtained 2.534 mean square error of predicted translations and scalings compared to target ones.
+  - Obtained 0.20 IoU between transformed parts and correct assembled parts.
+- Using the seat part of the chair as the anchor: 
+  - Obtained 3.991 mse 
+  - 0.1 IoU
+    
+### Part assembly results: (Predicted - Correct)  
+<img src="./assembly_results/predicted_assembly0.png" alt="Predicted0" width="450" height="300" />
+<img src="./assembly_results/correct_assembly0.png" alt="Correct0" width="450" height="300" />  
+<img src="./assembly_results/predicted_assembly33.png" alt="Predicted33" width="450" height="300" />
+<img src="./assembly_results/correct_assembly33.png" alt="Correct33" width="450" height="300" />  
+<img src="./assembly_results/predicted_assembly53.png" alt="Predicted53" width="450" height="300" />
+<img src="./assembly_results/correct_assembly53.png" alt="Correct53" width="450" height="300" />  
+<img src="./assembly_results/predicted_assembly67.png" alt="Predicted67." width="450" height="300" />
+<img src="./assembly_results/correct_assembly67.png" alt="Correct67" width="450" height="300" />    
+<img src="./assembly_results/predicted_assembly75.png" alt="Predicted75." width="450" height="300" />
+<img src="./assembly_results/correct_assembly75.png" alt="Correct75" width="450" height="300" />    
+
+
+### Part generation results: (MSE Reconstruction Loss - BCE Reconstruction Loss - Target)
+<img src="./generation_results/mu_1_3_mse.png" width="300" height="200" />
+<img src="./generation_results/mu_1_3_bce.png" width="300" height="200" />
+<img src="./generation_results/mu_1_3_real.png" width="300" height="200" />  
+
+<img src="./generation_results/mu_1_61_mse.png" width="300" height="200" />
+<img src="./generation_results/mu_1_61_bce.png" width="300" height="200" />
+<img src="./generation_results/mu_1_61_real.png" width="300" height="200" />  
+
+<img src="./generation_results/mu_1_148_mse.png" width="300" height="200" />
+<img src="./generation_results/mu_1_148_bce.png" width="300" height="200" />
+<img src="./generation_results/mu_1_148_real.png" width="300" height="200" />   
+
+<img src="./generation_results/mu_1_190_mse.png" width="300" height="200" />
+<img src="./generation_results/mu_1_190_bce.png" width="300" height="200" />
+<img src="./generation_results/mu_1_190_real.png" width="300" height="200" />   
+
+<img src="./generation_results/mu_1_389_mse.png" width="300" height="200" />
+<img src="./generation_results/mu_1_389_bce.png" width="300" height="200" />
+<img src="./generation_results/mu_1_389_real.png" width="300" height="200" /> 
 
 # 4. Conclusion
 
-Discuss the paper in relation to the results in the paper and your results.
+The paper proposes an interesting method, which uses compliceted and strong architectures.
+Unfortunately, the paper omits important information, which at first glance does not sound important.
+If there were any explanation on how they voxelized data, implemented deformation technique, implemented symmetry detection, training details of assembler network, we could obtain better results.
+Nonetheless, we tried different approached and methods for training the models and achieved visually acceptable results.
 
 # 5. References
 

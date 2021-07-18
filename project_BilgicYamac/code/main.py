@@ -8,8 +8,8 @@ def main():
 
     test = ld.loadData("test")
     train = ld.loadData("train")
-    dev = ld.loadData("dev")
-    pass
+    dev = ld.loadData("valid")
+    emb = ld.loadEmbeddings()
 
 
 if __name__ == '__main__':

@@ -6,46 +6,63 @@ import numpy as np
 
 class LoadData:
     def __init__(self):
-        my_file = Path("data/WikiQACorpus/vocab.t7")
+        my_file = Path("data/sequence/vocab.t7")
         if not my_file.is_file():
             self.buildVocab()
 
-        my_file = Path("data/WikiQACorpus/train.t7")
+        my_file = Path("data/sequence/train_wikia.t7")
         if not my_file.is_file():
+            self.buildSummary()
             self.buildData()
-        pass
+
+        my_file = Path("data/sequence/initEmb.t7")
+        if not my_file.is_file():
+            self.buildVacab2Emb()
 
     def buildVocab(self):
         print("Building vocab dict ...")
         vocab = {}
         ivocab = []
-        filenames = {"WikiQACorpus/WikiQACorpus/WikiQA-dev.txt",
-                     "WikiQACorpus/WikiQACorpus/WikiQA-test.txt",
-                     "WikiQACorpus/WikiQACorpus/WikiQA-train.txt"}
+        filenames = {"WikiHowQACorpus/test.txt",
+                     "WikiHowQACorpus/train.txt",
+                     "WikiHowQACorpus/valid.txt"
+                     }
         for filename in filenames:
             with open(filename, encoding="utf8") as f:
                 line = f.readline()
                 while line:
                     divs = line.split("\t")
-                    for m in range(0, 2):
-                        words = divs[m].lower().split(" ")
-                        for i in range(len(words)):
-                            if words[i] not in vocab:
-                                vocab[words[i]] = len(ivocab)
-                                ivocab.append(words[i])
+                    words = divs[0].lower().split(" ")
+                    for i in range(len(words)):
+                        if words[i] not in vocab:
+                            vocab[words[i]] = len(ivocab)
+                            ivocab.append(words[i])
 
                     line = f.readline()
 
-        torch.save(vocab, "data/WikiQACorpus/vocab.t7")
-        torch.save(ivocab, "data/WikiQACorpus/ivocab.t7")
+        with open("WikiHowQACorpus/summary.txt", encoding="utf8") as f:
+            line = f.readline()
+            while line:
+                divs = line.split("\t")
+                words = divs[1].lower().split(" ")
+                for i in range(len(words)):
+                    if words[i] not in vocab:
+                        vocab[words[i]] = len(ivocab)
+                        ivocab.append(words[i])
+
+                line = f.readline()
+
+        torch.save(vocab, "data/sequence/vocab.t7")
+        torch.save(ivocab, "data/sequence/ivocab.t7")
 
     def buildData(self):
         vocab = self.loadVocab()
+        summary = self.loadSummary()
         print("Building data ...")
 
-        filenames = {("dev", "WikiQACorpus/WikiQACorpus/WikiQA-dev.txt"),
-                     ("test", "WikiQACorpus/WikiQACorpus/WikiQA-test.txt"),
-                     ("train", "WikiQACorpus/WikiQACorpus/WikiQA-train.txt")}
+        filenames = {("valid", "WikiHowQACorpus/valid.txt"),
+                     ("test", "WikiHowQACorpus/test.txt"),
+                     ("train", "WikiHowQACorpus/train.txt")}
 
         for folder, filename in filenames:
             candidates = []
@@ -75,21 +92,59 @@ class LoadData:
                         candidates = []
                         labels = []
 
-                    words = divs[1].split(' ')
-                    cand = []
-                    for word in words:
-                        cand.append(vocab[word])
-                    candidates.append(torch.LongTensor(cand))
+                    summary_index = int(divs[1])
+                    candidates.append(summary[summary_index])
                     labels.append(int(divs[2]))
                     line = f.readline()
             torch.save(data, "data/sequence/" + folder + "_wikia.t7")
         return data
 
+    def buildSummary(self):
+        vocab = self.loadVocab()
+        print("Building summary ...")
+
+        summaryMap = []
+        with open("WikiHowQACorpus/summary.txt", encoding="utf8") as f:
+            line = f.readline()
+            line = line.replace("\n", " ")
+            while line:
+                divs = line.lower().split("\t")
+                words = divs[1].split(' ')
+                summary = []
+                for word in words:
+                    summary.append(vocab[word])
+                summaryMap.append(torch.LongTensor(summary))
+                line = f.readline()
+        torch.save(summaryMap, "data/sequence/summary_wikia.t7")
+
+    def buildVacab2Emb(self):
+        vocab = self.loadVocab()
+        print("Building embedings ...")
+
+        emb = {}
+        with open("glove/glove.6B.100d.txt", encoding="utf8") as f:
+            line = f.readline()
+            while line:
+                vector = []
+                vals = line.split("\n")[0].split(" ")
+                if vals[0] in vocab:
+                    for i in range(1, len(vals)):
+                        vector.append(vals[i])
+                    emb[vocab[vals[0]]]=vector
+                line = f.readline()
+        torch.save(emb, "data/sequence/initEmb.t7")
+
     def loadVocab(self):
-        return torch.load("data/WikiQACorpus/vocab.t7")
+        return torch.load("data/sequence/vocab.t7")
 
     def loadIVocab(self):
-        return torch.load("data/WikiQACorpus/ivocab.t7")
+        return torch.load("data/sequence/ivocab.t7")
+
+    def loadSummary(self):
+        return torch.load("data/sequence/summary_wikia.t7")
+
+    def loadEmbeddings(self):
+        return torch.load("data/sequence/initEmb.t7")
 
     def loadData(self, setname):
         return torch.load("data/sequence/" + setname + "_wikia.t7")

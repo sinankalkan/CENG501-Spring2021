@@ -16,7 +16,7 @@ In the existing literature, reinforcement learning agents go through a very long
 
 In the original method, the algorithm that is used in near optimal pick and place tasks are given briefly as "raise the manipulator", "go over the object", "lower the manipulator", "grab the object", "raise the object", "go over the target", "release the object". This is implemented for several environments including several objects. The actions taken according to the mentioned algorithm are saved along with an observation from a camera. This is repeated for different tasks.
 
-For simulations, pybullet package is used in python. The object meshes and textures are used from ShapeNet dataset and pybullet objects.
+For simulations, pybullet package is used in python. The object meshes and textures are used from [ShapeNet] (https://shapenet.org) dataset and pybullet objects.
 
 Using the near optimal action-state pairs gathered from the simulations, a CNN called behavioral prior is trained end-to-end. As the input of the CNN, random gaussian noise and camera observations are used. As the output of the CNN, the near optimal actions are used.
 
@@ -63,8 +63,11 @@ parrot
 │─── reactor_description
 │
 │─── selected textures
-
 ```
+
+In order to repeat the experiments, one should firstly run "robot_arm.py" file in order to generate near optimal action-state pairs in "data3" folder. When there is enough data, one can exit the script.
+Then, q_learning.py should be run in order to train a behavioral prior network based on the generated near optimal action-state pairs. This script will save the trained models inside "bp models" folder.
+Finally, one should run "behavioral_prior.py" script. This script will use the final behavioral prior model and start reinforcement learning.
 
 ## 3.3. Results
 
@@ -76,8 +79,12 @@ Discuss the paper in relation to the results in the paper and your results.
 
 # 5. References
 
-Provide your references here.
+[PARROT: Data-Driven Behavioral Priors for Reinforcement Learning] (https://arxiv.org/abs/2011.10024)
+[Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor] (https://arxiv.org/abs/1801.01290)
+[Robotic Manipulator] (https://github.com/a-price/reactor_description)
+
 
 # Contact
 
-Provide your names & email addresses and any other info with which people can contact you.
+Denge Uzel - uzel.denge@metu.edu.tr
+Erdem Ata - erdem.ata@metu.edu.tr

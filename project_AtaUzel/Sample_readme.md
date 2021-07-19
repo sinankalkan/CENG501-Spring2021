@@ -66,7 +66,9 @@ parrot
 ```
 
 In order to repeat the experiments, one should firstly run "robot_arm.py" file in order to generate near optimal action-state pairs in "data3" folder. When there is enough data, one can exit the script.
+
 Then, q_learning.py should be run in order to train a behavioral prior network based on the generated near optimal action-state pairs. This script will save the trained models inside "bp models" folder.
+
 Finally, one should run "behavioral_prior.py" script. This script will use the final behavioral prior model and start reinforcement learning.
 
 ## 3.3. Results

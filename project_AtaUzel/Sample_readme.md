@@ -87,4 +87,5 @@ Discuss the paper in relation to the results in the paper and your results.
 # Contact
 
 Denge Uzel - uzel.denge@metu.edu.tr
+
 Erdem Ata - erdem.ata@metu.edu.tr

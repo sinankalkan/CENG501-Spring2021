@@ -121,7 +121,28 @@ Some implementation details are not given in the paper, so I made my own assumpt
 
 ## 3.3. Results
 
-Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
+## **3.3. Results**
+    Table 1: Average accuracies of tasks for given experiments (Paper vs. Ours)           
+Dataset            | Paper         | Ours 
+-------------------|------------------  |------------------
+SVHN               | 98.2               | 95.1
+CIFAR100           | 82.3               | 69.9
+splitCIFAR        | 89.7               | 84.7
+
+* Comparison of our foundings and paper's are shown in Table 1. Eventhough, our performances are lower than what has been reported in paper due to limited/constrained hardware capabilities, for **SVHN** and **splitCIFAR** experiments we achieved good performances. Our **CIFAR100** experiment on the other hand was not that good.
+
+
+![Figure 1: Accuracy](https://drive.google.com/uc?id=1BWnU_XOxwcAxMhoPQBgOZXAfcpaH31rl)
+
+    Figure 1: Average Accuracies vs. Number of Tasks
+
+* As shown in the paper, we did not observed catastrophic forgetting phenomenon, yet we have seen graceful degredation on the average accuracies as the number of tasks increases. Moreover, we also observed that performance on the rest of tasks is highly dependent on the performance on the 1st task.
+
+![number of paramaters ](https://drive.google.com/uc?id=1m0YgfYbZY7CU7L_9l3WUatmeOjFDC57N)
+
+    Figure 2: Number of parameters vs. Number of Tasks
+    
+* Most of the memory consumed by the initial tasks parameters, since 1st task starts with base model's parameters. On the other hand incorporated calibration modules do not cause significant memory overhead as the number of tasks increases. As you can see from the figure above, each added task only increases the number of total parameters approximately 0.9% with respect to number of initial parameters.
 
 # 4. Conclusion
 

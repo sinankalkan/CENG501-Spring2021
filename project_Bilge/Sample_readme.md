@@ -132,8 +132,7 @@ splitCIFAR        | 89.7               | 84.7
 * Comparison of our foundings and paper's are shown in Table 1. Eventhough, our performances are lower than what has been reported in paper due to limited/constrained hardware capabilities, for **SVHN** and **splitCIFAR** experiments we achieved good performances. Our **CIFAR100** experiment on the other hand was not that good.
 
 
-![Figure 1: Accuracy](https://drive.google.com/uc?id=1BWnU_XOxwcAxMhoPQBgOZXAfcpaH31rl)
-
+![Figure 1: Accuracy](https://github.com/sinankalkan/CENG501-Spring2021/blob/main/project_Bilge/accuracy.png) 
     Figure 1: Average Accuracies vs. Number of Tasks
 
 * As shown in the paper, we did not observed catastrophic forgetting phenomenon, yet we have seen graceful degredation on the average accuracies as the number of tasks increases. Moreover, we also observed that performance on the rest of tasks is highly dependent on the performance on the 1st task.

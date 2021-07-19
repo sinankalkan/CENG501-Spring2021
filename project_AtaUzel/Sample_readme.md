@@ -10,7 +10,7 @@ Our aim is to implement a behvioral prior on a new environment and to compare th
 ## 1.1. Paper summary
 In the existing literature, reinforcement learning agents go through a very long exploration period where almost no useful learning is achieved. However assuming the environment is composed of a robotic manipulator and objects, almost always, the manipulator must interact with the objects to achieve the task. As a prior, this narrows down the search space considerably. Therefore if such priors can be learned in order to bias the agents, it can be considered as a pre-training in reinforcement learning. This way, the learning process can be quicker.
 
-# 2. The method and my interpretation
+# 2. The method and our interpretation
 
 ## 2.1. The original method
 
@@ -26,7 +26,7 @@ The output of the behavioral prior is used as a combination of three vector: the
 
 The environment in the reinforcement learning is composed of 3 three objects and the manipulator. The agents task is to either pick a specific object and raise it or pick a specific object and place it on another specific object.
 
-## 2.2. My interpretation 
+## 2.2. Our interpretation 
 
 In the paper, the algorithm that was used in order to get near optimal action-state pairs was very brief. Most  of the implementation details were chosen properly. As examples, the maximum velocity and torque that can be achieved by the robotic manipulator joints, how much the end effector should be raised before it moves over an object, how fast the object is carried, what the orientation of the end effector is while carrying the objects can be given.
 

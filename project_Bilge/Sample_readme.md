@@ -95,11 +95,37 @@ Some implementation details are not given in the paper, so I made my own assumpt
 
 ## 3.1. Experimental setup
 
-Describe the setup of the original paper and whether you changed any settings.
+* I have implemented the modified ResNet model with calibration modules using PyTorch (and related libraries) as mentioned in Chapter 2.2. Remark 1. 
+
+* The paper also includes experiments on large-scale datasets ImageNet and MS-Celeb-10K, however, due to memory constraints and computation capabilities/training times these experiments are not reproduced. Only SVHN, CIFAR100 and splitCIFAR experiments are ran.
+
+* The computation time without disconnection is limited on Colab. Therefore, it is not possible for us to train network for 150 epochs for each task. Eventhough, utilization of momentum acceleration are not mentioned in the paper, I have implemented in our training procedure for speed up and train for smaller number of epochs. Correspondingly utilized learning-rate scheduling also modified. The following shows the hyperparameters utilized in our setup for experiments:
+
+1. **SVHN:** model=ResNet18, batch_size=128, lr=0.01, epochs=20, optimizer=SGD, momentum=0.9
+
+1. **CIFAR100:** model=ResNet18, batch_size=80, lr=0.01, epochs=50, lr_decay=0.1 @ epoch=(20, 35), optimizer=SGD, momentum=0.9
+
+1. **splitCIFAR:** model=ResNet18, batch_size=64, lr=0.01, optimizer=SGD, momentum=0.9. Rest of the parameters are different for CIFAR10 and CIFAR100 tasks. For **CIFAR10**: epochs=15, lr_decay=0.1 @ epoch=(10); and for **CIFAR100**: epochs=50, lr_decay=0.1 @ epoch=(15,30).
+
+* We compute cumulative average accuracies and number of parameters vs number of tasks as performance metric as stated in the paper.
+
+* The $SCM$ and $CCM$ parameters are used as $\alpha \, , \, \beta \, = 1$ in all of the models.
 
 ## 3.2. Running the code
 
-Explain your code & directory structure and how other people can run it.
+## **3.2. Running the code**
+
+* Each provided experiment has its own notebook (some overlap between codes evident). 
+* _**Note**: Provided notebooks contains some of the experiments in the paper (**SVHN**, **CIFAR100** and **splitCIFAR**), the uncovered experiments can be realized by the reader by using the provided notebooks as reference._ Feel free to copy the notebooks to your drive and update hyper-parameters etc. for your own experiments.
+
+* Notebooks contains sections (in order):
+1. **Libraries:** Google Drive access and import required libraries.
+1. **Utils:** Utility functions such as accuracy computation or specific layer freezing.
+1. **Model:** Modified ResNet implementation with calibration modules.
+1. **Dataset:** Dataset and dataloader prepration for train, val and test subsets 
+1. **Main:** Contains training and testing functions for experiment. 
+
+* Models and tensorboard logs are automatically saved to your drive during execution.
 
 ## 3.3. Results
 

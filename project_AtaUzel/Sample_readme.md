@@ -16,7 +16,7 @@ In the existing literature, reinforcement learning agents go through a very long
 
 In the original method, the algorithm that is used in near optimal pick and place tasks are given briefly as "raise the manipulator", "go over the object", "lower the manipulator", "grab the object", "raise the object", "go over the target", "release the object". This is implemented for several environments including several objects. The actions taken according to the mentioned algorithm are saved along with an observation from a camera. This is repeated for different tasks.
 
-For simulations, pybullet package is used in python. The object meshes and textures are used from [ShapeNet](https://shapenet.org) dataset and pybullet objects.
+For simulations, [PyBullet](pybullet.org) package is used in python. The object meshes and textures are used from [ShapeNet](https://shapenet.org) dataset and PyBullet objects.
 
 Using the near optimal action-state pairs gathered from the simulations, a CNN called behavioral prior is trained end-to-end. As the input of the CNN, random gaussian noise and camera observations are used. As the output of the CNN, the near optimal actions are used.
 

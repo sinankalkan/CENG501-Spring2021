@@ -150,8 +150,8 @@ Discuss the paper in relation to the results in the paper and your results.
 
 # 5. References
 
-Provide your references here.
+[1] P. Singh, V. Verma, P. Mazumder, L. Carin and P. Rai, "Calibrating CNNs for Lifelong Learning", Papers.nips.cc, 2021. [Online]. Available: https://papers.nips.cc/paper/2020/hash/b3b43aeeacb258365cc69cdaf42a68af-Abstract.html.
 
 # Contact
 
-Provide your names & email addresses and any other info with which people can contact you.
+**Elif Bilge:** bilge.elif@metu.edu.tr

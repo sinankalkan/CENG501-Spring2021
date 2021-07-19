@@ -1,11 +1,13 @@
-# Paper title
+# **Paper title**
 
 This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.metu.edu.tr/~sinan/DL/) project for reproducing a paper without an implementation. See [CENG501 (Spring 2021) Project List](https://github.com/sinankalkan/CENG501-Spring2021) for a complete list of all paper reproduction projects.
 
-# **1. Introduction**
+**Important:** In this .md file latex equations are not supported, hence, we also uploaded notebook version to the repo as well. For best reading experience please use the notebook version.
+
+# 1. Introduction
 This repository describes and contains unoffical implementation of some of the experiments in the [paper](https://papers.nips.cc/paper/2020/hash/b3b43aeeacb258365cc69cdaf42a68af-Abstract.html) "Calibrating CNNs for Lifelong Learning" published in NeurIPS 2020. Paper presents a way to train CNNs for different tasks contiually without getting caugt in the catastrophic forgetting phenomenon by incorporating calibration modules after each convolutional layer. Aim of this project is to reproduce the experiments described in the paper, in detail, we want to achive gracefully degrading classification performance as the number of tasks increases. Moreover, the aim of this project is to shift the attention of the readers to the subject of "Continual Learning".
 
-## **1.1. Paper Summary**
+## 1.1. Paper Summary
 
 In lifelong learning, if the network forgets information from old tasks during training on a new task, the network is called plastic network; on the contrary, if the network focuses on older tasks and not learning the new task, then the network is called stable network.
 
@@ -30,9 +32,9 @@ For each task followings are stored and it has been assumed that during inferenc
 * After 1st task, base models conv layers
 * For upcoming tasks since base models layers are frozen only calibration models and classifier heads are stored. 
 
-# **2. Method and My Interpretation** 
+# 2. Method and My Interpretation
 
-## **2.1. Original method** 
+## 2.1. Original method
 
 The paper considers sequence of classification tasks with same base convolutional layers such that after each convolutional layer SCM and CCM modules are incorporated to calibrate activation maps of convolutional layers. 
 
@@ -64,7 +66,7 @@ Following models, hyperparameters, optimizers are utilized for aforementioned da
 
 !!! **For all experiments $\beta = 1$ in $CCM$ modules and $\alpha = 1$ in $SCM$ modules are used. In some experiments $\alpha = 4$ is also used.**
 
-## **2.2. My Interpretation** 
+## 2.2. My Interpretation 
 
 
 Some implementation details are not given in the paper, so I made my own assumptions on them:
@@ -105,8 +107,6 @@ Some implementation details are not given in the paper, so I made my own assumpt
 
 ## 3.2. Running the code
 
-## **3.2. Running the code**
-
 * Each provided experiment has its own notebook (some overlap between codes evident). 
 * _**Note**: Provided notebooks contains some of the experiments in the paper (**SVHN**, **CIFAR100** and **splitCIFAR**), the uncovered experiments can be realized by the reader by using the provided notebooks as reference._ Feel free to copy the notebooks to your drive and update hyper-parameters etc. for your own experiments.
 
@@ -121,7 +121,6 @@ Some implementation details are not given in the paper, so I made my own assumpt
 
 ## 3.3. Results
 
-## **3.3. Results**
     Table 1: Average accuracies of tasks for given experiments (Paper vs. Ours)           
 Dataset            | Paper         | Ours 
 -------------------|------------------  |------------------
@@ -146,8 +145,19 @@ splitCIFAR        | 89.7               | 84.7
 
 # 4. Conclusion
 
-Discuss the paper in relation to the results in the paper and your results.
+Our results are aligned with paper's claims in a sense that:
 
+1. We did not observe significant performace degregation as the number of tasks increases, eventhough for some experiments our performance were worse than the paper's foundings.
+
+1. In our experiments number of parameters did not increased drastically as calimed in the paper. Only 0.9% overhead is caused by calibration modules for each newly added task compared to number of parameters of initial model.
+
+1. The training process intirinsically applies on forward transfer learning (see Chapter 2.2), therefore we did not discuss this claim.
+ 
+On the  other hand, the paper claims that they could offer an effective method for CNNs' lifelong learning; however, in practice it may be noticed that it does not actually offer an efficient way for the following reasons:
+
+* For each task we need to keep the calibration module and the classifier head, assuming that task labels are provided during inference. However, this is not an realistic assumption, because, we dont have access to these labels in reality. In my opinion, an efficient solution should be able to increment the size of the classifier head with the same performance, i.e. a method that enables us to jointly classify among all the classes that we have learned up to that point.
+
+* At first I missunderstood that, since authors utilized ResNet variants, the calibration module is added after each block of ResNet. However, in reality they are added after each convolutional layer. Indeed, the resulting memory overhead caused by calibration modules are very small compared to initial model size. Still, it would be more impressive if we could add these calibrators only after each block rather than each convolutional layer.
 # 5. References
 
 [1] P. Singh, V. Verma, P. Mazumder, L. Carin and P. Rai, "Calibrating CNNs for Lifelong Learning", Papers.nips.cc, 2021. [Online]. Available: https://papers.nips.cc/paper/2020/hash/b3b43aeeacb258365cc69cdaf42a68af-Abstract.html.

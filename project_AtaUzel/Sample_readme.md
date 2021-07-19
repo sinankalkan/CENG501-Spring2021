@@ -20,29 +20,51 @@ For simulations, pybullet package is used in python. The object meshes and textu
 
 Using the near optimal action-state pairs gathered from the simulations, a CNN called behavioral prior is trained end-to-end. As the input of the CNN, random gaussian noise and camera observations are used. As the output of the CNN, the near optimal actions are used.
 
-After training the behavioral prior with the near optimal data, an agent which takes camera observations as inputs and gives 7D action vectors as outputs is used. The output of the agent is fed into the behavioral prior network and the output of the behavioral prior network is used as the final decision of the agent. This way, a random decision from the agent is biased into an action that could be useful in other tasks. Then, a suitable reinforcement learning algorithm, SAC in this case, can be used in order to train the agent to control the environment through the behavioral prior network.
+After training the behavioral prior with the near optimal data, an agent which takes camera observations as inputs and gives 7D action vectors as outputs is used. The output of the agent is fed into the behavioral prior network and the output of the behavioral prior network is used as the final decision of the agent. This way, a random decision from the agent is biased into an action that could be useful in other tasks. Then, a suitable reinforcement learning algorithm, SAC in this case, can be used in order to train the agent to control the environment through the behavioral prior network. SAC is suitable for the expermients given in the paper since it allows reinforcement learning in continuos observation and continuous action spaces.
 
-The output of the behavioral prior is used as a combination of three vector: the position of the end effector, the orientation of the end effector, and the grip action. Joint angles are calculated using inverse kinematics.
+The output of the behavioral prior is used as a combination of three vector: the position of the end effector, the orientation of the end effector, and the grip action. Joint angles are calculated using inverse kinematics. The value reward function in reinforcement learning is 1 if the task if successfuly complete, 0 if it is not.
+
+The environment in the reinforcement learning is composed of 3 three objects and the manipulator. The agents task is to either pick a specific object and raise it or pick a specific object and place it on another specific object.
 
 ## 2.2. My interpretation 
 
 In the paper, the algorithm that was used in order to get near optimal action-state pairs was very brief. Most  of the implementation details were chosen properly. As examples, the maximum velocity and torque that can be achieved by the robotic manipulator joints, how much the end effector should be raised before it moves over an object, how fast the object is carried, what the orientation of the end effector is while carrying the objects can be given.
 
-Also, the robotic arm model and the objects selected from ShapeNet were not given in the paper. A proper robotic arm model and proper objects from ShapeNet dataset was chosen properly. Unlike the original paper, no objects from pybullet package were used in our implementation. In the simulation, the objects were scaled properly and pyhsical properties are arbitrarily given to the objects.
+Also, the robotic arm model and the objects selected from ShapeNet were not given in the paper. A proper robotic arm model and proper objects from ShapeNet dataset was chosen properly. Unlike the original paper, no objects from pybullet package were used in our implementation. In the simulation, the objects were scaled properly and pyhsical properties are arbitrarily given to the objects. The camera
 
 In the original paper, the learning method of the behavioral prior was not given. As an interpretation, we decided to take random batches from a relatively big dataset and train on them. This way, the number of epochs was not chosen as a parameter.
 
 In reinforcement learning, we used a different reward function in order to make learning easier. The reward function was chosen such that it rewards the agent when the manipulator gets closer to the target object. Also, the reward was increased as the object was raised.
 
+In our interpretation, the tasks are limited to picking a specific object from a similar environment with the original paper.
+
 # 3. Experiments and results
 
 ## 3.1. Experimental setup
 
-Describe the setup of the original paper and whether you changed any settings.
+In order to evaluate the method, two agents were created where one of them had a behavioral prior and one of them did not. After using the reinforcement learning algorithm (SAC), on the agents, their success over time is compared. Success is evaluated by the mean reward over different environment episodes. Different from the original paper, in our implementation, mean reward is considered instead of success rate.
 
 ## 3.2. Running the code
 
-Explain your code & directory structure and how other people can run it.
+```
+parrot
+│   behavioral_prior.py
+│   q_learning.py
+│   robot_arm.py
+│
+│─── bp models
+│
+│─── data3
+│
+│─── evals
+│
+│─── sample models
+│
+│─── reactor_description
+│
+│─── selected textures
+
+```
 
 ## 3.3. Results
 

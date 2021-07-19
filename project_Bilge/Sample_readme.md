@@ -133,11 +133,12 @@ splitCIFAR        | 89.7               | 84.7
 
 
 ![Figure 1: Accuracy](https://github.com/sinankalkan/CENG501-Spring2021/blob/main/project_Bilge/accuracy.png) 
+    
     Figure 1: Average Accuracies vs. Number of Tasks
 
 * As shown in the paper, we did not observed catastrophic forgetting phenomenon, yet we have seen graceful degredation on the average accuracies as the number of tasks increases. Moreover, we also observed that performance on the rest of tasks is highly dependent on the performance on the 1st task.
 
-![number of paramaters ](https://drive.google.com/uc?id=1m0YgfYbZY7CU7L_9l3WUatmeOjFDC57N)
+![number of paramaters ](https://github.com/sinankalkan/CENG501-Spring2021/blob/main/project_Bilge/num_params.png)
 
     Figure 2: Number of parameters vs. Number of Tasks
     

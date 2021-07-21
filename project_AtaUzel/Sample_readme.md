@@ -80,41 +80,6 @@ Finally, one should run "q_learning.py" script. This script will use the final b
 
 ## 3.3. Results
 
-<style>
-
-/* Create a CSS class to style images to center-align */
-.centerAlign
-{
-    display:block;
-    float:none;
-    /* Set both the left and right margins to `auto` to cause the image to be centered. */
-    margin-left:auto;
-    margin-right:auto;
-    width:60%;
-}
-
-/* Create a CSS class to style images to left-align, or "float left" */
-.leftAlign
-{
-    display:inline-block;
-    float:left;
-    /* provide a 15 pixel gap between the image and the text to its right */
-    margin-right:15px; 
-    width:60%;
-}
-
-/* Create a CSS class to style images to right-align, or "float right" */
-.rightAlign
-{
-    display:inline-block;
-    float:right;
-    /* provide a 15 pixel gap between the image and the text to its left */
-    margin-left:15px;
-    width:60%;
-}
-
-</style> 
-<img src="https://user-images.githubusercontent.com/61411406/126568014-5dd670ef-6733-47f8-93a3-3dccb85b6e31.png" class="centerAlign">
 
 ![Figure 1: Average Reward vs. Number of evaluations without Prior](https://user-images.githubusercontent.com/61411406/126568014-5dd670ef-6733-47f8-93a3-3dccb85b6e31.png)
 

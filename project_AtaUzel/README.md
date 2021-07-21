@@ -106,7 +106,10 @@ The results in the original paper are consisntent with our results. In both case
 
 ![image](https://user-images.githubusercontent.com/61411406/126569511-3b6306eb-a92b-41ad-a486-93dce0c79756.png)
 
-Figure 3: Comparison of methods from the original paper
+<p align="center">
+  Figure 3: Comparison of methods from the original paper
+</p>
+
 
 As the figure suggests, the method proposed in the paper starts with a high average reward compared to other methods. This result was confirmed with our experiment. However we were not able to confirm the fact that this method is supposed to solve the problem in less number of steps. This is because running the reinforcement learning algorithm until the problem is completely solved requires too much time.
 

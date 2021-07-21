@@ -1,0 +1,8 @@
+SSL : https://towardsdatascience.com/supervised-learning-but-a-lot-better-semi-supervised-learning-a42dff534781
+VAT : https://arxiv.org/abs/1704.03976
+Mean Teacher : https://arxiv.org/pdf/1703.01780.pdf
+Pseudo-Labeling : https://www.kaggle.com/cdeotte/pseudo-labeling-qda-0-969
+Pi model & temporal ensembling : https://medium.com/analytics-vidhya/a-primer-on-semi-supervised-learning-part-2-803f45edac2
+(SWA) Stochastic Weight Averaging : https://arxiv.org/abs/1806.05594
+(OOD) Out-of-Distribution Detection : https://arxiv.org/abs/2106.03004
+Knowledge Distillation (to understand proposed distillation model in the paper) : https://arxiv.org/abs/2006.05525

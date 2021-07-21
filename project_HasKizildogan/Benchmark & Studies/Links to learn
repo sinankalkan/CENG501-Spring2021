@@ -6,3 +6,4 @@ Pi model & temporal ensembling : https://medium.com/analytics-vidhya/a-primer-on
 (SWA) Stochastic Weight Averaging : https://arxiv.org/abs/1806.05594
 (OOD) Out-of-Distribution Detection : https://arxiv.org/abs/2106.03004
 Knowledge Distillation (to understand proposed distillation model in the paper) : https://arxiv.org/abs/2006.05525
+Flags in Python : https://stackoverflow.com/questions/63191223/what-is-flags-in-python

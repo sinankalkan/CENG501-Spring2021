@@ -46,7 +46,8 @@ In order to evaluate the method, two agents were created where one of them had a
 
 Unlike the original paper, only the beginning of the reinforcement learning process is evaluated. This is because the behavioral prior is expected to result in a better average reward at the beginning of the learning. However, since the reinforcement learning algorithm was stopped before the agent completely solved the problem, it is not known whether the task would be solved sooner for the agent with the behavioral prior.
 
-The specific task that was chosen to evaluate the method requires the agent to contact on of the two chosen objects. The environment includes three objects. If the robotic manipulator contacts the third object, no reward is given but the simulation continues.
+The specific task that was chosen to evaluate the method requires the agent to contact on of the two chosen objects. The environment includes three objects. If the robotic manipulator contacts the third object, no reward is given but the simulation continues. This task is learned for 5000 timesteps and an evaluation was made every 50 timesteps. In order to eliminate the effect of the object locations, learning algorithm was run on 8 different random seeds where the positions of three objects vary.
+
 
 ## 3.2. Running the code
 

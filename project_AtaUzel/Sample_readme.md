@@ -93,7 +93,14 @@ The average of the success rates given in the first figure is 21.5% and the aver
 
 # 4. Conclusion
 
-Discuss the paper in relation to the results in the paper and your results.
+The results in the original paper are consisntent with our results. In both cases, it was observed that the agent with the behavioral prior starts the reinforcement learning with an obvious advantage.
+
+![image](https://user-images.githubusercontent.com/61411406/126569511-3b6306eb-a92b-41ad-a486-93dce0c79756.png)
+
+Figure 3: Comparison of methods from the original paper
+
+As the figure suggests, the method proposed in the paper starts with a high average reward compared to other methods. This result was confirmed with our experiment. However we were not able to confirm the fact that this method is supposed to solve the problem in less number of steps. This is because running the reinforcement learning algorithm until the problem is completely solved requires too much time.
+
 
 # 5. References
 

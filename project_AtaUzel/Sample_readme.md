@@ -82,6 +82,7 @@ Finally, one should run "q_learning.py" script. This script will use the final b
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/61411406/126568014-5dd670ef-6733-47f8-93a3-3dccb85b6e31.png" />
+  Figure 1: Average Reward vs. Number of evaluations without Prior
 </p>
 
 ![Figure 1: Average Reward vs. Number of evaluations without Prior](https://user-images.githubusercontent.com/61411406/126568014-5dd670ef-6733-47f8-93a3-3dccb85b6e31.png)

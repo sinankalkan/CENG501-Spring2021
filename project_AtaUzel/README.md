@@ -104,7 +104,9 @@ The average of the success rates given in the first figure is 21.5% and the aver
 
 The results in the original paper are consisntent with our results. In both cases, it was observed that the agent with the behavioral prior starts the reinforcement learning with an obvious advantage.
 
-![image](https://user-images.githubusercontent.com/61411406/126569511-3b6306eb-a92b-41ad-a486-93dce0c79756.png)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/61411406/126569511-3b6306eb-a92b-41ad-a486-93dce0c79756.png" />
+</p>
 
 <p align="center">
   Figure 3: Comparison of methods from the original paper

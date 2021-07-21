@@ -1,0 +1,430 @@
+<robot
+  name="reactor">
+   <material name="light_gray">
+    <color rgba="0.8 0.8 0.8 1"/>
+  </material>
+  <material name="dark_gray">
+    <color rgba="0.2 0.2 0.2 1"/>
+  </material>
+  <material name="surprise">
+    <color rgba="0.4 0.2 0.8 1"/>
+  </material>
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-3.9657E-09 2.0144E-09 0.04262"
+        rpy="0 0 0" />
+      <mass
+        value="0.33742" />
+      <inertia
+        ixx="0.0011303"
+        ixy="2.3398E-15"
+        ixz="5.3844E-11"
+        iyy="0.0011303"
+        iyz="-2.735E-11"
+        izz="0.0016747" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://reactor_description/meshes/base_link.STL" />
+      </geometry>
+    <material name="dark_gray"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://reactor_description/meshes/base_link_hull.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="shoulder_link">
+    <inertial>
+      <origin
+        xyz="5.5296E-07 0.00048339 0.0026355"
+        rpy="0 0 0" />
+      <mass
+        value="0.069055" />
+      <inertia
+        ixx="7.786E-05"
+        ixy="4.5909E-11"
+        ixz="-6.4873E-11"
+        iyy="4.1745E-05"
+        iyz="2.8244E-07"
+        izz="0.0001073" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://reactor_description/meshes/shoulder_link.STL" />
+      </geometry>
+    <material name="dark_gray"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://reactor_description/meshes/shoulder_link_hull.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="shoulder_yaw"
+    type="revolute">
+    <origin
+      xyz="0 0 0.081"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="shoulder_link"/>
+    <axis
+      xyz="0 0 1" />
+    <limit
+      effort="1.5"
+      velocity="6.178465545" 
+      lower="-3.141593"
+      upper="3.141593" />
+  </joint>
+  <link
+    name="bicep_link">
+    <inertial>
+      <origin
+        xyz="-0.079312 0.00175 0.0073486"
+        rpy="0 0 0" />
+      <mass
+        value="0.29331" />
+      <inertia
+        ixx="0.00040741"
+        ixy="-1.1578E-09"
+        ixz="-0.00014106"
+        iyy="0.0010604"
+        iyz="1.1578E-09"
+        izz="0.0012838" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://reactor_description/meshes/bicep_link.STL" />
+      </geometry>
+    <material name="dark_gray"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://reactor_description/meshes/bicep_link_hull.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="shoulder_pitch"
+    type="revolute">
+    <origin
+      xyz="0 0 0.0265"
+      rpy="0 0 0" />
+    <parent
+      link="shoulder_link" />
+    <child
+      link="bicep_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      effort="3.0"
+      velocity="6.178465545" 
+      lower="-1.57"
+      upper="3.141593" />
+  </joint>
+  <link
+    name="forearm_link">
+    <inertial>
+      <origin
+        xyz="0.0851888339312843 0.00136288621406396 -0.000141576344087929"
+        rpy="0 0 0" />
+      <mass
+        value="0.138705662443181" />
+      <inertia
+        ixx="9.73074886909647E-05"
+        ixy="-2.7259894490049E-06"
+        ixz="8.2757647661483E-07"
+        iyy="0.000291190570207828"
+        iyz="-7.99252279784603E-09"
+        izz="0.000367301178753318" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://reactor_description/meshes/forearm_link.STL" />
+      </geometry>
+    <material name="dark_gray"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://reactor_description/meshes/forearm_link_hull.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="elbow_pitch"
+    type="revolute">
+    <origin
+      xyz="-0.1445 0 0.0385"
+      rpy="0 0 0" />
+    <parent
+      link="bicep_link" />
+    <child
+      link="forearm_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      effort="3.0"
+      velocity="6.178465545" 
+      lower="-3.141593"
+      upper="1.57" />
+  </joint>
+  <link
+    name="wrist_1">
+    <inertial>
+      <origin
+        xyz="0.0426453655090486 0.0017494960392062 0.00984847105297723"
+        rpy="0 0 0" />
+      <mass
+        value="0.0605067986491363" />
+      <inertia
+        ixx="1.78648656995261E-05"
+        ixy="1.11621731933541E-10"
+        ixz="3.58888722407994E-06"
+        iyy="2.8352036542644E-05"
+        iyz="-2.18072661043818E-10"
+        izz="2.38673851634115E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://reactor_description/meshes/wrist_1.STL" />
+      </geometry>
+    <material name="surprise"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://reactor_description/meshes/wrist_1_hull.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="wrist_pitch"
+    type="revolute">
+    <origin
+      xyz="0.1535 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="forearm_link" />
+    <child
+      link="wrist_1" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      effort="1.5"
+      velocity="6.178465545" 
+      lower="-2"
+      upper="2" />
+  </joint>
+  <link
+    name="wrist_2">
+    <inertial>
+      <origin
+        xyz="0.0257033323112986 -4.70323974922438E-07 0.00799551302154672"
+        rpy="0 0 0" />
+      <mass
+        value="0.0648521292346638" />
+      <inertia
+        ixx="2.26217268610599E-05"
+        ixy="3.18902648619731E-10"
+        ixz="1.6408102941381E-06"
+        iyy="2.80862620457571E-05"
+        iyz="-2.80885432326681E-10"
+        izz="2.36871265523198E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://reactor_description/meshes/wrist_2.STL" />
+      </geometry>
+      <material name="surprise"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://reactor_description/meshes/wrist_2_hull.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="wrist_roll"
+    type="revolute">
+    <origin
+      xyz="0.071 0.00175 0"
+      rpy="0 0 0" />
+    <parent
+      link="wrist_1" />
+    <child
+      link="wrist_2" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      effort="1.5"
+      velocity="6.178465545" 
+      lower="-3.141593"
+      upper="3.141593" />
+  </joint>
+  <link
+    name="finger_link_1">
+    <dynamics friction="5"/>
+    <inertial>
+      <origin
+        xyz="0 -0.025883 -0.006455"
+        rpy="0 0 0" />
+      <mass
+        value="0.0078621" />
+      <inertia
+        ixx="1.332E-06"
+        ixy="-1.5154E-21"
+        ixz="-1.2894E-21"
+        iyy="1.3852E-06"
+        iyz="2.7871E-07"
+        izz="2.1828E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://reactor_description/meshes/finger_link.STL" />
+      </geometry>
+    <material name="light_gray"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://reactor_description/meshes/finger_link_hull.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="finger_joint"
+    type="prismatic">
+    <origin
+      xyz="0.088882 -0.0187500 0.0012072"
+      rpy="1.5708 -1.5572 -3.1416" />
+    <parent
+      link="wrist_2" />
+    <child
+      link="finger_link_1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      effort="1.5"
+      velocity="0.01"
+      lower="0"
+      upper="0.014" />
+  </joint>
+  <link
+    name="finger_link_2">
+    <dynamics friction="5"/>
+    <inertial>
+      <origin
+        xyz="8.3267E-17 -0.025883 -0.006455"
+        rpy="0 0 0" />
+      <mass
+        value="0.0078621" />
+      <inertia
+        ixx="1.332E-06"
+        ixy="-3.1416E-21"
+        ixz="-2.193E-21"
+        iyy="1.3852E-06"
+        iyz="2.7871E-07"
+        izz="2.1828E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://reactor_description/meshes/finger_link.STL" />
+      </geometry>
+    <material name="light_gray"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://reactor_description/meshes/finger_link_hull.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="finger_joint_2"
+    type="prismatic">
+    <origin
+      xyz="0.088882 0.0187500 0.0012072"
+      rpy="1.5708 1.5572 -1.4508E-15" />
+    <parent
+      link="wrist_2" />
+    <child
+      link="finger_link_2" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      effort="1.5"
+      velocity="0.01"
+      lower="0"
+      upper="0.014" />
+    <mimic
+      joint="finger_joint" />
+  </joint>
+</robot>

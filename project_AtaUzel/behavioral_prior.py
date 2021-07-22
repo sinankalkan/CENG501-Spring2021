@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jun 23 18:12:42 2021
 
-@author: erdemata
+CENG501 - Spring 2021 
+
 """
 
 import torch

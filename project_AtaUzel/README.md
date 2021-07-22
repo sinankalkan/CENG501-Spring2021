@@ -112,14 +112,14 @@ The average of the success rates given in the first figure is 21.5% and the aver
   <video src="https://user-images.githubusercontent.com/61411406/126642798-0c9205f0-8f96-4303-9f8a-026eddb9e586.mp4"/>
 </p>
 <p align="center">
-  The test task with behavioral prior
+  A test environment where behavioral prior is useful
 </p>
 
 <p align="center">
   <video src="https://user-images.githubusercontent.com/61411406/126643118-41c01f46-a128-4393-ac40-7e8be4e6aa34.mp4"/>
 </p>
 <p align="center">
-  The test task without behavioral prior
+  The same test environment where the agent does not use behavioral prior
 </p>
 
 

@@ -122,6 +122,16 @@ The average of the success rates given in the first figure is 21.5% and the aver
   The same test environment where the agent does not use behavioral prior
 </p>
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/61411406/126654521-3922a2a2-e0fc-46e9-959c-46209b436675.png" />
+</p>
+
+<p align="center">
+  Figure 3: Loss of the behavioral prior network vs. Iteration Number
+</p>
+
+In the figure given above, the change of the loss of the behavioral prior network over the number of learning iterations is given.
+
 
 # 4. Conclusion
 
@@ -132,7 +142,7 @@ The results in the original paper are consisntent with our results. In both case
 </p>
 
 <p align="center">
-  Figure 3: Comparison of methods from the original paper
+  Figure 4: Comparison of methods from the original paper
 </p>
 
 

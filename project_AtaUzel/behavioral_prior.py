@@ -155,8 +155,4 @@ if __name__ == '__main__':
                 torch.save(bp, f"./bp models/{str(time.time())[:10]}.pt")
             running_loss = 0.0
         except Exception as e:
-            print(e)
-     
-
-        
-        
+            print(e)   

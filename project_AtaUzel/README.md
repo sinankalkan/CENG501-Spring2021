@@ -22,7 +22,7 @@ Using the near optimal action-state pairs gathered from the simulations, a CNN c
 
 After training the behavioral prior with the near optimal data, an agent which takes camera observations as inputs and gives 7D action vectors as outputs is used. The output of the agent is fed into the behavioral prior network and the output of the behavioral prior network is used as the final decision of the agent. This way, a random decision from the agent is biased into an action that could be useful in other tasks. Then, a suitable reinforcement learning algorithm, SAC in this case, can be used in order to train the agent to control the environment through the behavioral prior network. SAC is suitable for the expermients given in the paper since it allows reinforcement learning in continuos observation and continuous action spaces.
 
-The output of the behavioral prior is used as a combination of three vector: the position of the end effector, the orientation of the end effector, and the grip action. Joint angles are calculated using inverse kinematics. The value reward function in reinforcement learning is 1 if the task if successfuly complete, 0 if it is not.
+The output of the behavioral prior is used as a concatecation of three vectors: the position of the end effector, the orientation of the end effector, and the grip action. Joint angles are calculated using inverse kinematics. The value reward function in reinforcement learning is 1 if the task if successfuly complete, 0 if it is not.
 
 The environment in the reinforcement learning is composed of 3 three objects and the manipulator. The agents task is to either pick a specific object and raise it or pick a specific object and place it on another specific object.
 

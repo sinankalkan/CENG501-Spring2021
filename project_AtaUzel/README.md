@@ -32,9 +32,15 @@ In the paper, the algorithm that was used in order to get near optimal action-st
 
 Also, the robotic arm model and the objects selected from ShapeNet were not given in the paper. A proper robotic arm model and proper objects from ShapeNet dataset was chosen properly. Unlike the original paper, no objects from pybullet package were used in our implementation. In the simulation, the objects were scaled properly and pyhsical properties are arbitrarily given to the objects. The camera position and orientation was also chosen similar to the original paper.
 
-In the original paper, the learning method of the behavioral prior was not given. As an interpretation, we decided to take random batches from a relatively big dataset and train on them. This way, the number of epochs was not chosen as a parameter. The loss function that was used in the training of the behavioral prior was also not given. As a suitable loss function, mean square error function was used.
+In the original paper, the learning method of the behavioral prior was not given. As an interpretation, we decided to take random batches from a relatively big dataset and train on them. This way, the number of epochs was not chosen as a parameter. The loss function that was used in the training of the behavioral prior was also not given. As a suitable loss function, mean square error function was used. In the training, a learning rate of 0.001 was used with a batch size of 256. Traning was stopped after 100 batches. The input to the network was a 48x48x3 observation image and a sample from 8D gaussian noise whose mean is 0 and standard deviation is 1. As an output the 8D vector that represents the position and orientation of the end effector and the grip action parameters is used.
 
-In reinforcement learning, we used a different reward function in order to make learning easier. The reward function was chosen such that it rewards the agent when the manipulator gets closer to the target object. Also, the reward was increased as the object was raised.
+In reinforcement learning, we used a different reward function in order to make learning easier. The reward function was chosen such that it rewards the agent when the manipulator gets closer to the target object. Also, the reward was increased as the object was raised. The soft actor-critic parameters which was used in our implementation are given below.
+
+- Target network update period: 100
+- Discount factor 0.99
+- Learning rate for both actor and critic: 0.001
+- Reward scale: 1
+- Gradient steps per environment step: 1
 
 In our interpretation, the tasks are limited to picking a specific object from a similar environment with the original paper.
 

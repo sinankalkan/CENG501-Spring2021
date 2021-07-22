@@ -63,13 +63,13 @@ parrot
 │
 │─── evals
 │    │─── with
-│    │─── without
+│    └─── without
 │
 │─── sample models
 │
 │─── reactor_description
 │
-│─── selected textures
+└─── selected textures
 ```
 
 In order to repeat our experiments, one should firstly run "robot_arm.py" file in order to generate near optimal action-state pairs in "data3" folder. When there is enough data, one can exit the script.

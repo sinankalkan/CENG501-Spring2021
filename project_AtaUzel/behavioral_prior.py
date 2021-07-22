@@ -45,10 +45,6 @@ def load_batch(names):
     return images, actions
 
 
-# names = get_random_name_batch(data_names, 3)
-# images, actions = load_batch(names)
-
-
 class I2P(nn.Module):
     def __init__(self):
         super().__init__()
@@ -131,8 +127,7 @@ if __name__ == '__main__':
         try:
             names = get_random_name_batch(data_names, BATCH_SIZE)
             images, actions = load_batch(names)
-            for a in actions:
-                print(a)
+
             # get the inputs; data is a list of [inputs, labels]
             inputs, labels = images.astype(np.float32), torch.from_numpy(actions.astype(np.float32))
         

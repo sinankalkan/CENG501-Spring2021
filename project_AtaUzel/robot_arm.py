@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 
-CENG501 - Project 
-Spring 2021 
+CENG501 - Spring 2021 
 
 """
 

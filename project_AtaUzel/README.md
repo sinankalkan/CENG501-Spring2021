@@ -108,6 +108,21 @@ The experiments are not exactly the same with the original paper. The experiment
 
 The average of the success rates given in the first figure is 21.5% and the average of the success rates given in the second figure is 1.75%. As expected, the success rate of the agent with behavioral prior is significantly higher compared to the agent without behavioral prior at the beginning of the reinforcement learning.
 
+<p align="center">
+  <video src="https://user-images.githubusercontent.com/61411406/126642798-0c9205f0-8f96-4303-9f8a-026eddb9e586.mp4"/>
+</p>
+<p align="center">
+  The test task with behavioral prior
+</p>
+
+<p align="center">
+  <video src="https://user-images.githubusercontent.com/61411406/126643118-41c01f46-a128-4393-ac40-7e8be4e6aa34.mp4"/>
+</p>
+<p align="center">
+  The test task without behavioral prior
+</p>
+
+
 # 4. Conclusion
 
 The results in the original paper are consisntent with our results. In both cases, it was observed that the agent with the behavioral prior starts the reinforcement learning with an obvious advantage.

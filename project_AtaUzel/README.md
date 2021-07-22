@@ -38,6 +38,14 @@ In reinforcement learning, we used a different reward function in order to make 
 
 In our interpretation, the tasks are limited to picking a specific object from a similar environment with the original paper.
 
+<p align="center">
+https://user-images.githubusercontent.com/61411406/126641855-c488a644-3f5c-468b-90d1-7c6fcd9caf94.mp4
+</p>
+<p align="center">
+  The near-optimal pick and place policy
+</p>
+
+
 # 3. Experiments and results
 
 ## 3.1. Experimental setup

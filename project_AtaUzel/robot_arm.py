@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed May 12 16:46:34 2021
 
-@author: erdemata
+CENG501 - Project 
+Spring 2021 
+
 """
 
 import pybullet

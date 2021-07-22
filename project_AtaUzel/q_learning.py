@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jun 29 13:25:45 2021
 
-@author: erdemata
+CENG501 - Spring 2021 
+
 """
 
 import torch
@@ -83,7 +83,6 @@ class PolicyCNN(BaseFeaturesExtractor):
 
 
     def forward(self, observations: torch.Tensor) -> torch.Tensor:
-        # return self.linear(self.cnn(observations))
         return self.cnn(observations)
 
 policy_kwargs = dict(

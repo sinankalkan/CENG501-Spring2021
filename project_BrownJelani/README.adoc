@@ -1,10 +1,4 @@
-:toc: macro
-:toc-title:
-:toclevels: 99
-
 = Robustness of Neural Ordinary Differential Equations
-
-toc::[]
 
 This readme file is an outcome of the http://kovan.ceng.metu.edu.tr/~sinan/DL/[CENG501 (Spring 2021)] project for reproducing a paper without an implementation. See https://github.com/sinankalkan/CENG501-Spring2021[CENG501 (Spring 2021) Project List] for a complete list of all paper reproduction projects.
 

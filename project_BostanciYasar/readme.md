@@ -28,11 +28,11 @@ Some hyperparameters are given in the paper.
 
 ## 2.2. My interpretation 
 
-Explain the parts that were not clearly explained in the original paper and how you interpreted them.
+Explain the parts that were not clearly explained in the original paper and how you interpreted them.\
 
-•	Data Augmentation
-•	Preprocessing Techniques
-•	Loss Function
+•	Data Augmentation\
+•	Preprocessing Techniques\
+•	Loss Function\
 
 # 3. Experiments and results
 

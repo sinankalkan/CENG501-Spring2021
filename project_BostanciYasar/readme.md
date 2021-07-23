@@ -4,8 +4,9 @@ This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.
 
 # 1. Introduction
 
-Introduce the paper (inc. where it is published) and describe your goal (reproducibility).
-When the training batch size is small, the noise level becomes high, increasing the training difficulty.To overcome this difficulty,Hongwei Yong proposed "Momentum Batch Normalization for Deep Learning with Small Batch Size" in 2020 and it was published at European Conference on Computer Vision (ECCV).
+<!--- Introduce the paper (inc. where it is published) and describe your goal (reproducibility).-->
+When the training batch size is small, the noise level becomes high, increasing the training difficulty.\
+To overcome this difficulty,Hongwei Yong proposed "Momentum Batch Normalization for Deep Learning with Small Batch Size" in 2020 and it was published at European Conference on Computer Vision (ECCV).\
 Our aim is to implement the models described in the paper and obtain the acceptable results.
 
 ## 1.1. Paper summary
@@ -16,23 +17,23 @@ Summarize the paper, the method & its contributions in relation with the existin
 
 ## 2.1. The original method
 
-Explain the original method.
-Some hyperparameters are given in the paper.
-•	Learning rate: It starts with 0.1*m/64 for both datasets and divide it by 10 for every 60 epochs.
-•	Ideal batch size:32
-•	Batch size: 8-16-32
-•	Neural network model : RESNET18,RESNET34,RESNET50,VGG11,VGG16
-•	Dataset: CIFAR10 and CIFAR100
-•	Optimizer: SGD
+<!--- Explain the original method.\ -->
+Some implementation details are given in the paper.\
+•	Learning rate: It starts with 0.1*m/64 for both datasets and divide it by 10 for every 60 epochs.\
+•	Ideal batch size:32 \
+•	Batch size: 8-16-32 \
+•	Neural network model : RESNET18,RESNET34,RESNET50,VGG11,VGG16 \
+•	Dataset: CIFAR10 and CIFAR100 \
+•	Optimizer: SGD 
 
 
 ## 2.2. My interpretation 
 
-Explain the parts that were not clearly explained in the original paper and how you interpreted them.\
-
+<!--- Explain the parts that were not clearly explained in the original paper and how you interpreted them.-->
+Some implementation details are not given in the paper.Therefore, we interpreted them based on literature. \
 •	Data Augmentation\
 •	Preprocessing Techniques\
-•	Loss Function\
+•	Loss Function
 
 # 3. Experiments and results
 

@@ -39,12 +39,18 @@ Some implementation details are not given in the paper.Therefore, we interpreted
 
 ## 3.1. Experimental setup
 
-Describe the setup of the original paper and whether you changed any settings.
+<!--- Describe the setup of the original paper and whether you changed any settings.
+With Colab Pro you get priority access to high-memory VMs. These VMs generally have double the memory of standard Colab VMs, and twice as many CPUs. You will be able to access a notebook setting to enable high-memory VMs once you are subscribed.-->
+<!--- The computation time without disconnection is limited on Google Colab.To solve this problem,we used Colab Pro.With Colab Pro,we get priority access to runtime up to 24 hours and twice as many CPUs compared to standard Colab.However,virtual resources are still limited due to Colab policy.However,Google still apply usage limits on GPU and this forces us to be selective about the runs to be proceeded-->
+<!---  Google needs to maintain the flexibility to adjust usage limits and the availability of hardware on the fly. -->
+
+The computation time without disconnection is limited on Google Colab.To solve this problem, we used Colab Pro. With Colab Pro, we get priority access to runtime up to 24 hours and twice as many CPUs as standard Colab.  However, Google still apply usage limits on GPU, and this forces us to be selective about the runs to have proceeded.
 
 ## 3.2. Running the code
 
 Explain your code & directory structure and how other people can run it.
 
+The notebooks are written for running on Google Colab. All dependencies are available within the current runtime available for Google Colab.
 ## 3.3. Results
 
 Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.

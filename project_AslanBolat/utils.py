@@ -20,6 +20,32 @@ split_path =  dataset_path + "train_test_split/"
 class_name_list = ["03001627"] # "03001627": chair, "02691156": airplane, "03636649": lamp, "03790512": motorbike
 instance_name_list = ["1ace72a88565df8e56bd8571ad86331a"]
 
+def visualize_voxels_color(voxels_list, dim_size, thresh=0.0001, name="pointcloud", device="cpu",show=True):
+    colors = [(85/255,220/255,100/255),(0,32/255,1),(149/255,85/255,0), (1,104/255,196/255)]
+    points_list = []
+    texture_list = []
+    for index,voxel in enumerate(voxels_list):
+        data = voxel.view(1, 64, 64, 64)
+        volume = pytorch3d.structures.Volumes([data])
+        grid = volume.get_coord_grid()
+        volume= 2*data >= thresh
+        points = grid[volume]
+        red = colors[index][0]*torch.ones(points.shape[0],1, device=device)
+        green = colors[index][1]*torch.ones(points.shape[0],1, device=device)
+        blue = colors[index][2]*torch.ones(points.shape[0],1, device=device)
+        texture = torch.cat([red,green,blue], dim=1)
+        points_list.append(points)
+        texture_list.append(texture)
+    pointcloud = pytorch3d.structures.Pointclouds(points_list, features=texture_list) 
+    figure=plot_scene({
+        name: {
+            "person": pointcloud
+        }
+    })
+    if show:
+        figure.show()
+    else:
+        figure.write_image("./images/{}.png".format(name))
 def visualize_voxels(voxels, dim_size, thresh=0.0001, name="pointcloud", device="cpu",show=True):
     # visualize voxel data as pointclouds
     voxels = voxels.view(voxels.size(0), dim_size, dim_size, dim_size)
@@ -192,19 +218,37 @@ def compute_retransformed_voxels(part_voxels, scale, translate):
     scale = scale.view(-1)
     part_voxels = part_voxels.view(-1, 64, 64, 64)
     translate = translate.view(-1,3)
-    print(scale.size(), translate.size())
+    # print(scale.size(), translate.size())
     retransformed_voxel = torch.zeros((1,64,64,64))
     for index in range(4):
         pointcloud = voxels_to_pointcloud(part_voxels[index])
         transformation = torch.eye(4).cuda()
         transformation[:3,:3] *= scale[index].item()
         transformation[:3,3] = translate[index]
-        print(scale[index].item(), translate[index])
+        # print(scale[index].item(), translate[index])
         transformed = transform_pointcloud(pointcloud, transformation)
         new_voxels = pointcloud_to_voxels(transformed, 0.8666)
         retransformed_voxel[new_voxels.view(1,64,64,64).bool()] = 1.0
     return retransformed_voxel
 
+def compute_retransformed_voxels_list(part_voxels, scale, translate):
+    scale = scale.view(-1)
+    part_voxels = part_voxels.view(-1, 64, 64, 64)
+    translate = translate.view(-1,3)
+    # print(scale.size(), translate.size())
+    retransformed_voxels_list = []
+    for index in range(4):
+        retransformed_voxel = torch.zeros((1,64,64,64))
+        pointcloud = voxels_to_pointcloud(part_voxels[index])
+        transformation = torch.eye(4).cuda()
+        transformation[:3,:3] *= scale[index].item()
+        transformation[:3,3] = translate[index]
+        # print(scale[index].item(), translate[index])
+        transformed = transform_pointcloud(pointcloud, transformation)
+        new_voxels = pointcloud_to_voxels(transformed, 0.8666)
+        retransformed_voxel[new_voxels.view(1,64,64,64).bool()] = 1.0
+        retransformed_voxels_list.append(retransformed_voxel)
+    return retransformed_voxels_list
 if __name__ == "__main__":
     # filenames = None
     # split_file_path = split_path + "shuffled_val_file_list.json"

@@ -7,7 +7,7 @@ This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.
 VAE-GANs are used to generate 3D shape synthesis which attracts attention recently. However, it is hard to satisfy topological correctness. 
 Besides, generated shape does not hold reasonable geometry.  
 
-In order to overcome these lacks, Jun Li, Chengjie Niu, Kai Xu proposed "Learning Part Generation and Assembly for Structure-aware Shape Synthesis" in 2020. It was published at "Conference on Artificial Intelligence, AAAI".  
+In order to overcome these lacks, Jun Li, Chengjie Niu, Kai Xu proposed "Learning Part Generation and Assembly for Structure-aware Shape Synthesis" in 2020 [5]. It was published at "Conference on Artificial Intelligence, AAAI".  
 
 We aim to process the dataset by data augmentation and voxelization, implement model architectures, loss functions and training methods.
 In our training and testing, we only used chair models. 
@@ -17,7 +17,7 @@ Our main aim is to obtain visaully acceptable chair parts and successfully assem
 ## 1.1. Paper summary
 
 Authors propose to use a VAE-GAN for each part of an object. Doing so, there will be N generator networks such that each one is responsible for creation of a part. Created parts may be resulted in a disjoint shape that needs small transformations to correctly assemble. 
-Thus, a network, called Assembler, learns to transformations in terms of translation and scaling. By using a generator network for each part, more detailed models can be obtained in contrast to methods using a single generative network (Wu et al. 2016) to create the model. 
+Thus, a network, called Assembler, learns to transformations in terms of translation and scaling. By using a generator network for each part, more detailed models can be obtained in contrast to methods using a single generative network [2] to create the model. 
 
 # 2. The method and our interpretation
 
@@ -100,7 +100,7 @@ It provides reproduce encoded volume.
 
 #### Normalization
 The paper indicates: "Batch normalization and ReLU layers are inserted between convolutional layers.", for discriminator network. However, it is not recommended to use batch normalization
-in the discriminator since it can learn correlation. The desired behaviour of discriminator is deciding each sample individually. Therefore, we implemented layer normalization between convolutional layers of discriminator as proposed at "Improved Training of Wasserstein GANs" (Gulrajani et al., 2017).  
+in the discriminator since it can learn correlation. The desired behaviour of discriminator is deciding each sample individually. Therefore, we implemented layer normalization between convolutional layers of discriminator as proposed at "Improved Training of Wasserstein GANs" [1].  
 
 #### Dataset
 ShapeNet part dataset contains only points and labels as mentioned above. To voxalize point data, we used binvox which is an open source voxelization framework. Binvox is voxelizer of the ShapeNet as the offical ShapeNet states.
@@ -112,7 +112,7 @@ Therefore, we implemented our own voxelizer. Doing so, we were able to scale and
 Preserving part translations and scalings same as the complete model, resulted in 64x64x64 voxels being mostly empty (on average 1700 voxels are occupied). And authors used deformation technique (Zheng et al. 2011) to enhance the dataset. Unfortunately, we could not find or implement this method. Therefore we used a smaller dataset with sparse voxel data.
  
 #### KL Loss Constant
-KL Loss is multiplied with 2 at the paper. However, in our tests, the model did not learn to produce any subpart. It produces empty or fully occupied volumes. We set it to 2*10^-4. Even with this small coefficient, model generates average volumes, i.e. resembling volumes that dominates the dataset. Therefore, we trained the VAE with MSE loss for 20 epochs then accounted KL loss with coefficient 2*10^-4 for 10 epochs. This approach similar to the method propesed by Bowman et al. 2016 (Subsection 3.1) and it is only applied for pretraining of the VAEs.
+KL Loss is multiplied with 2 at the paper. However, in our tests, the model did not learn to produce any subpart. It produces empty or fully occupied volumes. We set it to 2*10^-4. Even with this small coefficient, model generates average volumes, i.e. resembling volumes that dominates the dataset. Therefore, we trained the VAE with MSE loss for 20 epochs then accounted KL loss with coefficient 2*10^-4 for 10 epochs. This approach similar to the method propesed by [4](Subsection 3.1) and it is only applied for pretraining of the VAEs.
 
 #### n_critic 
 GAN training is not specified in the paper. We implemented the approach proposed at WGAN-GP. "n_critic" is equal to 5 since we recognized a consensus while investigating GANs.
@@ -124,7 +124,7 @@ It is not specified in the paper. We selected Log Cosh loss between estimated tr
 Most of the VAE implementations uses binary cross entropy for their reconstruction loss. After getting poor results in some cases (where voxel data of a specific part is too sparse), we tried binary cross entropy instead of mean squared error and obtained better results. 
 
 #### DCGAN implementation
-Authors of the paper followed WGAN-gp (Gulrajani et al. 2017), but even if changing the hyper parameters we could not obtained meaningful results. Even if the decoder generated successful parts after pretrainig, it deterioted with WGAN-gp training. One thing we noticed is that, discriminator cannot separate real and fake voxels even in the begining of the training. Therefore we implemented DCGAN (Radford et al. 2016) aproach for VAEGAN training. By scaling the generator error by 5e-3, we obtained successful results.
+Authors of the paper followed WGAN-gp (Gulrajani et al. 2017), but even if changing the hyper parameters we could not obtained meaningful results. Even if the decoder generated successful parts after pretrainig, it deterioted with WGAN-gp training. One thing we noticed is that, discriminator cannot separate real and fake voxels even in the begining of the training. Therefore we implemented DCGAN [3] aproach for VAEGAN training. By scaling the generator error by 5e-3, we obtained successful results.
 
 #### Symmetry losss
 Authors applied symmetry loss depending on [the study](http://vecg.cs.ucl.ac.uk/Projects/SmartGeometry/approx_symmetry/approx_symm_sig_06.html) of Mitra, Guibas, and Pauly. It was implemented in 2006 and there was no code provided for symmetry plane detection for 3D shapes. We searched and found neural models, however, we could not employ or implemet them owing to time limit and performance considerations. In fact, there is a study [Nerd](https://github.com/zhou13/nerd) but it uses three neural networks for symmetry plane estimation. Thus, we thought this massively extends the time required to create dataset. 
@@ -183,16 +183,48 @@ Each code can be run with "python3 python_file_name.py".
 
 ## 3.3. Results
 
-Due to implementation differences and omitted implementation details in the paper, we cannot compare our results with the results in the paper directly.  
+### Comparison
+In this section we compare the results we obtained with the results in the paper.  
 
-For assembly quality:
-- Using the back part of the chair as the anchor:
-  - Obtained 2.534 mean square error of predicted translations and scalings compared to target ones.
-  - Obtained 0.20 IoU between transformed parts and correct assembled parts.
-- Using the seat part of the chair as the anchor: 
-  - Obtained 3.991 mse 
-  - 0.1 IoU
-    
+&nbsp; 
+&nbsp; 
+     
+#### Table1. Comparison of Average Symmetry Measure    
+ 
+| &nbsp; | Paper | Ours | 
+| --- | --- | ----------- | 
+| back | 0.80 | 0.66 |
+| seat | 0.82 | 0.69 |
+| leg(sym.) | 0.56 | 0.51 |
+| armrest | 0.59 | 0.48 |
+
+&nbsp; 
+&nbsp; 
+     
+#### Table2. Comparison of part assembly quality
+ 
+| &nbsp; | Paper | Ours | 
+| --- | --- | ----------- | 
+|anchor part | &nbsp;  | &nbsp;  |
+| back | 0.83 | 0.27 |
+| seat | 0.81 | 0.29 |
+| leg  | 0.82 | 0.26 |
+| armrest | 0.79 | 0.11 |
+
+&nbsp; 
+&nbsp; 
+
+### Results of random shape generation  
+For the paper results, please refer to Figure 6 of the paper [5].
+|   |   |
+|---|---|
+| ![random0](./assembly_results/random_generated0.png)   | ![random1](./assembly_results/random_generated1.png)  |
+| ![random3](./assembly_results/random_generated3.png)  | ![random2](./assembly_results/random_generated2.png)  |
+| ![random4](./assembly_results/random_generated4.png)  |
+
+&nbsp; 
+&nbsp;
+
 ### Part assembly results: 
 Predicted                  |  Correct
 :-------------------------:|:-------------------------:
@@ -202,6 +234,8 @@ Predicted                  |  Correct
 ![Predicted67](./assembly_results/predicted_assembly67.png)  |  ![Correct67](./assembly_results/correct_assembly67.png)
 ![Predicted75](./assembly_results/predicted_assembly75.png)  |  ![Correct75](./assembly_results/correct_assembly75.png)
 
+&nbsp; 
+&nbsp;
 
 ### Part generation results: 
 MSE Reconstruction Loss    |  BCE Reconstruction Loss  |  Target
@@ -221,12 +255,13 @@ Nonetheless, we tried different approached and methods for training the models a
 
 # 5. References
 
-[Improved Training of Wasserstein GANs](https://arxiv.org/abs/1704.00028)  
-[3D-VAE-GAN](https://arxiv.org/pdf/1610.07584.pdf)  
-[DCGAN](https://arxiv.org/pdf/1511.06434.pdf)  
-[KL cost annealing (Section 3.1)](https://arxiv.org/pdf/1511.06349.pdf)  
+[1] [Ishaan Gulrajani, Faruk Ahmed, Martin Arjovsky, Vincent Dumoulin, andAaron Courville. Improved training of wasserstein gans, 2017.](https://arxiv.org/abs/1704.00028)  
+[2] [Jiajun Wu, Chengkai Zhang, Tianfan Xue, William T. Freeman, andJoshua B. Tenenbaum. Learning a probabilistic latent space of object shapes via 3d generative-adversarial modeling, 2017.](https://arxiv.org/pdf/1610.07584.pdf)  
+[3] [Alec Radford, Luke Metz, and Soumith Chintala. Unsupervised representation learning with deep convolutional generative adversarial networks, 2016](https://arxiv.org/pdf/1511.06434.pdf)  
+[4] [Samuel R. Bowman, Luke Vilnis, Oriol Vinyals, Andrew M. Dai, Rafal Joze-fowicz, and Samy Bengio. Generating sentences from a continuous space,2016.](https://arxiv.org/pdf/1511.06349.pdf)  
+[5] [Jun Li, Chengjie Niu, and Kai Xu. Learning part generation and assemblyfor structure-aware shape synthesis, 2020.](https://arxiv.org/pdf/1906.06693.pdf)
 
 # Contact
 
-ozgraslan17@gmail.com  
-burakbolatcs@gmail.com
+Özgür Aslan: ozgraslan17@gmail.com  
+Burak Bolat: burakbolatcs@gmail.com

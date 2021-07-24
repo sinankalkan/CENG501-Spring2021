@@ -135,23 +135,6 @@ def get_part_datasets(file_path, processed_path, class_dict):
 if __name__ == "__main__":
     file_path = "./dataset/train_test_split/shuffled_train_file_list.json"
     processed_path = "./processed_np_final/train/"
-    from utils import visualize_voxels
-    # class_dict = {"03001627" : 4}
-    # part_datasets = get_part_datasets(file_path, processed_path, class_dict)
-    # print(len(part_datasets["03001627"][0]))
-    ad = AssemblerDataset(file_path, processed_path, "03001627", 1, num_deformed=200, num_orig=0)
-    j = 0
-    print("dataset size:", len(ad))
-    # for data, scale, translate in ad:
-    #     # visualize_voxels(data, 64)
-    #     if j > 100 and j%10 == 0:
-    #         new_voxel = torch.zeros((1,64,64,64))
-    #         for i in range(4):
-    #             new_voxel[data[i].view(1,64,64,64).bool()] = 1.0 
-    #         visualize_voxels(new_voxel, 64)
-    #         print(scale)
-    #         print(translate)
-
-    #         print(data.shape, scale.shape, translate.shape)
-            
-    #     j+=1
+    pnd = PartNetDataset(file_path, processed_path, "03001627", 1)
+    voxels = pnd[0]
+    print(voxels.sum())

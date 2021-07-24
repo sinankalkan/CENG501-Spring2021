@@ -18,7 +18,13 @@ In addition to the robustness analysis, the authors of the paper present a novel
 
 === 2.1. The original method
 
-Some hyperparameters are given in the paper.
+The paper examines the robustness characteristics of neural ODEs compared to convolutional neural networks. Although neural ODEs are not a novelty of this paper, we will give a brief introduction to the concept as applied in deep classification networks. The neural ODE layer numerically integrates the output of a function block over a specified time range (e.g. 0 to 1). The input to the neural ODE layer serves as the initial point x~0~ of the integrated function. The final value x~f~ at time t~f~ is used as the output of the neural ODE layer that is subsequently passed to the following layers of the classification network. The function to be integrated is learned during the training process and in general is a function of both the current state value x and also time t.
+
+The paper proposes a novel TisODE model that is a variant of a neural ODE layer. The general neural ODE layer is modified in two ways. The first modification is to eliminate the time input to the block that is the function to be integrated in the neural ODE layer. This makes the ODE to become time invariant. The second modification is to add a steady-state regularization term. The new regularization term is formed by an additional integration period from t~f~ to 2t~f~ in which we accumulate the absolute value of the derivative being integrated in the neural ODE layer. The norm of the accumulated absolute value is used as a weighted regularizing term in the loss function for training the network. This serves to encourage the neural ODE block to have small derivative outputs at the end of the integration range.
+
+The idea behind the TisODE is that the time-invariant function will converge toward the same output values even for small variances in the input values, thus improving the robustness of the network.
+
+Some hyperparameters of the networks and training process being used for the investigation are given in the paper.
 
 - Classification accuracy (%) is reported as the evaluation metric of the various models.
 - Neural ODE network configurations are described.

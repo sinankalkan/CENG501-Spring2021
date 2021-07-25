@@ -16,7 +16,7 @@ These approaches are implemented and modified together to create a novel approac
 # 2. The method and our interpretation
 
 ## 2.1. The original method
-Algorithm suggested by authors is given below. Note: All the algorithms, equations etc. within a formal and algebraic notation are shared in paper. However, for educative purposes, we put them in pseudo-form so it is easier to grasp the concept.
+Algorithm suggested by authors is given below. Note: All the algorithms, equations etc. are shared within a formal and algebraic notation in paper. However, for educative purposes, we put them in pseudo-form so it is easier to grasp the concept.
 Require: Labelled data, Dl . Unlabelled data Du. A trainable neural network and a ramp-up weighting function, w.
 ```sh
 for t=1 to maximum_epoch

@@ -63,6 +63,8 @@ After creating the folder with given sub-folders and scripts, dependencies must 
 3)	We ran the code within a virtual machine that runs Ubuntu 18.04. Different Linux distros or Windows etc. would probably change the results as not every OS support every version of dependencies. This is also given in Oliver’s repo as every version of Tensorflow may output different result.
 4)	Due to write/read mechanism of temporary files, we had problems on Windows 10. There are some suggested solutions in the internet but they are cumbersome. It is not impossible to run on Windows however it may not worth the hassle. 
 5)	The method contains writes & reads not only after executing scripts but also during the run-time. Thus, we suggest using “sudo” when permission or other type of r/w errors are encountered. This is not obligatory.
+
+
 First, records and label should be constructed with these lines (we directly used terminal where directory is the folder that contains all folders)
 ```sh
 python3 build_tfrecords.py --dataset_name=cifar10

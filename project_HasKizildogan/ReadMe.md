@@ -19,10 +19,10 @@ These approaches are implemented and modified together to create a novel approac
 Algorithm suggested by authors is given below. Note: All the algorithms, equations etc. within a formal and algebraic notation are shared in paper. However, for educative purposes, we put them in pseudo-form so it is easier to grasp the concept.
 Require: Labelled data, Dl . Unlabelled data Du. A trainable neural network and a ramp-up weighting function, w.
 ```sh
-for: t=1 to maximum_epoch
+for t=1 to maximum_epoch
 	Refresh confidence threshold, pi_thr per epoch
-	for: k=1 to maximum_iteration_per_epoch
-	Forward propagation to accumulate prediction, q, for every in-batch sample
+	for k=1 to maximum_iteration_per_epoch
+	Forward propagation to accumulate prediction, q, as every in-batch sample
 	Apply out-of-distribution filtering
 	Update network parameters with loss function
 	endfor

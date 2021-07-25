@@ -14,7 +14,9 @@ As the name suggests, the paper is about SSL. In ideal cases, we have small labe
 
 ## 2.1. The original method
 
-Explain the original method.
+Algorithm suggested by authors is given below:
+Require: Labelled data D_l=〖{x_(i,l),y_i}〗_(i=1)^(N_l )
+
 
 ## 2.2. My interpretation 
 

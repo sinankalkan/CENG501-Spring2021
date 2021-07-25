@@ -83,8 +83,7 @@ class LoadData:
                                 nwords.append(vocab[word])
                             instance.append(torch.LongTensor(nwords))
                             instance.append(candidates)
-                            temp = np.array(labels)
-                            instance.append(temp / sum(labels))
+                            instance.append(torch.LongTensor(labels))
                             data.append(instance)
 
                         lastQuestion = divs[0]
@@ -106,7 +105,6 @@ class LoadData:
         summaryMap = []
         with open("WikiHowQACorpus/summary.txt", encoding="utf8") as f:
             line = f.readline()
-            line = line.replace("\n", " ")
             while line:
                 divs = line.lower().split("\t")
                 words = divs[1].split(' ')
@@ -129,8 +127,8 @@ class LoadData:
                 vals = line.split("\n")[0].split(" ")
                 if vals[0] in vocab:
                     for i in range(1, len(vals)):
-                        vector.append(vals[i])
-                    emb[vocab[vals[0]]]=vector
+                        vector.append(float(vals[i]))
+                    emb[vocab[vals[0]]] = vector
                 line = f.readline()
         torch.save(emb, "data/sequence/initEmb.t7")
 

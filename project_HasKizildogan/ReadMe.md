@@ -25,8 +25,8 @@ for t=1 to maximum_epoch
 	Forward propagation to accumulate prediction, q, as every in-batch sample
 	Apply out-of-distribution filtering
 	Update network parameters with loss function
-	endfor
-endfor
+	end for
+end for
 ```
 Here, q is calculated as the average (1/t) of summation of predictions for every epoch.
 OOD is applied via predictive confidence score, c_t. Let c_t be equal to maximum q value of a sample (here q also means soft target that is briefly explained in paper). 

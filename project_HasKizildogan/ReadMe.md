@@ -94,9 +94,13 @@ Discuss the paper in relation to the results in the paper and your results.
 
 # 5. References
 Instead of in-text references, we decided to go for this way as one can easily check internet for any subject.
+
 Some parts of the base is subjected to Apache License 2.0. Therefore we claim no trademark usage but only educational modifications (https://www.apache.org/licenses/LICENSE-2.0). 
+
 Oliver et al.’s repo for Tensorflow experiments: https://github.com/brain-research/realistic-ssl-evaluation
+
 Oliver et al’s paper for SSL: https://arxiv.org/abs/1804.09170
+
 Abseil’s documentary to understand flags as they are used exhaustively: https://abseil.io/docs/python/guides/flags
 
 # Contact

@@ -56,6 +56,23 @@ There are four code notebooks- two for each dataset- one is for MBN and the othe
 ## 3.3. Results
 
 Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
+![image](https://user-images.githubusercontent.com/86877356/126891175-e8017ded-1845-40d0-b385-c0da01ea0e4c.png)
+![image](https://user-images.githubusercontent.com/86877356/126891210-8332dc30-208c-44a1-b690-d12931439f15.png)
+
+![image](https://user-images.githubusercontent.com/86877356/126891269-5a51d4f4-ae5c-402d-85c2-a9ce6f216db3.png)
+![image](https://user-images.githubusercontent.com/86877356/126891289-04efe0b1-f826-4306-9608-942fcb12228f.png)
+
+![image](https://user-images.githubusercontent.com/86877356/126891335-af30a0fa-8188-4b69-962c-3015192d1231.png)
+![image](https://user-images.githubusercontent.com/86877356/126891341-ef8891e7-b6f7-4262-aab4-0b29f2aec3e0.png)
+![image](https://user-images.githubusercontent.com/86877356/126891348-60b4945f-9fef-4f1c-841a-66931383f8ec.png)
+<!--- 
+![name of the image](http://link.com/image.jpg)
+
+**Fig. 1:** Image caption
+
+-->
+
+
 
 # 4. Conclusion
 

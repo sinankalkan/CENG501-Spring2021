@@ -15,7 +15,11 @@ The paper introduces the notion of intent space and proposes a new zero-shot det
 
 ## 2.1. The original method
 
-The original method is described in rather generic terms where an intent space with a set of bases and coordinates for each intent is able to represent every intent distinctly. In order for this parameter sets, bases and coordinates, to be learnable, the paper proposes to use an RNN structure and encode the base information within the hidden state multiplier of the RNN. Namely, if h is the hidden state of the RNN and U * h is the feed forward calculation for the RNN, U is the base matrix chosen for the related class. Bases of the space are taken as matrices to increase modeling power with use of more parameters.
+The original method is described in rather generic terms where an intent space with a set of bases and coordinates for each intent is able to represent every intent distinctly. This is achieved by learning base vectors and coordinates for each intent in a high-dimensional space. For a fixed set of base vectors, each coordinate corresponds to an intent class in the training data. The advantage of this representation is that when a new intent class is encountered in test time, learning a new coordinate representation is enough to model it in a zero/few shot manner.
+
+In order for the parameter sets, bases and coordinates, to be learnable, the paper proposes to use an RNN structure and encode the base information within the hidden state multiplier of the RNN. Namely, if h is the hidden state of the RNN and U * h is the feed forward calculation for the RNN, U is the base matrix chosen for the related class. Bases of the space are taken as matrices to increase modeling power with use of more parameters.
+
+The properties of the space can be controlled with regularization terms, Euclidean and Simplex spaces are explored in the paper, but the general intent space representation is applicable without such constraints. It is demonstrated in the paper that the intent classes newly encountered during test time are assigned to suc coordinates that are close to the seen intent classes sharing a level of semantic similarity (e.g. AddToPlayList is being modelled mainly through PlayMusic \[1\]).
 
 ## 2.2. My interpretation 
 

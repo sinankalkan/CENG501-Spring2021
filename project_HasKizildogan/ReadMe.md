@@ -19,14 +19,14 @@ These approaches are implemented and modified together to create a novel approac
 Algorithm suggested by authors is given below. Note: All the algorithms, equations etc. within a formal and algebraic notation are shared in paper. However, for educative purposes, we put them in pseudo-form so it is easier to grasp the concept.
 Require: Labelled data, Dl . Unlabelled data Du. A trainable neural network and a ramp-up weighting function, w.
 ```sh
-Loop1: t=1 to maximum_epoch
+for: t=1 to maximum_epoch
 	Refresh confidence threshold, pi_thr per epoch
-	Loop2: k=1 to maximum_iteration_per_epoch
+	for: k=1 to maximum_iteration_per_epoch
 	Forward propagation to accumulate prediction, q, for every in-batch sample
 	Apply out-of-distribution filtering
 	Update network parameters with loss function
-	End of Loop 2
-End of Loop 1
+	endfor
+endfor
 ```
 Here, q is calculated as the average (1/t) of summation of predictions for every epoch.
 OOD is applied via predictive confidence score, c_t. Let c_t be equal to maximum q value of a sample (here q also means soft target that is briefly explained in paper). 

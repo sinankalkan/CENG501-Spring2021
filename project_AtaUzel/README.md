@@ -19,7 +19,7 @@ Finally, a deep learning agent can be trained using a new task.
   <img src="https://user-images.githubusercontent.com/61411406/126991041-e1c35042-1c1b-492f-946a-579b617a77b7.png"/>
 </p>
 <p align="center">
-  Figure 1: Trajectories of the manipulator with and without behavioral priors using a random policy
+  Figure 1: Trajectories of the manipulator with and without behavioral priors using a random policy given in the original paper
 </p>
 
 
@@ -37,7 +37,7 @@ Using the near optimal action-state pairs gathered from the simulations, a CNN c
   <img src="https://user-images.githubusercontent.com/61411406/126990300-8c1a8a3b-e8d0-4f15-8a0a-c313f3d30624.png"/>
 </p>
 <p align="center">
-  Figure 1: The structure of the behavioral prior network
+  Figure 1: The structure of the behavioral prior network from the original paper
 </p>
 
 After training the behavioral prior with the near optimal data, an agent which takes camera observations as inputs and gives 7D action vectors as outputs is used. The output of the agent is fed into the behavioral prior network and the output of the behavioral prior network is used as the final decision of the agent. This way, a random decision from the agent is biased into an action that could be useful in other tasks. Then, a suitable reinforcement learning algorithm, SAC in this case, can be used in order to train the agent to control the environment through the behavioral prior network. SAC is suitable for the expermients given in the paper since it allows reinforcement learning in continuos observation and continuous action spaces.
@@ -46,7 +46,7 @@ After training the behavioral prior with the near optimal data, an agent which t
   <img src="https://user-images.githubusercontent.com/61411406/126990430-0e188b3a-0646-41a5-8393-33c9c5319119.png"/>
 </p>
 <p align="center">
-  Figure 1: The structure of the policy network
+  Figure 1: The structure of the policy network from the original paper
 </p>
 
 
@@ -59,7 +59,7 @@ The environment in the reinforcement learning is composed of 3 three objects and
   <img src="https://user-images.githubusercontent.com/61411406/126990755-0558aea2-8458-42e4-89d1-a521f792684a.png"/>
 </p>
 <p align="center">
-  Figure 1: Problem Setting from the Original Paper
+  Figure 1: Problem setting from the original paper
 </p>
 
 
@@ -67,11 +67,11 @@ The environment in the reinforcement learning is composed of 3 three objects and
 
 In the paper, the algorithm that was used in order to get near optimal action-state pairs was very brief. Most  of the implementation details were chosen properly. As examples, the maximum velocity and torque that can be achieved by the robotic manipulator joints, how much the end effector should be raised before it moves over an object, how fast the object is carried, what the orientation of the end effector is while carrying the objects can be given.
 
-Also, the robotic arm model and the objects selected from ShapeNet were not given in the paper. A proper robotic arm model and proper objects from ShapeNet dataset was chosen properly. Unlike the original paper, no objects from pybullet package were used in our implementation. In the simulation, the objects were scaled properly and pyhsical properties are arbitrarily given to the objects. The camera position and orientation was also chosen similar to the original paper.
+Also, the robotic arm model and the objects selected from ShapeNet were not given in the paper. A proper robotic arm model and proper objects from ShapeNet dataset was chosen. Similar to the original paper, the robotic arm model has 6 degrees of freedom and a 2 finger gripper. Unlike the original paper, no objects from pybullet package were used in our implementation. In the simulation, the objects were scaled properly and pyhsical properties are arbitrarily given to the objects. The camera position and orientation was also chosen similar to the original paper.
 
-In the original paper, the learning method of the behavioral prior was not given. As an interpretation, we decided to take random batches from a relatively big dataset and train on them. This way, the number of epochs was not chosen as a parameter. The loss function that was used in the training of the behavioral prior was also not given. As a suitable loss function, mean square error function was used. In the training, a learning rate of 0.001 was used with a batch size of 256. Traning was stopped after 100 batches. The input to the network was a 48x48x3 observation image and a sample from 8D gaussian noise whose mean is 0 and standard deviation is 1. As an output the 8D vector that represents the position and orientation of the end effector and the grip action parameters is used.
+In the original paper, the learning method of the behavioral prior was not given. As an interpretation, we decided to take random batches from a relatively big dataset composed of 250k action-state pairs and train on them. This way, the number of epochs was not chosen as a parameter. The loss function that was used in the training of the behavioral prior was also not given. As a suitable loss function, mean square error function was used. In the training, a learning rate of 0.001 was used with a batch size of 256. Traning was stopped after 100 batches. The input to the network was a 48x48x3 observation image and a sample from 8D gaussian noise whose mean is 0 and standard deviation is 1. As an output the 8D vector that represents the position and orientation of the end effector and the grip action parameters is used.
 
-In reinforcement learning, we used a different reward function in order to make learning easier. The reward function was chosen such that it rewards the agent when the manipulator gets closer to the target object. Also, the reward was increased as the object was raised. The soft actor-critic parameters which was used in our implementation are given below.
+Unlike the original paper, the evalution task was chosen as a relatively simpler task. The agent was rewarded when the manipulator contacted target objects in the environment. In the original paper, evaluation tasks included pick tasks and place tasks.
 
 - Target network update period: 100
 - Discount factor 0.99
@@ -191,6 +191,7 @@ The results in the original paper are consisntent with our results. In both case
 
 As the figure suggests, the method proposed in the paper starts with a high average reward compared to other methods. This result was confirmed with our experiment. However we were not able to confirm the fact that this method is supposed to solve the problem in less number of steps. This is because running the reinforcement learning algorithm until the problem is completely solved requires too much time.
 
+We ran the algorithm for around 100k timesteps in reinforcement learning. However no significant improvement was observed for either case. This is probably because the task required more timesteps to be solved.
 
 # 5. References
 

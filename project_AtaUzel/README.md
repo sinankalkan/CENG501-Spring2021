@@ -35,7 +35,6 @@ Using the near optimal action-state pairs gathered from the simulations, a CNN c
 
 After training the behavioral prior with the near optimal data, an agent which takes camera observations as inputs and gives 8D action vectors as outputs is used. The output of the agent is fed into the behavioral prior network and the output of the behavioral prior network is used as the final decision of the agent. This way, a random decision from the agent is biased into an action that could be useful in other tasks. Then, a suitable reinforcement learning algorithm, SAC in this case, can be used in order to train the agent to control the environment through the behavioral prior network. SAC is suitable for the expermients given in the paper since it allows reinforcement learning in continuos observation and continuous action spaces.
 
-![image]()
 <p align="center">
   <video src="https://user-images.githubusercontent.com/61411406/126990300-8c1a8a3b-e8d0-4f15-8a0a-c313f3d30624.png"/>
 </p>

@@ -37,7 +37,7 @@ Using the near optimal action-state pairs gathered from the simulations, a CNN c
   <img src="https://user-images.githubusercontent.com/61411406/126990300-8c1a8a3b-e8d0-4f15-8a0a-c313f3d30624.png"/>
 </p>
 <p align="center">
-  Figure 1: The structure of the behavioral prior network from the original paper
+  Figure 2: The structure of the behavioral prior network from the original paper
 </p>
 
 After training the behavioral prior with the near optimal data, an agent which takes camera observations as inputs and gives 7D action vectors as outputs is used. The output of the agent is fed into the behavioral prior network and the output of the behavioral prior network is used as the final decision of the agent. This way, a random decision from the agent is biased into an action that could be useful in other tasks. Then, a suitable reinforcement learning algorithm, SAC in this case, can be used in order to train the agent to control the environment through the behavioral prior network. SAC is suitable for the expermients given in the paper since it allows reinforcement learning in continuos observation and continuous action spaces.
@@ -46,7 +46,7 @@ After training the behavioral prior with the near optimal data, an agent which t
   <img src="https://user-images.githubusercontent.com/61411406/126990430-0e188b3a-0646-41a5-8393-33c9c5319119.png"/>
 </p>
 <p align="center">
-  Figure 1: The structure of the policy network from the original paper
+  Figure 3: The structure of the policy network from the original paper
 </p>
 
 
@@ -59,7 +59,7 @@ The environment in the reinforcement learning is composed of 3 three objects and
   <img src="https://user-images.githubusercontent.com/61411406/126990755-0558aea2-8458-42e4-89d1-a521f792684a.png"/>
 </p>
 <p align="center">
-  Figure 1: Problem setting from the original paper
+  Figure 4: Problem setting from the original paper
 </p>
 
 
@@ -136,7 +136,7 @@ Finally, one should run "q_learning.py" script. This script will use the final b
 </p>
 
 <p align="center">
-  Figure 1: Average Reward vs. Number of evaluations without Prior
+  Figure 5: Average Reward vs. Number of evaluations without Prior
 </p>
 
 <p align="center">
@@ -144,12 +144,12 @@ Finally, one should run "q_learning.py" script. This script will use the final b
 </p>
 
 <p align="center">
-  Figure 2: Average Reward vs. Number of evaluations with Prior
+  Figure 6: Average Reward vs. Number of evaluations with Prior
 </p>
 
 The experiments are not exactly the same with the original paper. The experiment that was used in our implementation is explained in the previous section. The figures given above show the success rate (average reward) of the agent at the beginning of the reinforcement learning.
 
-The average of the success rates given in the first figure is 21.5% and the average of the success rates given in the second figure is 1.75%. As expected, the success rate of the agent with behavioral prior is significantly higher compared to the agent without behavioral prior at the beginning of the reinforcement learning.
+The average of the success rates given in the Figure 5 is 21.5% and the average of the success rates given in the Figure 6 is 1.75%. As expected, the success rate of the agent with behavioral prior is significantly higher compared to the agent without behavioral prior at the beginning of the reinforcement learning.
 
 <p align="center">
   <video src="https://user-images.githubusercontent.com/61411406/126642798-0c9205f0-8f96-4303-9f8a-026eddb9e586.mp4"/>
@@ -170,7 +170,7 @@ The average of the success rates given in the first figure is 21.5% and the aver
 </p>
 
 <p align="center">
-  Figure 3: Loss of the behavioral prior network vs. Iteration Number
+  Figure 7: Loss of the behavioral prior network vs. Iteration Number
 </p>
 
 In the figure given above, the change of the loss of the behavioral prior network over the number of learning iterations is given.
@@ -185,7 +185,7 @@ The results in the original paper are consisntent with our results. In both case
 </p>
 
 <p align="center">
-  Figure 4: Comparison of methods from the original paper
+  Figure 8: Comparison of methods from the original paper
 </p>
 
 

@@ -75,10 +75,20 @@ Present your results and compare them to the original paper. Please number your 
 
 
 
+| ![fig6a.jpg](https://user-images.githubusercontent.com/86877356/127048299-710a1bde-9398-4811-af21-8b5a34cc69e5.png) | 
+|:--:| 
+| *Fig 6a: Testing accuracy curves on CIFAR100 for different network architectures with training batch size of 8 and 16* |
+
+<!---
+| ![fig6a.jpg](https://user-images.githubusercontent.com/86877356/127045192-7586b030-8608-4637-a3aa-3b2aace0fe3c.png) | 
+|:--:| 
+| *Fig 6a: Testing accuracy curves on CIFAR100 for different network architectures with training batch size of 8 and 16* |
+
 
 | ![fig6a.jpg](https://user-images.githubusercontent.com/86877356/126895471-b42fa9e4-ebe0-4f76-9575-c17fc4c99d3e.png) | 
 |:--:| 
 | *Fig 6a: Testing accuracy curves on CIFAR100 for different network architectures with training batch size of 8 and 16* |
+-->
 
 | ![fig6b.jpg](https://user-images.githubusercontent.com/86877356/126891348-60b4945f-9fef-4f1c-841a-66931383f8ec.png) | 
 |:--:| 
@@ -95,6 +105,9 @@ Discuss the paper in relation to the results in the paper and your results.
 
 Provide your references here.
 
+
 # Contact
 
-Provide your names & email addresses and any other info with which people can contact you.
+Provide your names & email addresses and any other info with which people can contact you.\
+Hüseyin Avni Yasar : [@avniyasar](https://github.com/avniyasar) \
+Safa Mesut Bostancı : 

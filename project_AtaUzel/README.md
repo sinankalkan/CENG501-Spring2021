@@ -16,7 +16,7 @@ In order to achieve pre-training, the action-state pairs that are obtained from 
 Finally, a deep learning agent can be trained using a new task.
 
 <p align="center">
-  <video src="https://user-images.githubusercontent.com/61411406/126991041-e1c35042-1c1b-492f-946a-579b617a77b7.png"/>
+  <img src="https://user-images.githubusercontent.com/61411406/126991041-e1c35042-1c1b-492f-946a-579b617a77b7.png"/>
 </p>
 <p align="center">
   Figure 1: Trajectories of the manipulator with and without behavioral priors using a random policy
@@ -36,7 +36,7 @@ Using the near optimal action-state pairs gathered from the simulations, a CNN c
 After training the behavioral prior with the near optimal data, an agent which takes camera observations as inputs and gives 8D action vectors as outputs is used. The output of the agent is fed into the behavioral prior network and the output of the behavioral prior network is used as the final decision of the agent. This way, a random decision from the agent is biased into an action that could be useful in other tasks. Then, a suitable reinforcement learning algorithm, SAC in this case, can be used in order to train the agent to control the environment through the behavioral prior network. SAC is suitable for the expermients given in the paper since it allows reinforcement learning in continuos observation and continuous action spaces.
 
 <p align="center">
-  <video src="https://user-images.githubusercontent.com/61411406/126990300-8c1a8a3b-e8d0-4f15-8a0a-c313f3d30624.png"/>
+  <img src="https://user-images.githubusercontent.com/61411406/126990300-8c1a8a3b-e8d0-4f15-8a0a-c313f3d30624.png"/>
 </p>
 <p align="center">
   Figure 1: The structure of the behavioral prior network
@@ -47,7 +47,7 @@ The output of the behavioral prior is used as a concatenation of three vectors: 
 The environment in the reinforcement learning is composed of 3 three objects and the manipulator. The agent's task is to either pick a specific object and raise it or pick a specific object and place it on another specific object.
 
 <p align="center">
-  <video src="https://user-images.githubusercontent.com/61411406/126990430-0e188b3a-0646-41a5-8393-33c9c5319119.png"/>
+  <img src="https://user-images.githubusercontent.com/61411406/126990430-0e188b3a-0646-41a5-8393-33c9c5319119.png"/>
 </p>
 <p align="center">
   Figure 1: The structure of the policy network
@@ -55,7 +55,7 @@ The environment in the reinforcement learning is composed of 3 three objects and
 
 
 <p align="center">
-  <video src="https://user-images.githubusercontent.com/61411406/126990755-0558aea2-8458-42e4-89d1-a521f792684a.png"/>
+  <img src="https://user-images.githubusercontent.com/61411406/126990755-0558aea2-8458-42e4-89d1-a521f792684a.png"/>
 </p>
 <p align="center">
   Figure 1: Problem Setting from the Original Paper

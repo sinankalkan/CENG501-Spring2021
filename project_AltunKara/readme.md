@@ -1,10 +1,10 @@
-# Paper title
+# Structure Boundary Preserving Segmentation for Medical Image with Ambiguous Boundary
 
 This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.metu.edu.tr/~sinan/DL/) project for reproducing a paper without an implementation. See [CENG501 (Spring 2021) Project List](https://github.com/sinankalkan/CENG501-Spring2021) for a complete list of all paper reproduction projects.
 
 # 1. Introduction
 
-Introduce the paper (inc. where it is published) and describe your goal (reproducibility).
+In this repository, we describe and try to implement some of the experiments on the "Structure Boundary Preserving Segmentation for Medical Image with Ambiguous Boundary" paper published on Computer Vision and Pattern Recognition Conference, 2020. This paper, deals with the two biggest problems about medical image segmentation, which are uncertainty of the boundary of the structure in medical images and the uncertainty of the partitioned region without special domain information. The paper offers solution to these problems by a boundary key point selection algorithm and shape boundary-aware evaluator. Our aim is to reproduce the experiments implemented in the article and obtain similar results.
 
 ## 1.1. Paper summary
 
@@ -44,4 +44,5 @@ Provide your references here.
 
 # Contact
 
-Provide your names & email addresses and any other info with which people can contact you.
+Murat Kara muratka058@gmail.com
+İlayda Altun altunilayda8@gmail.com

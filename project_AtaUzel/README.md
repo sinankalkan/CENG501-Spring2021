@@ -31,9 +31,7 @@ In the original method, the algorithm that is used in near optimal pick and plac
 
 For simulations, [PyBullet](pybullet.org) package is used in python. The object meshes and textures are used from [ShapeNet](https://shapenet.org) dataset and PyBullet objects.
 
-Using the near optimal action-state pairs gathered from the simulations, a CNN called behavioral prior is trained end-to-end. As the input of the CNN, random gaussian noise and camera observations are used. As the output of the CNN, the near optimal actions are used.
-
-After training the behavioral prior with the near optimal data, an agent which takes camera observations as inputs and gives 8D action vectors as outputs is used. The output of the agent is fed into the behavioral prior network and the output of the behavioral prior network is used as the final decision of the agent. This way, a random decision from the agent is biased into an action that could be useful in other tasks. Then, a suitable reinforcement learning algorithm, SAC in this case, can be used in order to train the agent to control the environment through the behavioral prior network. SAC is suitable for the expermients given in the paper since it allows reinforcement learning in continuos observation and continuous action spaces.
+Using the near optimal action-state pairs gathered from the simulations, a CNN called behavioral prior is trained end-to-end. As the input of the CNN, random gaussian noise whose mean is 0 and standard deviation is 1 and camera observations (48x48x3) are used. As the output of the CNN, the near optimal actions are used.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/61411406/126990300-8c1a8a3b-e8d0-4f15-8a0a-c313f3d30624.png"/>
@@ -42,9 +40,7 @@ After training the behavioral prior with the near optimal data, an agent which t
   Figure 1: The structure of the behavioral prior network
 </p>
 
-The output of the behavioral prior is used as a concatenation of three vectors: the position of the end effector, the orientation of the end effector, and the grip action. Joint angles are calculated using inverse kinematics. The value reward function in reinforcement learning is 1 if the task if successfuly complete, 0 if it is not.
-
-The environment in the reinforcement learning is composed of 3 three objects and the manipulator. The agent's task is to either pick a specific object and raise it or pick a specific object and place it on another specific object.
+After training the behavioral prior with the near optimal data, an agent which takes camera observations as inputs and gives 7D action vectors as outputs is used. The output of the agent is fed into the behavioral prior network and the output of the behavioral prior network is used as the final decision of the agent. This way, a random decision from the agent is biased into an action that could be useful in other tasks. Then, a suitable reinforcement learning algorithm, SAC in this case, can be used in order to train the agent to control the environment through the behavioral prior network. SAC is suitable for the expermients given in the paper since it allows reinforcement learning in continuos observation and continuous action spaces.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/61411406/126990430-0e188b3a-0646-41a5-8393-33c9c5319119.png"/>
@@ -52,6 +48,11 @@ The environment in the reinforcement learning is composed of 3 three objects and
 <p align="center">
   Figure 1: The structure of the policy network
 </p>
+
+
+The output of the behavioral prior is used as a concatenation of three vectors: the position of the end effector, the orientation of the end effector, and the grip action. Joint angles are calculated using inverse kinematics. The value reward function in reinforcement learning is 1 if the task if successfuly complete, 0 if it is not.
+
+The environment in the reinforcement learning is composed of 3 three objects and the manipulator. The agent's task is to either pick a specific object and raise it or pick a specific object and place it on another specific object.
 
 
 <p align="center">

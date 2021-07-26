@@ -89,6 +89,10 @@ After creating the folder with given sub-folders and scripts, dependencies must 
 
 5)	The method contains writes & reads not only after executing scripts but also during the run-time. Thus, we suggest using “sudo” when permission or other type of r/w errors are encountered. This is not obligatory.
 
+A visual for suggestion number 1 is below:
+
+![Error1](https://cdn.discordapp.com/attachments/813308468483981343/869293512254976020/unknown.png)
+
 First, records and label should be constructed with these lines (we directly used terminal where directory is the folder that contains all folders)
 
 ```sh

@@ -31,16 +31,20 @@ def train_QASelection(epochs=5):
                          bidirectional=True)
 
     for train_epoch in train_epochs:
-        question = train_epoch[0][0]
-        question_matrix = []
-        for i in range(len(question)):
-            question_matrix.append(emb[question[i].item()])
-        for i in range(22 - len(question)):
-            question_matrix.append(np.zeros(100))
-        question_tensor = torch.FloatTensor(question_matrix)
-        question_tensor = torch.reshape(question_tensor, (1, 22, 100))
+        for train_input in train_epoch:
+            question = train_input[0]
+            question_matrix = []
+            for i in range(len(question)):
+                try:
+                    question_matrix.append(emb[question[i].item()])
+                except Exception as e:
+                    question_matrix.append(np.zeros(100))
+            for i in range(22 - len(question)):
+                question_matrix.append(np.zeros(100))
+            question_tensor = torch.FloatTensor(question_matrix)
+            question_tensor = torch.reshape(question_tensor, (1, 22, 100))
 
-        lstm.forward(question_tensor)
+            lstm.forward(question_tensor)
 
 
 def main():

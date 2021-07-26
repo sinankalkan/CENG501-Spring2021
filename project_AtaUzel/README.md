@@ -3,12 +3,25 @@
 This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.metu.edu.tr/~sinan/DL/) project for reproducing a paper without an implementation. See [CENG501 (Spring 2021) Project List](https://github.com/sinankalkan/CENG501-Spring2021) for a complete list of all paper reproduction projects.
 
 # 1. Introduction
-The paper PARROT: Data-Driven Behavioral Priors for Reinforcement Learning, was presented in ICLR in 2021. The purpose of the algorithm that was introduced in the paper is to apply pre-training in reinforcement learning. In order to achieve that goal, they propose a method called behavioral priors. Pre-training is applied on different robotic manipulator tasks and it is observed that the pre-trained agents learn the task quicker compared to random agents.
+The paper PARROT: Data-Driven Behavioral Priors for Reinforcement Learning, was presented in ICLR in 2021. The purpose of the algorithm that was introduced in the paper is to apply pre-training in reinforcement learning. In order to achieve that goal, they propose a method called behavioral priors. Pre-training is applied on different robotic manipulator tasks and it is observed that the pre-trained agents learn the task quicker compared to random agents by having a better initial performance.
 Our aim is to implement a behvioral prior on a new environment and to compare the agent with the behavioral prior to an agent without behavioral prior.
 
 
 ## 1.1. Paper summary
+
 In the existing literature, reinforcement learning agents go through a very long exploration period where almost no useful learning is achieved. However assuming the environment is composed of a robotic manipulator and objects, almost always, the manipulator must interact with the objects to achieve the task. As a prior, this narrows down the search space considerably. Therefore if such priors can be learned in order to bias the agents, it can be considered as a pre-training in reinforcement learning. This way, the learning process can be quicker.
+
+In order to achieve pre-training, the action-state pairs that are obtained from similar tasks are learned by a network called behavioral prior network. The behavioral prior network's structure is a conditional real NVP with four affine coupling layers. At the decision making process, this network takes the output of the agent and provides an action to the environment. The behavioral prior network can be considered as a tool for modifying the random output of the agent into an action which is more likely to result in a high reward. After the behavioral prior network is trained, its weights can be freezed.
+
+Finally, a deep learning agent can be trained using a new task.
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/61411406/126991041-e1c35042-1c1b-492f-946a-579b617a77b7.png"/>
+</p>
+<p align="center">
+  Figure 1: Trajectories of the manipulator with and without behavioral priors using a random policy given in the original paper
+</p>
+
 
 # 2. The method and our interpretation
 
@@ -18,23 +31,47 @@ In the original method, the algorithm that is used in near optimal pick and plac
 
 For simulations, [PyBullet](pybullet.org) package is used in python. The object meshes and textures are used from [ShapeNet](https://shapenet.org) dataset and PyBullet objects.
 
-Using the near optimal action-state pairs gathered from the simulations, a CNN called behavioral prior is trained end-to-end. As the input of the CNN, random gaussian noise and camera observations are used. As the output of the CNN, the near optimal actions are used.
+Using the near optimal action-state pairs gathered from the simulations, a CNN called behavioral prior is trained end-to-end. As the input of the CNN, random gaussian noise whose mean is 0 and standard deviation is 1 and camera observations (48x48x3) are used. As the output of the CNN, the near optimal actions are used.
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/61411406/126990300-8c1a8a3b-e8d0-4f15-8a0a-c313f3d30624.png"/>
+</p>
+<p align="center">
+  Figure 2: The structure of the behavioral prior network from the original paper
+</p>
 
 After training the behavioral prior with the near optimal data, an agent which takes camera observations as inputs and gives 7D action vectors as outputs is used. The output of the agent is fed into the behavioral prior network and the output of the behavioral prior network is used as the final decision of the agent. This way, a random decision from the agent is biased into an action that could be useful in other tasks. Then, a suitable reinforcement learning algorithm, SAC in this case, can be used in order to train the agent to control the environment through the behavioral prior network. SAC is suitable for the expermients given in the paper since it allows reinforcement learning in continuos observation and continuous action spaces.
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/61411406/126990430-0e188b3a-0646-41a5-8393-33c9c5319119.png"/>
+</p>
+<p align="center">
+  Figure 3: The structure of the policy network from the original paper
+</p>
+
+
 The output of the behavioral prior is used as a concatenation of three vectors: the position of the end effector, the orientation of the end effector, and the grip action. Joint angles are calculated using inverse kinematics. The value reward function in reinforcement learning is 1 if the task if successfuly complete, 0 if it is not.
 
-The environment in the reinforcement learning is composed of 3 three objects and the manipulator. The agents task is to either pick a specific object and raise it or pick a specific object and place it on another specific object.
+The environment in the reinforcement learning is composed of 3 three objects and the manipulator. The agent's task is to either pick a specific object and raise it or pick a specific object and place it on another specific object.
+
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/61411406/126990755-0558aea2-8458-42e4-89d1-a521f792684a.png"/>
+</p>
+<p align="center">
+  Figure 4: Problem setting from the original paper
+</p>
+
 
 ## 2.2. Our interpretation 
 
 In the paper, the algorithm that was used in order to get near optimal action-state pairs was very brief. Most  of the implementation details were chosen properly. As examples, the maximum velocity and torque that can be achieved by the robotic manipulator joints, how much the end effector should be raised before it moves over an object, how fast the object is carried, what the orientation of the end effector is while carrying the objects can be given.
 
-Also, the robotic arm model and the objects selected from ShapeNet were not given in the paper. A proper robotic arm model and proper objects from ShapeNet dataset was chosen properly. Unlike the original paper, no objects from pybullet package were used in our implementation. In the simulation, the objects were scaled properly and pyhsical properties are arbitrarily given to the objects. The camera position and orientation was also chosen similar to the original paper.
+Also, the robotic arm model and the objects selected from ShapeNet were not given in the paper. A proper robotic arm model and proper objects from ShapeNet dataset was chosen. Similar to the original paper, the robotic arm model has 6 degrees of freedom and a 2 finger gripper. Unlike the original paper, no objects from pybullet package were used in our implementation. In the simulation, the objects were scaled properly and pyhsical properties are arbitrarily given to the objects. The camera position and orientation was also chosen similar to the original paper.
 
-In the original paper, the learning method of the behavioral prior was not given. As an interpretation, we decided to take random batches from a relatively big dataset and train on them. This way, the number of epochs was not chosen as a parameter. The loss function that was used in the training of the behavioral prior was also not given. As a suitable loss function, mean square error function was used. In the training, a learning rate of 0.001 was used with a batch size of 256. Traning was stopped after 100 batches. The input to the network was a 48x48x3 observation image and a sample from 8D gaussian noise whose mean is 0 and standard deviation is 1. As an output the 8D vector that represents the position and orientation of the end effector and the grip action parameters is used.
+In the original paper, the learning method of the behavioral prior was not given. As an interpretation, we decided to take random batches from a relatively big dataset composed of 250k action-state pairs and train on them. This way, the number of epochs was not chosen as a parameter. The loss function that was used in the training of the behavioral prior was also not given. As a suitable loss function, mean square error function was used. In the training, a learning rate of 0.001 was used with a batch size of 256. Traning was stopped after 100 batches. The input to the network was a 48x48x3 observation image and a sample from 8D gaussian noise whose mean is 0 and standard deviation is 1. As an output the 8D vector that represents the position and orientation of the end effector and the grip action parameters is used.
 
-In reinforcement learning, we used a different reward function in order to make learning easier. The reward function was chosen such that it rewards the agent when the manipulator gets closer to the target object. Also, the reward was increased as the object was raised. The soft actor-critic parameters which was used in our implementation are given below.
+Unlike the original paper, the evalution task was chosen as a relatively simpler task. The agent was rewarded when the manipulator contacted target objects in the environment. In the original paper, evaluation tasks included pick tasks and place tasks.
 
 - Target network update period: 100
 - Discount factor 0.99
@@ -99,7 +136,7 @@ Finally, one should run "q_learning.py" script. This script will use the final b
 </p>
 
 <p align="center">
-  Figure 1: Average Reward vs. Number of evaluations without Prior
+  Figure 5: Average Reward vs. Number of evaluations without Prior
 </p>
 
 <p align="center">
@@ -107,12 +144,12 @@ Finally, one should run "q_learning.py" script. This script will use the final b
 </p>
 
 <p align="center">
-  Figure 2: Average Reward vs. Number of evaluations with Prior
+  Figure 6: Average Reward vs. Number of evaluations with Prior
 </p>
 
 The experiments are not exactly the same with the original paper. The experiment that was used in our implementation is explained in the previous section. The figures given above show the success rate (average reward) of the agent at the beginning of the reinforcement learning.
 
-The average of the success rates given in the first figure is 21.5% and the average of the success rates given in the second figure is 1.75%. As expected, the success rate of the agent with behavioral prior is significantly higher compared to the agent without behavioral prior at the beginning of the reinforcement learning.
+The average of the success rates given in the Figure 5 is 21.5% and the average of the success rates given in the Figure 6 is 1.75%. As expected, the success rate of the agent with behavioral prior is significantly higher compared to the agent without behavioral prior at the beginning of the reinforcement learning.
 
 <p align="center">
   <video src="https://user-images.githubusercontent.com/61411406/126642798-0c9205f0-8f96-4303-9f8a-026eddb9e586.mp4"/>
@@ -133,7 +170,7 @@ The average of the success rates given in the first figure is 21.5% and the aver
 </p>
 
 <p align="center">
-  Figure 3: Loss of the behavioral prior network vs. Iteration Number
+  Figure 7: Loss of the behavioral prior network vs. Iteration Number
 </p>
 
 In the figure given above, the change of the loss of the behavioral prior network over the number of learning iterations is given.
@@ -148,20 +185,23 @@ The results in the original paper are consisntent with our results. In both case
 </p>
 
 <p align="center">
-  Figure 4: Comparison of methods from the original paper
+  Figure 8: Comparison of methods from the original paper
 </p>
 
 
 As the figure suggests, the method proposed in the paper starts with a high average reward compared to other methods. This result was confirmed with our experiment. However we were not able to confirm the fact that this method is supposed to solve the problem in less number of steps. This is because running the reinforcement learning algorithm until the problem is completely solved requires too much time.
 
+We ran the algorithm for around 5k timesteps in reinforcement learning with 8 different seeds. However no significant improvement was observed during the reinforcement learning for either case. This is probably because the task required more timesteps to be solved.
 
 # 5. References
 
-[PARROT: Data-Driven Behavioral Priors for Reinforcement Learning](https://arxiv.org/abs/2011.10024)
+[1] [Singh, A., Liu, H., Zhou, G., Yu, A., Rhinehart, N., &amp; Levine, S. (2020, November 19). Parrot: Data-driven behavioral priors for reinforcement learning.](https://arxiv.org/abs/2011.10024)
 
-[Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor](https://arxiv.org/abs/1801.01290)
+[2] [Haarnoja, T., Zhou, A., Abbeel, P., &amp; Levine, S. (2018, August 8). Soft actor-critic: Off-policy maximum entropy deep reinforcement learning with a stochastic actor.](https://arxiv.org/abs/1801.01290)
 
-[Robotic Manipulator](https://github.com/a-price/reactor_description)
+[3] [A-Price. A-Price/Reactor_Description: URDF model for Phantomx REACTOR robot arm. ](https://github.com/a-price/reactor_description)
+
+[4] [Dinh, L., Sohl-Dickstein, J., &amp; Bengio, S. (2017, February 27). Density estimation using real nvp.](https://arxiv.org/abs/1605.08803)
 
 
 # Contact

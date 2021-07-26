@@ -57,16 +57,17 @@ There are four code notebooks- two for each dataset- one is for MBN and the othe
 
 Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
 
-
+<!---
 | ![fig4.jpg](https://user-images.githubusercontent.com/86877356/126894727-e119b037-d039-4173-b9de-58625b7304e8.png) | 
 |:--:| 
 | *Fig 4: Testing accuracy on CIFAR10 and CIFAR100 of ResNet18 with training batch size (BS) 8 and 32.* |
-
-<!---
-| ![fig5.jpg](https://user-images.githubusercontent.com/86877356/126893842-99f3cb80-40de-4761-8bc6-157ed0f783b2.png) | 
-|:--:| 
-| *Fig 5: Comparison of accuracy curves for different normalization methods with  batch size of 8.We show the test accuracies vs. the epoches  on CIFAR10(top) and CIFAR100(bottom). The ResNet is used.* |
 -->
+
+| ![fig4.jpg](https://user-images.githubusercontent.com/86877356/127033391-a8138ded-9496-4c7a-8371-ed23881eeb90.png) | 
+|:--:| 
+| *Fig 4: Testing accuracy on CIFAR10 and CIFAR100 of ResNet18 with training batch size (BS) 8 and 32.* |
+
+
 
 | ![fig5.jpg](https://user-images.githubusercontent.com/86877356/126895343-f17f62e0-db71-4999-aa6b-60b924377ef0.png) | 
 |:--:| 
@@ -74,11 +75,6 @@ Present your results and compare them to the original paper. Please number your 
 
 
 
-<!---
-| ![fig6a.jpg](https://user-images.githubusercontent.com/86877356/126892923-f2c6ed88-7cce-4669-ac38-47e6b261c665.png) | 
-|:--:| 
-| *Fig 6a: Testing accuracy curves on CIFAR100 for different network architectures with training batch size of 8 and 16* |
--->
 
 | ![fig6a.jpg](https://user-images.githubusercontent.com/86877356/126895471-b42fa9e4-ebe0-4f76-9575-c17fc4c99d3e.png) | 
 |:--:| 

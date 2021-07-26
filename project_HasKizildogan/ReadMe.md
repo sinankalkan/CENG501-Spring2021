@@ -115,6 +115,7 @@ tmuxp load runs/figure-3-svhn-500-vat.yml
 ```
 
 Here figure 3 means the 3rd figure in Oliver’s article. The article’s arxiv link is at references and we also put the paper in our repo in case you want to directly check all the figures and methods in Oliver's paper.
+
 ![Figure3Oliver](https://cdn.discordapp.com/attachments/813308468483981343/869293027166924850/unknown.png)
 
 ## 3.3. Results

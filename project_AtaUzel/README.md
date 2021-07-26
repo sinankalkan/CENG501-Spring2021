@@ -195,13 +195,13 @@ We ran the algorithm for around 5k timesteps in reinforcement learning with 8 di
 
 # 5. References
 
-[PARROT: Data-Driven Behavioral Priors for Reinforcement Learning](https://arxiv.org/abs/2011.10024)
+[1] [PARROT: Data-Driven Behavioral Priors for Reinforcement Learning](https://arxiv.org/abs/2011.10024)
 
-[Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor](https://arxiv.org/abs/1801.01290)
+[2] [Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor](https://arxiv.org/abs/1801.01290)
 
-[Robotic Manipulator](https://github.com/a-price/reactor_description)
+[3] [Robotic Manipulator](https://github.com/a-price/reactor_description)
 
-[DENSITY ESTIMATION USING REAL NVP](https://arxiv.org/pdf/1605.08803.pdf)
+[4] [Laurent Dinh, Jascha Sohl-Dickstein, and Samy Bengio. Density estimation using real NVP. In ICLR, 2017](https://arxiv.org/pdf/1605.08803.pdf)
 
 
 # Contact

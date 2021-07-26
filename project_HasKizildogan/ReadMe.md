@@ -124,11 +124,15 @@ Here figure 3 means the 3rd figure in Oliver’s article. The article’s arxiv 
 
 ## 3.3. Results
 
-Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
+We couldn't manage to apply method as whole. We managed to apply and test Out-Of-Distribution filtering and knowledge distillation. However, this on-the-fly evaluation of semi-supervised-learning required more than our skill levels. Though, we put our modified framework and train files to "OurApproach" folder, not to waste what we have learned during the process. 
+
+Our code fails at on-the-fly execution. We examined " https://www.isca-speech.org/archive/Interspeech_2020/pdfs/1337.pdf " for on-the-fly approach on SSL however as Oliver et al. used lambda functions a lot, debugging wasn't successive so we couldn't implement that.
+
+We managed to run and examine all of Oliver's runs however they are already presented in that paper thus feel free to check it if you want to learn about a strond and fundamental approach for semi-supervised-learning
 
 # 4. Conclusion
 
-Discuss the paper in relation to the results in the paper and your results.
+During the term, we learned a lot about semi-supervised learning. In ideal world, one may have fully labeled data to implement supervised learning. Or un-supervised learning is used to cluster unknown data. SSL though, is what we found really close to the most applicable one to the real life. Some of the data are labelled, some not. And those labelled would be mismatched. This is where this paper shines. Thanks to this paper, we learned to play with a mismatch with out-of-distribution filtering, learned about ensembling, various confidence models. Also Goodfellow was one of those who wrote the fundamental paper with Oliver, therefore we had to grasp some concepts mentioned in the Goodfellow's DL book.
 
 # 5. References
 Instead of in-text references, we decided to go for this way as one can easily check internet for any subject.

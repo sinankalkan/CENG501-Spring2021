@@ -54,8 +54,11 @@ def train_QASelection(epochs=5):
             question_tensor = torch.reshape(question_tensor, (1, 22, 100))
             answer_tensor = torch.FloatTensor(answer_matrix)
             answer_tensor = torch.reshape(answer_tensor, (1, 13805, 100))
-            input_tensor = torch.cat((question_tensor, answer_tensor), dim=1)
-            lstm.forward(input_tensor)
+            # input_tensor = torch.cat((question_tensor, answer_tensor), dim=1)
+            H_q = lstm.forward(question_tensor)
+            H_a = lstm.forward(answer_tensor)
+
+
 
 
 def main():

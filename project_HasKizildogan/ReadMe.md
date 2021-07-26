@@ -140,3 +140,5 @@ Abseil’s documentary to understand flags as they are used exhaustively: https:
 Göksu Anıl KIZILDOĞAN - goksu.kizildogan@gmail.com (or just add me on https://www.linkedin.com/in/goksu-anil-kizildogan-b90aa3116/)
 
 Alper Emre HAS – alperemrehas@gmail.com
+
+![DenemeText](https://cdn.discordapp.com/attachments/813308468483981343/869277134982619206/trainmodel.png)

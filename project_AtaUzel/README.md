@@ -201,7 +201,7 @@ We ran the algorithm for around 100k timesteps in reinforcement learning. Howeve
 
 [Robotic Manipulator](https://github.com/a-price/reactor_description)
 
-[Real NVP](https://arxiv.org/pdf/1605.08803.pdf)
+[DENSITY ESTIMATION USING REAL NVP](https://arxiv.org/pdf/1605.08803.pdf)
 
 
 # Contact

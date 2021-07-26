@@ -47,7 +47,7 @@ def train_QASelection(epochs=5):
                 try:
                     answer_matrix.append(emb[answer[i].item()])
                 except:
-                    answer_matrix.append(emb[answer[i].item()])
+                    answer_matrix.append(np.zeros(100))
             for i in range(13805 - len(answer)):
                 answer_matrix.append(np.zeros(100))
             question_tensor = torch.FloatTensor(question_matrix)

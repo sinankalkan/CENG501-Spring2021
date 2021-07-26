@@ -191,7 +191,7 @@ The results in the original paper are consisntent with our results. In both case
 
 As the figure suggests, the method proposed in the paper starts with a high average reward compared to other methods. This result was confirmed with our experiment. However we were not able to confirm the fact that this method is supposed to solve the problem in less number of steps. This is because running the reinforcement learning algorithm until the problem is completely solved requires too much time.
 
-We ran the algorithm for around 100k timesteps in reinforcement learning. However no significant improvement was observed for either case. This is probably because the task required more timesteps to be solved.
+We ran the algorithm for around 5k timesteps in reinforcement learning. However no significant improvement was observed for either case. This is probably because the task required more timesteps to be solved.
 
 # 5. References
 

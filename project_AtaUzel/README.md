@@ -16,7 +16,7 @@ In order to achieve pre-training, the action-state pairs that are obtained from 
 Finally, a deep learning agent can be trained using a new task.
 
 <p align="center">
-  <video src="https://user-images.githubusercontent.com/61411406/126990107-d818c30a-0213-499c-b615-e15b5f3b0527.png"/>
+  <video src="https://user-images.githubusercontent.com/61411406/126991041-e1c35042-1c1b-492f-946a-579b617a77b7.png"/>
 </p>
 <p align="center">
   Figure 1: Trajectories of the manipulator with and without behavioral priors using a random policy

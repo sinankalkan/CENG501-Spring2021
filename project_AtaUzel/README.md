@@ -3,12 +3,25 @@
 This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.metu.edu.tr/~sinan/DL/) project for reproducing a paper without an implementation. See [CENG501 (Spring 2021) Project List](https://github.com/sinankalkan/CENG501-Spring2021) for a complete list of all paper reproduction projects.
 
 # 1. Introduction
-The paper PARROT: Data-Driven Behavioral Priors for Reinforcement Learning, was presented in ICLR in 2021. The purpose of the algorithm that was introduced in the paper is to apply pre-training in reinforcement learning. In order to achieve that goal, they propose a method called behavioral priors. Pre-training is applied on different robotic manipulator tasks and it is observed that the pre-trained agents learn the task quicker compared to random agents.
+The paper PARROT: Data-Driven Behavioral Priors for Reinforcement Learning, was presented in ICLR in 2021. The purpose of the algorithm that was introduced in the paper is to apply pre-training in reinforcement learning. In order to achieve that goal, they propose a method called behavioral priors. Pre-training is applied on different robotic manipulator tasks and it is observed that the pre-trained agents learn the task quicker compared to random agents by having a better initial performance.
 Our aim is to implement a behvioral prior on a new environment and to compare the agent with the behavioral prior to an agent without behavioral prior.
 
 
 ## 1.1. Paper summary
+
 In the existing literature, reinforcement learning agents go through a very long exploration period where almost no useful learning is achieved. However assuming the environment is composed of a robotic manipulator and objects, almost always, the manipulator must interact with the objects to achieve the task. As a prior, this narrows down the search space considerably. Therefore if such priors can be learned in order to bias the agents, it can be considered as a pre-training in reinforcement learning. This way, the learning process can be quicker.
+
+In order to achieve pre-training, the action-state pairs that are obtained from similar tasks are learned by a network called behavioral prior network. The behavioral prior network's structure is a conditional real NVP with four affine coupling layers. At the decision making process, this network takes the output of the agent and provides an action to the environment. The behavioral prior network can be considered as a tool for modifying the random output of the agent into an action which is more likely to result in a high reward. After the behavioral prior network is trained, its weights can be freezed.
+
+Finally, a deep learning agent can be trained using a new task.
+
+<p align="center">
+  <video src="https://user-images.githubusercontent.com/61411406/126990107-d818c30a-0213-499c-b615-e15b5f3b0527.png"/>
+</p>
+<p align="center">
+  Figure 1: Trajectories of the manipulator with and without behavioral priors using a random policy
+</p>
+
 
 # 2. The method and our interpretation
 
@@ -20,11 +33,35 @@ For simulations, [PyBullet](pybullet.org) package is used in python. The object 
 
 Using the near optimal action-state pairs gathered from the simulations, a CNN called behavioral prior is trained end-to-end. As the input of the CNN, random gaussian noise and camera observations are used. As the output of the CNN, the near optimal actions are used.
 
-After training the behavioral prior with the near optimal data, an agent which takes camera observations as inputs and gives 7D action vectors as outputs is used. The output of the agent is fed into the behavioral prior network and the output of the behavioral prior network is used as the final decision of the agent. This way, a random decision from the agent is biased into an action that could be useful in other tasks. Then, a suitable reinforcement learning algorithm, SAC in this case, can be used in order to train the agent to control the environment through the behavioral prior network. SAC is suitable for the expermients given in the paper since it allows reinforcement learning in continuos observation and continuous action spaces.
+After training the behavioral prior with the near optimal data, an agent which takes camera observations as inputs and gives 8D action vectors as outputs is used. The output of the agent is fed into the behavioral prior network and the output of the behavioral prior network is used as the final decision of the agent. This way, a random decision from the agent is biased into an action that could be useful in other tasks. Then, a suitable reinforcement learning algorithm, SAC in this case, can be used in order to train the agent to control the environment through the behavioral prior network. SAC is suitable for the expermients given in the paper since it allows reinforcement learning in continuos observation and continuous action spaces.
+
+![image]()
+<p align="center">
+  <video src="https://user-images.githubusercontent.com/61411406/126990300-8c1a8a3b-e8d0-4f15-8a0a-c313f3d30624.png"/>
+</p>
+<p align="center">
+  Figure 1: The structure of the behavioral prior network
+</p>
 
 The output of the behavioral prior is used as a concatenation of three vectors: the position of the end effector, the orientation of the end effector, and the grip action. Joint angles are calculated using inverse kinematics. The value reward function in reinforcement learning is 1 if the task if successfuly complete, 0 if it is not.
 
-The environment in the reinforcement learning is composed of 3 three objects and the manipulator. The agents task is to either pick a specific object and raise it or pick a specific object and place it on another specific object.
+The environment in the reinforcement learning is composed of 3 three objects and the manipulator. The agent's task is to either pick a specific object and raise it or pick a specific object and place it on another specific object.
+
+<p align="center">
+  <video src="https://user-images.githubusercontent.com/61411406/126990430-0e188b3a-0646-41a5-8393-33c9c5319119.png"/>
+</p>
+<p align="center">
+  Figure 1: The structure of the policy network
+</p>
+
+
+<p align="center">
+  <video src="https://user-images.githubusercontent.com/61411406/126990755-0558aea2-8458-42e4-89d1-a521f792684a.png"/>
+</p>
+<p align="center">
+  Figure 1: Problem Setting from the Original Paper
+</p>
+
 
 ## 2.2. Our interpretation 
 

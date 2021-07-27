@@ -20,7 +20,7 @@ The main contributions of the paper can be summarized as follows:
 
  - The paper makes experiments for both positive and negative transfer cases for random label training while in previous works, the main focus was the negative effects.
  - The paper interprets what DNNs learn in random label training.
- - In previous works positive transfer coming from bigger weights (because the cross entropy loss is scale-sensitive) was not taken into account. The paper emphasizes this and makes a rescaling before starting the transfer.
+ - In previous works positive transfer coming from bigger weights (because the cross-entropy loss is scale-sensitive) was not taken into account. The paper emphasizes this and makes a rescaling before starting the transfer.
  - Alignment phenomenon explains the well-known fact that how earlier layers in DNNs generalize while later layers specialize.
  - The paper proves that what the first layers of a network learn can be approximated by eigenvectors of the input data.
  - Specialization at upper layers may prevent the positive transfer and can be mitigated by increasing model with at those layers.
@@ -34,10 +34,6 @@ The main contributions of the paper can be summarized as follows:
 What the paper offers is that the training phase captures the statistical characteristics of a given dataset and it is the reason for positive transfer. To demonstrate this, image patches from the dataset are extracted and the covariance matrix of this data is used to find eigenvectors. A measurement called "misalignment" calculating the deviation between the covariance matrix of data and the covariance matrix of weights learned in the first layers is given in the paper. By using misalignment, authors show that a low misalignment is observed after training both real and random labels whereas there is a high misalignment between weights and some random orthonormal basis. To prove that this result is related to positive effect, Gaussian approximation of weights after random label training is used and positive transfer similar to when random label training weights are directly used occurs. Said misalignment calculation is done by applying the following formula (From Appendix A-6 of paper):
 
 ![image](https://user-images.githubusercontent.com/79032387/127189903-0ed7d002-ddfe-47d3-9e3e-cfaf12bf111f.png)
-
-$\sum_x$ is the covariance of first layer weights after training
-
-$v_i$ is the eigenvectors of image patches 
 
 The result is the alignment score
 
@@ -53,27 +49,30 @@ Negative transfer in some experiments occurs when the neuron activation values a
 
 ## 2.2. Our interpretation 
 
-In the original paper, multiple number of different network architectures are experimented with different datasets, pre-training methods, training hyperparameters and initialization weights for different results. While on these examples, some of these parameters are specified, some others are usually left out. On these occasions, meaningful parameters from earlier experiments (if they have similar architecture, parameters etc.) are used. For example, batch size is not given for most experiments.
+In the original paper, multiple numbers of different network architectures are tried with different datasets, pre-training methods, training hyperparameters, and initialization weights for different results. While on these examples, some of these parameters are specified, some others are usually left out. On these occasions, meaningful parameters from earlier experiments (if they have similar architecture, parameters, etc.) are used.
 
-Other than that, the paper uses a initialization value (called "init_scale" ) for scaling initialization weights while attempting He/Xavier initialization. However, it is not clear what this scaling factor is used for. These values are experimented with different interperetations. For example, it is experimented if these values are the numerator for He/Xavier initialization as a placeholder sqrt(3)/sqrt(6) terms, however these experiments yielded no meaningful answer. Hence, this scaling factor considered trivial for experiments.
+Other than that, the paper uses a value called "init_scale" for scaling initialization weights while attempting He initialization. However, it is not clear what this scaling factor is used for. Thus, it is analyzed if these values are related to the standard deviation used in He normal initialization. However, these experiments yielded no meaningful result. Hence, this scaling factor is not used in our training.
 
 # 3. Experiments and results
 
 ## 3.1. Experimental setup
 
-Firstly, effects of real/random labels on pre-training is experimented with. For this reason, VGG16 models are pre-trained on CIFAR10 examples with random labels and subsequently fine-tuned on the fresh CIFAR10 examples with either real labels or random labels using different hyperparameters. Paper calls the pre-training as upstream training and fine-tuning as downstream training. As it is also explained in the paper, VGG16 model is slightly modified for these experiments. Avgpool layer and last two fully connected layers are removed.
+1. **Figure1**: The effects of pre-training are demonstrated. For this reason, VGG16 models are pre-trained on CIFAR10 examples with random labels and subsequently fine-tuned on the fresh CIFAR10 examples with either real labels or random labels using different hyperparameters. As is also explained in the paper, the VGG16 model is slightly modified for these experiments. The average pooling layer and last two fully connected layers are removed.
 
-Secondly, the "misalignment" between the data and first layer weights is observed. For this reason, a two layer convolutional network (256 convolutional filters, 64 fully connected nodes) are trained on CIFAR10 dataset with real/random labels.
+2. **Figure2**: The "misalignment" between the data and first layer weights is observed. For this reason, a two-layer convolutional network (256 convolutional filters, 64 fully connected nodes) is trained on the CIFAR10 dataset with real/random labels.
 
-Thirdly, it is desired to show that, covariance of the first layer aligns with the data eigenvectors. For this reason, a WideResNet (WRN-28-4) is trained on CIFA10 examples with random labels. It is required to visually show that, there exists some eigenvectors belonging to filters aligned with the eigenvectors of the data. For better visualization, WideResNet model is slightly modified to have 5x5 filters instead of 3x3 filters on the first layer. It should be noted that, this modification has significant impact on network training time.
+3. **Figure3**: It is desired to show that, the covariance matrix of the first layer weights aligns with the data covariance matrix. For this reason, a WideResNet (WRN-28-4) is trained on the CIFAR10 examples with random labels. It is required to visually show that, there exist some eigenvectors belonging to filters' covariance matrix aligned with the eigenvectors of the data. For better visualization, the WideResNet model is slightly modified to have 5x5 filters instead of 3x3 filters on the first layer. It should be noted that this modification has a significant impact on network training time.
 
-Fourtly, it is defined that for aligned matrices (data and first layer weights in this case) there exists a transfer function to obtain eigenvalues of first layer weights using data covariance matrix (eigenvectors and eigencalues). The relation between the data eigenvalues and first layer weight eigenvalues are desired to be obseved. For this reason, two networks are used: A two layer fully connected network, and a two layer convolutional network. Both of these networks are trained with random labels and real labels and the relation between eigenvalues is observed. It should be noted that, some parameters of these two networks are not fully defined. Hence, it is considered these two networks are similar to the networks given in previous experiments.
+4. **Figure4**: It is defined that for aligned matrices (data and first layer weights in this case) there exists a transfer function to obtain eigenvalues of first layer weights using data covariance matrix (eigenvectors and eigenvalues). The relation between the data eigenvalues and first layer weight eigenvalues is desired to be observed. For this reason, two networks are used: A two-layer fully connected network, and a two-layer convolutional network. Both of these networks are trained with random labels and real labels and the relation between eigenvalues is observed. It should be noted that some parameters of these two networks are not fully defined. Hence, it is considered these two networks are similar to the networks given in previous experiments.
 
-Lastly, It is desired to show the difference of accuracy of two cases: A case where a network is pre-trained on data as in the upstream training from an earlier case, and a case where the network is not trained but first layer weights are directly inserted from a pre-learned covariance matrix.
-
+5. **Figure5**: It is desired to show the difference of accuracy on downstream tasks when different kinds of upstream training are performed:
+    - A network is pre-trained on random labels, obtained weights are used in the downstream task. Weights are not scaled as it is done in Figure1 setup.
+    - A network is pre-trained on random labels, obtained weights are used in the downstream task. Weights are scaled to match their initial <em>l<sub>2</sub></em> norms.
+    - A network is pre-trained on random labels, Gaussian approximation of obtained weights is used in the downstream task.
+    - Downstream task is trained from scratch.
 ## 3.2. Running the code
 
-In the paper, Each experiment and idea is also supported with a figure. In the project, the focus is reimplementing the theory behind the paper and reproducing these ideas/experiments. For this reason, each figure is divided into its own code section and presented in jupyter format. A user can run there jupyter codes indivudially to obtain their corresponding figures. Hence, the codes are complete by themselves to generate their corresponding figure.
+In the paper, each experiment and idea is also supported with a figure. In the project, the focus is reimplementing the theory behind the paper and reproducing these ideas/experiments. For this reason, each figure is divided into its own code section and presented in Jupyter Notebook format. A user can run these notebooks individually to obtain their corresponding figures. Hence, the codes are complete by themselves to reproduce the figures presented in the paper.
 
 ## 3.3. Results
 

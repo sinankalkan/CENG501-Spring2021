@@ -113,6 +113,7 @@ Discuss the paper in relation to the results in the paper and your results.
 
 Provide your references here.
 
+https://blog.paperspace.com/pytorch-101-building-neural-networks/
 
 # Contact
 

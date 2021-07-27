@@ -2,7 +2,7 @@
 
 This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.metu.edu.tr/~sinan/DL/) project for reproducing a paper without an implementation. See [CENG501 (Spring 2021) Project List](https://github.com/sinankalkan/CENG501-Spring2021) for a complete list of all paper reproduction projects.
 
-**Important:** In this .md file latex equations are not supported, hence, we also uploaded pdf version to the read_me file as well. For best reading experience please use the pdf version (read_me_with_latex.pdf).
+**Important:** In this .md file latex equations are not supported, hence, we also uploaded pdf version to the read_me file as well. For best reading experience please use the html rendered version of notebook (i.e. ReadMe_latex.ipynb).
 
 # 1. Introduction
 This repository describes and contains unoffical implementation of some of the experiments in the [paper](https://papers.nips.cc/paper/2020/hash/b3b43aeeacb258365cc69cdaf42a68af-Abstract.html) "Calibrating CNNs for Lifelong Learning" published in NeurIPS 2020. Paper presents a way to train CNNs for different tasks contiually without getting caugt in the catastrophic forgetting phenomenon by incorporating calibration modules after each convolutional layer. Aim of this project is to reproduce the experiments described in the paper, in detail, we want to achive gracefully degrading classification performance as the number of tasks increases. Moreover, the aim of this project is to shift the attention of the readers to the subject of "Continual Learning".

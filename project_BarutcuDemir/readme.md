@@ -53,6 +53,10 @@ Feed Forward Hidden Size | 512** | 512
 Number of Heads | 8 | 8
 Number of Encoder Layers | 4 | 4
 Number of Decoder Layers | 4 | 4
+Beam Size | 5 | 5
+Beam Search Length Penalty Exponent (alpha) | 0.6 | 0.6
+
+
 
 The data is available [here](https://github.com/tlatkowski/st).
 
@@ -78,6 +82,8 @@ Feed Forward Hidden Size | 256** | 256
 Number of Heads | 4 | 4
 Number of Encoder Layers | 2 | 2
 Number of Decoder Layers | 2 | 2
+Beam Size | 5 | 5
+Beam Search Length Penalty Exponent (alpha) | 0.6 | 0.6
 
 The data is available [here](http://www.statmt.org/wmt14/translation-task.html). We only use the Europarl v7 dataset whereas the authors also used Common Crawl Corpus and the News Commentary.
 
@@ -119,13 +125,13 @@ PHM-Transformer (n=16) | 2,072,576 | 16.36 | 81.249 | 595
 
 The results reported by the authors:
 
-Model | Parameters | BLEU
------------- | ------------- | -------------
-Transformer | 44M | **36.68**
-PHM-Transformer (n=2) | 22M | 35.52 
-PHM-Transformer (n=4) | 11M | 35.53
-PHM-Transformer (n=8) | 5.5M | 34.16
-PHM-Transformer (n=16) | 2.9M | 33.89 
+Model | Parameters | BLEU | Train time per 100 steps (sec) | Inference time (sec)
+------------ | ------------- | ------------- | ------------- | -------------
+Transformer | 44M | **36.68** | 7.61 | 336
+PHM-Transformer (n=2) | 22M | 35.52 | - | -
+PHM-Transformer (n=4) | 11M | 35.53 | 7.92 | 299
+PHM-Transformer (n=8) | 5.5M | 34.16 | 7.70 | 282
+PHM-Transformer (n=16) | 2.9M | 33.89 | - | -
 
 Our results:
 

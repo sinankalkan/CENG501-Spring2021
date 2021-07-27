@@ -140,12 +140,14 @@ Finally, one should run "q_learning.py" script. This script will use the final b
 
 ## 3.3. Results
 
+### 3.3.1. Results of Experiment 1
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/61411406/126568014-5dd670ef-6733-47f8-93a3-3dccb85b6e31.png" />
 </p>
 
 <p align="center">
-  Figure 5: Average Reward vs. Number of evaluations without Prior
+  Figure 5: Average Reward vs. Number of evaluations without Prior for Experiment 1
 </p>
 
 <p align="center">
@@ -153,12 +155,34 @@ Finally, one should run "q_learning.py" script. This script will use the final b
 </p>
 
 <p align="center">
-  Figure 6: Average Reward vs. Number of evaluations with Prior
+  Figure 6: Average Reward vs. Number of evaluations with Prior for Experiment 1
 </p>
 
-The experiments are not exactly the same with the original paper. The experiment that was used in our implementation is explained in the previous section. The figures given above show the success rate (average reward) of the agent at the beginning of the reinforcement learning.
+The experiments are not exactly the same with the original paper. The experiments that was used in our implementation is explained in the previous section. The figures given above show the success rate (average reward) of the agent at the beginning of the reinforcement learning in experiment 1.
 
 The average of the success rates given in the Figure 5 is 21.5% and the average of the success rates given in the Figure 6 is 1.75%. As expected, the success rate of the agent with behavioral prior is significantly higher compared to the agent without behavioral prior at the beginning of the reinforcement learning.
+
+### 3.3.1. Results of Experiment 2
+
+<p align="center">
+  <img src="" />
+</p>
+
+<p align="center">
+  Figure 7: Average Reward vs. Number of evaluations without Prior for Experiment 2
+</p>
+
+<p align="center">
+  <img src="" />
+</p>
+
+<p align="center">
+  Figure 8: Average Reward vs. Number of evaluations with Prior for Experiment 2
+</p>
+
+The average of the success rates given in the Figure 7 is *todo* and the average of the success rates given in the Figure 8 is *todo*. As expected, the success rate of the agent with behavioral prior gets significantly higher with much less learning compared to the agent without behavioral prior. The plots are prepared using a running average of window size *todo* to make them easily readable.
+
+Since the number of seeds that was used in this experiment is relatively low, the results may not be very generalizable.
 
 <p align="center">
   <video src="https://user-images.githubusercontent.com/61411406/126642798-0c9205f0-8f96-4303-9f8a-026eddb9e586.mp4"/>
@@ -179,7 +203,7 @@ The average of the success rates given in the Figure 5 is 21.5% and the average 
 </p>
 
 <p align="center">
-  Figure 7: Loss of the behavioral prior network vs. Iteration Number
+  Figure 9: Loss of the behavioral prior network vs. Iteration Number
 </p>
 
 In the figure given above, the change of the loss of the behavioral prior network over the number of learning iterations is given.
@@ -194,7 +218,7 @@ The results in the original paper are consisntent with our results. In both case
 </p>
 
 <p align="center">
-  Figure 8: Comparison of methods from the original paper
+  Figure 10: Comparison of methods from the original paper
 </p>
 
 

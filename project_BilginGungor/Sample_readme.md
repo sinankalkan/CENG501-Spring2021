@@ -36,7 +36,9 @@ What the paper offers is that the training phase captures the statistical charac
 ![image](https://user-images.githubusercontent.com/79032387/127189903-0ed7d002-ddfe-47d3-9e3e-cfaf12bf111f.png)
 
 $\sum_x$ is the covariance of first layer weights after training
+
 $v_i$ is the eigenvectors of image patches 
+
 The result is the alignment score
 
 Another result derived from the alignment situation is that there is a mapping between eigenvalues of the covariance matrix of image patches and eigenvalues of weights at the first layer. In other words, the first layer learns this mapping function and it is proven in the paper that with different setups and hyperparameters this function's shape is roughly similar. The authors discuss that understanding this function might lead to being able to learn weights by only using input data statistics.
@@ -49,19 +51,29 @@ Performance of learning transfer can be improved by transferring more layers. In
 
 Negative transfer in some experiments occurs when the neuron activation values are suddenly and extremely dropped at the point where the training switches to the downstream task. These reductions are observed more in later layers because that earlier layers generalize while the later layers specialize in DNNs. Positive transfer cases, however, are not affected by this problem as much. It is depicted that increasing the number of neurons in the last layers can make the network remain enough capacity for the downstream task and subsequently solve the negative transfer problem.
 
-## 2.2. My interpretation 
+## 2.2. Our interpretation 
 
-Explain the parts that were not clearly explained in the original paper and how you interpreted them.
+In the original paper, multiple number of different network architectures are experimented with different datasets, pre-training methods, training hyperparameters and initialization weights for different results. While on these examples, some of these parameters are specified, some others are usually left out. On these occasions, meaningful parameters from earlier experiments (if they have similar architecture, parameters etc.) are used. For example, batch size is not given for most experiments.
+
+Other than that, the paper uses a initialization value (called "init_scale" ) for scaling initialization weights while attempting He/Xavier initialization. However, it is not clear what this scaling factor is used for. These values are experimented with different interperetations. For example, it is experimented if these values are the numerator for He/Xavier initialization as a placeholder sqrt(3)/sqrt(6) terms, however these experiments yielded no meaningful answer. Hence, this scaling factor considered trivial for experiments.
 
 # 3. Experiments and results
 
 ## 3.1. Experimental setup
 
-Describe the setup of the original paper and whether you changed any settings.
+Firstly, effects of real/random labels on pre-training is experimented with. For this reason, VGG16 models are pre-trained on CIFAR10 examples with random labels and subsequently fine-tuned on the fresh CIFAR10 examples with either real labels or random labels using different hyperparameters. Paper calls the pre-training as upstream training and fine-tuning as downstream training. As it is also explained in the paper, VGG16 model is slightly modified for these experiments. Avgpool layer and last two fully connected layers are removed.
+
+Secondly, the "misalignment" between the data and first layer weights is observed. For this reason, a two layer convolutional network (256 convolutional filters, 64 fully connected nodes) are trained on CIFAR10 dataset with real/random labels.
+
+Thirdly, it is desired to show that, covariance of the first layer aligns with the data eigenvectors. For this reason, a WideResNet (WRN-28-4) is trained on CIFA10 examples with random labels. It is required to visually show that, there exists some eigenvectors belonging to filters aligned with the eigenvectors of the data. For better visualization, WideResNet model is slightly modified to have 5x5 filters instead of 3x3 filters on the first layer. It should be noted that, this modification has significant impact on network training time.
+
+Fourtly, it is defined that for aligned matrices (data and first layer weights in this case) there exists a transfer function to obtain eigenvalues of first layer weights using data covariance matrix (eigenvectors and eigencalues). The relation between the data eigenvalues and first layer weight eigenvalues are desired to be obseved. For this reason, two networks are used: A two layer fully connected network, and a two layer convolutional network. Both of these networks are trained with random labels and real labels and the relation between eigenvalues is observed. It should be noted that, some parameters of these two networks are not fully defined. Hence, it is considered these two networks are similar to the networks given in previous experiments.
+
+Lastly, It is desired to show the difference of accuracy of two cases: A case where a network is pre-trained on data as in the upstream training from an earlier case, and a case where the network is not trained but first layer weights are directly inserted from a pre-learned covariance matrix.
 
 ## 3.2. Running the code
 
-Explain your code & directory structure and how other people can run it.
+In the paper, Each experiment and idea is also supported with a figure. In the project, the focus is reimplementing the theory behind the paper and reproducing these ideas/experiments. For this reason, each figure is divided into its own code section and presented in jupyter format. A user can run there jupyter codes indivudially to obtain their corresponding figures. Hence, the codes are complete by themselves to generate their corresponding figure.
 
 ## 3.3. Results
 

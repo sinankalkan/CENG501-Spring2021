@@ -10,7 +10,31 @@ Although the paper's title is intimidating, the main idea behind it is easy to u
 
 ## 1.1. Paper summary
 
-Summarize the paper, the method & its contributions in relation with the existing literature.
+The paper proposes Parametrized Hypercomplex Multiplication Layers to replace fully connected layers. These layers are put together very smartly, such that they subsume both the quaternion layers mentioned previously and the usual linear transformation. Thus the name, BEYOND FULLY-CONNECTED LAYERS WITH QUATERNIONS. The main advantage of the PHM Layer is that they enable choosing an arbitrary n to reduce the number of parameters, whereas this was limited to 4, 8 and 16 with quaternions. Here is how it works:
+
+Fully Connected Layer: ![Screenshot (582)](https://user-images.githubusercontent.com/62503047/127239071-392fe478-671e-483f-8d68-19d791b89b8d.png)
+
+PHM Layer: ![Screenshot (583)](https://user-images.githubusercontent.com/62503047/127239154-8f5d7832-1a26-4b3b-b457-cf5d76b0592d.png)
+
+H: ![Screenshot (585)](https://user-images.githubusercontent.com/62503047/127239276-69457fd1-c11c-4b4e-997e-2bd22764cedb.png)
+
+The PHM layer resembles a FC layer but differs in the way that the H matrix is obtained. H acts as a weight for input x, but the H matrix is not made up of parameters; the A and S matrices that are used to obtain H are. For a selection of n, which is a hyperparameter, the A matrix takes the form of (n,n,n) whereas the S matrix has the shape (n, dim1/n, dim2/n). The W in a FC layer would be shaped (dim1, dim2) in this case. Kronecker product of every matrix in the tensors A and S are taken and then these are summed to get H. Kronecker product of X and Y is defined as: 
+
+![Screenshot (586)](https://user-images.githubusercontent.com/62503047/127239343-206da384-17b4-4bbc-a6a9-5a35ac76604f.png)
+
+So the process for n=2, dim1=6 and dim2=8 looks like:
+
+![Screenshot (587)](https://user-images.githubusercontent.com/62503047/127239397-3313b5e1-bd4d-4041-951b-42dea44b44d6.png)
+
+
+The number of parameters here is given by elements in tensor A + tensor B which is n^3 + dim1\*dim2/n. So while 1/n effectively scales the parameters size, there is also a n^3 term which becomes evident with large n. This is further investigated in 2.2. So what does this have to do with quaternions? Remember Figure X. This Hamilton can be expressed as a PHM operation with n=4:
+
+![Screenshot (589)](https://user-images.githubusercontent.com/62503047/127239480-66083189-ca2a-4077-961d-d023ff3b6704.png)
+
+So in theory, the PHM layer can learn the Hamilton product. It can also learn other interactions, so it is more robust than just hardcoding the Hamilton product, which is introducing bias to the system about the interaction between the inputs of the Hamilton product. 
+
+It is important to note that the PHM layer also subsumes feed forward networks when n=1. Tensor A becomes a scalar that scales tensor S, which has the same dimensions with W.
+The authors replace some layers of the Transformer and LSTM and conduct several experiments, which are detailed in 2.1.
 
 # 2. The method and our interpretation
 
@@ -34,6 +58,8 @@ There are a bunch of things that are ambiguous about the transformer implementat
 *There is one particular aspect of the paper that is misleading.* The paper makes the overall architecture of the PHM transformer very clear. They report a reduction parameters as you can see in the tables at 3.3 Results. However it is impossible to reduce the total number of parameters of a transformer by 1/n by only replacing the parts mentioned in 2.1 because there are also word embeddings that map the tokens to the encoder and the generator that maps the decoder to the tokens. In fact these may make up the bulk of a transformer depending on the vocabulary size and the model setup. **So we propose a PHM+ transformer that also replaces these layers with PHM weights.** In this version every weight is replaced by its PHM counterpart.
 
 # 3. Experiments and results
+
+For transformer experiments we chose to reproduce the style transfer, because the data was the easiest to obtain, and the De-En translation task, because it was the one the paper went into farthest detail. In style transfer, the task is to translate modern English to Shakespearean English whereas in De-En it is to translate German to English.
 
 ## 3.1. Experimental setup
 
@@ -137,11 +163,11 @@ Our results:
 
 Model | Parameters | BLEU | Inference time for 500 lines (sec)
 ------------ | ------------- | ------------- | ------------- 
-Transformer | 27,309,056 | 16.62 | x 
+Transformer | 27,309,056 | 17.91 | 257
 PHM-Transformer (n=2) | 13,579,416 | 17.34 | x
 PHM-Transformer (n=4) | 6,830,272 | 17.30 | x 
 PHM-Transformer (n=8) | 3,463,680 | 18.02 | 553 
-PHM-Transformer (n=16) | 1,844,224 | x | x 
+PHM-Transformer (n=16) | 1,844,224 | 17.65 | 980
 
 # 4. Conclusion
 

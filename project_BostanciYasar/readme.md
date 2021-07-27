@@ -75,11 +75,19 @@ Present your results and compare them to the original paper. Please number your 
 
 
 
-| ![fig6a.jpg](https://user-images.githubusercontent.com/86877356/127048299-710a1bde-9398-4811-af21-8b5a34cc69e5.png) | 
+
+
+
+| ![fig6a.jpg](https://user-images.githubusercontent.com/86877356/127190495-a1a7d4a6-46ad-44c2-91b7-d5fbcf48c320.jpg) | 
 |:--:| 
 | *Fig 6a: Testing accuracy curves on CIFAR100 for different network architectures with training batch size of 8 and 16* |
 
 <!---
+| ![fig6a.jpg](https://user-images.githubusercontent.com/86877356/127048299-710a1bde-9398-4811-af21-8b5a34cc69e5.png) | 
+|:--:| 
+| *Fig 6a: Testing accuracy curves on CIFAR100 for different network architectures with training batch size of 8 and 16* |
+
+
 | ![fig6a.jpg](https://user-images.githubusercontent.com/86877356/127045192-7586b030-8608-4637-a3aa-3b2aace0fe3c.png) | 
 |:--:| 
 | *Fig 6a: Testing accuracy curves on CIFAR100 for different network architectures with training batch size of 8 and 16* |

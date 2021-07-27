@@ -17,7 +17,7 @@ For medical image processing applications, segmenting the anatomical structures 
   
 Figure 1: U-Net segmentation results which are failed in preserving structure boundary
   </p>
-In the article, two problems that arise in segmentation in medical images are tried to be overcome. The first of these problems is that medical images contain unclear borders due to poor quality and heterogeneous textures. The other problem is that it is difficult to automatically predict the target area without expert knowledge. To overcome these problems, tha paper proposed two algorithms and one network structure : 
+In the article, two problems that arise in segmentation in medical images are tried to be overcome. The first of these problems is that medical images contain unclear borders due to poor quality and heterogeneous textures. The other problem is that it is difficult to automatically predict the target area without expert knowledge. To overcome these problems, tha paper proposed one algorithm, one network structure and one discriminator structure : 
 
 One of the algorithms is boundary key point selection algorithm, which aims at finding key points on the boundary of ground truth segmentation map. 
 
@@ -25,6 +25,7 @@ Boundary Preserving Block (BPB) is a unit on CNN that enhances the boundary info
 
 Shape Boundary- aware Evaluator (SBE) is a discriminator which is only used during training. It discriminates and outputs an evaluation score between the predicted segmentation map concatenated with boundary key point map & ground truth segmentation map concatenated with boundary key point map. 
 
+The biggest contribution of this paper is the proposed method can be generalized to the different segmentation models. 
 
 # 2. The method and my interpretation
 

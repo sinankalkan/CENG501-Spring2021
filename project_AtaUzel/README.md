@@ -214,7 +214,7 @@ Since the number of seeds that was used in this experiment is relatively low, th
 
 # 4. Conclusion
 
-The results in the original paper are consisntent with our results. In both cases, it was observed that the agent with the behavioral prior starts the reinforcement learning with an obvious advantage.
+The results in the original paper are consisntent with our results. In both cases, it was observed that the agent with the behavioral prior starts the reinforcement learning with an obvious advantage and learns the task more rapidly.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/61411406/126569511-3b6306eb-a92b-41ad-a486-93dce0c79756.png" />

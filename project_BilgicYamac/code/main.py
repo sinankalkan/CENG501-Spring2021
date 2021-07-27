@@ -1,4 +1,4 @@
-from BiLSTM import BiLSTM
+# from BiLSTM import BiLSTM
 from LoadData import LoadData
 import torch as torch
 import numpy as np
@@ -55,10 +55,8 @@ def train_QASelection(epochs=5):
             answer_tensor = torch.FloatTensor(answer_matrix)
             answer_tensor = torch.reshape(answer_tensor, (1, 13805, 100))
             # input_tensor = torch.cat((question_tensor, answer_tensor), dim=1)
-            H_q = lstm.forward(question_tensor)
-            H_a = lstm.forward(answer_tensor)
-
-
+            H_q, c_q = lstm.forward(question_tensor)
+            H_a, c_a = lstm.forward(answer_tensor)
 
 
 def main():

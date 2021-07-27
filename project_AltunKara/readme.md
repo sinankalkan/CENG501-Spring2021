@@ -8,7 +8,23 @@ In this repository, we describe and try to implement some of the experiments on 
 
 ## 1.1. Paper summary
 
-Summarize the paper, the method & its contributions in relation with the existing literature.
+For medical image processing applications, segmenting the anatomical structures is correctly is an important task. In the existing literature, Fully Convolution Networks and U-Net used to semantic segmentation tasks. However, it has been observed that these deep learning-based medical image segmentation methods cannot successfully segment difficulties in the medical image such as unclear structure boundaries and heterogeneous textures during segmentation. Figure 1 shows cases where U-Net fails to segment target regions in the ultrasound image.
+<p align="center">
+  
+![Adsız](https://user-images.githubusercontent.com/82761420/127210354-32dec827-0fed-4fe2-96f3-b3befded14bc.png)
+</p>
+<p align="center">
+  
+Figure 1: U-Net segmentation results which are failed in preserving structure boundary
+  </p>
+In the article, two problems that arise in segmentation in medical images are tried to be overcome. The first of these problems is that medical images contain unclear borders due to poor quality and heterogeneous textures. The other problem is that it is difficult to automatically predict the target area without expert knowledge. To overcome these problems, tha paper proposed two algorithms and one network structure : 
+
+One of the algorithms is boundary key point selection algorithm, which aims at finding key points on the boundary of ground truth segmentation map. 
+
+Boundary Preserving Block (BPB) is a unit on CNN that enhances the boundary information of input. 
+
+Shape Boundary- aware Evaluator (SBE) is a discriminator which is only used during training. It discriminates and outputs an evaluation score between the predicted segmentation map concatenated with boundary key point map & ground truth segmentation map concatenated with boundary key point map. 
+
 
 # 2. The method and my interpretation
 

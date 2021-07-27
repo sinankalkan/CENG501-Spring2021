@@ -225,9 +225,7 @@ The results in the original paper are consisntent with our results. In both case
 </p>
 
 
-As the figure suggests, the method proposed in the paper starts with a high average reward compared to other methods. This result was confirmed with our experiment. However we were not able to confirm the fact that this method is supposed to solve the problem in less number of steps. This is because running the reinforcement learning algorithm until the problem is completely solved requires too much time.
-
-We ran the algorithm for around 5k timesteps in reinforcement learning with 8 different seeds. However no significant improvement was observed during the reinforcement learning for either case. This is probably because the task required more timesteps to be solved.
+As the figure suggests, the method proposed in the paper starts with a high average reward compared to other methods. This result was confirmed with our first experiment. The method is also expected to learn to task more rapidly compared to other methods. This result was confirmed with our second experiment. The results were discussed in the previous section.
 
 # 5. References
 

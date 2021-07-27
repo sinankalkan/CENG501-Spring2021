@@ -89,6 +89,8 @@ The data is available [here](http://www.statmt.org/wmt14/translation-task.html).
 
 The Colab notebooks for style transfer and translation thoroughly explains the parts of the code. It is very straightforward since it is on Colab.
 
+Style Transfer [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1bM_Gqw3V6q-gEu7KkzxVEYI3qimlKHPe?usp=sharing)]
+
 ## 3.3. Results
 
 ### For style transfer:

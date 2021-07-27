@@ -93,12 +93,21 @@ In our interpretation, the tasks are limited to picking a specific object from a
 
 ## 3.1. Experimental setup
 
-In order to evaluate the method, two agents were created where one of them had a behavioral prior and one of them did not. After using the reinforcement learning algorithm (SAC), on the agents, their success over time is compared. Success is evaluated by the mean reward over different environment episodes.
+In order to evaluate the method, two agents were created where one of them had a behavioral prior and one of them did not. After using the reinforcement learning algorithm (SAC), on the agents, their success over time is compared. Success is evaluated by the mean reward over different environment episodes. Two different experiments were used in order to evaluate the method.
 
-Unlike the original paper, only the beginning of the reinforcement learning process is evaluated. This is because the behavioral prior is expected to result in a better average reward at the beginning of the learning. However, since the reinforcement learning algorithm was stopped before the agent completely solved the problem, it is not known whether the task would be solved sooner for the agent with the behavioral prior.
+In both experiments, the specific task that was chosen to evaluate the method requires the agent to contact on of the two chosen objects. The environment includes three objects. If the robotic manipulator contacts the third object, no reward is given but the simulation continues.
 
-The specific task that was chosen to evaluate the method requires the agent to contact on of the two chosen objects. The environment includes three objects. If the robotic manipulator contacts the third object, no reward is given but the simulation continues. This task is learned for 5000 timesteps and an evaluation was made every 50 timesteps. In order to eliminate the effect of the object locations, learning algorithm was run on 8 different random seeds where the positions of three objects vary.
+### 3.1.1. Experiment 1
 
+Since the time and resources were limited for the experiments, the first experiment was focused on only the beginning of the reinforcement learning process. However the reinforcement learning algorithm was run for 8 seeds which is higher compared to the other experiment.
+
+The behavioral prior is expected to result in a better average reward at the beginning of the learning. However, in this experiment, since the reinforcement learning algorithm was stopped before the agent completely solved the problem, it is not known whether the task would be solved sooner for the agent with the behavioral prior.
+
+This task is learned for 5k timesteps and an evaluation was made every 50 timesteps. In order to eliminate the effect of the object locations, learning algorithm was run on 8 different random seeds where the positions of three objects vary.
+
+### 3.1.2. Experiment 2
+
+In this experiment, the reinforcement learning algorithm was run for 50k timesteps which is higher compared to the first experiment. Similar to the first experiment, an evaluation was made every 50 timesteps. Since the algorithm was run for longer, the average rewards significantly increased during the learning unlike the other experiment. However due to limitations in time and resources, this experiment was applied on 3 seeds which is lower than the first experiment.
 
 ## 3.2. Running the code
 

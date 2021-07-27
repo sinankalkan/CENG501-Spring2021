@@ -114,8 +114,8 @@ PHM-Transformer (n=16) | 2.9M | 10.76
 Our results:
 
 Model | Parameters | BLEU | Training time for 1 epoch (sec) | Inference time for 500 lines (sec)
------------- | ------------- | ------------- | ------------- | -------------
-Transformer | 29,421,568 | 17.86 | x | x
+------------ | ------------- | ------------- | ----------- | -------------
+Transformer | 29,421,568 | 17.86 | 41.644 | x
 PHM-Transformer (n=2) | 13,857,048 | 16.55 | 50.492 | x
 PHM-Transformer (n=4) | 7,043,264 | 15.39 | 55.223 | 327
 PHM-Transformer (n=8) | 3,651,072 | 16.09 | 63.436 | 358

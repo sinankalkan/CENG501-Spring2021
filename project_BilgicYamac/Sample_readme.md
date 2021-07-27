@@ -18,15 +18,15 @@ There are many studies have been made on different tasks in Community question a
 ## 2.1. The original method
 
 The aim is jointly conduct answer selection and abstractive summarization. The overall framework of Answer Selection and Abstractive Summarization consists of four components. Shared Compare-Aggregate Bi-LSTM Encoder, Sequence-to-sequence Model with Question-aware Attention, Question Answer Alignment with Summary Representations, Question-driven Pointer-generator Network.
-Shared Compare-Aggregate Bi-LSTM Encoder: The word embeddings of question and the original answer are preprocessed to obtain a new embedding vector which also captures some contextual information in addition to the word itself. The this new word embeddings are provided into the Bi-LSTM encoder. 
+###Shared Compare-Aggregate Bi-LSTM Encoder: The word embeddings of question and the original answer are preprocessed to obtain a new embedding vector which also captures some contextual information in addition to the word itself. The this new word embeddings are provided into the Bi-LSTM encoder. 
 
 ![image](https://user-images.githubusercontent.com/57533312/127110893-8dec128e-9004-48c9-89ba-47083a7254e8.png)
 
-Seq2Seq Model With Question-aware Attention: A question-aware attention based seq2seq model to decode the encoded sentence representation of the answer is proposed. A unidirection LSTM is adopted as the decoder. Also an attention mechanism is proposed.
+###Seq2Seq Model With Question-aware Attention: A question-aware attention based seq2seq model to decode the encoded sentence representation of the answer is proposed. A unidirection LSTM is adopted as the decoder. Also an attention mechanism is proposed.
 
-Question Answer Alignment with Summary Representations: A two way attention mechanism is proposed to generate the co-attention between the encoded question representation and the decoded summary representation. With a learnable attention parameter matrix U, the attention matrixes are obtained. The attention vectors and question/summary represantations are dot producted to get final attentive sentences.
+###Question Answer Alignment with Summary Representations: A two way attention mechanism is proposed to generate the co-attention between the encoded question representation and the decoded summary representation. With a learnable attention parameter matrix U, the attention matrixes are obtained. The attention vectors and question/summary represantations are dot producted to get final attentive sentences.
 
-Question-driven Pointer-generator Network: First, the probability distribution Pvocab over the fixed vocabulary is obtained by passing the summary representation through a softmax layer.
+###Question-driven Pointer-generator Network: First, the probability distribution Pvocab over the fixed vocabulary is obtained by passing the summary representation through a softmax layer.
 
 ![image](https://user-images.githubusercontent.com/57533312/127110973-d336f7bb-2557-4b9f-baf5-bd454dea9559.png)
 

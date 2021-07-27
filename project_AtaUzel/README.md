@@ -140,6 +140,18 @@ Finally, one should run "q_learning.py" script. This script will use the final b
 
 ## 3.3. Results
 
+### 3.3.1. Results of Behavioral Prior Training
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/61411406/126654521-3922a2a2-e0fc-46e9-959c-46209b436675.png" />
+</p>
+
+<p align="center">
+  Figure 9: Loss of the behavioral prior network vs. Iteration Number
+</p>
+
+In the figure given above, the change of the loss of the behavioral prior network over the number of learning iterations is given. It looks like the training of the behavioral prior network was successful and not a lot of overfitting occured.
+
 ### 3.3.1. Results of Experiment 1
 
 <p align="center">
@@ -162,7 +174,7 @@ The experiments are not exactly the same with the original paper. The experiment
 
 The average of the success rates given in the Figure 5 is 21.5% and the average of the success rates given in the Figure 6 is 1.75%. As expected, the success rate of the agent with behavioral prior is significantly higher compared to the agent without behavioral prior at the beginning of the reinforcement learning.
 
-### 3.3.1. Results of Experiment 2
+### 3.3.2. Results of Experiment 2
 
 <p align="center">
   <img src="" />
@@ -184,6 +196,8 @@ The average of the success rates given in the Figure 7 is *todo* and the average
 
 Since the number of seeds that was used in this experiment is relatively low, the results may not be very generalizable.
 
+### 3.3.3. Some Demonstrations of the Results
+
 <p align="center">
   <video src="https://user-images.githubusercontent.com/61411406/126642798-0c9205f0-8f96-4303-9f8a-026eddb9e586.mp4"/>
 </p>
@@ -197,17 +211,6 @@ Since the number of seeds that was used in this experiment is relatively low, th
 <p align="center">
   The same test environment where the agent does not use behavioral prior
 </p>
-
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/61411406/126654521-3922a2a2-e0fc-46e9-959c-46209b436675.png" />
-</p>
-
-<p align="center">
-  Figure 9: Loss of the behavioral prior network vs. Iteration Number
-</p>
-
-In the figure given above, the change of the loss of the behavioral prior network over the number of learning iterations is given.
-
 
 # 4. Conclusion
 

@@ -76,8 +76,28 @@ In the paper, each experiment and idea is also supported with a figure. In the p
 
 ## 3.3. Results
 
-Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
+### 3.3.1 Positive & negative transfer by training with random labels
 
+<p align = "center">
+<img src = "figures/figure1_original.png">
+</p>
+<p align = "center">
+Figure-1 - Original Figure1 in the paper
+</p>
+
+<p float="left">
+  <img src="figures/figure1_1.png" width="49%"/>
+  <img src="figures/figure1_2.png" width="49%"/> 
+  <img src="figures/figure1_3.png" width="49%"/>
+  <img src="figures/figure1_4.png" width="49%"/>
+</p>
+
+<p align = "center">
+Figure-2 - Reproduction of Figure1. The upper left image corresponds the first part of the original image the upper right image corresponds the second part of the original image and etc.
+</p>
+
+It can be seen from the Figure-1 and Figure-2 that results for downstream task with real labels are reproduced similar to the paper. For these task there is a clear separation indicating positive and negative transfer. However, for downstream task with random labels, the results are not as expected. We believe that this situation stems from the lack of experimental setup of downstream tasks with random labels. As it's discussed in section 2.2, crucial information such as number of random classes to be used is missing. Also, value of init_scale parameter which we could not fit into our experiments changes between random and real labeled trainings. This might lead to the differences between the results presented here.
+ 
 # 4. Conclusion
 
 Discuss the paper in relation to the results in the paper and your results.

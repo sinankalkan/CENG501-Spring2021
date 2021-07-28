@@ -417,7 +417,7 @@ if __name__ == "__main__":
     if argc > 3:
         mode = sys.argv[1]
         force_dataset = sys.argv[2]
-        save_prob = sys.argv[2]
+        save_prob = float(sys.argv[3])
     elif argc > 2:
         mode = sys.argv[1]
         force_dataset = sys.argv[2]

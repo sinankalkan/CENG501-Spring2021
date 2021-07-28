@@ -116,6 +116,7 @@ parrot
 │   behavioral_prior.py
 │   q_learning.py
 │   robot_arm.py
+│   scaling.py
 │
 │─── bp models
 │
@@ -137,6 +138,15 @@ In order to repeat our experiments, one should firstly run "robot_arm.py" file i
 Then, "behavioral_prior.py" should be run in order to train a behavioral prior network based on the generated near optimal action-state pairs. This script will save the trained models inside "bp models" folder. The currently existing "final.pt" file is the final model that is obtained from our behavioral prior training.
 
 Finally, one should run "q_learning.py" script. This script will use the final behavioral prior model and start reinforcement learning. Then store the results in "evals" folder. "with" and "without" foders inside the "evals" folder are used in order to keep the logs of the reinforcement learning agents with and without behavioral prior. The "with" and "without" folders given in this repository include the data of the first experiment.
+
+In the python environment, the current versions of following packages were used:
+- Numpy
+- Matplotlib
+- Stable Baselines 3
+- Pytorch
+- Open CV
+- Gym
+- PyBullet
 
 ## 3.3. Results
 

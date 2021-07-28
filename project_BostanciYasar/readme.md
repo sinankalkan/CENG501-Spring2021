@@ -33,6 +33,17 @@ Some implementation details are given in the paper.\
 •	Dataset: CIFAR10 and CIFAR100 \
 •	Optimizer: SGD 
 
+In the original method authors propose a dynamic momentum parameter “lambda” in order to control the final noise level in the training. The algorithm of the MBN which is directly taken from the paper is given below;
+
+The formulation of the momentum parameter of the MBN for the training stage is as follows;
+
+
+
+
+where t refers to the t-th iteration epoch, T  is the number of the total epochs. As it is seen from the formulation above in the beginning phase of the training the normalization technique does not differ much from the conventional Batch Normalization but as the epoch number increase the momentum parameter shows its effect. 
+The formulation of the momentum parameter of the MBN for the inference stage is as follows;
+The inference momentum parameter is adaptive to batch size. Where N denotes the number of samples in other words batch size and “m0” denotes the ideal batch size. In addition  “tao_zero” is an ideal coefficient and in the originial paper authors set it to 0.90 for the inference step. According to the inference step momentum formula, it can be easily seen that smaller batch size makes the inference momentum parameter smaller as well. 
+
 
 ## 2.2. My interpretation 
 

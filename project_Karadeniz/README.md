@@ -10,7 +10,7 @@ optimizing loss functions in order to achieve better loss functions. This is ach
 
 My goal starting this project was to achieve mentioned scores in the paper by implementing direction regularization, also help community.
 
-# # 1.1 Paper Summary
+## 1.1 Paper Summary
 
 This paper examines existing loss functions and their shortcomings, and proposes a new method which is also adaptable to existing loss functions.
 
@@ -39,7 +39,7 @@ Later, it is claimed in the paper that deriving equation can be used in triplet 
 
 # 3 Experiments
 
-# # 3.1 Datasets
+## 3.1 Datasets
 
 Following datasets are used in the experiment section:
 
@@ -49,11 +49,11 @@ Following datasets are used in the experiment section:
 
 For all datasets, images cropped to 224 x 224, with standard preprocessing techniques. Also, data augmentation with random crop, and random horizontal flipping is used. 
 
-# # 3.2 Network
+## 3.2 Network
 
 For all experiments googleNet is used with batch normalization, pretrained on ILSVRC 2012-CLS. Adam optimizer is also used. Occasionally embedding dimension of 64 is prefered instead of 512.
 
-# # 3.3 My Result
+## 3.3 My Result
 
 Unfortunately, I have not been succesful at my attempts run any code, even with high learning rate, unstabilities caused division by 0 type of error which resulted with all data becoming NaN.
 

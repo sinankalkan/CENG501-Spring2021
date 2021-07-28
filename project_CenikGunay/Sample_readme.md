@@ -37,9 +37,9 @@ _**Datasets-Placepedia**_
 
 - Places-Coarse. They select 200 places for validation and 400 places for testing,
 from 50 famous cities of 34 countries. The remained 25K places are used
-for training. For validation/testing set, we double checked the annotation
+for training. For validation/testing set, they double checked the annotation
 results. Places without category labels are manually annotated. After merging
-similar items of labels, we obtain 50 categories and 10 functions. The training/validation/testing set have 5M/60K/120K images respectively, from 7K
+similar items of labels, they obtain 50 categories and 10 functions. The training/validation/testing set have 5M/60K/120K images respectively, from 7K
 cities of more than 200 countries.
 - Places-Fine. Places-Fine shares the same validation/testing set with PlacesCoarse. For training set, they selected 400 places from the 50 cities of validation/testing places. Different from Places-Coarse, they also double checked
 the annotation of training data. The training/validation/testing set have

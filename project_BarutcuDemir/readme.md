@@ -182,11 +182,14 @@ LSTM Hidden Size | 300 | 300 |
 n            | 2,5,10 | 10 |
 
 (I): We defined the number of epochs as 10 for training process but we were not able to finish the train due to limited runtime on Colab.
+
 ## 3.2. Running the code
 
-The Colab notebooks for style transfer and translation thoroughly explains the parts of the code. It is very straightforward since it is on Colab.
+The Colab notebook for style transfer thoroughly explains the parts of the code. It is very straightforward since it is on Colab. Translation is also available but since it shares much of its codebase with style transfer, it is not explained in detail.
 
-Style Transfer [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1bM_Gqw3V6q-gEu7KkzxVEYI3qimlKHPe?usp=sharing)]
+**Style Transfer** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1bM_Gqw3V6q-gEu7KkzxVEYI3qimlKHPe?usp=sharing)
+
+**Translation** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1x64OkSUJdJgx-2FN95KtCZ7QRQfDM8Su?usp=sharing)
 
 ## 3.3. Results
 
@@ -240,7 +243,7 @@ We were not able to get the results from trained models because of runtime limit
 
 # 4. Conclusion
 
-**We were able to reproduce the authors' results in style transfer and De En translation tasks. Although we could not match their exact numbers because of training limitations and hyperparameter ambiguities, we saw that the vanilla transformer and the PHM+ transformer yielded very similar performances, which was the point of the paper. **
+**We were able to reproduce the authors' results in style transfer and De En translation tasks. Although we could not match their exact numbers because of training limitations and hyperparameter ambiguities, we saw that the vanilla transformer and the PHM+ transformer yielded very similar performances, which was the point of the paper.**
 
 Interestingly we outperformed the authors' model in style transfer. We think this is due to the choice of BLEU smoothing function mentioned before but we would also like to note that the authors report a large number of steps for training for this task. In fact we overfit the data with the authors' number of steps with a small batch size (see the figure under style transfer experiment), so when this large number of steps is coupled with a large batch size it could lead to greater overfitting. But we think this is extremely unlikely given the authors' experience, so there is probably something else at play.
 
@@ -261,7 +264,15 @@ Samuel R. Bowman, Gabor Angeli, Christopher Potts, Christopher D. Manning. 2015.
 Sepp Hochreiter, Jurgen Schmidhuber. Long short-term memory. ¨ Neural computation, 9(8):
 1735–1780, 1997.
 
+Titouan Parcollet, Ying Zhang, Mohamed Morchid, Chiheb Trabelsi, Georges Linares, Renato
+De Mori, and Yoshua Bengio. Quaternion convolutional neural networks for end-to-end auto-
+matic speech recognition. arXiv preprint arXiv:1806.07789, 2018.
+
 Qian Chen, Xiaodan Zhu, Zhenhua Ling, Si Wei, Hui Jiang, Diana Inkpen. 2017. *Enhanced LSTM for Natural Language Inference*. https://arxiv.org/abs/1609.06038
+
+Yi Tay, Aston Zhang, Luu Anh Tuan, Jinfeng Rao, Shuai Zhang, Shuohang Wang, Jie Fu, and
+Siu Cheung Hui. Lightweight and efficient neural natural language processing with quaternion
+networks. arXiv preprint arXiv:1906.04393, 2019
 
 # Contact
 

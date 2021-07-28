@@ -47,7 +47,9 @@ This unit can be embedded into any network and it enhances the boundary informat
 SBE is an evaluator which gives feedback to the network by using the bundary key point map. Basically, its inputs are boundary key point map and predicted or ground truth segmentation image, and it evaluates whether the segmentation results are consistent with the boundary key point map or not. 
 
 ### 2.1.2 Dataset
-The paper used the PH2 and ISBI 2016 datasets. These datasets are publically available for skin lesion segmentation.  ISBI 2016 dataset consists 900 skin lesion images, PH2 includes 200 dermoscopc images. They used ISBI 2016 dataset for training and PH2 for testing. They also used TVUS dataset which is private and collected for experiments. 
+The paper used the PH2 and ISBI 2016 datasets. These datasets are publically available for skin lesion segmentation.  ISBI 2016 dataset consists 900 skin lesion images, PH2 includes 200 dermoscopc images. They used ISBI 2016 dataset for training and PH2 for testing. They also used TVUS dataset which is private and collected for experiments.  
+ISBI2016 : [ISBI2016](https://challenge.isic-archive.com/data)  
+PH2 : [PH2](https://www.fc.up.pt/addi/ph2%20database.html)
 
 ### 2.1.3 Implementation Details
 

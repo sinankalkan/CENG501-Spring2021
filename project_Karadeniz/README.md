@@ -55,7 +55,7 @@ For all experiments googleNet is used with batch normalization, pretrained on IL
 
 ## 3.3 My Result
 
-Unfortunately, I have not been succesful at my attempts run any code, even with high learning rate, unstabilities caused division by 0 type of error which resulted with all data becoming NaN.
+Unfortunately, I have not been succesful at my attempts run any code, even with high learning rate, unstabilities caused division by 0 type of errors which resulted with all data becoming NaN.
 
 # 4 Conclusion
 

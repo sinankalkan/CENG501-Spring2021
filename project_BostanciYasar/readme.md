@@ -34,7 +34,7 @@ Some implementation details are given in the paper.\
 •	Optimizer: SGD 
 
 
-
+%5Cbegin%7Baligned%7D%0D%0A%26%5Ctext+%7B+Training+step%3A+%7D%5C%5C%0D%0A%26%5Cbegin%7Baligned%7D%0D%0A%26%5Cmu_%7BB%7D%3D%5Cfrac%7B1%7D%7BM%5E%7B2%7D%7D+%5Csum_%7Bi%3D1%7D%5E%7Bm%7D+x_%7Bi%7D+%5C%5C%0D%0A%26%5Csigma_%7BB%7D%5E%7B2%7D%3D%5Cfrac%7B1%7D%7Bm%7D+%5Csum_%7Bi%3D1%7D%5E%7Bm%7D%5Cleft%28x_%7Bi%7D-%5Cmu_%7Bb%7D%5Cright%29%5E%7B2%7D+%5C%5C%0D%0A%26%5Cmu+%5Cleftarrow+%5Clambda+%5Cmu%2B%281-%5Clambda%29+%5Cmu_%7BB%7D+%5C%5C%0D%0A%26%5Csigma%5E%7B2%7D+%5Cleftarrow+%5Clambda+%5Csigma%5E%7B2%7D%2B%281-%5Clambda%29+%5Csigma_%7BB%7D%5E%7B2%7D+%5C%5C%0D%0A%26%5Cwidehat%7Bx%7D_%7Bi%7D%3D%5Cfrac%7Bx_%7Bi%7D-%5Cmu%7D%7B%5Csqrt%7B%5Csigma%5E%7B2%7D%2Be%7D%7D+%5C%5C%0D%0A%26y_%7Bi%7D%3D%5Cgamma+%5Cwidehat%7Bx%7D_%7Bi%7D%2B%5Cbeta+%5C%5C%0D%0A%26%5Cmu_%7Bi+n+f%7D+%5Cleftarrow+%5Ctau+%5Cmu_%7Bi+n+f%7D%2B%281-%5Ctau%29+%5Cmu_%7BB%7D+%5C%5C%0D%0A%26%5Csigma_%7Bi+n+f%7D%5E%7B2%7D+%5Cleftarrow+%5Ctau+%5Csigma_%7Bi+n+f%7D%5E%7B2%7D%2B%281-%5Ctau%29+%5Csigma_%7BB%7D%5E%7B2%7D+%5C%5C%0D%0A%26%5Ctext+%7B+Inference+step%3A+%7D+y_%7Bi%7D%3D%5Cgamma+%5Cfrac%7Bx_%7Bi%7D-%5Cmu_%7Bi+n+f%7D%7D%7B%5Csqrt%7B%5Csigma_%7Bi+n+f%7D%5E%7B2%7D%2Be%7D%7D%2B%5Cbeta%0D%0A%5Cend%7Baligned%7D%0D%0A%5Cend%7Baligned%7D
 
 ## 2.2. My interpretation 
 

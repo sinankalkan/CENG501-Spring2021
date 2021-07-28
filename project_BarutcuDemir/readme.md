@@ -96,7 +96,9 @@ There are a bunch of things that are ambiguous about the transformer implementat
 6.   Concatenation heuristic method [Qian Chen et al., 2017.](https://arxiv.org/abs/1609.06038) is used in previous work. We used this heuristic for our implementation in NLI task. Concatenation process is done by computing both average and max pooling, and concatenate all these vectors to form the final fixed
 length vector v. The final fixed length vector v is calculated as follows:
 
-  ![Concat](https://user-images.githubusercontent.com/84293711/127306556-aae51486-42f3-4a7f-9714-9155f8f8a373.jpg)
+  ![Concat](https://user-images.githubusercontent.com/84293711/127313944-0d5a2d55-a0e2-4f96-a74f-d92f24ce826c.jpg)
+
+                       (Qian Chen et al., 2017)
 
 Where *Va,ave* and *Va,max* are LSTM outputs of premise sentences applied by average   and max operations respectively along hidden size direction, and *Vb,ave* and *Vb,max* are the outputs of hypothesis outputs of same process. 
 

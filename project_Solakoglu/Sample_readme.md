@@ -86,7 +86,10 @@ Discuss the paper in relation to the results in the paper and your results.
 4.	Yasuda R. Biophysics of Biochemical Signaling in Dendritic Spines: Implications in Synaptic Plasticity. Biophys J. 2017 Nov 21;113(10):2152-2159.
 5.	Chavlis S, Poirazi P. Drawing inspiration from biological dendrites to empower artificial neural networks. Curr Opin Neurobiol. 2021 Jun 1;70:1-10.
 6.	Faisal AA, Selen LP, Wolpert DM. Noise in the nervous system. Nat Rev Neurosci. 2008 Apr;9(4):292-303.
-7.	Pulvermüller F, Tomasello R, Henningsen-Schomers MR, Wennekers T. Biological constraints on neural network models of cognitive function. Nat Rev Neurosci. 2021 Aug;22(8):488-502. 
+7.	Pulvermüller F, Tomasello R, Henningsen-Schomers MR, Wennekers T. Biological constraints on neural network models of cognitive function. Nat Rev Neurosci. 2021 Aug;22(8):488-502.
+8.	Spielman, D. A. & Srivastava, N. Graph sparsification by effective resistances. SIAM Journal on Computing 40, 1913–1926 (2011).
+9.	Spielman, D. A. & Teng, S.-H. Spectral sparsification of graphs. SIAM Journal on Computing 40, 981–1025 (2011).
+
 
 # Contact
 

@@ -64,6 +64,6 @@ Unfortunately, I have not been succesful at my attempts run any code, even with 
 
 C. Szegedy et al., "Going deeper with convolutions," 2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2015, pp. 1-9, doi: 10.1109/CVPR.2015.7298594.
 
-
+https://pytorch.org/vision/stable/_modules/torchvision/models/googlenet.html
 
 

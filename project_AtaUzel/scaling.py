@@ -1,4 +1,3 @@
-  
 # -*- coding: utf-8 -*-
 """
 CENG501 - Spring 2021 

@@ -241,7 +241,9 @@ Interestingly we outperformed the authors' model in style transfer. We think thi
 
 We observed a lower performance than the authors' in the translation task. This was expected as we trained the same number of steps, with presumably a much smaller batch size. In fact we could not cover 1/3 of the dataset and there was still room for improvement. 
 
-One final thing of interest is the training and inference times for both tasks. When n is increased, the number of parameters decrease while the number of operations increase. One of these, may dominate the other. We observed that both times went up when n was increased while the authors reported a decrease. This hints that the authors' have a more efficient PHM layer code.  
+One final thing of interest is the training and inference times for both tasks. When n is increased, the number of parameters decrease while the number of operations increase. One of these, may dominate the other. We observed that both times went up when n was increased while the authors reported a decrease. This hints that the authors' have a more efficient PHM layer code.
+
+Due to limited memory and unparalizable structure of LSTM network, we only managed to train PHM-LSTM network half of a epoch. Even with a half epoch, we showed that PHM network is learning after a few iterations. Training process can be speed up by converting words into embeddings before training. Also, code of PHM layers can further be optimized. 
 
 To wrap up, we enjoyed reproducing this paper and learned a lot during the process. We would like to thank the authors for writing such a great and mostly clear paper and Sinan Hoca for equipping us with the skills to take on this project.
 

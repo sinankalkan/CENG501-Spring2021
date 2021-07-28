@@ -336,16 +336,13 @@ def main(mode, force_dataset, save_prob):
             tensor_noisier = tensor_noisier.unsqueeze(0)
             
             prediction = pytorch_model(tensor_noisier)
-            prediction_sn = pytorch_model(tensor_noisy)
 
             if pad_w > 0:
                 prediction[:, :, :, -pad_w:] = 0
-                prediction_sn[:, :, :, -pad_w:] = 0
                 tensor_noisier[:, :, :, -pad_w:] = 0
                 tensor_noisy[:, :, :, -pad_w:] = 0
             if pad_h > 0:
                 prediction[:, :, -pad_h:, :] = 0
-                prediction_sn[:, :, -pad_h:, :] = 0
                 tensor_noisier[:, :, -pad_h:, :] = 0
                 tensor_noisy[:, :, -pad_h:, :] = 0
             
@@ -414,7 +411,7 @@ if __name__ == "__main__":
 
     mode = 'test'
     force_dataset = ''
-    save_prob = 0.9011
+    save_prob = 0.0011
 
     argc = len(sys.argv)
     if argc > 3:

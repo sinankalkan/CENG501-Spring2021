@@ -72,12 +72,38 @@ Explain the parts that were not clearly explained in the original paper and how 
 
 ## 3.1. Experimental setup
 
-Describe the setup of the original paper and whether you changed any settings.
+We used google colab for training and tests.
+
+https://colab.research.google.com/drive/1p497oiw_nq-5X9c0t9eLL0GVyYhuUZUo?usp=sharing
+
+Their setup given below:
+"The training images are augmented using random cropping and random horizontal/vertical flipping. We set 100 epochs for training. We stop the network when the validation loss does not significantly decrease. The input resolution of training and testing images is 512×512. The weights of the backbone network are pre-trained on ImageNet dataset. Other weights of the network are initialized from a standard Gaussian distribution. We use Adam with an initial learning rate of 1.25e-4 to optimize the model weights. We implement the model with PyTorch on NVIDIA M40 GPUs."
+
+We used exactly same parameters with 10 epochs. However, since google colab did not let us to use it anymore (GPU limit reached), we only have the 5 epoch results.
 
 ## 3.2. Running the code
+The part below directly taken form [the real repository.](https://github.com/yijingru/ObjGuided-Instance-Segmentation)
 
-Explain your code & directory structure and how other people can run it.
+1. Create `YourDatasetClass`, for example, `dataset_neural.py` in `datasets`.
+2. Import `YourDatasetClass` in `module.py`, for example `from datasets.dataset_neural import Neural`.
+3. Create a `YourDatasetName` and make correspondence between the `YourDatasetName` and `YourDatasetClass` in `module.py`,  for example `self.dataset = {YourDatasetName:YourDatasetClass, 'neural': Neural}`
+4. Use the `YourDatasetName` you created in the following commands.
 
+### 3.2.1. Train the model
+```ruby
+python main.py --phase train --num_epoch 100 --data_dir YourDataPath --dataset YourDatasetName --ngpus 0 --batch_size 8 --num_workers 4 
+```
+
+### 3.2.2. Test the model
+```ruby
+python main.py --phase test --data_dir YourDataPath --dataset YourDatasetName
+```
+
+
+### 3.2.3. Evaluate the model
+```ruby
+python main.py --phase eval --data_dir YourDataPath --dataset YourDatasetName --eval_type seg --seg_thresh 0.5
+```
 ## 3.3. Results
 
 Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.

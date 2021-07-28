@@ -38,11 +38,12 @@ The algorithm select the boundary key points that best fit the ground truth segm
 3- These n points connected to form a polygon.  
 4- Repeat for T times and select the key point sets which have the highest intersection of union.  
 ### 2.1.2 Boundary Preserving Block (BPB)
-This unit can be embedded into any network and it enhances the boundary informatio of input. This unit consist boundary Point Map Generator, that produce a key point prediction map. 
+This unit can be embedded into any network and it enhances the boundary information of input. Boundary Preserving Block predicts the segmentation map.  This unit consist boundary Point Map Generator, that produce a key point prediction map. The generator consist boundary key point selection module which generates ground truth boundary key point maps. It also consist dilated convolution, so the generator can effectively encode & decode the features with a various range of receptive fields. Generator optimized by cross entropy loss between the estimated boundary key point map and ground truth boundary key point map. 
 
 ### 2.1.3 Shape Boundary-aware Evaluator (SBE)
+SBE is an evaluator which gives feedback to the network by using the bundary key point map. Basically, its inputs are boundary key point map and predicted or ground truth segmentation image, and it evaluates whether the segmentation results are consistent with the boundary key point map or not. 
 
-## 2.2. My interpretation 
+## 2.2. Our interpretation 
 
 Explain the parts that were not clearly explained in the original paper and how you interpreted them.
 

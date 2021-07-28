@@ -42,7 +42,34 @@ I've tried to keep configurations the same as much as possible. However, there i
 
 ## 3.2. Running the code
 
-Explain your code & directory structure and how other people can run it.
+File structure of the project is as follows:
+
+```
+checkpoints
+│   │   (*.pt)
+code
+│   │   main.py
+data
+└─── <dataset_id>
+  └─── test
+  │   │   image files (*.jpg, *.png etc.)
+  └─── train
+  │   │   image files (*.jpg, *.png etc.)
+denoised
+│   │   image files (*.jpg, *.png etc.)
+```
+
+**checkpoints**: This folder contains checkpoints (i.e. metadata of your model) that allow you to resume training your network or to use it for testing purposes. The id of checkpoints show the number of epochs. For example, _checkpoint_00010.pt_ contains metadata of a model trained for 11 epochs.
+
+**code**: This folder contains the code and you are supposed to run the project here.
+
+**data**: This folder contains images. You should keep the file structure as shown above. Simply download the dataset, create a folder for it under this directory, create two separate folders (i.e. test and train) and place images under these directories.
+
+**denoised:** This folder contains denoised images (i.e. the output).
+
+**How to Run**
+
+TODO
 
 ## 3.3. Results
 

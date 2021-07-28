@@ -117,10 +117,29 @@ Figure-1b - Reproduction of Figure1. The upper left image corresponds the first 
 It can be seen from the Figure-1a and Figure-1b that results for downstream task with real labels are reproduced similar to the paper. For these task there is a clear separation indicating positive and negative transfer. However, for downstream task with random labels, the results are not as expected. We believe that this situation stems from the lack of experimental setup of downstream tasks with random labels. As it's discussed in section 2.2, crucial information such as number of random classes to be used is missing. Also, value of init_scale parameter which we could not fit into our experiments changes between random and real labeled trainings. This might lead to the differences between the results presented here.
  
 ### 3.3.2 Misalignment between data and first layers.
- 
 
 ### 3.3.3 Visualization of covariance matrices of first layer and data
 
+<p align = "center">
+<img src = "figures/figure3_original.png">
+</p>
+<p align = "center">
+Figure-3a - Original Figure3 in the paper
+</p>
+
+<p float="left">
+  <img src="figures/figure3_1.jpg" width="32%"/>
+  <img src="figures/figure3_2.jpg" width="32%"/> 
+  <img src="figures/figure3_3.jpg" width="32%"/>
+</p>
+
+<p align = "center">
+Figure-3b - Reproduction of Figure3. Left: Random filters of first conv. layer of WideResNet-28-4 Middle: Ten eigenvectors of weights of first conv. layer of WideResNet-28-4 with largest eigenvalues. Right: Ten eigenvectors of image patches data with largest eigenvalues
+</p>
+
+As it can be seen from the figures, filters from the random label training are looking noisy similar to the paper. Likewise, filters from image patches look more or less similar. Similarity for filters of image patches can be improved if more image samples are used. However, because of hardware limitations more samples could not be fit into the memory.
+
+On the other hand, eigenvectors of weights are quite dissimilar which stems from the fact that authors train the model 70 times to better approximate the distribution of weights and ours is result of just one training due to the time limits. 
 
 ### 3.3.4 Relation between eigenvalues of first layer and data
 

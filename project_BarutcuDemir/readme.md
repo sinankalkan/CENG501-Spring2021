@@ -12,15 +12,23 @@ Quaternions are an extension for the vanilla complex numbers, a + bi, which are 
 
 These interactions are: ijk = i^2 = j^2 = k^2 = -1, ij = k, jk = i, ki = j, ji = -k, kj = -i, ik = -j.  
 
-For a quaternion Q defined as: ![Q](https://user-images.githubusercontent.com/62503047/127294554-20573947-34a0-4605-8f46-9904517b3816.PNG)
+For a quaternion Q defined as: 
 
-And a P defined similarly, the Hamilton product of Q and P becomes: ![h](https://user-images.githubusercontent.com/62503047/127294777-8f1312b8-fcb1-4270-bc2a-1a87a972d11d.PNG)
+![Q](https://user-images.githubusercontent.com/62503047/127294554-20573947-34a0-4605-8f46-9904517b3816.PNG)
 
-Now, to put this into ML perspective, say there is a weight vector W= R + Xi + Yj + Zk and input X= r + xi + yj + zk. Their Hamilton product is: ![hh](https://user-images.githubusercontent.com/62503047/127296656-c40eb3d7-9c4d-4055-a052-eb99d34be9d4.PNG)
+And a P defined similarly, the Hamilton product of Q and P becomes:
 
-Which can be expressed as: ![Capture](https://user-images.githubusercontent.com/62503047/127296804-faffb983-8093-4bd0-aa3d-9cb43290715e.PNG)
+![h](https://user-images.githubusercontent.com/62503047/127294777-8f1312b8-fcb1-4270-bc2a-1a87a972d11d.PNG)
 
-Putting aside i,j,k this should seem similar. It is a weight matrix V times the input X, the standard linear transformation. However the weight matrix V is created using the weight vector W. Normally the weight matrix V, being a 4x4 matrix, would have 16 degrees of freedom however since it is created using the interaction between the input and vector W, which has 4 degrees of freedom. So, quaternion valued linear transformations enjoy a %75 reduction in parameters while achieving similar performance to their real valued counterparts. You can find more details in the aforementioned papers. However the rest of the details such as backprop and loss functions with imarginary numbers are not relevant to this discussion. 
+Now, to put this into ML perspective, say there is a weight vector W= R + Xi + Yj + Zk and input X= r + xi + yj + zk. Their Hamilton product is: 
+
+![hh](https://user-images.githubusercontent.com/62503047/127296656-c40eb3d7-9c4d-4055-a052-eb99d34be9d4.PNG)
+
+Which can be expressed as:
+
+![Capture](https://user-images.githubusercontent.com/62503047/127296804-faffb983-8093-4bd0-aa3d-9cb43290715e.PNG)
+
+Putting aside i,j,k this should seem familiar. It is a weight matrix V times the input X, the standard linear transformation. However the weight matrix V is created using the weight vector W. Normally the weight matrix V, being a 4x4 matrix, would have 16 degrees of freedom however since it is created using the interaction between the input and vector W, which has 4 degrees of freedom. So, quaternion valued linear transformations enjoy a %75 reduction in parameters while achieving similar performance to their real valued counterparts. You can find more details in the aforementioned papers. However the rest of the details such as backprop and loss functions with imarginary numbers are not relevant to this discussion. 
 
 Although they are great in some cases, the problem with quaternion networks is that they can only be used to parametrize certain dimension sizes (4, 8, 16). This hampers their robustness, which brings us to the said paper.
 

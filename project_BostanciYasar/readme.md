@@ -58,7 +58,6 @@ Some implementation details are given in the paper.\
 <!--- Explain the parts that were not clearly explained in the original paper and how you interpreted them.-->
 Some implementation details are not given in the paper. Therefore, we interpreted them based on literature. \
 •	Data Augmentation\
-•	Preprocessing Techniques\
 •	Loss Function
 
 Data augmentation is not clearly explained in the paper. In the begining of the experiments there were a gap between our and authors results. Therefore, data augmentation is implemented according to the procedure from the literature [[2]](#2). When it is applied to datasets in our experiments results became closer to the original paper's results so in every experiments conducted in this project this method is used. 

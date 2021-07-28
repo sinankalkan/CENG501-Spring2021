@@ -36,6 +36,8 @@ After reading the original paper and Noise2Noise by Lehtinen et al., I was able 
 
 First, the number of epochs used in their experiments is not mentioned in the original work. The other (and kind of related) problem is, I could not directly understand when to use scheduler to reduce learning rate from 10<sup>-3</sup> to 10<sup>-4</sup>. As a result, I skipped learning rate scheduling and did not implement it.
 
+Other than that, non-additive noise (i.e. Bernoulli noise) implementation is also missing in this project.
+
 # 3. Experiments and results
 
 ## 3.1. Experimental setup
@@ -93,13 +95,26 @@ Note that if there are no checkpoints, you will not be able to run test mode. An
 
 ## 3.3. Results
 
-The code is tested on a Windows 10 (v19042.1110) machine with single NVIDIA GeForce RTX 3070 GPU. The network is trained for 11 epochs, which took ~11 hours in total (i.e. 1h/epoch).
+* The code is tested on a Windows 10 (v19042.1110) machine with single NVIDIA GeForce RTX 3070 GPU. 
+* The network is trained for 11 epochs, which took ~11 hours in total (i.e. 1h/epoch). 
+* The dataset I've used for training is COCO 2017. For testing, both COCO 2017 and Kodak datasets are used.
 
 <p align="center">
 <img src="readme_fig/steps_0_clean.jpg" width="15%" height="15%"> <img src="readme_fig/steps_1_noisy.png" width="15%" height="15%"> <img src="readme_fig/steps_2_noisier.png" width="15%" height="15%"> <img src="readme_fig/steps_3_residual.png" width="15%" height="15%"> <img src="readme_fig/steps_4_denoised.png" width="15%" height="15%">
   
 <i>Figure 2. Steps of the method. From left to right: Clean target, Singly-noisy realization(network input), Doubly-noisy realization(network output), Residual, Denoised result</i>
 </p>
+
+The full process and outputs of each step are illustrated in Figure 2. Average PSNR and SSIM values are shown in Table 1. Note that to obtain values for "-SN" variation (in which we feed the network with singly-noisy realizations and try to obtain clean image, without reconstruction steps), Kodak dataset is used. For the other one, COCO 2017 is used.
+
+                                                        
+|    Network           |    PSNR   |   SSIM   |
+| -------------------- | --------- | -------- |
+| Ours, α=1, σ=0.25    | 23.856216 | 0.697551 |
+| Ours-SN, α=1, σ=0.25 | 18.769699 | 0.383787 |
+
+_**Table 1.** Average PSNR and SSIM values for the trained network_
+
 
 <p align="center">
 <b>Gallery</b>

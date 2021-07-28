@@ -17,9 +17,9 @@ This paper examines existing loss functions and their shortcomings, and proposes
 Normally deep metric learning methods try creating optimal distance for specific properties and distributions. Mainly, their function is to map same class samples 
 together, while keeping other class maximally seperated. 
 
-![GitHub Logo](https://www.google.com/url?sa=i&url=https%3A%2F%2Fopenaccess.thecvf.com%2Fcontent_CVPR_2020%2Fpapers%2FMohan_Moving_in_the_Right_Direction_A_Regularization_for_Deep_Metric_CVPR_2020_paper.pdf&psig=AOvVaw0rmoOEwAl5PajfO9RN6XQl&ust=1627592221711000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCMCNq9fThvICFQAAAAAdAAAAABAD)
-Format: ![Alt Text](url)
-
+<p align="center">
+  <img src="1.png">
+</p>
 As stated in the paper, such an approach might lead to a case where a negative sample is pushed to positive samples, thus getting closer to the opposing cluster.
 
 This paper achieves better optimization, and supply better results that can be acquired by triplet loss, proxy loss, msLoss, etc. 
@@ -30,9 +30,9 @@ This paper achieves better optimization, and supply better results that can be a
 As stated in eq4 of the paper,  in a simple scenario with an anchor, a positive and a negative sample, anchor pushes negative sample while positive sample is pulled towards the anchor.
 Additionally, negative sample then should move orthogonally to the center of anchor and positive sample. Thus, writers arrive at an orthogonality equation, and aim to minimize that. 
 
-![GitHub Logo](https://www.google.com/url?sa=i&url=https%3A%2F%2Fopenaccess.thecvf.com%2Fcontent_CVPR_2020%2Fpapers%2FMohan_Moving_in_the_Right_Direction_A_Regularization_for_Deep_Metric_CVPR_2020_paper.pdf&psig=AOvVaw0rmoOEwAl5PajfO9RN6XQl&ust=1627592221711000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCPjBuq3VhvICFQAAAAAdAAAAABAD)
-Format: ![Alt Text](url)
-
+<p align="center">
+  <img src="2.png">
+</p>
 
 Later, it is claimed in the paper that deriving equation can be used in triplet loss, etc. to achieve regularization with a regularization parameter.
 

@@ -264,6 +264,10 @@ Samuel R. Bowman, Gabor Angeli, Christopher Potts, Christopher D. Manning. 2015.
 Sepp Hochreiter, Jurgen Schmidhuber. Long short-term memory. ¨ Neural computation, 9(8):
 1735–1780, 1997.
 
+Titouan Parcollet, Mohamed Morchid, and Georges Linares. Quaternion convolutional neural net-
+works for heterogeneous image processing. In ICASSP 2019-2019 IEEE International Conference
+on Acoustics, Speech and Signal Processing (ICASSP), pp. 8514–8518. IEEE, 2019
+
 Titouan Parcollet, Ying Zhang, Mohamed Morchid, Chiheb Trabelsi, Georges Linares, Renato
 De Mori, and Yoshua Bengio. Quaternion convolutional neural networks for end-to-end auto-
 matic speech recognition. arXiv preprint arXiv:1806.07789, 2018.

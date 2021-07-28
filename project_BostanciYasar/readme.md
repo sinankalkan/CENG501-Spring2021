@@ -77,11 +77,9 @@ The CIFAR10 and CIFAR100 datasets were loaded using torchvision.datasets. Other 
 ## 3.2. Running the code
 
 The notebooks are written for running on Google Colab. All dependencies are available within the current runtime on Google Colab.\
-There are four code notebooks- two for each dataset- one is for MBN and the other is for BN.Each notebook involves all the models.Depending on the experiment,the others should be commented out. Each notebook can be run using "Run All", but the run time may be excessive to complete it all in one run. One might suggest deciding number of epochs based on the available runtime limitations.
+There are ten code notebooks- five for each dataset- one is for MBN and the other is for BN, Layer Normalization (LN), Group Normalization (GN) and Instance Normalization (IN). Each notebook involves all the models such as Resnet18, Resnet34, Resnet50, VGG11 and VGG16. Depending on the experiment, the others should be commented out. Each notebook can be run using "Run All".
 
 ## 3.3. Results
-
-Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
 
 <!---
 | ![fig4.jpg](https://user-images.githubusercontent.com/86877356/126894727-e119b037-d039-4173-b9de-58625b7304e8.png) | 

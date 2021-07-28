@@ -10,7 +10,7 @@ This is an unofficial implementation of [Noisier2Noise by Moran et al. 2020](htt
 
 In some fields, for example in astrophotography, radiology (MRI) and computer graphics (Monte Carlo renderings), it is difficult to obtain clean images whereas obtaining a noisy one is much easier. Image denoising is the process where we remove noise from such images. After the rise of deep learning techniques in 2012, people began to use CNNs for this purpose and proposed various methods (see [Tian et al. 2020](https://arxiv.org/abs/1912.13171)). 
 
-In CVPR 2020, Moran et al. proposed Noisier2Noise, which is mainly based on a previous method called [Noise2Noise (Lehtinen et al. 2018)](https://arxiv.org/abs/1803.04189). The main contribution of Noisier2Noise is that it does not require clean image targets to train the network, whereas most deep learning base image denoising techniques (including Noise2Noise) do need them in training time.
+In CVPR 2020, Moran et al. proposed Noisier2Noise, which is mainly based on a previous method called [Noise2Noise (Lehtinen et al. 2018)](https://arxiv.org/abs/1803.04189). The main contribution of Noisier2Noise is that it does not require clean image targets to train the network, whereas most deep learning based image denoising techniques (including Noise2Noise) do need them at training stage.
 
 # 2. The method and my interpretation
 

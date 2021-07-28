@@ -1,14 +1,19 @@
-# Paper title
+# Object-Guided Instance Segmentation for Biological Images
 
 This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.metu.edu.tr/~sinan/DL/) project for reproducing a paper without an implementation. See [CENG501 (Spring 2021) Project List](https://github.com/sinankalkan/CENG501-Spring2021) for a complete list of all paper reproduction projects.
 
 # 1. Introduction
 
-Introduce the paper (inc. where it is published) and describe your goal (reproducibility).
+"Instance segmentation of biological images is essential for studying object behaviors and properties."(Yi et al.2019) is said in first sentence of the paper. Paper proposed a new method to achieve and pass the state of the art methods.
+
 
 ## 1.1. Paper summary
-
 Summarize the paper, the method & its contributions in relation with the existing literature.
+
+Proposed method is given below:
+<p align="center">
+	<img src="figures/method.png", width="800">
+</p>
 
 # 2. The method and my interpretation
 
@@ -42,6 +47,10 @@ Discuss the paper in relation to the results in the paper and your results.
 
 Provide your references here.
 
+# Disclaimer
+
+We did not write the code ourselves. The code belongs to [Jingru Yi](https://github.com/yijingru/ObjGuided-Instance-Segmentation). Code of the paper is not shared. [An improved version of the paper](https://arxiv.org/abs/2106.07159) (Yi et al.2021) was published in IEEE Transactions on Medical Imaging. We used that paper's code and deleted the new parts of the paper.
+
 # Contact
 
-Provide your names & email addresses and any other info with which people can contact you.
+Yusuf Can Aydemir : can.aydemir@metu.edu.tr

@@ -139,6 +139,8 @@ Then, "behavioral_prior.py" should be run in order to train a behavioral prior n
 
 Finally, one should run "q_learning.py" script. This script will use the final behavioral prior model and start reinforcement learning. Then store the results in "evals" folder. "with" and "without" foders inside the "evals" folder are used in order to keep the logs of the reinforcement learning agents with and without behavioral prior. The "with" and "without" folders given in this repository include the data of the first experiment.
 
+The file "scaling.py" includes a function that is necessary to scale the objects to the desired sizes.
+
 In the python environment, the current versions of following packages were used:
 - Numpy
 - Matplotlib

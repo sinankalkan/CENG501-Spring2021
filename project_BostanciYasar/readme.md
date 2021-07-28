@@ -97,24 +97,11 @@ In Figure-5 it can be seen that the training and testing accuracy curves vs. epo
 
 
 
-In Figure-6 (a) it can be seen that the training and testing accuracy curves vs. epoch and Figure-6 (b) final testing accuracies. It can be seen in our results which are consistent with the original paper, MBN shows better performance in all those different networks. In ResNet and VGG when the total layer of the network increases of course the total number of normalization layers increase. This increase in normalization layers consequences the increase of the added noise. In other words, when the network is getting deeper the accumulated noise level shows an increase. With the smaller batch size this effec can be seen better. 
+In Figure-6 (a) it can be seen that the training and testing accuracy curves vs. epoch and Figure-6 (b) final testing accuracies. It can be seen in our results which are consistent with the original paper, MBN shows better performance in all those different networks. In ResNet and VGG when the total layer of the network increases of course the total number of normalization layers increase. This increase in normalization layers consequences the increase of the added noise. In other words, when the network is getting deeper the accumulated noise level shows an increase. With the smaller batch size this effect can be seen better. 
 
-In our results, this effect can be seen in the Figure-6 (a); in the beginning stage of the training process MBN could not handle the accumluated noise level but in the last stage of the training owing to dynamic momentum parameter MBN starts to suppress the noise level and it maintains the performance gain better compared to other normalization method. It is seen in batch size 8 results more clearly.
+In our results, this effect can be seen in the Figure-6 (a) clearly. In the beginning stage of the training process MBN could not handle the accumuluated noise level but in the last stage of the training owing to dynamic momentum parameter MBN starts to suppress the noise level. This helps to MBN to maintain the performance gain better compared to other normalization method. It is seen in batch size 8 results more clearly.
 
-
- We
-can have the following observations. First, on all the four networks, MBN always
-outperforms BN. 
-
-Second, under such a small batch size, the accuracy of deeper
-network ResNet50 can be lower than its shallower counterpart ResNet34. That
-is because the deeper networks have more BN layers, and each BN layer would
-introduce relatively large noise when batch size is small. The noise is accumu-
-lated so that the benet of more layers can be diluted by the accumulated noise.
-However, with MBN the performance drop from ResNet50 to ResNet34 is very
-minor, where the drop by BN is significant. This again validates that MBN can
-suppress the noise eectively in training.
-
+In our results there are some sharp increase and decreases. As mentioned before in the Section 2, there are some uncertainties in the original paper such as loss function, data augmentation technique etc. This implementation uncertainties may cause these differences between the results. Even though, the results differs in the beginning stage of the trainings in the last stages MBN still outperforms BN as expected. The main behaviour of the MBN can be seen in Figure-6 (b) better.
 
 | ![fig6a.jpg](https://user-images.githubusercontent.com/86877356/127190495-a1a7d4a6-46ad-44c2-91b7-d5fbcf48c320.jpg) | 
 |:--:| 

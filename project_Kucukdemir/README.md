@@ -16,7 +16,19 @@ In CVPR 2020, Moran et al. proposed Noisier2Noise, which is mainly based on a pr
 
 ## 2.1. The original method
 
-Explain the original method.
+<p align="center">
+  <img src="readme_fig/method.png">
+  Figure 1. The brief overview of the method. Taken from [Moran et al. 2020](https://arxiv.org/abs/1910.11908)
+</p>
+
+In summary, the training step works as follow:
+* We first apply some noise to the clean image. Note that our network will not see the clean image directly.
+* Then, we apply noise one more time to get doubly-noisy realization of the clean image.
+* Then, we feed the network with doubly-noisy realization and try to predict singly-noisy realization.
+
+During inference, we give the doubly-noisy realization to our network and expect it to output a singly-noisy one. Then, we compute the residual by subtracting singly-noisy realization from doubly-noisy one. In the last step, we subtract the residual from singly-noisy realization and obtain an estimate of the clean target image.
+
+The network architecture used in this method is [U-Net by Ronneberger et al. (2015)](https://arxiv.org/abs/1505.04597).
 
 ## 2.2. My interpretation 
 
@@ -89,6 +101,7 @@ Discuss the paper in relation to the results in the paper and your results.
 * J. Deng, W. Dong, R. Socher, L.-J. Li, K. Li and L. Fei-Fei, "ImageNet: A Large-Scale Hierarchical Image Database". IEEE Computer Vision and Pattern Recognition (CVPR), 2009.
 * D. Martin, C. Fowlkes, D. Tal and J. Malik, "A Database of Human Segmented Natural Images and its Application to Evaluating Segmentation Algorithms and Measuring Ecological Statistics, Proc. 8th Int'l Conf. Computer Vision, 2001.
 * C. Tian, L. Fei, W Zheng, Y. Xu, W. Zuo and C. Lin, "Deep Learning on Image Denoising: An overview", 2020
+* O. Ronneberger, P. Fischer and T. Brox, "U-Net: Convolutional Networks for Biomedical Image Segmentation", 2015.
 
 # Contact
 

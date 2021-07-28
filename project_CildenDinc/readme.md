@@ -10,7 +10,9 @@ The goal of this study is to reproduce the results of the paper “Semi-supervis
 ### 1.1.1 Objective of the study
 
 Researchers’ main objective is to utilize the weakly supervised (image level labeled) data in image segmentation tasks. In semantic segmentation problem, convolutional neural networks (CNNs) are observed to be very powerful but they need mass amount of annotated data to be precise. However, obtaining strongly annotated data (pixel-level annotated data) is very time consuming and expensive. The study showed that training single branch networks with strong and weak annotations  even decreases the accuracy compared to networks trained with only  strongly annotated data. 
+
 ![image](https://user-images.githubusercontent.com/85442860/127391765-e8caea20-eef9-4ade-8d22-bcc05bbd0747.png)
+
 Figure 1: Plot from the paper [1] showing performance of the single branch network with different datasets for 150 epochs
 
 In the figure the performance of 3 different combinations of datasets using the same single branch network is shown. The blue line represents the results achieved via strong 1.4 k data, red line represents the performance gathered by using both 1.4k strong and 9k weak data, and the green line represents the results of 10k weak data only. The best performance is obtained using strongly annotated 1.4k data. However the performance of the task with strong 1.4 k and weak 9k data is substantially lower than the first one. Furthermore, the result obtained with using only weakly annotated 10k data and no strongly annotated data is approximately close to the results of the strong and weak combination. This shows that for a single branch network architecture, weakly annotated data has no use in increasing the accuracy of the semantic image segmentation task and it also downgrades the performance gained with just a small strongly annotated data in a single branch network architecture. 
@@ -26,18 +28,24 @@ Researchers mention about 3 main contributions of their paper [1]:
 
 ## 2.1. The original method
 Researchers showed the effect of using weakly annotated dataset across the strongly annotated data with different architectures. They illustrated the results in the figure shown below:
+
 ![image](https://user-images.githubusercontent.com/85442860/127392075-2ea8ee9f-de9e-4a3f-ac3d-10a1c6f440cd.png)
+
 Figure 2: Single Branch figure from the paper [1]
 
 Fig. 2 (e) shows the single branch network architecture they used. Fig 2.(a) is the test image. Fig 2.(b) shows the effect of strong and weak data together in a single-branch network. Firstly they used a single branch network and they fed it with both strong and weak data. The model cannot distinguish the area (background) between trains from the objects. They also fed the same single branch network with strong annotations and obtained the segmentation result in (c), which is much more successful than (b) showing that utilizing weak annotations besides the strong annotations even makes the accuracy worse. Fig 2. (d) shows the result of using a strong-weak dual-branch network that is much better than (b) and is slightly better than (d). These experiments show that using weakly annotated data brings no improvement with a single branch network but it brings an improvement on the results obtained using only strongly annotated dataset when the data is fed to a dual- branch network. 
 
 Figure 3 presents the dual-branch architecture proposed in the paper. The architecture consists of three main parts. The first part is the pretrained backbone VGG-16, which is followed by a neck module of n layers (n is max. 3). The last module is composed of two identical branches that are trained on strong and weak parts of input data respectively.
+
 ![image](https://user-images.githubusercontent.com/85442860/127392145-257e05d8-5c5e-4bc3-9ee3-25fbbf276989.png)
+
 Figure 3: Architecture of the dual-branch network (taken from the paper)[1]
 
 They trained the network on PASCAL VOC dataset [3] and used cross-entropy loss as shown in Figure 4. They generated weak data and proxy ground truth by using the weakly-supervised Deep Seeded Region Growing (DSRG) method [2]. They used random scaling and horizontal flipping as data augmentation and the image batches are cropped to 328x328.
 They used AdamOptimizer with an initial learning rate of 5e-6 for the backbone and 1e-4 for the branches. The learning rate decayed by a factor of 10 after 12 epochs. They trained the network for 20 epochs, with a batch size of 16 and weight decay 1e-4. They evaluated the network on both PASCAL VOC and COCO dataset with the standard mean Interaction over Union (mIoU) metric.
+
 ![image](https://user-images.githubusercontent.com/85442860/127392215-8bcf81ef-27d6-451d-8914-8c614a8607e6.png)
+
 Figure 4. Loss computation (taken from the paper [1])
 
 ## 2.2. Our interpretation 
@@ -61,7 +69,7 @@ For the dataset class implementations, we adapted the code from the github page 
 
 For the backbone, we used pretrained ResNet 18 excluding the last 2 layers. Afterwards, as the paper says, we added a neck part which consists of 3 layers in our case. In the first 2 neck layers we decreased the number of channels to half. In the third neck layer we did not change the number of channels. We decreased the number of channels from the initial value 512 to 128 during the first 2 neck layers. When we tried higher depth values, we came up with a very huge number of parameters after implementing the single branch following the neck layers. Thus, we decided to downsize channels during the neck phase to get less number of parameters in the following phases considering our limited resources with Google Colab. We applied ReLU as nonlinearity at the neck layers. After the neck, we implemented 4 transposed convolutional layers to increase the width and height gradually and at the last transposed convolutional layer we got (328,328) as width and height. Moreover, to be able to map channels to classes (21 PASCAL VOC dataset classes) we placed 1x1 convolutional layer to the end of the single branch. We applied batch normalization at the initial layers of the neck and single branch modules.  We used Xavier initialization for convolutional layers.
 
-### 2.2.1 Dual Branch Network
+### 2.2.2 Dual Branch Network
 
 As in the Single Branch Network, we used ResNet 18 excluding the last 2 layers for the backbone. We added a neck part which consists of 3 layers in our case. Due to Colab limitations, we decreased the number of channels from 512 to 64 in the neck layers. The branches have identical architecture. As in the single branch network, we have 4 transposed convolution and 1 1x1 convolution layers. We applied ReLU non-linearity and batch normalization similarly as in the Single Branch Network. We used Xavier initialization for convolutional layers.    
 
@@ -84,17 +92,23 @@ We used Semantic Boundaries Dataset’s (SBD Dataset) train partition (5623 imag
 ### 3.1.2 Experiments with the Single Branch Network
 
 In Single Branch Network, our first experiment was training the network with 1.4 strong data (train partition of PASCAL VOC 2012 dataset). After that, we tested predictions and evaluated our results. In the paper, authors came up with 68.9 mIoU as the performance. We came up with 22.38. Our loss curve was as shown below:
+
 ![image](https://user-images.githubusercontent.com/85442860/127392870-621cc72d-aac0-42dd-b7d9-b7ecaa75c18e.png)
+
 Figure 5. Loss curve for Single Branch Network trained with strong annotations
 
 The second experiment we performed with this network is training the single branch network with 1.4k strong and 1.5k weak data. In the original paper, they used 9k weak data but since we have limited computing power in Google Colab, we only trained the network with 1.5k weak data which we obtained from SBD dataset via feeding it to DSRG as a weakly annotated data generation method. In the paper they got 62.8 mIoU as the performance outcome for 9k weak data case in addition to 1.4k strong data. In our case, we obtained 28.1 which is an expected result considering that we had much less weak data compared to the original work. 
+
 ![image](https://user-images.githubusercontent.com/85442860/127392950-fd455836-bf3b-4d48-90b3-114a6158074e.png)
+
 Figure 6. Loss curve for Single Branch Network trained with strong and weak annotations
 
 ### 3.1.3 Experiments with the Dual Branch Network
 
 We performed an experiment with the dual branch network by feeding 1.4k strongly annotated data to the strong branch and 1.4k weakly annotated data to the weak branch. We could train the network for 20 epochs with considerably less amount of data (ten percent of data) when compared to the original paper.   
+
 ![image](https://user-images.githubusercontent.com/85442860/127393073-dd914627-fc69-4a14-87f9-506abe5e7082.png)
+
 Figure 7. Loss curve for Dual Branch Network trained with strong and weak annotations (The first zero value at 0 is just because of initialization for print purposes) 
 
 ## 3.2. Running the code
@@ -110,9 +124,13 @@ While running our files, we made extensive use of Google drive. We usually mount
 2.	Preparing Weak dataset file: Download SBD from [4] and then open up with the comment:
 	tar -xzf /content/drive/MyDrive/SBD_Strong.tgz
 To get train_noval.txt that contains the names of image files in the dataset and prepare a tgz file on drive, run the commands below:
-!wget http://home.bharathh.info/pubs/codes/SBD/train_noval.txt  
-!mv train_noval.txt benchmark_RELEASE
-!tar -cvzf /content/drive/MyDrive/SBD_Strong.tgz benchmark_RELEASE
+
+	!wget http://home.bharathh.info/pubs/codes/SBD/train_noval.txt  
+
+	!mv train_noval.txt benchmark_RELEASE
+
+	!tar -cvzf /content/drive/MyDrive/SBD_Strong.tgz benchmark_RELEASE
+
 3.	Generating weak annotations: After predicting with DSRG (as explained in Section 3.1.1), store weakly annotated data generated from SBD image set on drive in directory SBDWeak. The weak annotations reside in SBDWeak/1/pred.  
 4.	When VOC_Strong.tar file is extracted, it generates a directory named “VOCdevkit/VOC2012” at the local directory. VOCdevkit/VOC2012/JPEGImages contains input image files in JPEG format. VOCdevkit/VOC2012/SegmentationClass stores the ground truth information, strongly annotated image files in PNG format.
 5.	 When SBD_Strong.tgz is extracted, it generated a directory named “benchmark_RELEASE” at the local directory. benchmark_RELEASE/dataset/img contains input images in JPEG format. train_noval.txt contains names of the image files to be loaded.
@@ -127,26 +145,35 @@ As in the paper, our metric for evaluation is meanIoU. In the paper, performance
 When we evaluated the predictions of the DSRG network we trained for 1500 epochs (the recommended number of epochs were 8000), the overall mIoU for the predictions of the model is 42.71. This value is a good baseline for evaluating the performance of our models.  Table 1 shows the mIoU values for each of the classes in the PASCAL VOC dataset.
 
 ![image](https://user-images.githubusercontent.com/85442860/127393310-95b3c812-b07a-449a-8a73-b987a2642b2e.png)
+
 Table 1. Evaluation results for the weakly generated dataset for the DSRG implementation
 
 ### 3.3.1 Single Branch with strong annotated data
+
 ![image](https://user-images.githubusercontent.com/85442860/127393510-f337c98b-1126-41c8-99d8-ea0a798fb87e.png)
+
 Table 2. Evaluation results for the Single Branch Network trained with strongly annotated dataset
 
 ![image](https://user-images.githubusercontent.com/85442860/127393650-9708afea-4a66-4c78-9a45-955707acdc15.png)
+
 Figure 8. Prediction from the Single Branch Network trained with strongly annotated data. The input image is shown on the left.
 
 ### 3.3.2 Single Branch with strong+weakly annotated data
+
 ![image](https://user-images.githubusercontent.com/85442860/127393848-bab45b89-6b55-40bf-9322-89ee233c3f7c.png)
+
 Table 3. Evaluation results for the Single Branch Network trained with strong and weakly annotated dataset
 
 ![image](https://user-images.githubusercontent.com/85442860/127393939-8478a53b-635a-45f7-92c5-dce652b33cc9.png)
+
 Figure 9. Prediction from the Single Branch Network trained with strong+weakly annotated data. The input image is shown on the left.
 
 ### 3.3.3 Dual Branch with strong+weakly annotated data
 
 Since we had a limited GPU, we trained the model for 20 epochs and although training loss values are satisfying we couldn’t obtain good predictions for the dual branch case. mIoU was 3.3, the predictions were random figures as shown below. 
+
 ![image](https://user-images.githubusercontent.com/85442860/127394043-d853aced-b3d2-4509-aad0-dbeb6def9416.png)
+
 Figure 10. Prediction from the Dual Branch Network trained with strong+weakly annotated data. The input image is same with previous figure.
 
 # 4. Conclusion

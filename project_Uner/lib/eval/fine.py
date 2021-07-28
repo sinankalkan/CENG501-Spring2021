@@ -1,4 +1,5 @@
 import natsort
+import numpy as np
 from PIL import Image
 from pathlib import Path
 
@@ -11,12 +12,13 @@ from torchvision.transforms import functional as TF
 from lib.models.meticulousnet import MeticulousNet
 from lib.utils import load_checkpoint
 from lib.base.base_dataset import BaseDataset
+from lib.eval.helper import green_background
 
 from natsort import natsorted, ns
 
 
 class FineModule(nn.Module):
-    def __init__(self, low_ckpt, high_ckpt, low_size, high_size, device='cpu'):
+    def __init__(self, low_ckpt, high_ckpt, low_size, device='cpu'):
         super().__init__()
         low_ckpt = load_checkpoint(low_ckpt)
         high_ckpt = load_checkpoint(high_ckpt)
@@ -35,7 +37,6 @@ class FineModule(nn.Module):
         self.high_model.eval()
 
         self.low_resize = transforms.Resize(low_size)
-        self.high_resize = transforms.Resize(high_size)
         self.image_transform = transforms.Compose([
             transforms.ToTensor(),
             transforms.Normalize(BaseDataset.MEAN, BaseDataset.STD)
@@ -54,17 +55,14 @@ class FineModule(nn.Module):
     def forward(self, image, step_size=224):
         orig_h, orig_w = image.size[1], image.size[0]
         coarse_mask = self.low_forward(image)
-        # image = self.high_resize(image)
         img = self.image_transform(image).unsqueeze(0).to(self.device)
         _, _, h, w = img.shape
         coarse_mask = F.interpolate(coarse_mask, size=(h, w), mode='bilinear', align_corners=False)
         coarse_mask = TF.normalize(coarse_mask, mean=[0.5], std=[0.5])
-        coarse_mask[coarse_mask >= 0.0] = 1.0
-        coarse_mask[coarse_mask < 0.0] = -1.0
 
         fine = torch.zeros_like(coarse_mask)
-        for x_idx in range((w) // step_size):
-            for y_idx in range((h) // step_size):
+        for x_idx in range(round(w / step_size)):
+            for y_idx in range(round(h / step_size)):
 
                 start_x = x_idx * step_size
                 start_y = y_idx * step_size
@@ -78,36 +76,31 @@ class FineModule(nn.Module):
                 end_y = min(h-1, end_y)
 
                 # Take crop
-                img_part = img[:, :, start_y:end_y, start_x:end_x]
-                mask_part = coarse_mask[:, :, start_y:end_y, start_x:end_x]
+                img_part = torch.zeros((img.shape[0], img.shape[1], step_size, step_size)).to(img.device)
+                mask_part = torch.zeros((coarse_mask.shape[0], coarse_mask.shape[1], step_size, step_size)).to(img.device)
+
+                img_part[:, :, :end_y-start_y, :end_x-start_x] = img[:, :, start_y:end_y, start_x:end_x]
+                mask_part[:, :, :end_y-start_y, :end_x-start_x] = coarse_mask[:, :, start_y:end_y, start_x:end_x]
                 inp = torch.cat((img_part, mask_part), dim=1)
-                old_shape = (inp.shape[2], inp.shape[3])
-                if inp.shape[2] % 8 != 0 or inp.shape[3] % 8 != 0:
-                    new_w = (inp.shape[2] // 16) * 16
-                    new_h = (inp.shape[3] // 16) * 16
-                    inp = F.interpolate(inp, size=(new_w, new_h), mode='bilinear', align_corners=True)
                 preds, _ = self.high_model(inp)
                 out_part = preds[-1]
-                if (out_part.shape[2], out_part.shape[3]) != old_shape:
-                    out_part = F.interpolate(out_part, size=old_shape, mode='bilinear', align_corners=True)
-                fine[:, :, start_y:end_y, start_x:end_x] += out_part
+                fine[:, :, start_y:end_y, start_x:end_x] += out_part[:, :, :end_y-start_y, :end_x-start_x]
         fine = F.interpolate(fine, size=(orig_h, orig_w), mode='bilinear', align_corners=False)
         return fine
 
 
 if __name__ == '__main__':
-    low_ckpt_path = Path("../../saved/MeticulousNet_L/07-02_18-06/checkpoints/checkpoint-epoch360.pth").resolve()
-    high_ckpt_path = Path("../../saved/MeticulousNet_H/07-10_19-10/checkpoints/checkpoint-epoch40.pth").resolve()
-    fine_outputs = Path('../../saved/outputs/fine/')
-    fine_outputs.mkdir(parents=True, exist_ok=True)
+    low_ckpt_path = Path("../../saved/checkpoints/mosl_checkpoint.pth").resolve()
+    high_ckpt_path = Path("../../saved/checkpoints/mosh_checkpoint.pth").resolve()
+    fine_outputs = Path('../../saved/outputs/MOS600/fine')
+    img_folder = Path('../../datasets/MOS600')
 
-    img_folder = Path('../../datasets/test/image')
-    fine_module = FineModule(low_ckpt_path, high_ckpt_path, low_size=(336, 336), high_size=(896, 896), device='cuda')
+    fine_outputs.mkdir(parents=True, exist_ok=True)
+    fine_module = FineModule(low_ckpt_path, high_ckpt_path, low_size=(336, 336), device='cuda')
     for img_path in natsorted(img_folder.glob("*.jpg"), alg=ns.PATH):
         img = Image.open(img_path).convert('RGB')
-        fine_mask = fine_module(img, step_size=336)
+        fine_mask = fine_module(img, step_size=224)
         fine_mask = fine_mask[0, 0]
-        fine_mask[fine_mask > 0.5] = 1.0
-        fine_img = (img * fine_mask[..., None].cpu().numpy()).astype("uint8")
-        fine_img = Image.fromarray(fine_img)
+
+        fine_img = green_background(img, fine_mask[..., None].cpu().numpy())
         fine_img.save(fine_outputs / img_path.name)

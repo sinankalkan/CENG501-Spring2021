@@ -9,6 +9,7 @@ from torchvision import transforms
 from lib.models.meticulousnet import MeticulousNet
 from lib.utils import load_checkpoint
 from lib.base.base_dataset import BaseDataset
+from lib.eval.helper import green_background
 
 
 class CoarseModule(nn.Module):
@@ -39,11 +40,11 @@ class CoarseModule(nn.Module):
 
 
 def coarse_mask_demo():
-    ckpt_path = Path("../../saved/MeticulousNet_L/07-02_18-06/checkpoints/checkpoint-epoch360.pth").resolve()
+    ckpt_path = Path("../../saved/checkpoints/mosl_checkpoint.pth").resolve()
 
-    img_folder = Path('../../datasets/test/image')
-    coarse_image_path = Path('../../saved/outputs/test/coarse/')
-    coarse_mask_path = Path('../../saved/outputs/test/coarse_mask/')
+    img_folder = Path('../../datasets/MOS600/')
+    coarse_image_path = Path('../../saved/outputs/MOS600/coarse/')
+    coarse_mask_path = Path('../../saved/outputs/MOS600/coarse_mask/')
     coarse_image_path.mkdir(parents=True, exist_ok=True)
     coarse_mask_path.mkdir(parents=True, exist_ok=True)
 
@@ -55,10 +56,7 @@ def coarse_mask_demo():
         coarse_mask = coarse_mask[0, 0]
         coarse_mask_out = Image.fromarray((coarse_mask.detach().cpu().numpy() * 255).astype('uint8'))
         coarse_mask_out.save((coarse_mask_path / img_path.name).with_suffix('.png'))
-
-        coarse_mask[coarse_mask > 0.5] = 1.0
-        coarse_img = (img * coarse_mask[..., None].cpu().numpy()).astype("uint8")
-        coarse_img = Image.fromarray(coarse_img)
+        coarse_img = green_background(img, coarse_mask[..., None].cpu().numpy())
         coarse_img.save(coarse_image_path / img_path.name)
 
 

@@ -13,7 +13,7 @@ I aimed to obtain similar qualitative and quantitative results with the paper fo
 
 The paper aims to generate coarse and fine mask of the major foreground object. Coarse mask generation is done just like salient object segmentation. The MOS_L model is responsible for coarse mask generation. The MOS_H model is used to improve the coarse mask produced from the MOS_L model. MOS_L and MOS_H models have the same architecture, but there is only one difference between them, which is that MOS_L using RGB image as input whereas MOS_H using RGB image and coarse mask as input.
 
-The MOS_L model is trained with the [DUTS-TR[2]](http://saliencydetection.net/duts/) dataset. Inputs are resized to 386x386 and with this resolution a coarse mask is obtained in both training and testing phases. 
+The MOS_L model is trained with the [DUTS-TR[2]](http://saliencydetection.net/duts/) dataset. Inputs are resized to 336x336 and with this resolution a coarse mask is obtained in both training and testing phases. 
 
 The MOS_H model is trained with the MSRA-10K [3], DUT-OMRON [4], ECSSD [5], and FSS-1000[6]. DIM[7] dataset is also added to MOS_H training dataset with 463 unique foreground. It is synthesized 100 times with random background images sampled from the COCO dataset for each foreground in the DIM dataset. MOS_H refines images in patch-based manner. Even high-resolution images, which are normally difficult to fit into GPU memory, can be used with this patch-based refinement method. At training time, they used 224x224 random cropped images with perturbed corresponding ground truth masks. The method used at the test time is not clearly stated in the article. I have used 224x224 windows to crop test images without overlapping.
 

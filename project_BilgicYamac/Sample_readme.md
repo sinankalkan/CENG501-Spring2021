@@ -18,7 +18,7 @@ There are many studies have been made on different tasks in Community question a
 ## 2.1. The original method
 
 The aim is jointly conduct answer selection and abstractive summarization. The overall framework of Answer Selection and Abstractive Summarization consists of four components. Shared Compare-Aggregate Bi-LSTM Encoder, Sequence-to-sequence Model with Question-aware Attention, Question Answer Alignment with Summary Representations, Question-driven Pointer-generator Network.
-Shared Compare-Aggregate Bi-LSTM Encoder: The word embeddings of question and the original answer are preprocessed to obtain a new embedding vector which also captures some contextual information in addition to the word itself. The this new word embeddings are provided into the Bi-LSTM encoder. 
+**Shared Compare-Aggregate Bi-LSTM Encoder**: The word embeddings of question and the original answer are preprocessed to obtain a new embedding vector which also captures some contextual information in addition to the word itself. The this new word embeddings are provided into the Bi-LSTM encoder. 
 
 ![image](https://user-images.githubusercontent.com/57533312/127110893-8dec128e-9004-48c9-89ba-47083a7254e8.png)
 

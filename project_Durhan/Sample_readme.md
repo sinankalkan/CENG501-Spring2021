@@ -80,6 +80,8 @@ Describe the setup of the original paper and whether you changed any settings.
 
 ## 3.2. Running the code
 
+I prepared the code on Google's colab framework. One can easily follow the relevant cells.
+
 Explain your code & directory structure and how other people can run it.
 
 ## 3.3. Results
@@ -87,6 +89,9 @@ Explain your code & directory structure and how other people can run it.
 Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
 
 # 4. Conclusion
+
+The ground state energies I found were close to the those of original paper. The shape of the ground state wavefunctions were also quite similar to the those of the 
+original ones. There was only fractional differences between the original
 
 Discuss the paper in relation to the results in the paper and your results.
 

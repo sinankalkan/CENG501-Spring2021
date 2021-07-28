@@ -43,6 +43,7 @@ where t refers to the t-th iteration epoch, T  is the number of the total epochs
 The formulation of the momentum parameter of the MBN for the inference stage is as follows;
 The inference momentum parameter is adaptive to batch size. Where N denotes the number of samples in other words batch size and “m0” denotes the ideal batch size. In addition  “tao_zero” is an ideal coefficient and in the originial paper authors set it to 0.90 for the inference step. According to the inference step momentum formula, it can be easily seen that smaller batch size makes the inference momentum parameter smaller as well. 
 
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
 
 ## 2.2. My interpretation 
 

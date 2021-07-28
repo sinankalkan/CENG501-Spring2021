@@ -52,8 +52,9 @@ The paper does a good job of explaining the PHM layer, however misses out on som
 
 There are a bunch of things that are ambiguous about the transformer implementation. These are:
 1. **Tokenization**. Nothing is said about the tokenization method. There are many tokenization methods to choose from today because they can really improve the performance of the network. We chose to use the most elementary method that is word tokenization. Every unique word is assigned a token along with some special tokens such as beginning of sentences, end of sentence and unknown word token. It is important to note that virtually no language model uses this tokenization method today, they opt in for subword tokenization methods such as byte pair encoding and Sentencepiece. These are easy to use and we have experience working with them but we chose word tokenization due to its simplicity and the ambiguity of the tokenization method in the paper.
-2. **Experimental Setup**. Nothing is said about the chosen optimizer and its parameters. The batch size is also reported for only natural language inference (LSTM). The authors report how much they train the networks in terms of step sizes, but since the batch size is ambiguous for most tasks, this does not help to replicate the results. Our choice of these hyperparameters are explained in the experimental setup.
+2. **Experimental Setup**. Nothing is said about the chosen optimizer and its parameters. The batch size is also reported for only natural language inference (LSTM). There is no explanation about hidden sizes of both LSTM and MLP, and choise of activation function between linear layers in NLI tasks. The authors report how much they train the networks in terms of step sizes, but since the batch size is ambiguous for most tasks, this does not help to replicate the results. Our choice of these hyperparameters are explained in the experimental setup.
 3. **Model Architecture**. Some parameters regarding the model architecture are missing such as the feed forward network hidden size. Our choice of these hyperparameters are explained in the experimental setup.
+4.  **Concatenation Process in LSTM**. There is no explanation about concatenation of *premise* and *hypothesis* outputs in NLI experiments. We inferred previous works for concatenation process
 
 *There is one particular aspect of the paper that is misleading.* The paper makes the overall architecture of the PHM transformer very clear. They report a reduction parameters as you can see in the tables at 3.3 Results. However it is impossible to reduce the total number of parameters of a transformer by 1/n by only replacing the parts mentioned in 2.1 because there are also word embeddings that map the tokens to the encoder and the generator that maps the decoder to the tokens. In fact these may make up the bulk of a transformer depending on the vocabulary size and the model setup. **So we propose a PHM+ transformer that also replaces these layers with PHM weights.** In this version every weight is replaced by its PHM counterpart.
 
@@ -82,9 +83,22 @@ Number of Decoder Layers | 4 | 4
 Beam Size | 5 | 5
 Beam Search Length Penalty Exponent (alpha) | 0.6 | 0.6
 
-
-
 The data is available [here](https://github.com/tlatkowski/st).
+
+### For NLI task on MNLI Dataset
+Setup Component | The authors | Us
+------------ | ------------- | -------------
+Optimizer    | Adam | Adam
+Weight Decay | - | -|
+Batch Size   | 256 | 256 |
+Epochs       | - | 10 (I)|
+Max Lenght of Input | - | 128 |
+Feed Forward Hidden Size | - | 100 |
+LSTM Hidden Size | 300 | 300 |
+n            | 2,5,10 | 10 |
+
+(I): We defined the number of epochs as 10 for training process but we were not able to finish the train due to limited runtime on Colab.
+
 
 ![Training Curves](https://user-images.githubusercontent.com/62503047/127185010-28cb14ca-7b6e-47e3-8c85-29abef553a03.png)
 
@@ -169,13 +183,24 @@ PHM-Transformer (n=4) | 6,830,272 | 17.30 | x
 PHM-Transformer (n=8) | 3,463,680 | 18.02 | 553 
 PHM-Transformer (n=16) | 1,844,224 | 17.65 | 980
 
+### For NLI Tasks
+
+We were not able to get the results from trained models because of runtime limitation and shortage of memory in Colab. However, our implementation can be completed with sufficient amount of resources. We showed that training loss decreases through iterations when PHM-LSTM implementation is used.
+
 # 4. Conclusion
 
 Discuss the paper in relation to the results in the paper and your results.
 
 # 5. References
 
-Provide your references here.
+Adina Williams, Nikita Nangia, Samuel R. Bowman. 2017. *A Broad-Coverage Challenge Corpus for Sentence Understanding through Inference*. https://arxiv.org/abs/1704.05426
+
+Samuel R. Bowman, Gabor Angeli, Christopher Potts, Christopher D. Manning. 2015. *A large annotated corpus for learning natural language inference*. https://arxiv.org/abs/1508.05326
+
+Sepp Hochreiter, Jurgen Schmidhuber. Long short-term memory. ¨ Neural computation, 9(8):
+1735–1780, 1997.
+
+Qian Chen, Xiaodan Zhu, Zhenhua Ling, Si Wei, Hui Jiang, Diana Inkpen. 2017. *Enhanced LSTM for Natural Language Inference*. https://arxiv.org/abs/1609.06038
 
 # Contact
 

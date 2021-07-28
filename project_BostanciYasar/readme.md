@@ -13,6 +13,13 @@ Our aim is to implement the models described in the paper and obtain the accepta
 
 Summarize the paper, the method & its contributions in relation with the existing literature.
 
+Computing power in the last decade especially GPUs processing capacities increased remarkably and this improvement directly affected the deep neural networks (DNNs) success.  DNNs are used in various applications; object detection, natural language processing, speech recognition etc. The main secret behind the success of DNNs lies behind the usage of large scale datasets, learning algorithms and considerably higher computational power.
+
+Normalizing the data and intermediate features in DNNs is one of the key fetaures which affects the success of the architecture. Normalizing the input data improves the training performance and resulting lower training times as well. In literature it is quite common to use Batch Normalization (BN) technique in order to normalize the samples of mini-batches during the training process. It is a well known fact that BN improves training speed and performance. It also allows user to choose higher learning rates while it improves the generalization capacity of the model.
+
+It is not quite certain how BN improves the performance yet, it is argued that BN reduce the Internal Covariance Shift but xxxx opposes that there is not an evidence between ICS and BN. However, it is certain that BN adds some noise. In the original paper authors propose a new method which is called Momentum Batch Normalization (MBN). Accoridng to the authors the added noise to the mean and variance depends on only the batch-size in conventional BN technique. Smaller batch-sizes increases the noise and this phenomena makes the training more difficult. MBN method can automatically controls the noise level in the training process and this allows a stable training even with smaller batch-sizes when the memory resources are insufficient. 
+
+
 # 2. The method and my interpretation
 
 ## 2.1. The original method

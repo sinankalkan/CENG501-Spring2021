@@ -20,19 +20,33 @@ Explain the original method.
 
 ## 2.2. My interpretation 
 
+** TODO mention max epoch and learning rate thing here **
+
 Explain the parts that were not clearly explained in the original paper and how you interpreted them.
 
 # 3. Experiments and results
 
 ## 3.1. Experimental setup
 
-Describe the setup of the original paper and whether you changed any settings.
+**Dependencies**
+
+* Python (3.7.0)
+* Numpy (1.19.5)
+* PIL (8.3.1)
+* PyTorch (1.9.0+cu111) + torchvision (0.10.0+cu111)
+* scikit-image (0.18.2)
+
+_(Versions written in parentheses stand for the ones used during the development and testing of this repository)_
+
+I've tried to keep configurations the same as much as possible. However, there is one significant difference. In the original paper, authors have used a batch size of 32. But in this work, it is reduced to 16 due to hardware limitations. 
 
 ## 3.2. Running the code
 
 Explain your code & directory structure and how other people can run it.
 
 ## 3.3. Results
+
+The code is tested on a Windows 10 (v19042.1110) machine with single NVIDIA GeForce RTX 3070 GPU.
 
 Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
 

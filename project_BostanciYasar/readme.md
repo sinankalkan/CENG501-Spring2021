@@ -33,7 +33,7 @@ Some implementation details are given in the paper.\
 •	Dataset: CIFAR10 and CIFAR100 \
 •	Optimizer: SGD 
 
-In the original method authors propose a dynamic momentum parameter “lambda” in order to control the final noise level in the training. The algorithm of the MBN which is directly taken from the paper is given below;
+In the original method authors propose a dynamic momentum parameter <img src="https://latex.codecogs.com/gif.latex?\lambda" title="\lambda" /> in order to control the final noise level in the training. The algorithm of the MBN which is directly taken from the paper is given below;
 
 <img src="https://latex.codecogs.com/gif.latex?\begin{aligned}&space;&\text&space;{&space;Training&space;step:&space;}\\&space;&\begin{aligned}&space;&\mu_{B}=\frac{1}{M^{2}}&space;\sum_{i=1}^{m}&space;x_{i}&space;\\&space;&\sigma_{B}^{2}=\frac{1}{m}&space;\sum_{i=1}^{m}\left(x_{i}-\mu_{b}\right)^{2}&space;\\&space;&\mu&space;\leftarrow&space;\lambda&space;\mu&plus;(1-\lambda)&space;\mu_{B}&space;\\&space;&\sigma^{2}&space;\leftarrow&space;\lambda&space;\sigma^{2}&plus;(1-\lambda)&space;\sigma_{B}^{2}&space;\\&space;&\widehat{x}_{i}=\frac{x_{i}-\mu}{\sqrt{\sigma^{2}&plus;e}}&space;\\&space;&y_{i}=\gamma&space;\widehat{x}_{i}&plus;\beta&space;\\&space;&\mu_{i&space;n&space;f}&space;\leftarrow&space;\tau&space;\mu_{i&space;n&space;f}&plus;(1-\tau)&space;\mu_{B}&space;\\&space;&\sigma_{i&space;n&space;f}^{2}&space;\leftarrow&space;\tau&space;\sigma_{i&space;n&space;f}^{2}&plus;(1-\tau)&space;\sigma_{B}^{2}&space;\\&space;&\text&space;{&space;Inference&space;step:&space;}&space;y_{i}=\gamma&space;\frac{x_{i}-\mu_{i&space;n&space;f}}{\sqrt{\sigma_{i&space;n&space;f}^{2}&plus;e}}&plus;\beta&space;\end{aligned}&space;\end{aligned}" title="\begin{aligned} &\text { Training step: }\\ &\begin{aligned} &\mu_{B}=\frac{1}{M^{2}} \sum_{i=1}^{m} x_{i} \\ &\sigma_{B}^{2}=\frac{1}{m} \sum_{i=1}^{m}\left(x_{i}-\mu_{b}\right)^{2} \\ &\mu \leftarrow \lambda \mu+(1-\lambda) \mu_{B} \\ &\sigma^{2} \leftarrow \lambda \sigma^{2}+(1-\lambda) \sigma_{B}^{2} \\ &\widehat{x}_{i}=\frac{x_{i}-\mu}{\sqrt{\sigma^{2}+e}} \\ &y_{i}=\gamma \widehat{x}_{i}+\beta \\ &\mu_{i n f} \leftarrow \tau \mu_{i n f}+(1-\tau) \mu_{B} \\ &\sigma_{i n f}^{2} \leftarrow \tau \sigma_{i n f}^{2}+(1-\tau) \sigma_{B}^{2} \\ &\text { Inference step: } y_{i}=\gamma \frac{x_{i}-\mu_{i n f}}{\sqrt{\sigma_{i n f}^{2}+e}}+\beta \end{aligned} \end{aligned}" />
 
@@ -57,7 +57,7 @@ The inference momentum parameter is adaptive to batch size. Where <img src="http
 
 <img src="https://latex.codecogs.com/gif.latex?m" title="m" />
 
-<img src="https://latex.codecogs.com/gif.latex?\lambda" title="\lambda" />
+
 
 
 

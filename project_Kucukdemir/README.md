@@ -89,7 +89,7 @@ python main.py [test|train] [dataset_id] [save_prob]
 ```
 Default values for these arguments are 'test', 'coco' and '0.0011', respectively. save_prob is used during testing only. For example, if you set it to 0.5, half of the results obtained will be saved under 'denoised' directory. 
 
-Note that if there are no checkpoints, you will not be able to run test mode. And if there are chekcpoints, you should remove checkpoints or copy them elsewhere to train a network from scratch. See get_run_config() method to change network hyperparameters.
+Note that if there are no checkpoints, you will not be able to run test mode. And if there are checkpoints, you should remove them or copy them elsewhere to train a network from scratch. See get_run_config() method to change network hyperparameters.
 
 ## 3.3. Results
 

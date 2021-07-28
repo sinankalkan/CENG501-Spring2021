@@ -37,7 +37,6 @@ In the original method authors propose a dynamic momentum parameter “lambda”
 
 The formulation of the momentum parameter of the MBN for the training stage is as follows;
 
-$$\int_\Omega \nabla u \cdot \nabla v~dx = \int_\Omega fv~dx$$
 
 
 where t refers to the t-th iteration epoch, T  is the number of the total epochs. As it is seen from the formulation above in the beginning phase of the training the normalization technique does not differ much from the conventional Batch Normalization but as the epoch number increase the momentum parameter shows its effect. 

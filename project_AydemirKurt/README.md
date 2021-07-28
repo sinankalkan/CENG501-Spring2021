@@ -4,8 +4,7 @@ This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.
 
 # 1. Introduction
 
-"Instance segmentation of biological images is essential for studying object behaviors and properties."(Yi et al.2019) is said in first sentence of the paper. Paper proposed a new method to achieve and pass the state of the art methods.
-
+The paper we tried to implement is titled Object-Guided Instance Segmentation for Biological Images and published in Proceedings of the AAAI Conference on Artificial Intelligence 34. The authors suggest a box-based instance segmentation method for biological images. Box-based instance segmentation methods use Region of Interest (RoI) patches generated from bounding boxes. These bounding boxes are obtained by examining all the pixels in an image. After obtaining the bounding boxes RoI patches are generated. The Keypoint Graph method[2] uses a separate segmentation branch to operate on cropped RoI patches. In the segmentation branch five keypoints are detected for generating a bounding box, which creates problems when objects are overlapping. In this paper authors suggest using a keypoint based method where only the center point is used to generate each bounding box for overcoming the problem of overlapping keypoints at the detection branch. 
 
 ## 1.1. Paper summary
 Summarize the paper, the method & its contributions in relation with the existing literature.
@@ -38,7 +37,7 @@ The output of the U shaped network is used for three operation: Heatmap generati
 
 Explain the parts that were not clearly explained in the original paper and how you interpreted them.
 
-* We did not know if there is a filter before Heatmap, Width-Height, and Offset Heads. In [newer paper](https://arxiv.org/abs/2106.07159) there is filters before each head. But in the code the heads are different. In the code Width-Height and Offset modules filters are swapped so there are 7x7 layers before WH  and 3x3-1x1 layers before offset head. 
+* We did not know if there is a filter before Heatmap, Width-Height, and Offset Heads. In [newer paper](https://arxiv.org/abs/2106.07159)[3] there is filters before each head. But in the code the heads are different. In the code Width-Height and Offset modules filters are swapped so there are 7x7 layers before WH  and 3x3-1x1 layers before offset head. 
 <p align="center">
 	<img src="figures/DecHead.png", width="400">
 </p>
@@ -71,6 +70,8 @@ Discuss the paper in relation to the results in the paper and your results.
 
 [3] [Jingru Yi, Pengxiang Wu, Hui Tang, Bo Liu, Qiaoying Huang, Hui Qu, Lianyi Han, Wei Fan, Daniel J. Hoeppner, Dimitris N. Metaxas.Object-Guided Instance Segmentation With Auxiliary Feature Refinement for Biological Images. 2021](https://arxiv.org/abs/2106.07159)
 
+[4] [Olaf Ronneberger, Philipp Fischer, Thomas Brox.U-Net: Convolutional Networks for Biomedical Image Segmentation. 2015](https://arxiv.org/abs/1505.04597)
+
 # Disclaimer
 
 We did not write the code ourselves. The code belongs to [Jingru Yi](https://github.com/yijingru/ObjGuided-Instance-Segmentation). Code of the paper is not shared. [An improved version of the paper](https://arxiv.org/abs/2106.07159) (Yi et al.2021) was published in IEEE Transactions on Medical Imaging. We used that paper's code and deleted the new parts of the paper.
@@ -78,4 +79,5 @@ We did not write the code ourselves. The code belongs to [Jingru Yi](https://git
 # Contact
 
 Yusuf Can Aydemir : can.aydemir@metu.edu.tr
+
 Yunus Bilge Kurt : yunusbilgekurt@gmail.com

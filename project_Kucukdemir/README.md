@@ -102,7 +102,7 @@ Note that if there are no checkpoints, you will not be able to run test mode. An
 <p align="center">
 <img src="readme_fig/steps_0_clean.jpg" width="15%" height="15%"> <img src="readme_fig/steps_1_noisy.png" width="15%" height="15%"> <img src="readme_fig/steps_2_noisier.png" width="15%" height="15%"> <img src="readme_fig/steps_3_residual.png" width="15%" height="15%"> <img src="readme_fig/steps_4_denoised.png" width="15%" height="15%">
   
-<i>Figure 2. Steps of the method. From left to right: Clean target, Singly-noisy realization(network input), Doubly-noisy realization(network output), Residual, Denoised result</i>
+<i>Figure 2. Steps of the method. From left to right: Clean target, Singly-noisy realization, Doubly-noisy realization, Residual, Denoised result</i>
 </p>
 
 The full process and outputs of each step are illustrated in Figure 2. Average PSNR and SSIM values are shown in Table 1. Note that to obtain values for "-SN" variation (in which we feed the network with singly-noisy realizations and try to obtain clean image, without reconstruction steps), Kodak dataset is used. For the other one, COCO 2017 is used.
@@ -147,6 +147,17 @@ _**Table 1.** Average PSNR and SSIM values for the trained network. σ stands fo
 <p align="center">
   <img src="readme_fig/sample_5_clean.jpg" width="30%" height="30%"> <img src="readme_fig/sample_5_denoised.png" width="30%" height="30%">
 </p>
+
+<p align="center">
+  <b>Sample SN Variation Output</b>
+</p>  
+<p align="center">
+<i>(Left: Singly-noisy realization (as network input), Right: Denoised images)</i>
+</p>
+<p align="center">
+  <img src="readme_fig/sn_noisy.png" width="30%" height="30%"> <img src="readme_fig/sn_denoised.png" width="30%" height="30%">
+</p>
+
 
 # 4. Conclusion
 

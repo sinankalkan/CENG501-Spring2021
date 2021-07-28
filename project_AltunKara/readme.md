@@ -4,7 +4,7 @@ This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.
 
 # 1. Introduction
 
-In this repository, we describe and try to implement some of the experiments on the "Structure Boundary Preserving Segmentation for Medical Image with Ambiguous Boundary" paper published on Computer Vision and Pattern Recognition Conference, 2020. This paper deals with the two biggest problems with medical image segmentation: uncertainty of the boundary of the structure in medical images and the uncertainty of the partitioned region without special domain information. The paper offers a solution to these problems by a boundary key point selection algorithm and shape boundary-aware evaluator. We aim to reproduce the experiments implemented in the article and obtain similar results.
+In this repository, we describe and try to implement some of the experiments on the "Structure Boundary Preserving Segmentation for Medical Image with Ambiguous Boundary" paper published on Computer Vision and Pattern Recognition Conference, 2020. This paper deals with the two biggest problems with medical image segmentation: uncertainty of the boundary of the structure in medical images and the uncertainty of the partitioned region without special domain information. The paper offers a solution to these problems by a generic solution. This solution makes the efforts of detecting the boundaries fully automatized. The idea has given two novel methods (Boundary Preserving Block Maps and Structured Boundary Evaluator) to the community. We aim to reproduce the experiments implemented in the article and obtain similar results. 
 
 ## 1.1. Paper summary
 

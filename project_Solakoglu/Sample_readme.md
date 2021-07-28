@@ -94,10 +94,9 @@ Unlike the results at the oringinal paper A_sparse sturucture has exploded withi
 
 In this study authors has defined a new neural network model that includes a noise parameter to obtain realistic results. The authors defined their neural network theoretically and obtained numerical results compare traditional neural networks that does not use noise-pruning. Although their results seems to be robust. I observed some limitiations that have caused failure of this study.
 
-Firstly, authors have not shared the code with the scientific community. Since the paper is under peer-review authors should share their code when their study will be published. Second, I think that authors did not define their parameters well enough to reproduce their results. During my study I have struggled with obtaining true *K* value and create initial firing rate matrix to obtain covarince matrix and *A<sup>sparse</sup>* yet I failed to reproduce. Third at the introduction of the study authors has made me think, they modeled a neural network that has really used much detailed model. 
+Firstly, authors have not shared the code with the scientific community. Since the paper is under peer-review authors should share their code when their study will be published. Second, I think that authors did not define their parameters well enough to reproduce their results. During my study I have struggled with obtaining true *K* value and create initial firing rate matrix to obtain covarince matrix and *A<sup>sparse</sup>* yet I failed to reproduce. Third at the introduction of the study authors has made me think, they modeled a neural network that has really used much detailed model. Given that a single neuron can be modeled as at least 2-layer ANN, the authors might have  used this structure to obtain well defined neural network model with synaptic plasticity [11,12].
 
-
-In this study authors did not share a code to understand 
+In conclusion, realistic neural network models looks more complicated. I hope that more realistic neural networks and neuron models would be created and structured within time and computational algorithm would be improved with this progress.
 
 # 5. References
 
@@ -111,9 +110,12 @@ In this study authors did not share a code to understand
 8.	Spielman, D. A. & Srivastava, N. Graph sparsification by effective resistances. SIAM Journal on Computing 40, 1913–1926 (2011).
 9.	Spielman, D. A. & Teng, S.-H. Spectral sparsification of graphs. SIAM Journal on Computing 40, 981–1025 (2011).
 10. Denker M, Yegenoglu A, Grün S (2018) Collaborative HPC-enabled workflows on the HBP Collaboratory using the Elephant framework. Neuroinformatics 2018, P19
+11. Poirazi P, Brannon T, Mel BW. Pyramidal neuron as two-layer neural network. Neuron. 2003 Mar 27;37(6):989-99.
+12. Single Cortical Neurons as Deep Artificial Neural Networks David Beniaguev, Idan Segev, Michael London bioRxiv 613141; doi: https://doi.org/10.1101/613141
+
 
 
 # Contact
 
-You can contact me via sabahaddin.solakoglu@hacettepe.edu.tr
+For any questions or fixing my mistakes, you can contact me via sabahaddin.solakoglu@hacettepe.edu.tr
 S. Taha Solakoglu

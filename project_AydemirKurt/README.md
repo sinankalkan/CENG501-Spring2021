@@ -126,7 +126,7 @@ Discuss the paper in relation to the results in the paper and your results.
 
 # Disclaimer
 
-We did not write the code ourselves. The code belongs to [Jingru Yi](https://github.com/yijingru/ObjGuided-Instance-Segmentation). Code of the paper is not shared. [An improved version of the paper](https://arxiv.org/abs/2106.07159)[3] was published in IEEE Transactions on Medical Imaging. We used that paper's code and deleted the new parts of the paper.
+We did not write the code ourselves. The code belongs to [Jingru Yi](https://github.com/yijingru/ObjGuided-Instance-Segmentation). Code of our selected paper[1] is not shared. [An improved version of the paper](https://arxiv.org/abs/2106.07159)[3] was published in IEEE Transactions on Medical Imaging. We used that paper's[3] code and deleted the newly added parts of the paper[3].
 
 # Contact
 

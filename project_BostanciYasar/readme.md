@@ -74,6 +74,8 @@ The computation time without disconnection is limited on Google Colab.To solve t
 
 The CIFAR10 and CIFAR100 datasets were loaded using torchvision.datasets. Other experimental parameters and details are given in Section 2. Batch size is changed in different experiments by keeping it compatible with the original paper to reproduce the results of the original paper. 
 
+In the original paper authors used four GPUs for the experiments and they splitted the batches by four. Therefore, the results in the original paper is given according to the batch size per GPU. However, throughout this implementaion project only one GPU is used because of insufficient computational resources. Therefore, in our figures, results etc. batch size is shown as multiplied by four because only one GPU is used as mentioned. 
+
 ## 3.2. Running the code
 
 The notebooks are written for running on Google Colab. All dependencies are available within the current runtime on Google Colab.\
@@ -83,18 +85,11 @@ There are ten code notebooks- five for each dataset- one is for MBN and the othe
 
 It can be seen in Figure-4 that MBN gives similar results with the BN in larger batch-sizes. In fact, in the obtained results it is observed that BN shows slightly better performance compared to MBN such as batch size 16 and 32. It is similar in the original paper as well. Even though with the batch size 32 the results are not similar with the original paper, BN performs better in batch size 16 in the original paper. However, as expected MBN shows a better performance with the smallest batch size. This results shows that MBN provides a more robust training with smaller batch sizes compared to other normalization methods. The main idea behind the method proposed by the authors; MBN suppresses the noise in the mean and variance in smaller batch sizes. Moreover, our results can be accepted as compatible with the original paper, because MBN shows better performance in the smallest batch size compared to other normalization methods. In addition, there is a increasing performance trend in favor to the MBN while batch size decreases.
 
-<!---
-| ![fig4.jpg](https://user-images.githubusercontent.com/86877356/126894727-e119b037-d039-4173-b9de-58625b7304e8.png) | 
-|:--:| 
-| *Fig 4: Testing accuracy on CIFAR10 and CIFAR100 of ResNet18 with training batch size (BS) 8 and 32.* |
--->
-
 | ![fig4.jpg](https://user-images.githubusercontent.com/86877356/127033391-a8138ded-9496-4c7a-8371-ed23881eeb90.png) | 
 |:--:| 
 | *Fig 4: Testing accuracy on CIFAR10 and CIFAR100 of ResNet18 with training batch size (BS) 8 and 32.* |
 
-
-In Figure-5 it can be seen that the training and testing accuracy curves vs. epoch of ResNet18 with batch size 8. In the original paper, especially in CIFAR100 dataset, in the last section of the training MBN can carry out a considerable perfomance gain compared to other normalization methods. In our results it could not be observed such a dominant performance difference in favor to the MBN. However, in both of the datasets MBN shows a better perfomance and in the last epochs of the training it maintains to increase the accuracy level. This phenomena is consistent with the method promises. 
+In Figure-5 it can be seen that the training and testing accuracy curves vs. epoch of ResNet18 with batch size 8. In the original paper, especially in CIFAR100 dataset, in the last section of the training MBN can carry out a considerable performance gain compared to other normalization methods. In our results, it could not be observed such a dominant performance difference in favor to the MBN. However, in both of the datasets MBN shows a better performance and in the last epochs of the training it maintains to increase the accuracy level. This phenomena is consistent with the method promises. 
 
 | ![fig5.jpg](https://user-images.githubusercontent.com/86877356/126895343-f17f62e0-db71-4999-aa6b-60b924377ef0.png) | 
 |:--:| 
@@ -102,35 +97,33 @@ In Figure-5 it can be seen that the training and testing accuracy curves vs. epo
 
 
 
+In Figure-6 (a) it can be seen that the training and testing accuracy curves vs. epoch and Figure-6 (b) final testing accuracies. It can be seen in our results which are consistent with the original paper, MBN shows better performance in all those different networks. In ResNet and VGG when the total layer of the network increases of course the total number of normalization layers increase. This increase in normalization layers consequences the increase of the added noise. In other words, when the network is getting deeper the accumulated noise level shows an increase. With the smaller batch size this effec can be seen better. 
 
+In our results, this effect can be seen in the Figure-6 (a); in the beginning stage of the training process MBN could not handle the accumluated noise level but in the last stage of the training owing to dynamic momentum parameter MBN starts to suppress the noise level and it maintains the performance gain better compared to other normalization method. It is seen in batch size 8 results more clearly.
+
+
+ We
+can have the following observations. First, on all the four networks, MBN always
+outperforms BN. 
+
+Second, under such a small batch size, the accuracy of deeper
+network ResNet50 can be lower than its shallower counterpart ResNet34. That
+is because the deeper networks have more BN layers, and each BN layer would
+introduce relatively large noise when batch size is small. The noise is accumu-
+lated so that the benet of more layers can be diluted by the accumulated noise.
+However, with MBN the performance drop from ResNet50 to ResNet34 is very
+minor, where the drop by BN is significant. This again validates that MBN can
+suppress the noise eectively in training.
 
 
 | ![fig6a.jpg](https://user-images.githubusercontent.com/86877356/127190495-a1a7d4a6-46ad-44c2-91b7-d5fbcf48c320.jpg) | 
 |:--:| 
 | *Fig 6a: Testing accuracy curves on CIFAR100 for different network architectures with training batch size of 8 and 16* |
 
-<!---
-| ![fig6a.jpg](https://user-images.githubusercontent.com/86877356/127048299-710a1bde-9398-4811-af21-8b5a34cc69e5.png) | 
-|:--:| 
-| *Fig 6a: Testing accuracy curves on CIFAR100 for different network architectures with training batch size of 8 and 16* |
-
-
-| ![fig6a.jpg](https://user-images.githubusercontent.com/86877356/127045192-7586b030-8608-4637-a3aa-3b2aace0fe3c.png) | 
-|:--:| 
-| *Fig 6a: Testing accuracy curves on CIFAR100 for different network architectures with training batch size of 8 and 16* |
-
-
-| ![fig6a.jpg](https://user-images.githubusercontent.com/86877356/126895471-b42fa9e4-ebe0-4f76-9575-c17fc4c99d3e.png) | 
-|:--:| 
-| *Fig 6a: Testing accuracy curves on CIFAR100 for different network architectures with training batch size of 8 and 16* |
--->
 
 | ![fig6b.jpg](https://user-images.githubusercontent.com/86877356/126891348-60b4945f-9fef-4f1c-841a-66931383f8ec.png) | 
 |:--:| 
 | *Fig 6b: Testing accuracy on CIFAR100 for different network architectures with training batch size of 8* |
-
-
-
 
 # 4. Conclusion
 

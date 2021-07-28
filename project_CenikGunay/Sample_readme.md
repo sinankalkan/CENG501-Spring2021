@@ -48,11 +48,11 @@ functions, 50 cities, and 34 countries.
 
 _**PlaceNet**_
 
-**Loss Functions**. They study three losses for PlaceNet, namely, **softmax loss**, **focal
+- **Loss Functions**. They study three losses for PlaceNet, namely, **softmax loss**, **focal
 loss**, and **triplet loss**. 
 
 
-**Pooling Methods**. They also study different pooling methods for PlaceNet,
+- **Pooling Methods**. They also study different pooling methods for PlaceNet,
 namely, **average pooling**, **max pooling**, **spatial pyramid pooling**
 
 ## 2.2. My interpretation 

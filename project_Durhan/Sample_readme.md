@@ -4,16 +4,16 @@ This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.
 
 # 1. Introduction
 This study was presented at the Machine Learning and the Physical Sciences Workshop at the 34th Conference on Neural Information Processing Systems (NeurIPS) on 
-December, 2020. It aims at approximating the ground state energies and eigenfunctions of quantum mechanical sytems via Neural Networks. Our goal was to obtain the 
+December, 2020. It aims at approximating the ground state energies and eigenfunctions of quantum mechanical sytems via Neural Networks. My goal was to obtain the 
 same result with the original paper.    
 Introduce the paper (inc. where it is published) and describe your goal (reproducibility). 
 
 ## 1.1. Paper summary
 
 In Quantum Mechanics, the solution of the Schrödinger's equation provides full knowledge of the dynamics of physical systems. However, there might be complex systems 
-which may not be solved analytically such as energy levels of Helium atom. There are numerical methods to retrieve the eigenenergies of physical systems such as 
-variational methods. Once the problem is reduced to a optimization problem one can use Neural Networks to solve the problem. In the literature, it is often to see the 
-methods which uses trial wavefunctions and imposed boundary conditions than seek for the solutions. In this paper, however, there is no trial wavefunctions and 
+which may not be solved analytically such as many body systems like Helium atom. There are several methods to retrieve the energy eigenvalues of such systems such as 
+variational methods. Once the problem is reduced to an optimization problem one can use Neural Networks to solve the problem. In the literature, it is often to see 
+the methods which uses trial wavefunctions and imposed boundary conditions, then seeks for the solution. In this paper, however, there is no trial wavefunction and 
 boundary conditions. The problem was solved in an unsupervised manner. The method is described in more details in section 2.1 
 
 Summarize the paper, the method & its contributions in relation with the existing literature.
@@ -22,17 +22,15 @@ Summarize the paper, the method & its contributions in relation with the existin
 
 ## 2.1. The original method
 
-The method that was used in the study was quite simple. Given the basis functions of the system, the expectation value of the Hamiltonian was used as the loss 
-function. The input of the network is the position and the output is the ground state wavefunction.    
+The method that was used in the study was straightforward. Given the basis functions of the system, the expectation value of the Hamiltonian was used as the loss 
+function. The input of the network is the position and the output is the ground state wave function.    
 
 Explain the original method.
 
 ## 2.2. My interpretation 
-Some of hyperparameters such as the learning rate and the number of epochs were not expressed in the study. Therefore it was cumbersome to finetune the networks. 
-
- were calculated using Riemann's sum. According to this, one has,
-
-The loss definitions and the training can be found in section 3.1 
+Some of hyperparameters such as the learning rate and the number of epochs were not expressed in the study. Therefore, it was cumbersome to finetune the network. 
+After several attempts for finetuning, the network started to give similar results with the original work. The loss definitions and the training procedure can be 
+found in Section 3.1 
   
 Explain the parts that were not clearly explained in the original paper and how you interpreted them.
 
@@ -41,8 +39,8 @@ Explain the parts that were not clearly explained in the original paper and how 
 ## 3.1. Experimental setup
 
 In the study the one dimensional infinite well with and without perturbation were inspected. For the unperturbed system with the well width a = 1 , a neural 
-network with one hidden layer of 1000 thousands ReLU activations were used. However, in my experiments I found this insufficient and put one extra hidden layer of the 
-same size. The basis functions in the one dimensional infinite well were defined as [[1]](#1), ,    
+network with one hidden layer of 1000 ReLU activations were used. However, in my experiments I found this insufficient and put one extra hidden layer of the 
+same size. The basis functions in the one dimensional infinite well were defined as [[1]](#1),    
 
 ![b_n](https://user-images.githubusercontent.com/47567854/127366652-068e95a8-2377-4726-8aaf-7dfb3a20b37b.png)
 
@@ -95,8 +93,8 @@ Present your results and compare them to the original paper. Please number your 
 
 # 4. Conclusion
 
-The ground state energies I found were close to the those of original paper. The shape of the ground state wavefunctions were also quite similar to the those of the 
-original ones. There was only fractional differences between the original
+The ground state energies and the shape of the ground state wavefunctionsI found were close to the those of the original paper. There was some fractional differences 
+in the wave function.
 
 Discuss the paper in relation to the results in the paper and your results. 
 
@@ -110,5 +108,7 @@ Approximating Ground State Energies and Wave Functions of Physical Systems with 
 Provide your references here.
 
 # Contact
-
+Onur Durhan
+Middle East Technical University, Department of Physics
+email: onur.durhan@metu.edu.tr
 Provide your names & email addresses and any other info with which people can contact you.

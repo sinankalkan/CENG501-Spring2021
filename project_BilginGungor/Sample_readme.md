@@ -118,6 +118,23 @@ It can be seen from the Figure-1a and Figure-1b that results for downstream task
  
 ### 3.3.2 Misalignment between data and first layers.
 
+<p align = "center">
+<img src = "figures/figure2_original.png">
+</p>
+<p align = "center">
+Figure-2a - Original Figure2 in the paper
+</p>
+
+<p float="left">
+  <img src="figures/figure2_1.png" width="49%"/>
+  <img src="figures/figure2_2.png" width="49%"/> 
+</p>
+<p align = "center">
+Figure-2b - Reproduction of Figure2. Left: Training with settings given in the paper. Right: Training with settings that is modified to be able to learn random labels
+</p>
+
+Two experiments are conducted to reproduce Figure2. First one uses setup from the original paper which uses all training set, 0.01 learning rate, and 40 epochs. However, this training could not learn when random labels are used. We believe this is acceptable because the model used in this section is a very simple model that contains only one convolutional layer. Even though it is sufficiently complex for learning real labels, it fails for random labels because learning random labels is mostly done with overparameterization. This is required considering there is nothing to learn and model should memorize the random labels. The model used here cannot perform this deliberate overfitting. Thus, another setup enabling the model to output less loss is used. It uses less data (5000 instead of 50000), 0.001 learning rate, and 80 epochs. Consequently, curves more similar to original ones are obtained. Misalignment of eigenvectors of weights are smaller and more seperable than the misalignments of random basis. Behaviour of increasing misalignment as the training continues is also reproduces in this setup. 
+ 
 ### 3.3.3 Visualization of covariance matrices of first layer and data
 
 <p align = "center">

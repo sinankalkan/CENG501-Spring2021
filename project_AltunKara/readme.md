@@ -4,7 +4,7 @@ This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.
 
 # 1. Introduction
 
-In this repository, we describe and try to implement some of the experiments on the "Structure Boundary Preserving Segmentation for Medical Image with Ambiguous Boundary" paper published on Computer Vision and Pattern Recognition Conference, 2020. This paper deals with the two biggest problems with medical image segmentation: uncertainty of the boundary of the structure in medical images and the uncertainty of the partitioned region without special domain information. The paper offers a solution to these problems by a generic solution. This solution makes the efforts of detecting the boundaries fully automatized. The idea has given two novel methods (Boundary Preserving Block Maps and Structured Boundary Evaluator) to the community. We aim to reproduce the experiments implemented in the article and obtain similar results. 
+In this repository, we describe and try to implement some of the experiments on the "Structure Boundary Preserving Segmentation for Medical Image with Ambiguous Boundary" paper [1] published on Computer Vision and Pattern Recognition Conference, 2020. This paper deals with the two biggest problems with medical image segmentation: uncertainty of the boundary of the structure in medical images and the uncertainty of the partitioned region without special domain information. The paper offers a solution to these problems by a generic solution. This solution makes the efforts of detecting the boundaries fully automatized. The idea has given two novel methods (Boundary Preserving Block Maps and Structured Boundary Evaluator) to the community. We aim to reproduce the experiments implemented in the article and obtain similar results. 
 
 ## 1.1. Paper summary
 
@@ -62,6 +62,7 @@ The paper used the PH2 and ISBI 2016 datasets. These datasets are publically ava
 
 Explain the parts that were not clearly explained in the original paper and how you interpreted them.
 First , we wanted to have the same segmentation scores on different networks. We tried to implement the FCN segmentation network with using ISBI 2016 dataset. Unfortunately, we couldn't get the segmentation scores yet. The FCN networks which are using ISBI 2016 dataset included on the FCN codes file. 
+On the other hand, we succesfully implement the U-Net segmentation model to the ISBI 2016 dataset. 
 
 # 3. Experiments and results
 
@@ -80,10 +81,12 @@ Present your results and compare them to the original paper. Please number your 
 # 4. Conclusion
 
 Discuss the paper in relation to the results in the paper and your results.
+As a conclusion, even though we couldn't reach the same results on the paper, we tried to implement a brand new method on existing segmentation network structures. 
 
 # 5. References
 
 Provide your references here.
+[1]https://openaccess.thecvf.com/content_CVPR_2020/papers/Lee_Structure_Boundary_Preserving_Segmentation_for_Medical_Image_With_Ambiguous_Boundary_CVPR_2020_paper.pdf
 
 # Contact
 

@@ -161,7 +161,17 @@ _**Table 1.** Average PSNR and SSIM values for the trained network. σ stands fo
 
 # 4. Conclusion
 
-Discuss the paper in relation to the results in the paper and your results.
+Our results look consistent with the original work. However, I cannot assert that it is 100% accurate due to a silly mistake I've made but I've realized that too late :) 
+
+The authors of the original work present results for 3 separate networks, which are trained with different standard deviation values (0.05, 0.1 and 0.2. See Table 1 in the original work). However, I've trained my network with σ=0.25, which means the amplitude of the noise applied in my experiments are stronger. Therefore, obtaining lower PSNR and SSIM are actually expected. And, comparing their PSNR values (i.e. 27.92 and 27.17, see Table 1 of the original paper, row 2 and 3 for σ=0.2), we can say that the non-SN version of the network performs as expected, quantitatively.
+
+When we examine the outputs qualitatively, we observe that the network is able to remove noise but our results look a bit blurry. Besides, in some cases, they look quite artistic and visually pleasing :)
+
+There may be several reasons for the degradation of the performance our network:
+* The dataset we've used is much smaller (~14M vs ~120K). Using a larger dataset may help.
+* We've decreased the batch size from 32 to 16, which may also affect our performance.
+* We've applied more noise to images during both testing and training phases. If we decrease that, we may get rid of bluriness in our outputs.
+* We've stopped training when training loss started to become steady but that may be misleading and 11 epochs may not be enough. Introducing a validation set may help us here.
 
 # 5. References
 

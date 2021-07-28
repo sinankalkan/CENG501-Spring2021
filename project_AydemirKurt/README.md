@@ -19,7 +19,18 @@ Proposed method is given below:
 
 ## 2.1. The original method
 
-Explain the original method.
+There are two branches on network architecture. One is to detect object and create the bounding boxes, other is to segmentation. In first branch a U shaped architecture used with skip layers (See [UNet(Ronneberger et al.2015)](https://arxiv.org/abs/1505.04597) ). 
+
+<p align="center">
+	<img src="figures/detBranch.png", width="600">
+</p>
+
+Skip layers are combined using the below:
+
+<p align="center">
+	<img src="figures/skip.png", width="600">
+</p>
+
 
 ## 2.2. My interpretation 
 

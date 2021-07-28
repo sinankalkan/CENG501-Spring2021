@@ -113,7 +113,7 @@ The full process and outputs of each step are illustrated in Figure 2. Average P
 | Ours, α=1, σ=0.25    | 23.856216 | 0.697551 |
 | Ours-SN, α=1, σ=0.25 | 18.769699 | 0.383787 |
 
-_**Table 1.** Average PSNR and SSIM values for the trained network_
+_**Table 1.** Average PSNR and SSIM values for the trained network. σ stands for the standard deviation of Gaussian noise applied during training phase and α stands for the ratio between σs during training and testing phases. See Section 3.3, Equation 6 in Noisier2Noise paper for details_
 
 
 <p align="center">

@@ -37,7 +37,12 @@ What the paper offers is that the training phase captures the statistical charac
 
 The result is the alignment score
 
-Another result derived from the alignment situation is that there is a mapping between eigenvalues of the covariance matrix of image patches and eigenvalues of weights at the first layer. In other words, the first layer learns this mapping function and it is proven in the paper that with different setups and hyperparameters this function's shape is roughly similar. The authors discuss that understanding this function might lead to being able to learn weights by only using input data statistics.
+Another result derived from the alignment situation is that there is a mapping between eigenvalues of the covariance matrix of image patches and eigenvalues of weights at the first layer. In other words, the first layer learns this mapping function and it is proven in the paper that with different setups and hyperparameters this function's shape is roughly similar. The authors discuss that understanding this function might lead to being able to learn weights by only using input data statistics. This mapping is explained in the paper with the following equation
+
+<p align = "center">
+<img src = "figures/Figure4_equ.PNG">
+</p>
+
 
 ### 2.1.2. Transferring more
 
@@ -63,11 +68,7 @@ Other than that, the paper uses a value called "init_scale" for scaling initiali
 
 3. **Figure3**: It is desired to show that, the covariance matrix of the first layer weights aligns with the data covariance matrix. For this reason, a WideResNet (WRN-28-4) is trained on the CIFAR10 examples with random labels. It is required to visually show that, there exist some eigenvectors belonging to filters' covariance matrix aligned with the eigenvectors of the data. For better visualization, the WideResNet model is slightly modified to have 5x5 filters instead of 3x3 filters on the first layer. It should be noted that this modification has a significant impact on network training time.
 
-4. **Figure4**: It is defined that for aligned matrices (data and first layer weights in this case) there exists a transfer function to obtain eigenvalues of first layer weights using data covariance matrix (eigenvectors and eigenvalues). The relation between the data eigenvalues and first layer weight eigenvalues is desired to be observed. This relation is explained in the paper as in the following equation and this equation is used to plot the figures in this part.
-
-<p align = "center">
-<img src = "figures/Figure4_equ.PNG">
-</p>
+4. **Figure4**: It is defined that for aligned matrices (data and first layer weights in this case) there exists a transfer function to obtain eigenvalues of first layer weights using data covariance matrix (eigenvectors and eigenvalues). The relation between the data eigenvalues and first layer weight eigenvalues is desired to be observed. This relation is explained in section 2.1.1 and this equation is used to plot the figures in this part.
 
 For this reason, two networks are used: A two-layer fully connected network, and a two-layer convolutional network. Both of these networks are trained with random labels and real labels and the relation between eigenvalues is observed. It should be noted that some parameters of these two networks are not fully defined. Hence, it is considered these two networks are similar to the networks given in previous experiments. The fully connected networks used in this part has the following structures for their respective figures (figure 4b).
 

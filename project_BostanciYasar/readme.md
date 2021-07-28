@@ -47,17 +47,15 @@ The formulation of the momentum parameter of the MBN for the inference stage is 
 
 <img src="https://latex.codecogs.com/gif.latex?\tau^{\frac{N}{m}}=\tau_{0}^{\frac{N}{m_{0}}}&space;\Rightarrow&space;\tau=\tau_{0}^{\frac{m}{m_{0}}}" title="\tau^{\frac{N}{m}}=\tau_{0}^{\frac{N}{m_{0}}} \Rightarrow \tau=\tau_{0}^{\frac{m}{m_{0}}}" />
 
-The inference momentum parameter is adaptive to batch size. Where N denotes the number of samples in other words batch size and “m0” denotes the ideal batch size. In addition  “tao_zero” is an ideal coefficient and in the originial paper authors set it to 0.90 for the inference step. According to the inference step momentum formula, it can be easily seen that smaller batch size makes the inference momentum parameter smaller as well. 
+The inference momentum parameter is adaptive to batch size. Where N denotes the number of samples in other words batch size and <img src="https://latex.codecogs.com/gif.latex?m_{0}" title="m_{0}" /> denotes the ideal batch size. In addition <img src="https://latex.codecogs.com/gif.latex?{\tau&space;_{0}}" title="{\tau _{0}}" /> is an ideal coefficient and in the originial paper authors set it to 0.90 for the inference step. According to the inference step momentum formula, it can be easily seen that smaller batch size makes the inference momentum parameter smaller as well. 
 
-<img src="https://latex.codecogs.com/gif.latex?m_{0}" title="m_{0}" />
+
 
 <img src="https://latex.codecogs.com/gif.latex?\rho" title="\rho" />
 
 <img src="https://latex.codecogs.com/gif.latex?\tau" title="\tau" />
 
 <img src="https://latex.codecogs.com/gif.latex?m" title="m" />
-
-<img src="https://latex.codecogs.com/gif.latex?{\tau&space;_{0}}" title="{\tau _{0}}" />
 
 <img src="https://latex.codecogs.com/gif.latex?\lambda" title="\lambda" />
 

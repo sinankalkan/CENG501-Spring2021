@@ -79,7 +79,7 @@ https://colab.research.google.com/drive/1p497oiw_nq-5X9c0t9eLL0GVyYhuUZUo?usp=sh
 Their setup given below:
 "The training images are augmented using random cropping and random horizontal/vertical flipping. We set 100 epochs for training. We stop the network when the validation loss does not significantly decrease. The input resolution of training and testing images is 512×512. The weights of the backbone network are pre-trained on ImageNet dataset. Other weights of the network are initialized from a standard Gaussian distribution. We use Adam with an initial learning rate of 1.25e-4 to optimize the model weights. We implement the model with PyTorch on NVIDIA M40 GPUs."
 
-We used exactly same parameters with 10 epochs. However, since google colab did not let us to use it anymore (GPU limit reached), we only have the 5 epoch results.
+We used exactly same parameters with 10 epochs. However, since google colab did not let us to use it anymore (GPU limit reached), we only have the 5 epoch results for kaggle DSB52018 dataset.
 
 ## 3.2. Running the code
 The part below directly taken form [the real repository.](https://github.com/yijingru/ObjGuided-Instance-Segmentation)
@@ -106,7 +106,27 @@ python main.py --phase eval --data_dir YourDataPath --dataset YourDatasetName --
 ```
 ## 3.3. Results
 
-Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
+Output of the eval function:
+```
+ap@0.5 is 0.7817917000451478, iou is 0.8159621532246749
+ap@0.55 is 0.7420598926153958, iou is 0.8267407055455888
+ap@0.6 is 0.7027410652673193, iou is 0.8366706783924476
+ap@0.65 is 0.6526887459787108, iou is 0.8473813933669887
+ap@0.7 is 0.5855413254640123, iou is 0.8610690677047939
+ap@0.75 is 0.49836565846319414, iou is 0.875981400107438
+ap@0.8 is 0.38387169408242716, iou is 0.8939700495156038
+ap@0.85 is 0.23473154767889984, iou is 0.9154754407514619
+ap@0.9 is 0.0948747988760061, iou is 0.9402873869874471
+ap@0.95 is 0.010814004286980127, iou is 0.9726941869071761
+```
+
+#### Table1. Comparison of Results    
+ 
+Results| AP 0.5| AP 0.75 | IOU 0.5 | IOU 0.75 | FPS | 
+-------|-------|---------|---------|----------|-----|
+Paper | 84.85 | 65.14| 87.17| 91.47| 3.27|
+Ours | 78.17| 49.83| 81.59| 87.59 | 2.76|
+
 
 # 4. Conclusion
 

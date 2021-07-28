@@ -93,9 +93,39 @@ Note that if there are no checkpoints, you will not be able to run test mode. An
 
 ## 3.3. Results
 
-The code is tested on a Windows 10 (v19042.1110) machine with single NVIDIA GeForce RTX 3070 GPU.
+The code is tested on a Windows 10 (v19042.1110) machine with single NVIDIA GeForce RTX 3070 GPU. The network is trained for 11 epochs, which took ~11 hours in total (i.e. 1h/epoch).
 
-Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
+
+
+**Gallery**
+
+<p align="center">
+<i>(Left: Clean target images, Right: Denoised images)</i>
+</p>
+
+<p align="center">
+  <img src="readme_fig/sample_0_clean.jpg" width="30%" height="30%"> <img src="readme_fig/sample_0_denoised.png" width="30%" height="30%">
+</p>
+
+<p align="center">
+  <img src="readme_fig/sample_1_clean.jpg" width="30%" height="30%"> <img src="readme_fig/sample_1_denoised.png" width="30%" height="30%">
+</p>
+
+<p align="center">
+  <img src="readme_fig/sample_2_clean.jpg" width="30%" height="30%"> <img src="readme_fig/sample_2_denoised.png" width="30%" height="30%">
+</p>
+
+<p align="center">
+  <img src="readme_fig/sample_3_clean.jpg" width="30%" height="30%"> <img src="readme_fig/sample_3_denoised.png" width="30%" height="30%">
+</p>
+
+<p align="center">
+  <img src="readme_fig/sample_4_clean.jpg" width="30%" height="30%"> <img src="readme_fig/sample_4_denoised.png" width="30%" height="30%">
+</p>
+
+<p align="center">
+  <img src="readme_fig/sample_5_clean.jpg" width="30%" height="30%"> <img src="readme_fig/sample_5_denoised.png" width="30%" height="30%">
+</p>
 
 # 4. Conclusion
 

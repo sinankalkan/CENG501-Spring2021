@@ -136,6 +136,8 @@ Beam Search Length Penalty Exponent (alpha) | 0.6 | 0.6
 
 The data is available [here](https://github.com/tlatkowski/st).
 
+The loss curves can be accessed at our [Weights and Biases report for style transfer](https://wandb.ai/demegire/transformer/reports/Style-Transfer--Vmlldzo4ODgzMTQ).
+
 ![Training Curves](https://user-images.githubusercontent.com/62503047/127185010-28cb14ca-7b6e-47e3-8c85-29abef553a03.png)
 
 ![Validation Curves](https://user-images.githubusercontent.com/62503047/127185236-5c748f9c-98ea-4acf-bfdd-908f985aca9f.png)
@@ -162,6 +164,8 @@ Beam Size | 5 | 5
 Beam Search Length Penalty Exponent (alpha) | 0.6 | 0.6
 
 The data is available [here](http://www.statmt.org/wmt14/translation-task.html). We only use the Europarl v7 dataset whereas the authors also used Common Crawl Corpus and the News Commentary.
+
+The loss curves can be accessed at our [Weights and Biases report for style transfer](https://wandb.ai/demegire/transformer/reports/Translation--Vmlldzo4ODgzMTE).
 
 ![W B Chart 7_28_2021, 1 38 15 PM](https://user-images.githubusercontent.com/62503047/127309563-87e06b18-e832-4b16-bee3-13009c5f42c7.png)
 
@@ -235,7 +239,7 @@ PHM-Transformer (n=16) | 2.9M | 33.89 | - | -
 
 Our results:
 
-Model | Parameters | BLEU | Train time for 10,000 steps (sec) | Inference time for 500 lines (sec)
+Model | Parameters | BLEU | Train time for 50,000 steps (sec) | Inference time for 500 lines (sec)
 ------------ | ------------- | ------------- | ------------- | ------------- 
 Transformer | 27,309,056 | 17.91 | 2257 | 257
 PHM-Transformer (n=2) | 13,579,416 | 17.89 | 2604 | 392

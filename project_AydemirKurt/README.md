@@ -20,6 +20,7 @@ Proposed method is given below:
 There are two branches on network architecture. One is to detect object and create the bounding boxes, other is to segmentation.
 
 ### 2.1.1 Detection Branch
+
 In first branch a U shaped architecture used with skip layers (See [4] ). Skip layers made the layer size double at each combine operation. U shaped network and Skip layer schema is given below:
 <p align="center">
 	<img src="figures/detBranch.png", height="300">
@@ -47,6 +48,13 @@ The center points are predicted from downsized heatmaps. When mapping these poin
 2.1.1.3 Width-Height Map: 
 
 Width and height of bounding boxes are obtained from heatmaps. The authors used L1 loss to regress width and height of bounding boxes.
+
+### 2.1.2 Segmentation Branch
+After cropping RoI patches from encoder and object layers using the bounding boxes, a deep to shallow segmentation branch is developed through a skip combination module as can be seen in Figure 1. For removing the neighbor statistics from RoI patches the authors use instance normalization. For the optimization of segmentation branch, binary cross entropy loss is used. Different sampling method is used. Instead of batch norm instance norm is used:
+
+<p align="center">
+	<img src="figures/skip2.png", height="300">
+</p>
 
 
 ## 2.2. My interpretation 

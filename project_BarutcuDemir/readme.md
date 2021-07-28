@@ -61,7 +61,7 @@ So the process for n=2, dim1=6 and dim2=8 looks like:
 ![Screenshot (587)](https://user-images.githubusercontent.com/62503047/127239397-3313b5e1-bd4d-4041-951b-42dea44b44d6.png)
 
 
-The number of parameters here is given by elements in tensor A + tensor B which is n^3 + dim1\*dim2/n. So while 1/n effectively scales the parameters size, there is also a n^3 term which becomes evident with large n. This is further investigated in 2.2. So what does this have to do with quaternions? Remember Figure X. This Hamilton can be expressed as a PHM operation with n=4:
+The number of parameters here is given by elements in tensor A + tensor B which is n^3 + dim1\*dim2/n. So while 1/n effectively scales the parameters size, there is also a n^3 term which becomes evident with large n. This is further investigated in 2.2. So what does this have to do with quaternions? Remember the Hamilton product in matrix form above. This Hamilton product can be expressed as a PHM operation with n=4:
 
 ![Screenshot (589)](https://user-images.githubusercontent.com/62503047/127239480-66083189-ca2a-4077-961d-d023ff3b6704.png)
 

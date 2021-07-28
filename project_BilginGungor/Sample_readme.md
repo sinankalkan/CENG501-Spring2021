@@ -63,7 +63,25 @@ Other than that, the paper uses a value called "init_scale" for scaling initiali
 
 3. **Figure3**: It is desired to show that, the covariance matrix of the first layer weights aligns with the data covariance matrix. For this reason, a WideResNet (WRN-28-4) is trained on the CIFAR10 examples with random labels. It is required to visually show that, there exist some eigenvectors belonging to filters' covariance matrix aligned with the eigenvectors of the data. For better visualization, the WideResNet model is slightly modified to have 5x5 filters instead of 3x3 filters on the first layer. It should be noted that this modification has a significant impact on network training time.
 
-4. **Figure4**: It is defined that for aligned matrices (data and first layer weights in this case) there exists a transfer function to obtain eigenvalues of first layer weights using data covariance matrix (eigenvectors and eigenvalues). The relation between the data eigenvalues and first layer weight eigenvalues is desired to be observed. For this reason, two networks are used: A two-layer fully connected network, and a two-layer convolutional network. Both of these networks are trained with random labels and real labels and the relation between eigenvalues is observed. It should be noted that some parameters of these two networks are not fully defined. Hence, it is considered these two networks are similar to the networks given in previous experiments.
+4. **Figure4**: It is defined that for aligned matrices (data and first layer weights in this case) there exists a transfer function to obtain eigenvalues of first layer weights using data covariance matrix (eigenvectors and eigenvalues). The relation between the data eigenvalues and first layer weight eigenvalues is desired to be observed. This relation is explained in the paper as in the following equation and this equation is used to plot the figures in this part.
+
+<p align = "center">
+<img src = "figures/Figure4_equ.PNG">
+</p>
+
+For this reason, two networks are used: A two-layer fully connected network, and a two-layer convolutional network. Both of these networks are trained with random labels and real labels and the relation between eigenvalues is observed. It should be noted that some parameters of these two networks are not fully defined. Hence, it is considered these two networks are similar to the networks given in previous experiments. The fully connected networks used in this part has the following structures for their respective figures (figure 4b).
+
+<p align = "center">
+<img src = "figures/AppendixE1_settings.PNG">
+</p>
+<p align = "center">
+Table-4a - Fully connected network architecture for obtaining figure 4a left and figure 4b.
+</p>
+
+These fully connected networks are trained with a batch size of 128, learning rate of 0.01 and epoch of 200.
+
+The networks used to obtain figure 4a-middle and figure 4a-right is a two-layer convolutional network with 256 convolutional filters followed by 64 fully-connected nodes, which connects to the classifier head of 10 classes. 
+
 
 5. **Figure5**: It is desired to show the difference of accuracy on downstream tasks when different kinds of upstream training are performed:
     - A network is pre-trained on random labels, obtained weights are used in the downstream task. Weights are not scaled as it is done in Figure1 setup.
@@ -82,7 +100,7 @@ In the paper, each experiment and idea is also supported with a figure. In the p
 <img src = "figures/figure1_original.png">
 </p>
 <p align = "center">
-Figure-1 - Original Figure1 in the paper
+Figure-1a - Original Figure1 in the paper
 </p>
 
 <p float="left">
@@ -93,11 +111,61 @@ Figure-1 - Original Figure1 in the paper
 </p>
 
 <p align = "center">
-Figure-2 - Reproduction of Figure1. The upper left image corresponds the first part of the original image the upper right image corresponds the second part of the original image and etc.
+Figure-1b - Reproduction of Figure1. The upper left image corresponds the first part of the original image the upper right image corresponds the second part of the original image and etc.
 </p>
 
-It can be seen from the Figure-1 and Figure-2 that results for downstream task with real labels are reproduced similar to the paper. For these task there is a clear separation indicating positive and negative transfer. However, for downstream task with random labels, the results are not as expected. We believe that this situation stems from the lack of experimental setup of downstream tasks with random labels. As it's discussed in section 2.2, crucial information such as number of random classes to be used is missing. Also, value of init_scale parameter which we could not fit into our experiments changes between random and real labeled trainings. This might lead to the differences between the results presented here.
+It can be seen from the Figure-1a and Figure-1b that results for downstream task with real labels are reproduced similar to the paper. For these task there is a clear separation indicating positive and negative transfer. However, for downstream task with random labels, the results are not as expected. We believe that this situation stems from the lack of experimental setup of downstream tasks with random labels. As it's discussed in section 2.2, crucial information such as number of random classes to be used is missing. Also, value of init_scale parameter which we could not fit into our experiments changes between random and real labeled trainings. This might lead to the differences between the results presented here.
  
+### 3.3.2 Misalignment between data and first layers.
+ 
+
+### 3.3.3 Visualization of covariance matrices of first layer and data
+
+
+### 3.3.4 Relation between eigenvalues of first layer and data
+
+Relation between eigenvalues of the first layer and training data is represented as in the next figure:
+
+<p align = "center">
+<img src = "figures/Figure4_original.PNG">
+</p>
+<p align = "center">
+Figure-4a - Original Figure4 in the paper
+</p>
+
+Before talking about the results on the middle and right figures from figure 4a, information on left figure should be explained. In the left figure, artificial data is generated by an artificial covariance matrix and a network is trained as explained in section 3.1 . To better explain the left figure, paper presents Appendix E-1 where three different figures are generated from the training of artificial datas and different networks architectures (All are fully connected networks). The results obtained from these figures is as follows in Appendix E-1.
+
+<p align = "center">
+<img src = "figures/AppendixE1_original.PNG">
+</p>
+<p align = "center">
+Figure-4b - Original Figure20 (from Appendix E1) in the paper
+</p>
+
+In order to check the correctness of eigenvalue relations, these simpler networks and their eigenvalue relations are checked first. Upon creating the artificial data and creating networks, the networks are trained and first layer weights (and their covariance matrices) are used to obtain the following figures. Each figure represents 5 runs
+with different random initializations.
+
+<p float="left">
+  <img src="figures/AppendixE1_1.png" width="33%"/>
+  <img src="figures/Figure4_1.png" width="33%"/> 
+  <img src="figures/AppendixE1_3.png" width="33%"/>
+</p>
+
+Upon inspection of these figures, it can be seen that the claim of the paper holds true. Trained
+networks are obtained in which the first layer weights only differ by the same orthogonal transformation Furthermore, both the decreasing part or the increasing part may be missing depending on the architecture or training settings/hyperparameters, but same shape of curves in all experiments are observed.
+
+Since similar results are obtained for the fully connected network, a slightly advanced network (convolutional network as explained in section 3.1) can be inspected and similar eigenvalue relations are obtained. These relations can be seen on the next figure:
+
+<p float="left">
+  <img src="figures/Figure4_2.png" width="49%"/>
+  <img src="figures/Figure4_3.png" width="49%"/> 
+</p>
+
+It can be noted that these figures are more noisy with respect to the figures of the paper in figure 4a. This is becouse in the paper, 50 trainings are averaged while obtaining this figure, only 1 training is done due to trainining time restrictions. However, these figures are sufficient to show the claims of the paper and the generated figures possess the same important characteristics every time its generated. Both curves have somewhat of an increasing and decreasing structure. More importantly, Larger eigenvalues of data covariance matrix lead to larger effective learning rate in gradient descent, which leads in turn to larger corresponding values of first layer weights.
+
+
+### 3.3.4 Accuracy on downstream tasks with different kinds of upstream training
+
 # 4. Conclusion
 
 Discuss the paper in relation to the results in the paper and your results.

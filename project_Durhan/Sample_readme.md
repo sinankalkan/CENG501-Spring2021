@@ -14,7 +14,7 @@ In Quantum Mechanics, the solution of the Schrödinger's equation provides full 
 which may not be solved analytically such as energy levels of Helium atom. There are numerical methods to retrieve the eigenenergies of physical systems such as 
 variational methods. Once the problem is reduced to a optimization problem one can use Neural Networks to solve the problem. In the literature, it is often to see the 
 methods which uses trial wavefunctions and imposed boundary conditions than seek for the solutions. In this paper, however, there is no trial wavefunctions and 
-boundary conditions. The problem was solved in an unsupervised manner.
+boundary conditions. The problem was solved in an unsupervised manner. The method is described in more details in section 2.1 
 
 Summarize the paper, the method & its contributions in relation with the existing literature.
 
@@ -22,15 +22,59 @@ Summarize the paper, the method & its contributions in relation with the existin
 
 ## 2.1. The original method
 
+The method that was used in the study was quite simple. Given the basis functions of the system, the expectation value of the Hamiltonian was used as the loss 
+function. The input of the network is the position and the output is the ground state wavefunction.    
+
 Explain the original method.
 
 ## 2.2. My interpretation 
+Some of hyperparameters such as the learning rate and the number of epochs were not expressed in the study. Therefore it was cumbersome to finetune the networks. 
 
+Theoretically, the input space (i.e. the position space) must be a continous interval. It was stated that the projections of the outputs onto the Hilbert space (i.e. 
+the basis functions) were calculated using Riemann's sum. According to this, one has,
+
+![render](https://user-images.githubusercontent.com/47567854/127363943-de8d30e7-7945-4402-90fd-a3b69182ec30.png)
+
+The loss definitions and the training can be found in section 3.1 
+  
 Explain the parts that were not clearly explained in the original paper and how you interpreted them.
 
 # 3. Experiments and results
 
 ## 3.1. Experimental setup
+
+In the study the one dimensional infinite well with and without perturbation were inspected. For the unperturbed system with the well width a = 1 , a neural 
+network with one hidden layer of 1000 thousands ReLU activations were used. However, in my experiments I found this insufficient and put one extra hidden layer of the 
+same size. The basis functions in the one dimensional infinite well were defined as,    
+
+![b_n](https://user-images.githubusercontent.com/47567854/127366652-068e95a8-2377-4726-8aaf-7dfb3a20b37b.png)
+
+For every experiment N = 100 basis functions were used. The expectation value of the Hamiltonian in the unperturbed system, i.e. the loss function is given as,     
+
+![hamilton_unperturbed](https://user-images.githubusercontent.com/47567854/127367205-7dd102ba-17a6-477d-85c7-7227144211a2.png)
+
+where the energy eigenvalues of the unperturbed system is,
+
+![render_2](https://user-images.githubusercontent.com/47567854/127366875-5f90533f-07f8-4eb0-8f5a-ed42c5f02176.png)
+
+As far as the perturbed system is concerned, a perturbation term should be added to the unperturbed Hamiltonian i.e. 
+
+![add_hams](https://user-images.githubusercontent.com/47567854/127367931-2d522c02-297b-43f6-930f-9c9f88650724.png)
+
+where the perturbed Hamiltonian can be defined as, 
+
+
+![perturbed_hamiltonian](https://user-images.githubusercontent.com/47567854/127368324-5fd3d8e6-a475-4c08-8d5b-f0832a54e9b6.png)
+
+α is the perturbation constant and where, 
+
+![x_nm](https://user-images.githubusercontent.com/47567854/127368545-55bb0f0a-e94a-4272-beec-632f193427b5.png)
+
+For the perturbed setup a network with two hidden layers with 500 and 100 ReLU activations were used for two configurations,
+
+i. a=1 & α = 8.
+ii. a = 10 & α = 2.
+
 
 Describe the setup of the original paper and whether you changed any settings.
 

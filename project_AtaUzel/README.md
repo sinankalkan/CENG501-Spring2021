@@ -143,7 +143,7 @@ Finally, one should run "q_learning.py" script. This script will use the final b
 
 The file "scaling.py" includes a function that is necessary to scale the objects to the desired sizes.
 
-"textures" and "selected textures" folders include the textures for the ground and the objects respectively.
+"textures" and "selected textures" folders include the texture for the ground and the textures for the objects respectively.
 
 "reactor_description" folder includes the 3D models and urdf definition of the robotic manipulator.
 

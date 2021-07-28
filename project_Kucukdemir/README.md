@@ -34,7 +34,7 @@ The network architecture used in this method is [U-Net by Ronneberger et al. (20
 
 After reading the original paper and Noise2Noise by Lehtinen et al., I was able to implement the method without having any major issues. There are still two ambiguous points, though. 
 
-First, the number of epochs used in their experiments are not mentioned in the original work. The other (and kind of related) problem is, I could not directly understand when to use scheduler to reduce learning rate from 10<sup>-3</sup> to 10<sup>-4</sup>. As a result, I skipped learning rate scheduling and did not implement it.
+First, the number of epochs used in their experiments is not mentioned in the original work. The other (and kind of related) problem is, I could not directly understand when to use scheduler to reduce learning rate from 10<sup>-3</sup> to 10<sup>-4</sup>. As a result, I skipped learning rate scheduling and did not implement it.
 
 # 3. Experiments and results
 

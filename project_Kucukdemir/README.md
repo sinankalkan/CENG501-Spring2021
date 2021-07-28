@@ -18,7 +18,7 @@ In CVPR 2020, Moran et al. proposed Noisier2Noise, which is mainly based on a pr
 
 <p align="center">
   <img src="readme_fig/method.png">
-  Figure 1. The brief overview of the method. Taken from the original paper.[1]
+  <i>Figure 1. The brief overview of the method. Taken from the original paper[1].</i>
 </p>
 
 In summary, the training step works as follows:
@@ -94,6 +94,12 @@ Note that if there are no checkpoints, you will not be able to run test mode. An
 ## 3.3. Results
 
 The code is tested on a Windows 10 (v19042.1110) machine with single NVIDIA GeForce RTX 3070 GPU. The network is trained for 11 epochs, which took ~11 hours in total (i.e. 1h/epoch).
+
+<p align="center">
+<img src="readme_fig/steps_0_clean.jpg" width="15%" height="15%"> <img src="readme_fig/steps_1_noisy.png" width="15%" height="15%"> <img src="readme_fig/steps_2_noisier.png" width="15%" height="15%"> <img src="readme_fig/steps_3_residual.png" width="15%" height="15%"> <img src="readme_fig/steps_4_denoised.png" width="15%" height="15%">
+  
+<i>Figure 2. Steps of the method. From left to right: Clean target, Singly-noisy realization(network input), Doubly-noisy realization(network output), Residual, Denoised result</i>
+</p>
 
 <p align="center">
 <b>Gallery</b>

@@ -21,7 +21,7 @@ In CVPR 2020, Moran et al. proposed Noisier2Noise, which is mainly based on a pr
   Figure 1. The brief overview of the method. Taken from the original paper.[1]
 </p>
 
-In summary, the training step works as follow:
+In summary, the training step works as follows:
 * We first apply some noise to the clean image. Note that our network will not see the clean image directly.
 * Then, we apply noise one more time to get doubly-noisy realization of the clean image.
 * Then, we feed the network with doubly-noisy realization and try to predict singly-noisy realization.

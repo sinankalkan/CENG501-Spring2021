@@ -7,7 +7,7 @@ This readme file is an outcome of the CENG501 (Spring 2021) project for reproduc
 The goal of this study is to reproduce the results of the paper “Semi-supervised Semantic Segmentation via Strong-weak Dual-branch Network”[1], authored by Wenfeng Luo and Meng Yang. The paper was published in the European Conference on Computer Vision in year 2020. We used Google Colab as implementation environment throughout our project. 
 
 ## 1.1. Paper summary
-### 1.1.1 Objective of the study
+### 1.1.1. Objective of the study
 
 Researchers’ main objective is to utilize the weakly supervised (image level labeled) data in image segmentation tasks. In semantic segmentation problem, convolutional neural networks (CNNs) are observed to be very powerful but they need mass amount of annotated data to be precise. However, obtaining strongly annotated data (pixel-level annotated data) is very time consuming and expensive. The study showed that training single branch networks with strong and weak annotations  even decreases the accuracy compared to networks trained with only  strongly annotated data. 
 
@@ -17,7 +17,7 @@ Figure 1: Plot from the paper [1] showing performance of the single branch netwo
 
 In the figure the performance of 3 different combinations of datasets using the same single branch network is shown. The blue line represents the results achieved via strong 1.4 k data, red line represents the performance gathered by using both 1.4k strong and 9k weak data, and the green line represents the results of 10k weak data only. The best performance is obtained using strongly annotated 1.4k data. However the performance of the task with strong 1.4 k and weak 9k data is substantially lower than the first one. Furthermore, the result obtained with using only weakly annotated 10k data and no strongly annotated data is approximately close to the results of the strong and weak combination. This shows that for a single branch network architecture, weakly annotated data has no use in increasing the accuracy of the semantic image segmentation task and it also downgrades the performance gained with just a small strongly annotated data in a single branch network architecture. 
 Authors mentioned that the simple combination of strong and weak annotations with equal treatment may weaken the final performance and so they tried different methods to combine strong and weak data in various ways to increase the accuracy. Authors followed a different perspective: They used a dual branch network and fed two branches simultaneously via using different combinations of strong and weak data. The details of the original method are given in 2.1.
-### 1.1.2 Contributions
+### 1.1.2. Contributions
 
 Researchers mention about 3 main contributions of their paper [1]:
 1.	They for the first time showed that segmentation network trained under mixed strong and weak annotations achieves even worse results than using only the strong ones.
@@ -65,11 +65,11 @@ In the paper, authors used random scaling and horizontal flipping as data augmen
 We adapted the settings about learning rate and Adam optimizer the same as the Single Branch experiments. For the dual branch, the network size was not appropriate for training in the Colab environment. To decrease the network size, we halved the depth parameters. For obtaining better loss values, we increased the learning rate by a factor of 10 and used an initial learning rate of 1e-3 for the newly-added branches and 5e-5 for the backbone. The learning rate is decayed by a factor of 10 after  12 epochs as in the original paper. We used the same batch size and weight decay parameters.
 For the dataset class implementations, we adapted the code from the github page https://github.com/DevikalyanDas/Semantic-Segmentation-of-pascal-voc-dataset-using-Pytorch/blob/main/Pascal_VOC_Segmentation.ipynb [6]. 
 
-### 2.2.1 Single Branch Network
+### 2.2.1. Single Branch Network
 
 For the backbone, we used pretrained ResNet 18 excluding the last 2 layers. Afterwards, as the paper says, we added a neck part which consists of 3 layers in our case. In the first 2 neck layers we decreased the number of channels to half. In the third neck layer we did not change the number of channels. We decreased the number of channels from the initial value 512 to 128 during the first 2 neck layers. When we tried higher depth values, we came up with a very huge number of parameters after implementing the single branch following the neck layers. Thus, we decided to downsize channels during the neck phase to get less number of parameters in the following phases considering our limited resources with Google Colab. We applied ReLU as nonlinearity at the neck layers. After the neck, we implemented 4 transposed convolutional layers to increase the width and height gradually and at the last transposed convolutional layer we got (328,328) as width and height. Moreover, to be able to map channels to classes (21 PASCAL VOC dataset classes) we placed 1x1 convolutional layer to the end of the single branch. We applied batch normalization at the initial layers of the neck and single branch modules.  We used Xavier initialization for convolutional layers.
 
-### 2.2.2 Dual Branch Network
+### 2.2.2. Dual Branch Network
 
 As in the Single Branch Network, we used ResNet 18 excluding the last 2 layers for the backbone. We added a neck part which consists of 3 layers in our case. Due to Colab limitations, we decreased the number of channels from 512 to 64 in the neck layers. The branches have identical architecture. As in the single branch network, we have 4 transposed convolution and 1 1x1 convolution layers. We applied ReLU non-linearity and batch normalization similarly as in the Single Branch Network. We used Xavier initialization for convolutional layers.    
 
@@ -77,7 +77,7 @@ As in the Single Branch Network, we used ResNet 18 excluding the last 2 layers f
 
 ## 3.1. Experimental setup
 
-### 3.1.1 About datasets
+### 3.1.1. About datasets
 
 As in the paper, we used PASCAL VOC 2012 dataset as the main dataset for strongly annotated data. For weakly annotated data, we downloaded Semantic Boundary Detection (SBD) dataset and generated weakly annotated data using DSRG method as well.  We carried our evaluations on the validation split of the PASCAL VOC 2012 dataset.
 
@@ -89,7 +89,7 @@ During the construction of weakly annotated datasets since we used DSRG as the g
 
 We used Semantic Boundaries Dataset’s (SBD Dataset) train partition (5623 images) to generate additional 5.6 k weakly annotated data. In total we had 7072 weakly annotated images. We used first 1500 of them as the additional weakly annotated data to train our Single Branch Network. 
 
-### 3.1.2 Experiments with the Single Branch Network
+### 3.1.2. Experiments with the Single Branch Network
 
 In Single Branch Network, our first experiment was training the network with 1.4 strong data (train partition of PASCAL VOC 2012 dataset). After that, we tested predictions and evaluated our results. In the paper, authors came up with 68.9 mIoU as the performance. We came up with 22.38. Our loss curve was as shown below:
 
@@ -103,7 +103,7 @@ The second experiment we performed with this network is training the single bran
 
 Figure 6. Loss curve for Single Branch Network trained with strong and weak annotations
 
-### 3.1.3 Experiments with the Dual Branch Network
+### 3.1.3. Experiments with the Dual Branch Network
 
 We performed an experiment with the dual branch network by feeding 1.4k strongly annotated data to the strong branch and 1.4k weakly annotated data to the weak branch. We could train the network for 20 epochs with considerably less amount of data (ten percent of data) when compared to the original paper.   
 
@@ -148,7 +148,7 @@ When we evaluated the predictions of the DSRG network we trained for 1500 epochs
 
 Table 1. Evaluation results for the weakly generated dataset for the DSRG implementation
 
-### 3.3.1 Single Branch with strong annotated data
+### 3.3.1. Single Branch with strong annotated data
 
 ![image](https://user-images.githubusercontent.com/85442860/127393510-f337c98b-1126-41c8-99d8-ea0a798fb87e.png)
 
@@ -158,7 +158,7 @@ Table 2. Evaluation results for the Single Branch Network trained with strongly 
 
 Figure 8. Prediction from the Single Branch Network trained with strongly annotated data. The input image is shown on the left.
 
-### 3.3.2 Single Branch with strong+weakly annotated data
+### 3.3.2. Single Branch with strong+weakly annotated data
 
 ![image](https://user-images.githubusercontent.com/85442860/127393848-bab45b89-6b55-40bf-9322-89ee233c3f7c.png)
 
@@ -168,7 +168,7 @@ Table 3. Evaluation results for the Single Branch Network trained with strong an
 
 Figure 9. Prediction from the Single Branch Network trained with strong+weakly annotated data. The input image is shown on the left.
 
-### 3.3.3 Dual Branch with strong+weakly annotated data
+### 3.3.3. Dual Branch with strong+weakly annotated data
 
 Since we had a limited GPU, we trained the model for 20 epochs and although training loss values are satisfying we couldn’t obtain good predictions for the dual branch case. mIoU was 3.3, the predictions were random figures as shown below. 
 
@@ -197,8 +197,7 @@ https://deepai.org/dataset/pascal-voc, https://www.microsoft.com/en-us/research/
 [4] Semantic Boundaries Dataset: http://home.bharathh.info/pubs/codes/SBD/download.html
 [5] DSRG PyTorch implementation: https://github.com/terenceylchow124/DSRG_PyTorch/
 [6] Main source for the dataset implementations:  https://github.com/DevikalyanDas/Semantic-Segmentation-of-pascal-voc-dataset-using-Pytorch/blob/main/Pascal_VOC_Segmentation.ipynb  
-[7] Our DSRG fork for training DSRG and generating the weak dataset:
-https://github.com/duygu-dinc/DSRG_PyTorch  
+[7] Our DSRG fork (originally taken from https://github.com/terenceylchow124/DSRG_PyTorch and revised for our project) for training DSRG and generating the weak dataset is available as a separate zip file named "DSRG_PyTorch-main"
 
 
 # Contact

@@ -76,8 +76,8 @@ The paper proposes PHM Transformers and LSTM's. They define a PHM Transformer su
 3.  the linear layer weights of feedforward network subsequent to the multiheaded attention in encoder/decoder layers
 
 For PHM LSTM:
-2. Input gate, Forget gate and cell states are replaced with PHM version. Following linear layers are not changed as stated in paper.
-1. Outputs of premise and hypothesis hidden states are concatenated with max and mean pooling heuristic. Resulting vectors are then fed into two layer 300 dimension multi-layer perceptron. 
+1. Input gate, Forget gate and cell states are replaced with PHM version. Following linear layers are not changed as stated in paper.
+2. Outputs of premise and hypothesis hidden states are concatenated with max and mean pooling heuristic. Resulting vectors are then fed into two layer 300 dimensional multi-layer perceptron. 
 
 ## 2.2. Our interpretation 
 

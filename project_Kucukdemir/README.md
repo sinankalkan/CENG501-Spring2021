@@ -83,7 +83,7 @@ denoised
 
 **How to Run**
 
-You should copy training/testing images under data directory according to the file structure shown above. After doing that, simply cd into "code" directory and run 
+You should copy training/testing images under data directory according to the file structure shown above <sup>[See here for download links](data/README.md)</sup>. After doing that, simply cd into "code" directory and run 
 ```
 python main.py [test|train] [dataset_id] [save_prob]
 ```

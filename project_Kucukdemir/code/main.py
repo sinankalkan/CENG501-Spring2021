@@ -219,7 +219,7 @@ def get_run_config(checkpoint=None):
         
     return run_config
 
-def main(mode, force_dataset):
+def main(mode, force_dataset, save_prob):
 
     checkpoints_path = '../checkpoints/'
     checkpoints = sorted(os.listdir(checkpoints_path))
@@ -300,7 +300,8 @@ def main(mode, force_dataset):
         denoised_path = '../denoised/'
 
         root_path = '../data/' + cfg['dataset_id'] + '/test/'
-        img_paths = os.listdir(root_path)
+        img_ext = ['jpg','jpeg', 'bmp', 'png', 'gif']
+        img_paths = [fp for fp in os.listdir(root_path) if any(fp.endswith(ext) for ext in img_ext)]
 
         max_loss = 0
         max_psnr = 0
@@ -375,8 +376,7 @@ def main(mode, force_dataset):
                 max_ssim = ssim
             total_ssim = total_ssim + ssim
 
-            save_prob = np.random.random()
-            if save_prob < 0.0011:
+            if np.random.random() < save_prob:
                 save_id = np.random.randint(2147483647)
 
                 tensor_residual_min = torch.min(tensor_residual)
@@ -414,9 +414,14 @@ if __name__ == "__main__":
 
     mode = 'test'
     force_dataset = ''
+    save_prob = 0.9011
 
     argc = len(sys.argv)
-    if argc > 2:
+    if argc > 3:
+        mode = sys.argv[1]
+        force_dataset = sys.argv[2]
+        save_prob = sys.argv[2]
+    elif argc > 2:
         mode = sys.argv[1]
         force_dataset = sys.argv[2]
     elif argc > 1:
@@ -430,4 +435,4 @@ if __name__ == "__main__":
     random_seed = int(time.time()*1000)%(2**32-1) 
     np.random.seed(random_seed)
     
-    main(mode, force_dataset)
+    main(mode, force_dataset, save_prob)

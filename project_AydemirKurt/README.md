@@ -20,21 +20,30 @@ Proposed method is given below:
 ## 2.1. The original method
 
 There are two branches on network architecture. One is to detect object and create the bounding boxes, other is to segmentation. In first branch a U shaped architecture used with skip layers (See [UNet(Ronneberger et al.2015)](https://arxiv.org/abs/1505.04597) ). 
-
 <p align="center">
-	<img src="figures/detBranch.png", width="600">
+	<img src="figures/detBranch.png", width="400">
 </p>
 
-Skip layers are combined using the below:
-
+Skip layers made the layer size double at each combine operation. Skip layer schema is given below:
 <p align="center">
-	<img src="figures/skip.png", width="600">
+	<img src="figures/skip.png", width="400">
 </p>
 
+The output of the U shaped network is used for three operation: Heatmap generation, Bounding Box Width Height, and Bounding Box Offset generation. Hetmap is creating by finding the center of the each Region of Interest(ROI) and place a 2d gaussian to center. 
+<p align="center">
+	<img src="figures/outputDec.png", width="400">
+</p>
 
 ## 2.2. My interpretation 
 
 Explain the parts that were not clearly explained in the original paper and how you interpreted them.
+
+* We did not know if there is a filter before Heatmap, Width-Height, and Offset Heads. In [newer paper](https://arxiv.org/abs/2106.07159) there is filters before each head. But in the code the heads are different. In the code Width-Height and Offset modules filters are swapped so there are 7x7 layers before WH  and 3x3-1x1 layers before offset head. 
+<p align="center">
+	<img src="figures/DecHead.png", width="400">
+</p>
+
+* Non-linearities are never mentioned in paper. However, in code after every convolutional layer there is a ReLU non-linearity Layer.
 
 # 3. Experiments and results
 

@@ -69,16 +69,12 @@ It is also not quite certain in the paper that which loss function is used in th
 
 ## 3.1. Experimental setup
 
-<!--- Describe the setup of the original paper and whether you changed any settings.
-With Colab Pro you get priority access to high-memory VMs. These VMs generally have double the memory of standard Colab VMs, and twice as many CPUs. You will be able to access a notebook setting to enable high-memory VMs once you are subscribed.-->
-<!--- The computation time without disconnection is limited on Google Colab.To solve this problem,we used Colab Pro.With Colab Pro,we get priority access to runtime up to 24 hours and twice as many CPUs compared to standard Colab.However,virtual resources are still limited due to Colab policy.However,Google still apply usage limits on GPU and this forces us to be selective about the runs to be proceeded-->
-<!---  Google needs to maintain the flexibility to adjust usage limits and the availability of hardware on the fly. -->
 In this paper, to evaluate MBN, this method is applied to image classification tasks and experiments are conducted on CIFAR10,CIFAR100 and  Mini-ImageNet100 datasets.\
-The computation time without disconnection is limited on Google Colab.To solve this problem, we used Colab Pro. With Colab Pro, we get priority access to runtime up to 24 hours and twice as many CPUs as standard Colab.  However, Google still applies usage limits on GPU, forcing us to be selective about the runs to have proceeded.Therefore ,we decided to reproduce results for CIFAR10 and CIFAR100. In CIFAR10 and CIFAR100 obtained results showed almost the same trend with the original paper Mini-ImageNet-100 dataset is not implemented in our experiments. 
-The CIFAR10 and CIFAR100 datasets were loaded using torchvision.datasets. Other experimental parameters and details are given in Section 2. Batch size is changed in different experiments by keeping it compatible with the original paper to reproduce the results of the original paper. 
-## 3.2. Running the code
+The computation time without disconnection is limited on Google Colab.To solve this problem, we used Colab Pro. With Colab Pro, we get priority access to runtime up to 24 hours and twice as many CPUs as standard Colab.  However, Google still applies usage limits on GPU, forcing us to be selective about the runs to have proceeded.Therefore ,we decided to reproduce results for CIFAR10 and CIFAR100. Since, the obtained results with CIFAR10 and CIFAR100 datasets showed almost the same trend with the original paper, Mini-ImageNet-100 dataset is not implemented in our experiments. 
 
-Explain your code & directory structure and how other people can run it.
+The CIFAR10 and CIFAR100 datasets were loaded using torchvision.datasets. Other experimental parameters and details are given in Section 2. Batch size is changed in different experiments by keeping it compatible with the original paper to reproduce the results of the original paper. 
+
+## 3.2. Running the code
 
 The notebooks are written for running on Google Colab. All dependencies are available within the current runtime on Google Colab.\
 There are four code notebooks- two for each dataset- one is for MBN and the other is for BN.Each notebook involves all the models.Depending on the experiment,the others should be commented out. Each notebook can be run using "Run All", but the run time may be excessive to complete it all in one run. One might suggest deciding number of epochs based on the available runtime limitations.

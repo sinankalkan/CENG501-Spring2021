@@ -34,7 +34,6 @@ Some implementation details are given in the paper.\
 •	Optimizer: SGD 
 
 
-&\mu_{B}=\frac{1}{M^{2}} \sum_{i=1}^{m} x_{i} \\
 
 
 ## 2.2. My interpretation 

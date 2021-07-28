@@ -133,7 +133,7 @@ parrot
 └─── selected textures
 ```
 
-In order to repeat our experiments, one should firstly run "robot_arm.py" file in order to generate near optimal action-state pairs in "data3" folder. When there is enough data, one can exit the script.
+In order to repeat our experiments, one should firstly run "robot_arm.py" file in order to generate near optimal action-state pairs in "data3" folder. When there is enough data, one can exit the script. In the current version of the repository, "data3" folder includes a single action-state pair for demonstration purposes.
 
 Then, "behavioral_prior.py" should be run in order to train a behavioral prior network based on the generated near optimal action-state pairs. This script will save the trained models inside "bp models" folder. The currently existing "final.pt" file is the final model that is obtained from our behavioral prior training.
 

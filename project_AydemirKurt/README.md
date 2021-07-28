@@ -4,34 +4,50 @@ This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.
 
 # 1. Introduction
 
-The paper we tried to implement is titled Object-Guided Instance Segmentation for Biological Images and published in Proceedings of the AAAI Conference on Artificial Intelligence 34. The authors suggest a box-based instance segmentation method for biological images. Box-based instance segmentation methods use Region of Interest (RoI) patches generated from bounding boxes. These bounding boxes are obtained by examining all the pixels in an image. After obtaining the bounding boxes RoI patches are generated. The Keypoint Graph method[2] uses a separate segmentation branch to operate on cropped RoI patches. In the segmentation branch five keypoints are detected for generating a bounding box, which creates problems when objects are overlapping. In this paper authors suggest using a keypoint based method where only the center point is used to generate each bounding box for overcoming the problem of overlapping keypoints at the detection branch. 
+The paper we tried to implement is titled Object-Guided Instance Segmentation for Biological Images and published in Proceedings of the AAAI Conference on Artificial Intelligence 34. The authors suggest a box-based instance segmentation method for biological images. 
 
 ## 1.1. Paper summary
-Summarize the paper, the method & its contributions in relation with the existing literature.
+Box-based instance segmentation methods use Region of Interest (RoI) patches generated from bounding boxes. These bounding boxes are obtained by examining all the pixels in an image. After obtaining the bounding boxes RoI patches are generated. The Keypoint Graph method[2] uses a separate segmentation branch to operate on cropped RoI patches. In the segmentation branch five keypoints are detected for generating a bounding box, which creates problems when objects are overlapping. In this paper authors suggest using a keypoint based method where only the center point is used to generate each bounding box for overcoming the problem of overlapping keypoints at the detection branch. 
 
+# 2. The method and my interpretation
 Proposed method is given below:
 <p align="center">
 	<img src="figures/method.png", width="800">
 </p>
 
-# 2. The method and my interpretation
-
 ## 2.1. The original method
 
-There are two branches on network architecture. One is to detect object and create the bounding boxes, other is to segmentation. In first branch a U shaped architecture used with skip layers (See [UNet(Ronneberger et al.2015)](https://arxiv.org/abs/1505.04597) ). 
+There are two branches on network architecture. One is to detect object and create the bounding boxes, other is to segmentation.
+
+### 2.1.1 Detection Branch
+In first branch a U shaped architecture used with skip layers (See [4] ). Skip layers made the layer size double at each combine operation. U shaped network and Skip layer schema is given below:
 <p align="center">
-	<img src="figures/detBranch.png", width="400">
+	<img src="figures/detBranch.png", height="300">
+	<img src="figures/skip.png", height="300">
 </p>
 
-Skip layers made the layer size double at each combine operation. Skip layer schema is given below:
-<p align="center">
-	<img src="figures/skip.png", width="400">
-</p>
-
-The output of the U shaped network is used for three operation: Heatmap generation, Bounding Box Width Height, and Bounding Box Offset generation. Hetmap is creating by finding the center of the each Region of Interest(ROI) and place a 2d gaussian to center. 
+The output of the U shaped network is used for three operation: Heatmap generation, Bounding Box Width Height, and Bounding Box Offset generation. 
 <p align="center">
 	<img src="figures/outputDec.png", width="400">
 </p>
+2.1.1.1 Heatmap:
+
+Each object has only one ground truth center location. The authors suggest using a Gaussian circle around each center point following the work of [5] and using the variant focal loss.
+
+<p align="center">
+	<img src="figures/lossHM.png", width="600">
+</p>
+
+Where _i_ indexes _i_ th location in the predicted heatmap _N_ is the total number of center points, _y_ is the ground truth. We use α = 2, β = 4 in this paper.The predicted center heatmaps are refined through a non-maximum-suppression (NMS) operation. The operation employs a 3×3 max-pooling layer on the center heatmaps. The center points are gathered according to their local maximum probability.
+
+2.1.1.2 Offset Map: 
+
+The center points are predicted from downsized heatmaps. When mapping these points from downsized images to their original locations an offset map is needed. The authors used L1 loss for regressing the offset center points.
+
+2.1.1.3 Width-Height Map: 
+
+Width and height of bounding boxes are obtained from heatmaps. The authors used L1 loss to regress width and height of bounding boxes.
+
 
 ## 2.2. My interpretation 
 
@@ -72,9 +88,11 @@ Discuss the paper in relation to the results in the paper and your results.
 
 [4] [Olaf Ronneberger, Philipp Fischer, Thomas Brox.U-Net: Convolutional Networks for Biomedical Image Segmentation. 2015](https://arxiv.org/abs/1505.04597)
 
+[5] [Hei Law, Jia Deng.CornerNet: Detecting Objects as Paired Keypoints.2018](https://arxiv.org/abs/1808.01244)
+
 # Disclaimer
 
-We did not write the code ourselves. The code belongs to [Jingru Yi](https://github.com/yijingru/ObjGuided-Instance-Segmentation). Code of the paper is not shared. [An improved version of the paper](https://arxiv.org/abs/2106.07159) (Yi et al.2021) was published in IEEE Transactions on Medical Imaging. We used that paper's code and deleted the new parts of the paper.
+We did not write the code ourselves. The code belongs to [Jingru Yi](https://github.com/yijingru/ObjGuided-Instance-Segmentation). Code of the paper is not shared. [An improved version of the paper](https://arxiv.org/abs/2106.07159)[3] was published in IEEE Transactions on Medical Imaging. We used that paper's code and deleted the new parts of the paper.
 
 # Contact
 

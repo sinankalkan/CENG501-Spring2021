@@ -94,7 +94,7 @@ It can be seen in Figure-4 that MBN gives similar results with the BN in larger 
 | *Fig 4: Testing accuracy on CIFAR10 and CIFAR100 of ResNet18 with training batch size (BS) 8 and 32.* |
 
 
-In Figure-5 it can be seen the training and testing accuracy curves vs. epoch of ResNet18 with batch size 8. In the original paper, especially in CIFAR100 dataset, in the last section of the training MBN can carry out a considerable perfomance gain compared to other normalization methods. In our results it could not be observed such a dominant performance difference in favor to the MBN. However, in both of the datasets MBN shows a better perfomance and in the last epochs of the training it maintains to increase the accuracy level. This phenomena is consistent with the method promises. 
+In Figure-5 it can be seen that the training and testing accuracy curves vs. epoch of ResNet18 with batch size 8. In the original paper, especially in CIFAR100 dataset, in the last section of the training MBN can carry out a considerable perfomance gain compared to other normalization methods. In our results it could not be observed such a dominant performance difference in favor to the MBN. However, in both of the datasets MBN shows a better perfomance and in the last epochs of the training it maintains to increase the accuracy level. This phenomena is consistent with the method promises. 
 
 | ![fig5.jpg](https://user-images.githubusercontent.com/86877356/126895343-f17f62e0-db71-4999-aa6b-60b924377ef0.png) | 
 |:--:| 

@@ -4,13 +4,13 @@ This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.
 
 # 1. Introduction
 
-This is an unofficial implementation of [Nosier2Noise by Moran et al. 2020](https://arxiv.org/abs/1910.11908).
+This is an unofficial implementation of [Noisier2Noise by Moran et al. 2020](https://arxiv.org/abs/1910.11908).
 
 ## 1.1. Paper summary
 
-In some fields, for example in astrophotography, radiology (MRI) and computer graphics (Monte Carlo renderings), it is difficult to obtain clean images whereas obtaining a noisy one is much easier. Image denoising is the process where we remove noise from such images. 
+In some fields, for example in astrophotography, radiology (MRI) and computer graphics (Monte Carlo renderings), it is difficult to obtain clean images whereas obtaining a noisy one is much easier. Image denoising is the process where we remove noise from such images. After the rise of deep learning techniques in 2012, people began to use CNNs for this purpose and proposed various methods (see [Tian et al. 2020](https://arxiv.org/abs/1912.13171)). 
 
-After the rise of deep learning techniques in 2012, people began to use CNNs for this purpose and proposed various methods (see [Tian et al. 2020](https://arxiv.org/pdf/1912.13171.pdf)). In CVPR 2020, Moran et al. proposed Noisier2Noise, which is mainly based on a previous method called Noise2Noise (Lehtinen et al. 2018). The main contribution of Noisier2Noise is that it does not require clean image targets to train the network, whereas most deep learning base image denoising techniques (including Noise2Noise) do need them in training time.
+In CVPR 2020, Moran et al. proposed Noisier2Noise, which is mainly based on a previous method called [Noise2Noise (Lehtinen et al. 2018)](https://arxiv.org/abs/1803.04189). The main contribution of Noisier2Noise is that it does not require clean image targets to train the network, whereas most deep learning base image denoising techniques (including Noise2Noise) do need them in training time.
 
 # 2. The method and my interpretation
 
@@ -48,7 +48,6 @@ Discuss the paper in relation to the results in the paper and your results.
 * J. Deng, W. Dong, R. Socher, L.-J. Li, K. Li and L. Fei-Fei, "ImageNet: A Large-Scale Hierarchical Image Database". IEEE Computer Vision and Pattern Recognition (CVPR), 2009.
 * D. Martin, C. Fowlkes, D. Tal and J. Malik, "A Database of Human Segmented Natural Images and its Application to Evaluating Segmentation Algorithms and Measuring Ecological Statistics, Proc. 8th Int'l Conf. Computer Vision, 2001.
 * C. Tian, L. Fei, W Zheng, Y. Xu, W. Zuo and C. Lin, "Deep Learning on Image Denoising: An overview", 2020
-
 
 # Contact
 

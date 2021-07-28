@@ -1,0 +1,78 @@
+{
+    "name": "MeticulousNet_L",
+    "n_gpu": 1,
+
+    "arch": {
+        "type": "MeticulousNet",
+        "args": {
+            "backbone": "resnet50",
+            "pretrained_encoder": true
+        }
+    },
+
+    "datamanager": {
+        "type": "MosLDataset",
+        "root": "./datasets",
+        "train_set": [
+            ["ECCSD/images", "ECCSD/masks"],
+            ["MSRA10K/Imgs", "MSRA10K/Imgs"],
+            ["dut-omron/images", "dut-omron/masks"],
+            ["HRSOD_release/HRSOD_train", "HRSOD_release/HRSOD_train_mask"],
+            ["DUTS-TR/DUTS-TR-Image", "DUTS-TR/DUTS-TR-Mask"]
+        ],
+        "val_set": [
+            ["DUTS-TE/SUB-TE-Image", "DUTS-TE/SUB-TE-Mask"]
+        ],
+        "height": 336,
+        "width": 336,
+        "norm_mean": null,
+        "norm_std": null,
+        "pin_memory": false,
+        "batch_size_train": 4,
+        "batch_size_test": 2,
+        "workers": 16
+    },
+
+    "optimizer": {
+        "type": "adam",
+        "args":{
+            "lr":2e-3,
+            "weight_decay": 0,
+            "momentum": 0.9,
+            "staged_lr": true,
+            "new_layers": ["decoder"],
+            "base_lr_mult": 0.5
+        }
+    },
+
+    "lr_scheduler": {
+        "type": "multi_step",
+        "args": {
+            "stepsize": [10, 40],
+            "gamma": 0.5
+        }
+    },
+
+    "trainer": {
+        "type": "MosLTrainer",
+        "epochs": 400,
+        "save_dir": "saved/",
+        "save_period": 2,
+
+        "monitor": "max",
+        "early_stop": 200,
+        "log_per_batch": 300,
+        "warmup_batches": 500,
+
+        "val": true,
+        "val_per_epochs": 1,
+
+        "visualize_train_batch": true,
+        "visualize_val_batch": true,
+        "vis_count": 40
+    },
+
+    "deployment": {
+        "best_model": ""
+    }
+}

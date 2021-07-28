@@ -1,0 +1,74 @@
+{
+    "name": "MeticulousNet_Overfit",
+    "n_gpu": 1,
+
+    "arch": {
+        "type": "MeticulousNet",
+        "args": {
+            "backbone": "resnet50",
+            "pretrained_encoder": true
+        }
+    },
+
+    "datamanager": {
+        "type": "MosLDataset",
+        "root": "./datasets",
+        "train_set": [
+            ["DUTS-TR/overfit-Image", "DUTS-TR/overfit-Mask"]
+        ],
+        "val_set": [
+            ["DUTS-TR/overfit-Image", "DUTS-TR/overfit-Mask"]
+        ],
+        "height": 224,
+        "width": 224,
+        "norm_mean": null,
+        "norm_std": null,
+        "pin_memory": false,
+        "batch_size_train": 1,
+        "batch_size_test": 1,
+        "workers": 0
+    },
+
+    "optimizer": {
+        "type": "adam",
+        "args":{
+            "lr": 8e-3,
+            "weight_decay": 0,
+            "momentum": 0.9,
+            "staged_lr": true,
+            "new_layers": ["decoder"],
+            "base_lr_mult": 0.5
+        }
+    },
+
+    "lr_scheduler": {
+        "type": "multi_step",
+        "args": {
+            "stepsize": [200],
+            "gamma": 0.5
+        }
+    },
+
+    "trainer": {
+        "type": "MosLTrainer",
+        "epochs": 400,
+        "save_dir": "saved/",
+        "save_period": 2000,
+
+        "monitor": "max",
+        "early_stop": 200,
+        "log_per_batch": 300,
+        "warmup_batches": 500,
+
+        "val": true,
+        "val_per_epochs": 1,
+
+        "visualize_train_batch": true,
+        "visualize_val_batch": true,
+        "vis_count": 40
+    },
+
+    "deployment": {
+        "best_model": ""
+    }
+}

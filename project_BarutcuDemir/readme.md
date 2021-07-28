@@ -92,7 +92,7 @@ There are a bunch of things that are ambiguous about the transformer implementat
 6.   Concatenation heuristic method [Qian Chen et al., 2017.](https://arxiv.org/abs/1609.06038) is used in previous work. We used this heuristic for our implementation in NLI task. Concatenation process is done by computing both average and max pooling, and concatenate all these vectors to form the final fixed
 length vector v. The final fixed length vector v is calculated as follows:
 
-![Concat](https://user-images.githubusercontent.com/84293711/127306556-aae51486-42f3-4a7f-9714-9155f8f8a373.jpg)
+  ![Concat](https://user-images.githubusercontent.com/84293711/127306556-aae51486-42f3-4a7f-9714-9155f8f8a373.jpg)
 
 Where *Va,ave* and *Va,max* are LSTM outputs of premise sentences applied by average   and max operations respectively along hidden size direction, and *Vb,ave* and *Vb,max* are the outputs of hypothesis outputs of same process. 
 
@@ -157,6 +157,11 @@ Beam Search Length Penalty Exponent (alpha) | 0.6 | 0.6
 
 The data is available [here](http://www.statmt.org/wmt14/translation-task.html). We only use the Europarl v7 dataset whereas the authors also used Common Crawl Corpus and the News Commentary.
 
+![W B Chart 7_28_2021, 1 38 15 PM](https://user-images.githubusercontent.com/62503047/127309563-87e06b18-e832-4b16-bee3-13009c5f42c7.png)
+
+![W B Chart 7_28_2021, 1 38 26 PM](https://user-images.githubusercontent.com/62503047/127309583-4b0ba188-4f7d-43d9-b18a-669bdcf51a8f.png)
+
+
 \* We do early stopping at 5,175 because the model starts to overfit. The training curves for the models can be viewed above. 
 
 \** The authors report a 'hidden size' for the transformer and we used this value both for feed forward network hidden size and the embedding size.
@@ -202,7 +207,7 @@ Our results:
 Model | Parameters | BLEU | Training time for 1 epoch (sec) | Inference time for 500 lines (sec)
 ------------ | ------------- | ------------- | ----------- | -------------
 Transformer | 29,421,568 | 17.52 | 41.644 | 205
-PHM-Transformer (n=2) | 13,857,048 | 16.55 | 50.492 | -
+PHM-Transformer (n=2) | 13,857,048 | 16.55 | 50.492 | 344
 PHM-Transformer (n=4) | 7,043,264 | 15.39 | 55.223 | 327
 PHM-Transformer (n=8) | 3,651,072 | 16.09 | 63.436 | 358
 PHM-Transformer (n=16) | 2,072,576 | 16.36 | 81.249 | 595
@@ -225,7 +230,7 @@ Model | Parameters | BLEU | Train time for 10,000 steps (sec) | Inference time f
 ------------ | ------------- | ------------- | ------------- | ------------- 
 Transformer | 27,309,056 | 17.91 | 2257 | 257
 PHM-Transformer (n=2) | 13,579,416 | 17.89 | 2604 | 392
-PHM-Transformer (n=4) | 6,830,272 | 17.30 | x | x 
+PHM-Transformer (n=4) | 6,830,272 | 17.30 | 2745 | 438 
 PHM-Transformer (n=8) | 3,463,680 | 18.02 | - | 553 
 PHM-Transformer (n=16) | 1,844,224 | 17.65 | 5003 | 980
 

@@ -56,12 +56,14 @@ Some implementation details are given in the paper.\
 ## 2.2. My interpretation 
 
 <!--- Explain the parts that were not clearly explained in the original paper and how you interpreted them.-->
-Some implementation details are not given in the paper.Therefore, we interpreted them based on literature. \
+Some implementation details are not given in the paper. Therefore, we interpreted them based on literature. \
 •	Data Augmentation\
 •	Preprocessing Techniques\
 •	Loss Function
 
-Data augmentation is not clearly explained in the paper. In the begining of the experiments there were a gap between our and authors results. Therefore, data augmentation is implemented according to the procedure from the literature. 
+Data augmentation is not clearly explained in the paper. In the begining of the experiments there were a gap between our and authors results. Therefore, data augmentation is implemented according to the procedure from the literature [[2]](#2). When it is applied to datasets in our experiments results became closer to the original paper's results so in every experiments conducted in this project this method is used. 
+
+It is also not quite certain in the paper that which loss function is used in the experiments. Firstly, the data augmentation method is fixed and the Cross-Entropy Loss function is used in ResNet18 model with CIFAR10 dataset in our experiment. Then the results are compared with the original experiment and it was observed that the obtained results are compatible with the original paper. Therefore, it is assumed that Cross-Entropy Loss function would be reasonable for this problem and in all of the experiments it is used as our loss function. 
 
 
 # 3. Experiments and results
@@ -141,6 +143,14 @@ Discuss the paper in relation to the results in the paper and your results.
 # 5. References
 
 Provide your references here.
+
+<a name="2"></a>
+
+### <a name="tith"></a>[2] https://medium.com/swlh/how-data-augmentation-improves-your-cnn-performance-an-experiment-in-pytorch-and-torchvision-e5fb36d038fb
+
+
+
+
 
 https://blog.paperspace.com/pytorch-101-building-neural-networks/
 

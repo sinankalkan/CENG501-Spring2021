@@ -33,6 +33,7 @@ Some implementation details are given in the paper.\
 •	Dataset: CIFAR10 and CIFAR100 \
 •	Optimizer: SGD 
 
+$\sigma$
 
 ## 2.2. My interpretation 
 

@@ -48,7 +48,7 @@ Some implementation details are given in the paper.\
 •	Ideal batch size, <img src="https://latex.codecogs.com/gif.latex?m_{0}" title="m_{0}" /> :32 \
 •	Batch size, <img src="https://latex.codecogs.com/gif.latex?m" title="m" /> : 8-16-32 \
 •	Ideal inference momentum parameter, <img src="https://latex.codecogs.com/gif.latex?{\tau&space;_{0}}" title="{\tau _{0}}" />  : 0.9 \
-•	Total epoch number, <img src="https://latex.codecogs.com/gif.latex?T" title="T" />: 200 
+•	Total epoch number, <img src="https://latex.codecogs.com/gif.latex?T" title="T" />: 200 \
 •	Neural network model : RESNET18,RESNET34,RESNET50,VGG11,VGG16 \
 •	Dataset: CIFAR10 and CIFAR100 \
 •	Optimizer: SGD 

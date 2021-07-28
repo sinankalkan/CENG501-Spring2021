@@ -18,7 +18,7 @@ In CVPR 2020, Moran et al. proposed Noisier2Noise, which is mainly based on a pr
 
 <p align="center">
   <img src="readme_fig/method.png">
-  Figure 1. The brief overview of the method. Taken from [Moran et al. 2020](https://arxiv.org/abs/1910.11908)
+  Figure 1. The brief overview of the method. Taken from the original paper.[1]
 </p>
 
 In summary, the training step works as follow:
@@ -28,13 +28,13 @@ In summary, the training step works as follow:
 
 During inference, we give the doubly-noisy realization to our network and expect it to output a singly-noisy one. Then, we compute the residual by subtracting singly-noisy realization from doubly-noisy one. In the last step, we subtract the residual from singly-noisy realization and obtain an estimate of the clean target image.
 
-The network architecture used in this method is [U-Net by Ronneberger et al. (2015)](https://arxiv.org/abs/1505.04597).
+The network architecture used in this method is [U-Net by Ronneberger et al. (2015)](https://arxiv.org/abs/1505.04597). For more detailed and theoretical information, please check Section 3.2 of the original paper.
 
 ## 2.2. My interpretation 
 
-** TODO mention max epoch and learning rate thing here **
+After reading the original paper and Noise2Noise by Lehtinen et al., I was able to implement the method without having any major issues. There are still two ambiguous points, though. 
 
-Explain the parts that were not clearly explained in the original paper and how you interpreted them.
+First, the number of epochs used in their experiments are not mentioned in the original work. The other (and kind of related) problem is, I could not directly understand when to use scheduler to reduce learning rate from 10<sup>-3</sup> to 10<sup>-4</sup>. As a result, I skipped learning rate scheduling and did not implement it.
 
 # 3. Experiments and results
 
@@ -50,7 +50,9 @@ Explain the parts that were not clearly explained in the original paper and how 
 
 _(Versions written in parentheses stand for the ones used during the development and testing of this repository)_
 
-I've tried to keep configurations the same as much as possible. However, there is one significant difference. In the original paper, authors have used a batch size of 32. But in this work, it is reduced to 16 due to hardware limitations. 
+I've tried to keep configurations the same as much as possible. However, there are two significant differences, which probably affect the results considerably. 
+* In the original paper, authors have used a batch size of 32. But in this work, it is reduced to 16 due to hardware limitations. 
+* The original work uses ImageNet dataset in the training phase, which contains over 14 million images, whereas the dataset I've used (i.e. COCO, 2017) contains 118287 images.
 
 ## 3.2. Running the code
 
@@ -95,13 +97,20 @@ Discuss the paper in relation to the results in the paper and your results.
 
 # 5. References
 
-* N. Moran, D. Schmidt, Y. Zhong and P. Coady, "Noisier2Noise: Learning to Denoise from Unpaired Noisy Data", CVPR, 2020.
-* J. Lehtinen, J. Munkberg, J. Hasselgren, S. Laine, T. Karras, M. Aittala and T. Aila, "Noise2Noise: Learning Image Restoration without Clean Data", 2018.
-* T. Lin, M. Maire, S. Belongie, L. Bourdev, R. Girshick, J. Hays, P. Perona, D. Ramanan, C. L. Zitnick and P. Dollár, "Microsoft COCO: Common Objects in Context", 2015.
-* J. Deng, W. Dong, R. Socher, L.-J. Li, K. Li and L. Fei-Fei, "ImageNet: A Large-Scale Hierarchical Image Database". IEEE Computer Vision and Pattern Recognition (CVPR), 2009.
-* D. Martin, C. Fowlkes, D. Tal and J. Malik, "A Database of Human Segmented Natural Images and its Application to Evaluating Segmentation Algorithms and Measuring Ecological Statistics, Proc. 8th Int'l Conf. Computer Vision, 2001.
-* C. Tian, L. Fei, W Zheng, Y. Xu, W. Zuo and C. Lin, "Deep Learning on Image Denoising: An overview", 2020
-* O. Ronneberger, P. Fischer and T. Brox, "U-Net: Convolutional Networks for Biomedical Image Segmentation", 2015.
+[1] N. Moran, D. Schmidt, Y. Zhong and P. Coady, "Noisier2Noise: Learning to Denoise from Unpaired Noisy Data", CVPR, 2020.
+
+[2] J. Lehtinen, J. Munkberg, J. Hasselgren, S. Laine, T. Karras, M. Aittala and T. Aila, "Noise2Noise: Learning Image Restoration without Clean Data", 2018.
+
+[3] T. Lin, M. Maire, S. Belongie, L. Bourdev, R. Girshick, J. Hays, P. Perona, D. Ramanan, C. L. Zitnick and P. Dollár, "Microsoft COCO: Common Objects in Context", 2015.
+
+[4] J. Deng, W. Dong, R. Socher, L.-J. Li, K. Li and L. Fei-Fei, "ImageNet: A Large-Scale Hierarchical Image Database". IEEE Computer Vision and Pattern Recognition (CVPR), 2009.
+
+[5] D. Martin, C. Fowlkes, D. Tal and J. Malik, "A Database of Human Segmented Natural Images and its Application to Evaluating Segmentation Algorithms and Measuring Ecological Statistics, Proc. 8th Int'l Conf. Computer Vision, 2001.
+
+[6] C. Tian, L. Fei, W Zheng, Y. Xu, W. Zuo and C. Lin, "Deep Learning on Image Denoising: An overview", 2020
+
+[7] O. Ronneberger, P. Fischer and T. Brox, "U-Net: Convolutional Networks for Biomedical Image Segmentation", 2015.
+
 
 # Contact
 

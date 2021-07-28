@@ -61,7 +61,7 @@ The paper used the PH2 and ISBI 2016 datasets. These datasets are publically ava
 ## 2.2. Our interpretation 
 
 Explain the parts that were not clearly explained in the original paper and how you interpreted them.
-First , we wanted to have the same segmentation scores on different networks. We tried to implement the FCN segmentation network with using ISBI 2016 dataset. Unfortunately, we couldn't get the segmentation scores yet. The FCN networks which are using ISBI 2016 dataset included on the codes files. 
+First , we wanted to have the same segmentation scores on different networks. We tried to implement the FCN segmentation network with using ISBI 2016 dataset. Unfortunately, we couldn't get the segmentation scores yet. The FCN networks which are using ISBI 2016 dataset included on the FCN codes file. 
 
 # 3. Experiments and results
 

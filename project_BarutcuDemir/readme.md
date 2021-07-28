@@ -259,6 +259,8 @@ To wrap up, we enjoyed reproducing this paper and learned a lot during the proce
 
 Adina Williams, Nikita Nangia, Samuel R. Bowman. 2017. *A Broad-Coverage Challenge Corpus for Sentence Understanding through Inference*. https://arxiv.org/abs/1704.05426
 
+Aston Zhang, Yi Tay, Shuai Zhang, Alvin Chan, Anh Tuan Luu, Siu Cheung Hui, Jie Fu. 2021. *Beyond Fully-Connected Layers With Quarternions: Parameterization Of Hypercomplex Multiplication With 1/n Parameters*. https://arxiv.org/abs/2102.08597
+
 Samuel R. Bowman, Gabor Angeli, Christopher Potts, Christopher D. Manning. 2015. *A large annotated corpus for learning natural language inference*. https://arxiv.org/abs/1508.05326
 
 Sepp Hochreiter, Jurgen Schmidhuber. Long short-term memory. ¨ Neural computation, 9(8):

@@ -28,7 +28,6 @@ def get_dimensions(path):
     
     for i in range(3):
         is_ = faces[:,i]
-        # i_center = (np.min(is_) + np.max(is_))/2
         centers[i] = np.mean(is_)
         sizes[i] = (np.max(is_) - np.min(is_))
     
@@ -44,7 +43,6 @@ if __name__ == "__main__":
     model_names = os.listdir("./sample models/other")
     model_names = [m for m in model_names if m.split('.')[1] == "obj"]
     random_name = model_names[int(random.random()*len(model_names))]
-    # path = f"./models/{random_name}"
     
     for n in model_names:
         path = f"./sample models/other/{n}"

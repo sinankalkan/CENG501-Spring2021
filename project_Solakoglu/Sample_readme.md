@@ -58,7 +58,9 @@ Finally, they showed how they obtained their formulas and and obtained numerical
 
 ## 2.2. My interpretation 
 
-Explain the parts that were not clearly explained in the original paper and how you interpreted them.
+In the introduction of this study. Authors mentioned how synaptic connection change their connectivity by adding or pruning synapses. However synaptic implementation to this model ended with introduction and they defined the connectivity as classical neural network connectivity. Therefore study has become limited with a new neural network type that changes connectivity between neurons according to recently defined rule.
+
+At numerical analysis authors well defined connectivity structure. Therefore I could created W, D and external noisy input. However authors could not difine firing rate vectors and how to obtain covariance matrix structure since obtaining covariance matrix with size of N x N was not possble with firing rate at 0 s. Threfore I used Eliphant to create firing rate covariance rate at 0 s [10].
 
 # 3. Experiments and results
 
@@ -89,6 +91,7 @@ Discuss the paper in relation to the results in the paper and your results.
 7.	Pulvermüller F, Tomasello R, Henningsen-Schomers MR, Wennekers T. Biological constraints on neural network models of cognitive function. Nat Rev Neurosci. 2021 Aug;22(8):488-502.
 8.	Spielman, D. A. & Srivastava, N. Graph sparsification by effective resistances. SIAM Journal on Computing 40, 1913–1926 (2011).
 9.	Spielman, D. A. & Teng, S.-H. Spectral sparsification of graphs. SIAM Journal on Computing 40, 981–1025 (2011).
+10. Denker M, Yegenoglu A, Grün S (2018) Collaborative HPC-enabled workflows on the HBP Collaboratory using the Elephant framework. Neuroinformatics 2018, P19
 
 
 # Contact

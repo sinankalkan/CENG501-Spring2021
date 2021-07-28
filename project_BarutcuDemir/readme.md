@@ -36,11 +36,17 @@ Although they are great in some cases, the problem with quaternion networks is t
 
 The paper proposes Parametrized Hypercomplex Multiplication Layers to replace fully connected layers. These layers are put together very smartly, such that they subsume both the quaternion layers mentioned previously and the usual linear transformation. Thus the name, Beyond Fully Connected Layers with Quaternions... . The main advantage of the PHM Layer is that they enable choosing an arbitrary n to reduce the number of parameters, whereas this was limited to 4, 8 and 16 with quaternions. Here is how it works:
 
-Fully Connected Layer: ![Screenshot (582)](https://user-images.githubusercontent.com/62503047/127239071-392fe478-671e-483f-8d68-19d791b89b8d.png)
+Fully Connected Layer:
 
-PHM Layer: ![Screenshot (583)](https://user-images.githubusercontent.com/62503047/127239154-8f5d7832-1a26-4b3b-b457-cf5d76b0592d.png)
+![Screenshot (582)](https://user-images.githubusercontent.com/62503047/127239071-392fe478-671e-483f-8d68-19d791b89b8d.png)
 
-H: ![Screenshot (585)](https://user-images.githubusercontent.com/62503047/127239276-69457fd1-c11c-4b4e-997e-2bd22764cedb.png)
+PHM Layer:
+
+![Screenshot (583)](https://user-images.githubusercontent.com/62503047/127239154-8f5d7832-1a26-4b3b-b457-cf5d76b0592d.png)
+
+H: 
+
+![Screenshot (585)](https://user-images.githubusercontent.com/62503047/127239276-69457fd1-c11c-4b4e-997e-2bd22764cedb.png)
 
 The PHM layer resembles a FC layer but differs in the way that the H matrix is obtained. H acts as a weight for input x, but the H matrix is not made up of parameters; the A and S matrices that are used to obtain H are. For a selection of n, which is a hyperparameter, the A matrix takes the form of (n,n,n) whereas the S matrix has the shape (n, dim1/n, dim2/n). The W in a FC layer would be shaped (dim1, dim2) in this case. Kronecker product of every matrix in the tensors A and S are taken and then these are summed to get H. Kronecker product of X and Y is defined as: 
 
@@ -68,7 +74,9 @@ The paper proposes PHM Transformers and LSTM's. They define a PHM Transformer su
 1. the weights that are multiplied with inputs to produce Query, Key and Value in the beginning of multiheaded attention (called in-projection weights in the official PyTorch implementation)
 2. the weights that are multiplied with the concatenation of outputs of the individual heads to reduce their dimension in the end of multiheaded attention (called out-projection weights in the official PyTorch implementation)
 3.  the linear layer weights of feedforward network subsequent to the multiheaded attention in encoder/decoder layers
-4.  4. Outputs of premise and hypothesis hidden states are concatenated with max and mean pooling heuristic. Resulting vectors are then fed into two layer 300 dimension multi-layer perceptron. 
+
+For PHM LSTM:
+1. Outputs of premise and hypothesis hidden states are concatenated with max and mean pooling heuristic. Resulting vectors are then fed into two layer 300 dimension multi-layer perceptron. 
 
 ## 2.2. Our interpretation 
 
@@ -81,7 +89,9 @@ There are a bunch of things that are ambiguous about the transformer implementat
 4.  **Concatenation Process in LSTM**. There is no explanation about concatenation of *premise* and *hypothesis* outputs in NLI experiments. We inferred from previous works for concatenation process.
 5.  **BLEU smoothing function**. The BLEU metric used for translation is not a perfect metric and some modifications have been proposed to make it closer to human judgement. One such proposal is the use of [smoothing functions](https://leimao.github.io/blog/BLEU-Score/). We used a particular but common smoothing function, but the authors have not made it clear whether they have used it or which one. So a comparison between our BLEU scores and the authors' may not be %100 accurate.
 6.   Concatenation heuristic method [Qian Chen et al., 2017.](https://arxiv.org/abs/1609.06038) is used in previous work. We used this heuristic for our implementation in NLI task. Concatenation process is done by computing both average and max pooling, and concatenate all these vectors to form the final fixed
-length vector v. The final fixed length vector v is calculated as follows:![Concat](https://user-images.githubusercontent.com/84293711/127306556-aae51486-42f3-4a7f-9714-9155f8f8a373.jpg)
+length vector v. The final fixed length vector v is calculated as follows:
+
+![Concat](https://user-images.githubusercontent.com/84293711/127306556-aae51486-42f3-4a7f-9714-9155f8f8a373.jpg)
 
 Where *Va,ave* and *Va,max* are LSTM outputs of premise sentences applied by average   and max operations respectively along hidden size direction, and *Vb,ave* and *Vb,max* are the outputs of hypothesis outputs of same process. 
 

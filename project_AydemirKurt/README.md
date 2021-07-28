@@ -66,8 +66,10 @@ Discuss the paper in relation to the results in the paper and your results.
 # 5. References
 
 [1] [Jingru Yi, Hui Tang, Pengxiang Wu, Bo Liu, Daniel J. Hoeppner, Dimitris N. Metaxas, Lianyi Han, Wei Fan. Object-Guided Instance Segmentation for Biological Images, 2019.](https://arxiv.org/abs/1911.09199) 
+
 [2] [Jingru Yi, Pengxiang Wu, Qiaoying Huang, Hui Qu, Bo Liu, Daniel J. Hoeppner, Dimitris N. Metaxas. Multi-scale Cell Instance Segmentation with Keypoint Graph based Bounding Boxes, 2019.](https://arxiv.org/abs/1907.09140) 
 
+[3] [Jingru Yi, Pengxiang Wu, Hui Tang, Bo Liu, Qiaoying Huang, Hui Qu, Lianyi Han, Wei Fan, Daniel J. Hoeppner, Dimitris N. Metaxas.Object-Guided Instance Segmentation With Auxiliary Feature Refinement for Biological Images. 2021](https://arxiv.org/abs/2106.07159)
 
 # Disclaimer
 
@@ -76,3 +78,4 @@ We did not write the code ourselves. The code belongs to [Jingru Yi](https://git
 # Contact
 
 Yusuf Can Aydemir : can.aydemir@metu.edu.tr
+Yunus Bilge Kurt : yunusbilgekurt@gmail.com

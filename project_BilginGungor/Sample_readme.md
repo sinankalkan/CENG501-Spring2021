@@ -4,7 +4,7 @@ This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.
 
 # 1. Introduction
 
-The paper is published at NeurIPS 2020 and its objective is to extend the information about what DNNs (deep neural networks) learn for a given dataset. It examines the outcomes of having networks learn random labels and explains these from a statistical point of view.
+The paper<sup>1</sup> is published at NeurIPS 2020 and its objective is to extend the information about what DNNs (deep neural networks) learn for a given dataset. It examines the outcomes of having networks learn random labels and explains these from a statistical point of view.
 
 ## 1.1. Paper summary
 
@@ -66,7 +66,7 @@ Other than that, the paper uses a value called "init_scale" for scaling initiali
 
 2. **Figure2**: The "misalignment" between the data and first layer weights is observed. For this reason, a two-layer convolutional network (256 convolutional filters, 64 fully connected nodes) is trained on the CIFAR10 dataset with real/random labels.
 
-3. **Figure3**: It is desired to show that, the covariance matrix of the first layer weights aligns with the data covariance matrix. For this reason, a WideResNet (WRN-28-4) is trained on the CIFAR10 examples with random labels. It is required to visually show that, there exist some eigenvectors belonging to filters' covariance matrix aligned with the eigenvectors of the data. For better visualization, the WideResNet model is slightly modified to have 5x5 filters instead of 3x3 filters on the first layer. It should be noted that this modification has a significant impact on network training time.
+3. **Figure3**: It is desired to show that, the covariance matrix of the first layer weights aligns with the data covariance matrix. For this reason, a WideResNet (WRN-28-4) is trained on the CIFAR10 examples with random labels. While some WideResNet architectures are readily available and popular, (WRN-28-4) is not and there is a requirement to have some modifications. For this reason, a publicly available WideResNet code<sup>[2]</sup> is repurposed to give desired results. It is required to visually show that, there exist some eigenvectors belonging to filters' covariance matrix aligned with the eigenvectors of the data. For better visualization, the WideResNet model is slightly modified to have 5x5 filters instead of 3x3 filters on the first layer. It should be noted that this modification has a significant impact on network training time.
 
 4. **Figure4**: It is defined that for aligned matrices (data and first layer weights in this case) there exists a transfer function to obtain eigenvalues of first layer weights using data covariance matrix (eigenvectors and eigenvalues). The relation between the data eigenvalues and first layer weight eigenvalues is desired to be observed. This relation is explained in section 2.1.1 and this equation is used to plot the figures in this part.
 
@@ -203,13 +203,27 @@ It can be noted that these figures are more noisy with respect to the figures of
 
 ### 3.3.4 Accuracy on downstream tasks with different kinds of upstream training
 
+figure 5 results
+
 # 4. Conclusion
 
-Discuss the paper in relation to the results in the paper and your results.
+One of the claims of this paper is that, pre-training (upstream training) can have positive or negative effects for later trainings (downstream training), regardless of architecture or whether labels are random or not. The experiments for figure 1 yielded supporting results. Some positive effects explained in the paper found as negative and vice versa. However, this does not necessarily contradict with the idea since the architectures in the experiments could not be the exact same of the paper due to missing parameters and in the experiment results it is just that different relations are obtained.
+
+figure 2 conclusion
+
+Experiments of figure 3 yielded similar image patches to the ones from the paper. On the other hand, eigenvectors of weights are somewhat dissimilar. The reason for this discrepancy is assumed to be hardware limitations and the small number of training that could be achieved.
+
+Experiments for figure 4 yielded that first layer weights only differ by the same orthogonal transformation with respect to dataset covariance matrix. This and other small remarks given in section 3.3.3 are directly consistent with the information from paper, even if the data obtained is slightly noisy due to lower amount of training.
+
+figure 5 conclusion
+
+In general, many claims of the paper are experimented on. It should be noted that, some trainings for these experiments were weeks long with the hardware capacity at hand. For this reason, most of the training parameters and methods were meaningfully scaled down to obtain, evaluate the results (and correct the experiments if necessary in a timely manner). While some of the results of experiment results are not exactly same, the results are similar enough to see meaningful similar paterns in between experiment results and paper figures.
 
 # 5. References
 
-Provide your references here.
+<sup>1</sup> Maennel, H. et al. (2020). What Do Neural Networks Learn When Trained With Random Labels? arXiv:2006.10455 
+<sup>2</sup> hysts, PyTorch Implementation of WRN, Jun 2, 2018, https://github.com/hysts/pytorch_wrn
+
 
 # Contact
 

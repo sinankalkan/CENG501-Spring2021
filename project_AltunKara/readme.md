@@ -30,22 +30,38 @@ The major contribution of this paper on literature is the proposed method can be
 # 2. The method and my interpretation
 
 ## 2.1. The original method
+This section describes the original method used in paper. Also, dataset and some implementation details are given. 
+
+### 2.1.1 BPB & SBE
 In the original method, the boundary preserving segmentation structure consists Boundary Preserving Block (BPB) and Shape Boundary-aware Evaluator(SBE). The BPB and SBE use the boundary key points which are selected from boundary key point selection algorithm.
-### 2.1.1 Boundary Key Point Selection Algorithm
+#### 2.1.1.1 Boundary Key Point Selection Algorithm
 The algorithm select the boundary key points that best fit the ground truth segmentation map. The algorithm works as described below :   
 1- Obtain the boundary of the target object using edge detection  
 2- On the boundary, randomly select n points  
 3- These n points connected to form a polygon.  
 4- Repeat for T times and select the key point sets which have the highest intersection of union.  
-### 2.1.2 Boundary Preserving Block (BPB)
+#### 2.1.1.2 Boundary Preserving Block (BPB)
 This unit can be embedded into any network and it enhances the boundary information of input. Boundary Preserving Block predicts the segmentation map.  This unit consist boundary Point Map Generator, that produce a key point prediction map. The generator consist boundary key point selection module which generates ground truth boundary key point maps. It also consist dilated convolution, so the generator can effectively encode & decode the features with a various range of receptive fields. Generator optimized by cross entropy loss between the estimated boundary key point map and ground truth boundary key point map. 
 
-### 2.1.3 Shape Boundary-aware Evaluator (SBE)
+#### 2.1.1.3 Shape Boundary-aware Evaluator (SBE)
 SBE is an evaluator which gives feedback to the network by using the bundary key point map. Basically, its inputs are boundary key point map and predicted or ground truth segmentation image, and it evaluates whether the segmentation results are consistent with the boundary key point map or not. 
+
+### 2.1.2 Dataset
+The paper used the PH2 and ISBI 2016 datasets. These datasets are publically available for skin lesion segmentation.  ISBI 2016 dataset consists 900 skin lesion images, PH2 includes 200 dermoscopc images. They used ISBI 2016 dataset for training and PH2 for testing. They also used TVUS dataset which is private and collected for experiments. 
+
+### 2.1.3 Implementation Details
+
+-The model optimized by using ADAM optimizer.  
+-The learning rate was 0.0001 both in segmentation network and SBE network.  
+-They used randomly initialized weights with 8 input batches.  
+-Forboundary key point maps , they selected 6 points and run the algorithm 40000 times. 
+-They integrated the proposed method in several segmentation networks : U-Net , FCN, Dilated-Net. 
+
 
 ## 2.2. Our interpretation 
 
 Explain the parts that were not clearly explained in the original paper and how you interpreted them.
+First , we wanted to have the same segmentation scores on different networks. We tried to implement the FCN segmentation network with using ISBI 2016 dataset. Unfortunately, we couldn't get the segmentation scores yet. The FCN networks which are using ISBI 2016 dataset included on the codes files. 
 
 # 3. Experiments and results
 

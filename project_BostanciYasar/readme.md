@@ -11,7 +11,8 @@ Our aim is to implement the models described in the paper and obtain the accepta
 
 ## 1.1. Paper summary
 
-Summarize the paper, the method & its contributions in relation with the existing literature.
+
+
 
 Computing power in the last decade especially GPUs processing capacities increased remarkably and this improvement directly affected the deep neural networks (DNNs) success.  DNNs are used in various applications; object detection, natural language processing, speech recognition etc. The main secret behind the success of DNNs lies behind the usage of large scale datasets, learning algorithms and considerably higher computational power.
 
@@ -121,7 +122,7 @@ In the experiments it is shown that the MBN work stably with different batch siz
 
 # 5. References
 
-Provide your references here.
+
 
 <a name="2"></a>
 

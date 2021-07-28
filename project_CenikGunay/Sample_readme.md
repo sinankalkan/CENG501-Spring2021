@@ -27,15 +27,21 @@ largest number of images and the richest information
 
 ## 2.1. The original method
 
+They construct a CNN-based model to predict all tasks simultaneously. The training procedure performs in an iterative manner and the system is learned **end-to-end** learning. 
+
+_**Network Structures**_
+
+- The network structure of PlaceNet is similar to ResNet50. The only difference is that the last convolution/pooling/fc layers are duplicated to five branches, namely, place, category, function, city and country. Each branch contatins two FC layers. 
+
 _**Datasets-Placepedia**_
 
-– Places-Coarse. They select 200 places for validation and 400 places for testing,
+- Places-Coarse. They select 200 places for validation and 400 places for testing,
 from 50 famous cities of 34 countries. The remained 25K places are used
 for training. For validation/testing set, we double checked the annotation
 results. Places without category labels are manually annotated. After merging
 similar items of labels, we obtain 50 categories and 10 functions. The training/validation/testing set have 5M/60K/120K images respectively, from 7K
 cities of more than 200 countries.
-– Places-Fine. Places-Fine shares the same validation/testing set with PlacesCoarse. For training set, they selected 400 places from the 50 cities of validation/testing places. Different from Places-Coarse, they also double checked
+- Places-Fine. Places-Fine shares the same validation/testing set with PlacesCoarse. For training set, they selected 400 places from the 50 cities of validation/testing places. Different from Places-Coarse, they also double checked
 the annotation of training data. The training/validation/testing set have
 110K/60K/120K images respectively, which are tagged with 50 categories, 10
 functions, 50 cities, and 34 countries.
@@ -51,7 +57,11 @@ namely, **average pooling**, **max pooling**, **spatial pyramid pooling**
 
 ## 2.2. My interpretation 
 
-Explain the parts that were not clearly explained in the original paper and how you interpreted them.
+
+The biggest problem we encountered while implementing the solution proposed in the paper was that the data set was quite large. Also, due to the complexity of the model due to duplication for multiple predictions and hardware constraint, results corresponding to training only a part of the dataset will be presented here. Moreover, the learning rate 0.5 value given in the paper was not suitable as we could not use the entire dataset. That's why we chose the learning rate as 1e-4. All details will be given in the experimental setup.
+Since the batch size is not specified in the training details section of the paper, we have set the batch size as 64. As we observe from the paper, loss functions fatal and softmax give almost the same results. Therefore, we only use softmax loss function as well as avarage pooling. The other problem we encounter is related to dataset image shape. After starting training, after the some point we got the error **output with shape [1, 224, 224] doesn't match the broadcast shape [3, 224, 224]**, which is due to the mismatch of grayscale image to RGB image,which means there is some grayscale images in the dataset and produces an error. Therefore, we have trained our model until we encountered this error without checking whole dataset since it has 240K such images. Our aim is to show that our model works correct and it tends to be more powerful compared to other datasets and models even if we can only train our model such constraints and problems.
+
+
 
 # 3. Experiments and results
 

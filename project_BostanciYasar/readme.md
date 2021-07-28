@@ -71,7 +71,7 @@ With Colab Pro you get priority access to high-memory VMs. These VMs generally h
 <!---  Google needs to maintain the flexibility to adjust usage limits and the availability of hardware on the fly. -->
 In this paper, to evaluate MBN,this method is applied to image classification tasks and experiments are conducted on CIFAR10,CIFAR100 and  Mini-ImageNet100 datasets.\
 The computation time without disconnection is limited on Google Colab.To solve this problem, we used Colab Pro. With Colab Pro, we get priority access to runtime up to 24 hours and twice as many CPUs as standard Colab.  However, Google still applies usage limits on GPU, forcing us to be selective about the runs to have proceeded.Therefore ,we decided to reproduce results for CIFAR10 and CIFAR100.
-The CIFAR10 and CIFAR100 datasets were loaded using torchvision.datasets.
+The CIFAR10 and CIFAR100 datasets were loaded using torchvision.datasets. Other experimental parameters and details are given in Section 2. 
 ## 3.2. Running the code
 
 Explain your code & directory structure and how other people can run it.

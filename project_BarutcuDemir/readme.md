@@ -98,7 +98,7 @@ length vector v. The final fixed length vector v is calculated as follows:
 
   ![Concat](https://user-images.githubusercontent.com/84293711/127313944-0d5a2d55-a0e2-4f96-a74f-d92f24ce826c.jpg)
 
-                       (Qian Chen et al., 2017)
+  (Qian Chen et al., 2017)
 
 Where *Va,ave* and *Va,max* are LSTM outputs of premise sentences applied by average   and max operations respectively along hidden size direction, and *Vb,ave* and *Vb,max* are the outputs of hypothesis outputs of same process. 
 
@@ -165,7 +165,7 @@ Beam Search Length Penalty Exponent (alpha) | 0.6 | 0.6
 
 The data is available [here](http://www.statmt.org/wmt14/translation-task.html). We only use the Europarl v7 dataset whereas the authors also used Common Crawl Corpus and the News Commentary.
 
-The loss curves can be accessed at our [Weights and Biases report for style transfer](https://wandb.ai/demegire/transformer/reports/Translation--Vmlldzo4ODgzMTE).
+The loss curves can be accessed at our [Weights and Biases report for translation](https://wandb.ai/demegire/transformer/reports/Translation--Vmlldzo4ODgzMTE).
 
 ![W B Chart 7_28_2021, 1 38 15 PM](https://user-images.githubusercontent.com/62503047/127309563-87e06b18-e832-4b16-bee3-13009c5f42c7.png)
 

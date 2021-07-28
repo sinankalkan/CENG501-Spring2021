@@ -95,9 +95,9 @@ Note that if there are no checkpoints, you will not be able to run test mode. An
 
 The code is tested on a Windows 10 (v19042.1110) machine with single NVIDIA GeForce RTX 3070 GPU. The network is trained for 11 epochs, which took ~11 hours in total (i.e. 1h/epoch).
 
-
-
-**Gallery**
+<p align="center">
+<b>Gallery</b>
+</p>
 
 <p align="center">
 <i>(Left: Clean target images, Right: Denoised images)</i>

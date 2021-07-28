@@ -81,6 +81,8 @@ There are ten code notebooks- five for each dataset- one is for MBN and the othe
 
 ## 3.3. Results
 
+It can be seen in Figure-4 that MBN gives similar results with the BN in larger batch-sizes. In fact, in the obtained results it is observed that BN shows slightly better performance compared to MBN such as batch size 16 and 32. It is similar in the original paper as well. Even though with the batch size 32 the results are not similar with the original paper, BN performs better in batch size 16 in the original paper. However, as expected MBN shows a better performance with the smallest batch size. This results shows that MBN provides a more robust training with smaller batch sizes compared to other normalization methods. The main idea behind the method proposed by the authors; MBN suppresses the noise in the mean and variance in smaller batch sizes. Moreover, our results can be accepted as compatible with the original paper, because MBN shows better performance in the smallest batch size compared to other normalization methods. In addition, there is a increasing performance trend in favor to the MBN while batch size decreases.
+
 <!---
 | ![fig4.jpg](https://user-images.githubusercontent.com/86877356/126894727-e119b037-d039-4173-b9de-58625b7304e8.png) | 
 |:--:| 

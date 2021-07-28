@@ -1,5 +1,4 @@
 import numpy as np
-from imgaug import augmenters as iaa
 import cv2
 import random
 import torch
@@ -20,57 +19,6 @@ def mask2numpy(mask):
     mask = np.array(mask, dtype=np.float)[..., 0]  # shape: (H, W, #SegmapsPerImage)
     mask /= 255.
     return mask
-
-
-class MosLAugmentation:
-    def __init__(self, img_size):
-        self.img_resize = iaa.Resize({'width': img_size[1], 'height': img_size[0]})
-
-        self.aug_img = iaa.Sequential([
-            iaa.Sometimes(0.3, iaa.AdditiveGaussianNoise(loc=0, scale=(0.0, 0.05 * 255), per_channel=0.5)),
-            iaa.Sometimes(0.4, iaa.Sequential([
-                iaa.Sometimes(0.5, iaa.AddToHueAndSaturation(value=(-25, 25), per_channel=True)),
-                iaa.Sometimes(0.5, iaa.Add((-20, 20), per_channel=0.5)),
-                iaa.Sometimes(0.5, iaa.GammaContrast(gamma=(0.25, 1.25)))]))
-
-            # iaa.OneOf([
-            #     iaa.Sometimes(0.2, iaa.CLAHE()),
-            #     iaa.Sometimes(0.4, iaa.Sequential([
-            #         iaa.Sometimes(0.5, iaa.AddToHueAndSaturation(value=(-25, 25), per_channel=True)),
-            #         iaa.Sometimes(0.5, iaa.Add((-20, 20), per_channel=0.5)),
-            #         iaa.Sometimes(0.5, iaa.GammaContrast(gamma=(0.25, 1.25)))]))
-            # ]),
-            # iaa.OneOf([
-            #     iaa.Sometimes(0.3, iaa.GaussianBlur(sigma=(0.5, 3.0))),
-            #     iaa.Sometimes(0.3, iaa.MotionBlur(k=(5, 15))),
-            #     iaa.AverageBlur(k=(3, 7))
-            # ]),
-            # iaa.Sometimes(0.2, iaa.Grayscale(alpha=(0.0, 1.0))),
-            # iaa.Sometimes(0.2, iaa.JpegCompression(compression=(10, 80)))
-        ])
-
-        self.aug_all = iaa.Sequential([
-            # iaa.Sometimes(0.5, iaa.Affine(scale={"x": (0.7, 1.2), "y": (0.7, 1.2)})),
-            # iaa.Sometimes(0.5, iaa.PerspectiveTransform(scale=(0.01, 0.1))),
-            # iaa.Affine(scale=(0.5, 1.0)),
-            iaa.Sometimes(0.5, iaa.Affine(translate_percent={'x': (-0.3, 0.3), 'y': (-0.3, 0.3)})),
-            iaa.Sometimes(0.5, iaa.Affine(rotate=(-20, 20)))
-        ])
-
-    def __call__(self, img, mask):
-        img = np.asarray(img)
-        mask = mask2numpy(mask)
-        img = self.img_resize(image=img)
-        mask = self.img_resize(image=mask)
-
-        aug_img_det = self.aug_img.to_deterministic()
-        aug_all_det = self.aug_all.to_deterministic()
-
-        img_aug = aug_img_det.augment_image(img)
-        img_aug = aug_all_det.augment_image(img_aug)
-        mask_aug = aug_all_det.augment_image(mask)
-        mask_aug[mask_aug < 0] = 0
-        return img_aug, mask_aug
 
 
 def modify_boundary(image, regional_sample_rate=0.1, sample_rate=0.1, move_rate=0.0, iou_target=0.8):

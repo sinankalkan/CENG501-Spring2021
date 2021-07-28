@@ -1,0 +1,7 @@
+numpy
+torchvision
+pillow
+natsort
+tqdm
+easydict
+torch==1.7.1

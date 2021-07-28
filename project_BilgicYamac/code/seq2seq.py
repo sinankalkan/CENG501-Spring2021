@@ -9,10 +9,10 @@ class seq2seq(nn.Module):
         self.width = width
 
         self.W_h = nn.Parameter(torch.Tensor(self.width))
-        self.W_s = nn.Parameter(torch.Tensor(150))
+        self.W_s = nn.Parameter(torch.Tensor(300))
         self.W_q = nn.Parameter(torch.Tensor(self.width))
         self.bias = nn.Parameter(torch.Tensor(self.width))
-        self.lstm = nn.LSTM(300, 150, bidirectional=False)
+        self.lstm = nn.LSTM(300, 300, bidirectional=False)
 
         self.initialize_weights()
 
@@ -25,22 +25,22 @@ class seq2seq(nn.Module):
         W_h = self.W_h.repeat(1, H_a.shape[1])
         W_h = W_h.view(self.width, H_a.shape[1])
         W_s = self.W_s.repeat(1, H_a.shape[1])
-        W_s = W_s.view(150, H_a.shape[1])
-        W_q = self.W_q.repeat(1, H_a.shape[1])
-        W_q = W_q.view(self.width, H_a.shape[1])
-        bias = self.bias.repeat(1, H_a.shape[1])
-        bias = bias.view(self.width, H_a.shape[1])
+        W_s = W_s.view(300, H_a.shape[1])
+        W_q = self.W_q.repeat(1, 300)
+        W_q = W_q.view(self.width, 300)
+        bias = self.bias.repeat(1, 300)
+        bias = bias.view(self.width, 300)
 
-        s = self.lstm(H_a)
+        s, (_, _) = self.lstm(H_a)
         o_q = torch.mean(H_q)
         answer = W_h @ H_a[0]
-        s_hidden = W_s @ s[0][0]
+        s_hidden = W_s @ s[0]
         question = W_q * o_q
         e = torch.tanh(answer + s_hidden + question + bias)
-        a = torch.softmax(e)
-
-        H_t = torch.mul(torch.transpose(a), H_a)
-        torch.sum(H_t, dim=0)
+        a = torch.softmax(e, dim=1)
+        adfs = torch.transpose(H_a[0], 0, 1)
+        H_t = torch.matmul(a, adfs)
+        H_t = torch.sum(H_t, dim=1)
 
         return a
 

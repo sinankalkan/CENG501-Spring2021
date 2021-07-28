@@ -27,7 +27,6 @@ def train_QASelection(epochs=5):
 
     lstm = torch.nn.LSTM(100,
                          150,
-                         2,
                          bidirectional=True)
 
     for train_epoch in train_epochs:
@@ -43,18 +42,17 @@ def train_QASelection(epochs=5):
                     question_matrix.append(np.zeros(100))
             for i in range(22 - len(question)):
                 question_matrix.append(np.zeros(100))
-            for i in range(len(answer)):
+            for i in range(min(len(answer), 400)):
                 try:
                     answer_matrix.append(emb[answer[i].item()])
                 except:
                     answer_matrix.append(np.zeros(100))
-            for i in range(13805 - len(answer)):
+            for i in range(400 - len(answer)):
                 answer_matrix.append(np.zeros(100))
             question_tensor = torch.FloatTensor(question_matrix)
             question_tensor = torch.reshape(question_tensor, (1, 22, 100))
             answer_tensor = torch.FloatTensor(answer_matrix)
-            answer_tensor = torch.reshape(answer_tensor, (1, 13805, 100))
-            # input_tensor = torch.cat((question_tensor, answer_tensor), dim=1)
+            answer_tensor = torch.reshape(answer_tensor, (1, 400, 100))
             H_q, c_q = lstm.forward(question_tensor)
             H_a, c_a = lstm.forward(answer_tensor)
 

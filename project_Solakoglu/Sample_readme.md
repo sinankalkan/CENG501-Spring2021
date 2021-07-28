@@ -28,7 +28,7 @@ The vector *x* represents the firing rate of *N* neurons with *x<sub>i</sub>* is
 
 Their pruning rule seek to generate a sparse network with corresponding matrix Asparse with two properties:
   
-  1-	Small number of edges (i.e. number of non-zero entries in Asparse) to create different neuron groups
+  1-	Small number of edges (i.e. number of non-zero entries in *A<sup>sparse</sup>*) to create different neuron groups
   
   2-	Dynamics of this network seeks to be similar to dynamics of original network:
   
@@ -66,11 +66,23 @@ At numerical analysis authors well defined connectivity structure. Therefore I c
 
 ## 3.1. Experimental setup
 
-Describe the setup of the original paper and whether you changed any settings.
+In the original paper, authors have done their numerical analysis for 3,000 neurons (with clusters of 2,700, 100, 100 and 100 neurons) and 10,000 neurons (with 10 clusters of 100 neurons and 1 cluster of 9,000 neurons). I started to create my algorithm with the first selection (3,000) neurons.
+
+Authors defined two types of connection to create connectiviy matrix:
+
+ 1-	Dense within-cluster connections (%60 of connections with the weight of ~ *N*(1,1))
+ 
+ 2-	Sparse long-range connections (5000 total with the weight of ~ *U*(0,1))
+
+I created the connectivity matrix by using *within_network*, *sparse_network* and *connectivity_matrix* algorithms according to above rule.
+
+Next, authors defined external input by assigning *b* as 0.0002 and *ξ* as a gaussian white noise. In the original paper authors defined *x*(0) (i.e. firing rates at 0 s) as uniform random entries with a rule of ~*U*(0,1). But this definition was not enough to create covariance matrix. Therefore I used *homogenous_poisson_process* and *instantaneous_rate algorithms* form Elephant library [10]. This code gives a firing rate with Poisson process with a defined firing rate and sampling interval and period. To get an easy example, I created firing rates 3,000 neurons at 10 Hz with Poisson distribution for 10 seconds with sampling period of 50 ms. The leaking activity of these neurons was obtained with *get_leaking* algorithm.
+
+When I created the structure of my network. I obtained Asparse via get_probs and a_sparse algorithms. After obtaining *A<sup>sparse</sup>*, I have chosen to protect diagonal structure via *preserve_diag algorithm* since authors have showed whether preseving or not preserving does not change the results. Matrix multiplication was not supported in Elephant due to Quantities library does not supporting matrix multiplication. To overcome this issue I have created *matrix_multip* algorithm that makes just basic matrix operation. Finally I have tried my algorithms to work via dxdt algorithm.
 
 ## 3.2. Running the code
 
-Explain your code & directory structure and how other people can run it.
+My code can basically run by anyone who has simple computer. It does not require a GPU.
 
 ## 3.3. Results
 

@@ -78,19 +78,26 @@ I created the connectivity matrix by using *within_network*, *sparse_network* an
 
 Next, authors defined external input by assigning *b* as 0.0002 and *ξ* as a gaussian white noise. In the original paper authors defined *x*(0) (i.e. firing rates at 0 s) as uniform random entries with a rule of ~*U*(0,1). But this definition was not enough to create covariance matrix. Therefore I used *homogenous_poisson_process* and *instantaneous_rate algorithms* form Elephant library [10]. This code gives a firing rate with Poisson process with a defined firing rate and sampling interval and period. To get an easy example, I created firing rates 3,000 neurons at 10 Hz with Poisson distribution for 10 seconds with sampling period of 50 ms. The leaking activity of these neurons was obtained with *get_leaking* algorithm.
 
-When I created the structure of my network. I obtained Asparse via get_probs and a_sparse algorithms. After obtaining *A<sup>sparse</sup>*, I have chosen to protect diagonal structure via *preserve_diag algorithm* since authors have showed whether preseving or not preserving does not change the results. Matrix multiplication was not supported in Elephant due to Quantities library does not supporting matrix multiplication. To overcome this issue I have created *matrix_multip* algorithm that makes just basic matrix operation. Finally I have tried my algorithms to work via *dxdt* algorithm for 40 seconds.
+When I created the structure of my network. I obtained Asparse via get_probs and a_sparse algorithms. When I started to run get_probs algorithm, I obtained some probablities larger than 1. To overcome this issue I divided probabilities to 10 until there will no value larger than 1. 
+
+After obtaining *A<sup>sparse</sup>*, I have chosen to protect diagonal structure via *preserve_diag algorithm* since authors have showed whether preseving or not preserving does not change the results. Matrix multiplication was not supported in Elephant due to Quantities library does not supporting matrix multiplication. To overcome this issue I have created *matrix_multip* algorithm that makes just basic matrix operation. Finally I have tried my algorithms to work via *dxdt* algorithm for 40 seconds with sampling period of 50 ms.
 
 ## 3.2. Running the code
 
-My code can basically run by anyone who has simple computer. It does not require a GPU.
+My code can basically run by anyone who has simple computer. I ran my algorithm on Google Colab. It does not require a GPU.
 
 ## 3.3. Results
 
-Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
+Unlike the results at the oringinal paper A_sparse sturucture has exploded within time. When the computational limits has reached, the algorithm has got into a infinity loop. Therefore I could not reproduce numerical results of the study.
 
 # 4. Conclusion
 
-Discuss the paper in relation to the results in the paper and your results.
+In this study authors has defined a new neural network model that includes a noise parameter to obtain realistic results. The authors defined their neural network theoretically and obtained numerical results compare traditional neural networks that does not use noise-pruning. Although their results seems to be robust. I observed some limitiations that have caused failure of this study.
+
+Firstly, authors have not shared the code with the scientific community. Since the paper is under peer-review authors should share their code when their study will be published. Second, I think that authors did not define their parameters well enough to reproduce their results. During my study I have struggled with obtaining true *K* value and create initial firing rate matrix to obtain covarince matrix and *A<sup>sparse</sup>* yet I failed to reproduce. Third at the introduction of the study authors has made me think, they modeled a neural network that has really used much detailed model. 
+
+
+In this study authors did not share a code to understand 
 
 # 5. References
 

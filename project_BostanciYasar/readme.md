@@ -137,4 +137,4 @@ https://blog.paperspace.com/pytorch-101-building-neural-networks/
 
 Provide your names & email addresses and any other info with which people can contact you.\
 Hüseyin Avni Yasar : [@avniyasar](https://github.com/avniyasar) \
-Safa Mesut Bostancı : 
+Safa Mesut Bostancı : [@smbostanci](https://github.com/smbostanci) \

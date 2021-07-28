@@ -25,13 +25,6 @@ It is not quite certain how BN improves the performance yet, it is argued that B
 ## 2.1. The original method
 
 <!--- Explain the original method.\ -->
-Some implementation details are given in the paper.\
-•	Learning rate: It starts with 0.1*m/64 for both datasets and divide it by 10 for every 60 epochs.\
-•	Ideal batch size:32 \
-•	Batch size: 8-16-32 \
-•	Neural network model : RESNET18,RESNET34,RESNET50,VGG11,VGG16 \
-•	Dataset: CIFAR10 and CIFAR100 \
-•	Optimizer: SGD 
 
 In the original method authors propose a dynamic momentum parameter <img src="https://latex.codecogs.com/gif.latex?\lambda" title="\lambda" /> in order to control the final noise level in the training. The algorithm of the MBN which is directly taken from the paper is given below;
 
@@ -48,6 +41,17 @@ The formulation of the momentum parameter of the MBN for the inference stage is 
 <img src="https://latex.codecogs.com/gif.latex?\tau^{\frac{N}{m}}=\tau_{0}^{\frac{N}{m_{0}}}&space;\Rightarrow&space;\tau=\tau_{0}^{\frac{m}{m_{0}}}" title="\tau^{\frac{N}{m}}=\tau_{0}^{\frac{N}{m_{0}}} \Rightarrow \tau=\tau_{0}^{\frac{m}{m_{0}}}" />
 
 The inference momentum parameter is adaptive to batch size. Where <img src="https://latex.codecogs.com/gif.latex?m" title="N" /> denotes the number of samples in other words batch size and <img src="https://latex.codecogs.com/gif.latex?m_{0}" title="m_{0}" /> denotes the ideal batch size which is set to 32 in the original paper and it is preserved in the experiments of this implementation as well. In addition <img src="https://latex.codecogs.com/gif.latex?{\tau&space;_{0}}" title="{\tau _{0}}" /> is an ideal coefficient and in the originial paper authors set it to 0.90 for the inference step. According to the inference step momentum formula, it can be easily seen that smaller batch size makes the inference momentum parameter larger. 
+
+
+Some implementation details are given in the paper.\
+•	Learning rate: It starts with 0.1*m/64 for both datasets and divide it by 10 for every 60 epochs.\
+•	Ideal batch size:32 \
+•	Batch size: 8-16-32 \
+•	Neural network model : RESNET18,RESNET34,RESNET50,VGG11,VGG16 \
+•	Dataset: CIFAR10 and CIFAR100 \
+•	Optimizer: SGD 
+
+
 
 
 

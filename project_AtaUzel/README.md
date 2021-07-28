@@ -107,7 +107,7 @@ This task is learned for 5k timesteps and an evaluation was made every 50 timest
 
 ### 3.1.2. Experiment 2
 
-In this experiment, the reinforcement learning algorithm was run for 50k timesteps which is higher compared to the first experiment. Similar to the first experiment, an evaluation was made every 50 timesteps. Since the algorithm was run for longer, the average rewards significantly increased during the learning unlike the other experiment. However due to limitations in time and resources, this experiment was applied on 3 seeds which is lower than the first experiment.
+In this experiment, the reinforcement learning algorithm was run for 50k timesteps which is higher compared to the first experiment. Similar to the first experiment, an evaluation was made every 50 timesteps. Since the algorithm was run for longer, the average rewards significantly increased during the learning unlike the other experiment. However due to limitations in time and resources, this experiment was applied on a single seed which is lower than the first experiment.
 
 ## 3.2. Running the code
 
@@ -177,7 +177,7 @@ The average of the success rates given in the Figure 6 is 21.5% and the average 
 ### 3.3.2. Results of Experiment 2
 
 <p align="center">
-  <img src="" />
+  <img src="https://user-images.githubusercontent.com/61411406/127308584-482768e2-5ca5-4214-8d25-fb0ecbe87dad.png" />
 </p>
 
 <p align="center">
@@ -185,14 +185,14 @@ The average of the success rates given in the Figure 6 is 21.5% and the average 
 </p>
 
 <p align="center">
-  <img src="" />
+  <img src="https://user-images.githubusercontent.com/61411406/127308609-a989a3a5-664c-4b72-a247-757e337c564e.png" />
 </p>
 
 <p align="center">
   Figure 9: Average Reward vs. Number of evaluations with Prior for Experiment 2
 </p>
 
-The average of the success rates given in the Figure 8 is *todo* and the average of the success rates given in the Figure 9 is *todo*. As expected, the success rate of the agent with behavioral prior gets significantly higher with much less learning compared to the agent without behavioral prior. The plots are prepared using a running average of window size *todo* to make them easily readable.
+The average of the success rates given in the Figure 8 is 4.5% and the average of the success rates given in the Figure 9 is 12.6%. As expected, the success rate of the agent with behavioral prior gets significantly higher with much less learning compared to the agent without behavioral prior. The plots are prepared using a running average of window size 150 to make them easily readable.
 
 Since the number of seeds that was used in this experiment is relatively low, the results may not be very generalizable.
 
@@ -226,6 +226,8 @@ The results in the original paper are consisntent with our results. In both case
 
 
 As the figure suggests, the method proposed in the paper starts with a high average reward compared to other methods. This result was confirmed with our first experiment. The method is also expected to learn to task more rapidly compared to other methods. This result was confirmed with our second experiment. The results were discussed in the previous section.
+
+Even though the simulation timesteps are not exactly comparable, the original paper has 500k timesteps of learning while we could run the algorithm for only 50k timesteps. Therefore having a much lower final performance is roughly expected.
 
 # 5. References
 

@@ -4,7 +4,7 @@ This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.
 
 # 1. Introduction
 
-[This paper](https://openreview.net/pdf?id=rcQdycl0zyk) was published as a conference paper at ICLR 2021 by Zhang et al. It was among the 8 Outstanding Papers selected by ICLR organizers out of the 860 papers submitted to the conference.
+[This paper](https://openreview.net/pdf?id=rcQdycl0zyk) was published as a conference paper at ICLR 2021 by Zhang et al (2021). It was among the 8 Outstanding Papers selected by ICLR organizers out of the 860 papers submitted to the conference.
 
 Although the paper's title is intimidating, the main idea behind it is easy to understand. It builds up on top of the work by Parcollet ([2018](https://hal.archives-ouvertes.fr/hal-02107611/document), [2019](https://core.ac.uk/download/pdf/217859026.pdf)) and Tay ([2019](https://arxiv.org/pdf/1906.04393.pdf)). These papers propose various quaternion networks, which greatly reduce the number of parameters while attaining similar performances with their ordinary counterparts. 
 
@@ -12,7 +12,7 @@ Quaternions are an extension for the vanilla complex numbers, a + bi, which are 
 
 These interactions are: ijk = i^2 = j^2 = k^2 = -1, ij = k, jk = i, ki = j, ji = -k, kj = -i, ik = -j.  
 
-For a quaternion Q defined as: 
+For a quaternion Q defined as: (the figures belong to Zhang et al. unless otherwise stated)
 
 ![Q](https://user-images.githubusercontent.com/62503047/127294554-20573947-34a0-4605-8f46-9904517b3816.PNG)
 
@@ -24,9 +24,13 @@ Now, to put this into ML perspective, say there is a weight vector W= R + Xi + Y
 
 ![hh](https://user-images.githubusercontent.com/62503047/127296656-c40eb3d7-9c4d-4055-a052-eb99d34be9d4.PNG)
 
+(Parcollet et al. 2019)
+
 Which can be expressed as:
 
 ![Capture](https://user-images.githubusercontent.com/62503047/127296804-faffb983-8093-4bd0-aa3d-9cb43290715e.PNG)
+
+(Parcollet et al. 2019)
 
 Putting aside i,j,k this should seem familiar. It is a weight matrix V times the input X, the standard linear transformation. However the weight matrix V is created using the weight vector W. Normally the weight matrix V, being a 4x4 matrix, would have 16 degrees of freedom however since it is created using the interaction between the input and vector W, which has 4 degrees of freedom. So, quaternion valued linear transformations enjoy a %75 reduction in parameters while achieving similar performance to their real valued counterparts. You can find more details in the aforementioned papers. However the rest of the details such as backprop and loss functions with imarginary numbers are not relevant to this discussion. 
 

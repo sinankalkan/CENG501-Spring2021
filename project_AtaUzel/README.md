@@ -134,20 +134,19 @@ parrot
 │
 └─── sample models
 ```
+In order to repeat our experiments, one should firstly run [robot_arm.py](https://github.com/sinankalkan/CENG501-Spring2021/blob/main/project_AtaUzel/robot_arm.py) file in order to generate near optimal action-state pairs in [data3](https://github.com/sinankalkan/CENG501-Spring2021/tree/main/project_AtaUzel/data3) folder. When there is enough data, one can exit the script. In the current version of the repository, [data3](https://github.com/sinankalkan/CENG501-Spring2021/tree/main/project_AtaUzel/data3) folder includes a single action-state pair for demonstration purposes.
 
-In order to repeat our experiments, one should firstly run "robot_arm.py" file in order to generate near optimal action-state pairs in "data3" folder. When there is enough data, one can exit the script. In the current version of the repository, "data3" folder includes a single action-state pair for demonstration purposes.
+Then, [behavioral_prior.py](https://github.com/sinankalkan/CENG501-Spring2021/blob/main/project_AtaUzel/behavioral_prior.py) should be run in order to train a behavioral prior network based on the generated near optimal action-state pairs. This script will save the trained models inside [bp models](https://github.com/sinankalkan/CENG501-Spring2021/tree/main/project_AtaUzel/bp%20models) folder. The currently existing [final.pt](https://github.com/sinankalkan/CENG501-Spring2021/blob/main/project_AtaUzel/bp%20models/final.pt) file is the final model that is obtained from our behavioral prior training.
 
-Then, "behavioral_prior.py" should be run in order to train a behavioral prior network based on the generated near optimal action-state pairs. This script will save the trained models inside "bp models" folder. The currently existing "final.pt" file is the final model that is obtained from our behavioral prior training.
+Finally, one should run [q_learning.py](https://github.com/sinankalkan/CENG501-Spring2021/blob/main/project_AtaUzel/q_learning.py) script. This script will use the final behavioral prior model and start reinforcement learning. Then store the results in "evals" folder. [with](https://github.com/sinankalkan/CENG501-Spring2021/tree/main/project_AtaUzel/evals/with) and [without](https://github.com/sinankalkan/CENG501-Spring2021/tree/main/project_AtaUzel/evals/without) foders inside the [evals](https://github.com/sinankalkan/CENG501-Spring2021/tree/main/project_AtaUzel/evals) folder are used in order to keep the logs of the reinforcement learning agents with and without behavioral prior. The [with](https://github.com/sinankalkan/CENG501-Spring2021/tree/main/project_AtaUzel/evals/with) and [without](https://github.com/sinankalkan/CENG501-Spring2021/tree/main/project_AtaUzel/evals/without) folders given in this repository include the data of the first experiment.
 
-Finally, one should run "q_learning.py" script. This script will use the final behavioral prior model and start reinforcement learning. Then store the results in "evals" folder. "with" and "without" foders inside the "evals" folder are used in order to keep the logs of the reinforcement learning agents with and without behavioral prior. The "with" and "without" folders given in this repository include the data of the first experiment.
+The file [scaling.py](https://github.com/sinankalkan/CENG501-Spring2021/blob/main/project_AtaUzel/scaling.py) includes a function that is necessary to scale the objects to the desired sizes.
 
-The file "scaling.py" includes a function that is necessary to scale the objects to the desired sizes.
+[textures](https://github.com/sinankalkan/CENG501-Spring2021/tree/main/project_AtaUzel/textures) and [selected textures](https://github.com/sinankalkan/CENG501-Spring2021/tree/main/project_AtaUzel/selected%20textures) folders include the texture for the ground and the textures for the objects respectively.
 
-"textures" and "selected textures" folders include the texture for the ground and the textures for the objects respectively.
+[reactor_description](https://github.com/sinankalkan/CENG501-Spring2021/tree/main/project_AtaUzel/reactor_description) folder includes the 3D models and urdf definition of the robotic manipulator.
 
-"reactor_description" folder includes the 3D models and urdf definition of the robotic manipulator.
-
-"sample models" folder include the 3D models of the selected objects.
+[sample models](https://github.com/sinankalkan/CENG501-Spring2021/tree/main/project_AtaUzel/sample%20models) folder include the 3D models of the selected objects.
 
 In the python environment, the current versions of following packages were used:
 - Numpy

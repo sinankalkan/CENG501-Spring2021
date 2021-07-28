@@ -61,7 +61,13 @@ So the process for n=2, dim1=6 and dim2=8 looks like:
 ![Screenshot (587)](https://user-images.githubusercontent.com/62503047/127239397-3313b5e1-bd4d-4041-951b-42dea44b44d6.png)
 
 
-The number of parameters here is given by elements in tensor A + tensor B which is n^3 + dim1\*dim2/n. So while 1/n effectively scales the parameters size, there is also a n^3 term which becomes evident with large n. This is further investigated in 2.2. So what does this have to do with quaternions? Remember the Hamilton product in matrix form above. This Hamilton product can be expressed as a PHM operation with n=4:
+The number of parameters here is given by elements in tensor A + tensor B which is n^3 + dim1\*dim2/n. So while 1/n effectively scales the parameters size, there is also a n^3 term which becomes evident with large n. After a point, parameter sizes of PHM network exceeds the original one due to the n^3 term. Considering the aim of the PHM implementation, this is undesirable and n should be choosen from finite set of numbers. However, there is no disscussion about this issue in paper. Break even point for n where number of PHM parameters becomes equal to original implementation can be calculated with the formula below:
+
+   ![image](https://user-images.githubusercontent.com/84293711/127322723-bd84eb21-6e7c-47f1-aacb-a4a6c9cad8d5.png)
+
+where *dim* = _dim1_ * _dim2_. Solving the quartic equation for n gives the break-even points.
+
+So what does this have to do with quaternions? Remember the Hamilton product in matrix form above. This Hamilton product can be expressed as a PHM operation with n=4:
 
 ![Screenshot (589)](https://user-images.githubusercontent.com/62503047/127239480-66083189-ca2a-4077-961d-d023ff3b6704.png)
 
@@ -91,14 +97,13 @@ There are a bunch of things that are ambiguous about the transformer implementat
 1. **Tokenization**. Nothing is said about the tokenization method. There are many tokenization methods to choose from today because they can really improve the performance of the network. We chose to use the most elementary method that is word tokenization. Every unique word is assigned a token along with some special tokens such as beginning of sentences, end of sentence and unknown word token. It is important to note that virtually no language model uses this tokenization method today, they opt in for subword tokenization methods such as byte pair encoding and Sentencepiece. These are easy to use and we have experience working with them but we chose word tokenization due to its simplicity and the ambiguity of the tokenization method in the paper.
 2. **Experimental Setup**. Nothing is said about the chosen optimizer and its parameters. The batch size is also reported for only natural language inference (LSTM). There is no explanation about hidden sizes of both LSTM and MLP, and choice of activation function between linear layers in NLI tasks. The authors report how much they train the networks in terms of step sizes, but since the batch size is ambiguous for most tasks, this does not help to replicate the results. Our choice of these hyperparameters are explained in the experimental setup.
 3. **Model Architecture**. Some choices regarding the model architecture are ambiguous such as the feed forward network hidden size. Our choice of these hyperparameters are explained in the experimental setup.
-4.  **Concatenation Process in LSTM**. There is no explanation about concatenation of *premise* and *hypothesis* outputs in NLI experiments. We inferred from previous works for concatenation process.
-5.  **BLEU smoothing function**. The BLEU metric used for translation is not a perfect metric and some modifications have been proposed to make it closer to human judgement. One such proposal is the use of [smoothing functions](https://leimao.github.io/blog/BLEU-Score/). We used a particular but common smoothing function, but the authors have not made it clear whether they have used it or which one. So a comparison between our BLEU scores and the authors' may not be %100 accurate.
-6.   Concatenation heuristic method [Qian Chen et al., 2017.](https://arxiv.org/abs/1609.06038) is used in previous work. We used this heuristic for our implementation in NLI task. Concatenation process is done by computing both average and max pooling, and concatenate all these vectors to form the final fixed
+4.  **BLEU smoothing function**. The BLEU metric used for translation is not a perfect metric and some modifications have been proposed to make it closer to human judgement. One such proposal is the use of [smoothing functions](https://leimao.github.io/blog/BLEU-Score/). We used a particular but common smoothing function, but the authors have not made it clear whether they have used it or which one. So a comparison between our BLEU scores and the authors' may not be %100 accurate.
+5.    **Concatenation Process in LSTM**. There is no explanation about concatenation of *premise* and *hypothesis* outputs in NLI experiments. We inferred from previous work [Qian Chen et al., 2017.](https://arxiv.org/abs/1609.06038) for concatenation process. We used this heuristic for our implementation in NLI task. Concatenation process is done by computing both average and max pooling, and concatenate all these vectors to form the final fixed
 length vector v. The final fixed length vector v is calculated as follows:
 
   ![Concat](https://user-images.githubusercontent.com/84293711/127313944-0d5a2d55-a0e2-4f96-a74f-d92f24ce826c.jpg)
 
-  (Qian Chen et al., 2017)
+                     (Qian Chen et al., 2017)
 
 Where *Va,ave* and *Va,max* are LSTM outputs of premise sentences applied by average   and max operations respectively along hidden size direction, and *Vb,ave* and *Vb,max* are the outputs of hypothesis outputs of same process. 
 
@@ -116,7 +121,7 @@ For transformer experiments we chose to reproduce the style transfer, because th
 Notice how every weight dimension hyperparameter is an exponential of 2, so that we can pick n=2,4,8...256.
 
 ### For style transfer:
-
+*Table 1: Transformer Parameters for Style Transfer*
 Setup Component | The authors | Us
 ------------ | ------------- | -------------
 Optimizer | - | AdamW
@@ -142,10 +147,12 @@ The loss curves can be accessed at our [Weights and Biases report for style tran
 
 ![Validation Curves](https://user-images.githubusercontent.com/62503047/127185236-5c748f9c-98ea-4acf-bfdd-908f985aca9f.png)
 
+*Figure 1: Training and Validation Loss Curves of Transformer Network for Style Transfer*
+
 The step numbers here are not the real steps, rather they are the intervals for reporting the losses to Weights and Biases.
 
 ### For De-En translation:
-
+*Table 2: Transformer Parameters for Translation*
 Setup Component | The authors | Us
 ------------ | ------------- | -------------
 Optimizer | - | AdamW
@@ -171,6 +178,8 @@ The loss curves can be accessed at our [Weights and Biases report for translatio
 
 ![W B Chart 7_28_2021, 1 38 26 PM](https://user-images.githubusercontent.com/62503047/127309583-4b0ba188-4f7d-43d9-b18a-669bdcf51a8f.png)
 
+*Figure 2: Training and Validation Loss Curves of Transformer Network for Translation*
+
 
 \* We do early stopping at 5,175 because the model starts to overfit. The training curves for the models can be viewed above. 
 
@@ -180,6 +189,7 @@ The loss curves can be accessed at our [Weights and Biases report for translatio
 
 
 ### For NLI task on MNLI Dataset
+*Table 3: LSTM Parameters for NLI*
 Setup Component | The authors | Us
 ------------ | ------------- | -------------
 Optimizer    | Adam | Adam
@@ -205,7 +215,7 @@ The Colab notebook for style transfer thoroughly explains the parts of the code.
 
 ### For style transfer:
 
-The results reported by the authors:
+*Table 4: The results reported by the authors*
 
 Model | Parameters | BLEU
 ------------ | ------------- | -------------
@@ -217,6 +227,7 @@ PHM-Transformer (n=16) | 2.9M | 10.76
 
 Our results:
 
+*Table 5: The results by our implementation*
 Model | Parameters | BLEU | Training time for 1 epoch (sec) | Inference time for 500 lines (sec)
 ------------ | ------------- | ------------- | ----------- | -------------
 Transformer | 29,421,568 | 17.52 | 41.644 | 205
@@ -227,8 +238,7 @@ PHM-Transformer (n=16) | 2,072,576 | 16.36 | 81.249 | 595
 
 ### For De-En translation:
 
-The results reported by the authors:
-
+*Table 6: The results reported by the authors for translation*
 Model | Parameters | BLEU | Train time per 100 steps (sec) | Inference time (sec)
 ------------ | ------------- | ------------- | ------------- | -------------
 Transformer | 44M | **36.68** | 7.61 | 336
@@ -239,6 +249,7 @@ PHM-Transformer (n=16) | 2.9M | 33.89 | - | -
 
 Our results:
 
+*Table 7: The results by our implementation for translation*
 Model | Parameters | BLEU | Train time for 50,000 steps (sec) | Inference time for 500 lines (sec)
 ------------ | ------------- | ------------- | ------------- | ------------- 
 Transformer | 27,309,056 | 17.91 | 2257 | 257

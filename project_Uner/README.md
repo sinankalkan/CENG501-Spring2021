@@ -1,10 +1,12 @@
-# Paper title
+# Meticulous Object Segmentation
 
 This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.metu.edu.tr/~sinan/DL/) project for reproducing a paper without an implementation. See [CENG501 (Spring 2021) Project List](https://github.com/sinankalkan/CENG501-Spring2021) for a complete list of all paper reproduction projects.
 
 # 1. Introduction
 
-Introduce the paper (inc. where it is published) and describe your goal (reproducibility).
+[This paper](https://arxiv.org/pdf/2012.07181.pdf) was published by Adobe as an Arxiv paper in 2020. The paper proposes a solution which is called MeticulousNet for the segmentation of well defined foreground objects including high resolution images. They also called this task as "Meticulous Object Segmentation". The results shown in the article are highly impressive both qualitatively and quantitatively. MeticulousNet consists of two models which have almost same architecture. These models are MOS_L and MOS_H that are responsible from the coarse(low resolution) and refined(high resolution) mask generation respectively.
+
+I aimed to obtain similar qualitative and quantitative results with the paper for both MOS_L and MOS_H.
 
 ## 1.1. Paper summary
 

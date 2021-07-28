@@ -16,17 +16,17 @@ For a quaternion Q defined as: ![Q](https://user-images.githubusercontent.com/62
 
 And a P defined similarly, the Hamilton product of Q and P becomes: ![h](https://user-images.githubusercontent.com/62503047/127294777-8f1312b8-fcb1-4270-bc2a-1a87a972d11d.PNG)
 
-Now, to put this into ML perspective, say there is a weight vector W = R + Xi + Yj + Zk and input X = r + xi + yj + zk. Their Hamilton product becomes: ![hh](https://user-images.githubusercontent.com/62503047/127296656-c40eb3d7-9c4d-4055-a052-eb99d34be9d4.PNG)
+Now, to put this into ML perspective, say there is a weight vector W= R + Xi + Yj + Zk and input X= r + xi + yj + zk. Their Hamilton product is: ![hh](https://user-images.githubusercontent.com/62503047/127296656-c40eb3d7-9c4d-4055-a052-eb99d34be9d4.PNG)
 
 Which can be expressed as: ![Capture](https://user-images.githubusercontent.com/62503047/127296804-faffb983-8093-4bd0-aa3d-9cb43290715e.PNG)
 
-Putting aside i,j,k this should seem similar. It is a weight matrix V times the input X, the standard linear transformation. However the weight matrix V is created using the weight vector W. Normally the weight matrix V, being a 4x4 matrix, would have 16 degrees of freedom however since it is created using the interaction between the input and vector W, which has 4 degrees of freedom. So, quaternion valued linear transformations enjoy a %75 reduction in parameters while achieving similar performance to their real valued counterparts. You can find more details in the afore 
+Putting aside i,j,k this should seem similar. It is a weight matrix V times the input X, the standard linear transformation. However the weight matrix V is created using the weight vector W. Normally the weight matrix V, being a 4x4 matrix, would have 16 degrees of freedom however since it is created using the interaction between the input and vector W, which has 4 degrees of freedom. So, quaternion valued linear transformations enjoy a %75 reduction in parameters while achieving similar performance to their real valued counterparts. You can find more details in the aforementioned papers. However the rest of the details such as backprop and loss functions with imarginary numbers are not relevant to this discussion. 
 
-But the problem with quaternion networks is that they can only be used to parametrize certain dimension sizes (4, 8, 12). This limits their potential, which brings us to the said paper.
+Although they are great in some cases, the problem with quaternion networks is that they can only be used to parametrize certain dimension sizes (4, 8, 16). This hampers their robustness, which brings us to the said paper.
 
 ## 1.1. Paper summary
 
-The paper proposes Parametrized Hypercomplex Multiplication Layers to replace fully connected layers. These layers are put together very smartly, such that they subsume both the quaternion layers mentioned previously and the usual linear transformation. Thus the name, BEYOND FULLY-CONNECTED LAYERS WITH QUATERNIONS. The main advantage of the PHM Layer is that they enable choosing an arbitrary n to reduce the number of parameters, whereas this was limited to 4, 8 and 16 with quaternions. Here is how it works:
+The paper proposes Parametrized Hypercomplex Multiplication Layers to replace fully connected layers. These layers are put together very smartly, such that they subsume both the quaternion layers mentioned previously and the usual linear transformation. Thus the name, Beyond Fully Connected Layers with Quaternions... . The main advantage of the PHM Layer is that they enable choosing an arbitrary n to reduce the number of parameters, whereas this was limited to 4, 8 and 16 with quaternions. Here is how it works:
 
 Fully Connected Layer: ![Screenshot (582)](https://user-images.githubusercontent.com/62503047/127239071-392fe478-671e-483f-8d68-19d791b89b8d.png)
 
@@ -178,7 +178,7 @@ Our results:
 Model | Parameters | BLEU | Training time for 1 epoch (sec) | Inference time for 500 lines (sec)
 ------------ | ------------- | ------------- | ----------- | -------------
 Transformer | 29,421,568 | 17.52 | 41.644 | 205
-PHM-Transformer (n=2) | 13,857,048 | 16.55 | 50.492 | x
+PHM-Transformer (n=2) | 13,857,048 | 16.55 | 50.492 | -
 PHM-Transformer (n=4) | 7,043,264 | 15.39 | 55.223 | 327
 PHM-Transformer (n=8) | 3,651,072 | 16.09 | 63.436 | 358
 PHM-Transformer (n=16) | 2,072,576 | 16.36 | 81.249 | 595
@@ -211,7 +211,15 @@ We were not able to get the results from trained models because of runtime limit
 
 # 4. Conclusion
 
-Discuss the paper in relation to the results in the paper and your results.
+**We were able to reproduce the authors' results in style transfer and De En translation tasks. Although we could not match their exact numbers because of training limitations and hyperparameter ambiguities, we saw that the vanilla transformer and the PHM+ transformer yielded very similar performances, which was the point of the paper. **
+
+Interestingly we outperformed the authors' model in style transfer. We think this is due to the choice of BLEU smoothing function mentioned before but we would also like to note that the authors report a large number of steps for training for this task. In fact we overfit the data with the authors' number of steps with a small batch size (see the figure under style transfer experiment), so when this large number of steps is coupled with a large batch size it could lead to greater overfitting. But we think this is extremely unlikely given the authors' experience, so there is probably something else at play.
+
+We observed a lower performance than the authors' in the translation task. This was expected as we trained the same number of steps, with presumably a much smaller batch size. In fact we could not cover 1/3 of the dataset and there was still room for improvement. 
+
+One final thing of interest is the training and inference times for both tasks. When n is increased, the number of parameters decrease while the number of operations increase. One of these, may dominate the other. We observed that both times went up when n was increased while the authors reported a decrease. This hints that the authors' have a more efficient PHM layer code.  
+
+To wrap up, we enjoyed reproducing this paper and learned a lot during the process. We would like to thank the authors for writing such a great and mostly clear paper and Sinan Hoca for equipping us with the skills to take on this project.
 
 # 5. References
 

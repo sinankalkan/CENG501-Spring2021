@@ -41,7 +41,7 @@ The formulation of the momentum parameter of the MBN for the training stage is a
 
 <img src="https://latex.codecogs.com/gif.latex?\lambda^{(t)}=\rho^{\frac{T}{T-1}&space;\max&space;(T-t,&space;0)}-\rho^{T},&space;\quad&space;\rho=\min&space;\left(\frac{m}{m_{0}},&space;1\right)^{\frac{1}{T}}" title="\lambda^{(t)}=\rho^{\frac{T}{T-1} \max (T-t, 0)}-\rho^{T}, \quad \rho=\min \left(\frac{m}{m_{0}}, 1\right)^{\frac{1}{T}}" />
 
-where t refers to the t-th iteration epoch, T  is the number of the total epochs. As it is seen from the formulation above in the beginning phase of the training the normalization technique does not differ much from the conventional Batch Normalization but as the epoch number increase the momentum parameter shows its effect. 
+where <img src="https://latex.codecogs.com/gif.latex?t" title="t" /> refers to the <img src="https://latex.codecogs.com/gif.latex?t" title="t" /> -th iteration epoch, <img src="https://latex.codecogs.com/gif.latex?T" title="T" /> is the number of the total epochs. As it is seen from the formulation above in the beginning phase of the training the normalization technique does not differ much from the conventional Batch Normalization but as the epoch number increase the momentum parameter shows its effect. 
 
 The formulation of the momentum parameter of the MBN for the inference stage is as follows;
 
@@ -61,9 +61,7 @@ The inference momentum parameter is adaptive to batch size. Where N denotes the 
 
 <img src="https://latex.codecogs.com/gif.latex?\lambda" title="\lambda" />
 
-<img src="https://latex.codecogs.com/gif.latex?T" title="T" />
 
-<img src="https://latex.codecogs.com/gif.latex?t" title="t" />
 
 
 

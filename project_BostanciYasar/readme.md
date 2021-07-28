@@ -114,7 +114,10 @@ In our results there are some sharp increase and decreases. As mentioned before 
 
 # 4. Conclusion
 
-Discuss the paper in relation to the results in the paper and your results.
+Batch normalization is accepted as a breakthrough method and it improved the performances of various deep neural networks. In this paper authors propose a new method which foundations lie on the BN. the working mechanism of the BN could not be understood exactly but it is known that BN increases the accumulated noise in deep neural networks. Authors proposes a novel approach MBN in order to control the accumulated noise level in BN by a dynamic momentum parameter. This technique promises to make training with normalization in more robust way with small batch sizes. 
+
+In the experiments it is shown that the MBN work stably with different batch sizes with different networks on different data sets. MBN also shows better performance with smaller batch sizes as expected and it outperformed other normalization methods such as IN, LN, GN and BN. The obtained results of the our implementation project is compatible with the original paper results. Moreover, it is seen that the results are consistent with the theoritical expectations as well. 
+
 
 # 5. References
 

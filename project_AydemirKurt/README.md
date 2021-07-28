@@ -9,7 +9,7 @@ The paper we tried to implement is titled Object-Guided Instance Segmentation fo
 ## 1.1. Paper summary
 Box-based instance segmentation methods use Region of Interest (RoI) patches generated from bounding boxes. These bounding boxes are obtained by examining all the pixels in an image. After obtaining the bounding boxes RoI patches are generated. The Keypoint Graph method[2] uses a separate segmentation branch to operate on cropped RoI patches. In the segmentation branch five keypoints are detected for generating a bounding box, which creates problems when objects are overlapping. In this paper authors suggest using a keypoint based method where only the center point is used to generate each bounding box for overcoming the problem of overlapping keypoints at the detection branch. 
 
-# 2. The method and my interpretation
+# 2. The method and our interpretation
 Proposed method is given below:
 <p align="center">
 	<img src="figures/method.png", width="800">
@@ -57,7 +57,7 @@ After cropping RoI patches from encoder and object layers using the bounding box
 </p>
 
 
-## 2.2. My interpretation 
+## 2.2. Our interpretation 
 
 Explain the parts that were not clearly explained in the original paper and how you interpreted them.
 
@@ -77,6 +77,7 @@ We used google colab for training and tests.
 https://colab.research.google.com/drive/1p497oiw_nq-5X9c0t9eLL0GVyYhuUZUo?usp=sharing
 
 Their setup given below:
+
 "The training images are augmented using random cropping and random horizontal/vertical flipping. We set 100 epochs for training. We stop the network when the validation loss does not significantly decrease. The input resolution of training and testing images is 512×512. The weights of the backbone network are pre-trained on ImageNet dataset. Other weights of the network are initialized from a standard Gaussian distribution. We use Adam with an initial learning rate of 1.25e-4 to optimize the model weights. We implement the model with PyTorch on NVIDIA M40 GPUs."
 
 We used exactly same parameters with 10 epochs. However, since google colab did not let us to use it anymore (GPU limit reached), we only have the 5 epoch results for kaggle DSB52018 dataset.
@@ -130,8 +131,7 @@ Ours | 78.17| 49.83| 81.59| 87.59 | 2.76|
 
 # 4. Conclusion
 
-Discuss the paper in relation to the results in the paper and your results.
-
+The paper proposes an box-based instance segmentation method. Unfortunately we were not able to reproduce the results due to the excess time required for the computations. Our main limitation was the limited GPU usage time of Google Colab.
 # 5. References
 
 [1] [Jingru Yi, Hui Tang, Pengxiang Wu, Bo Liu, Daniel J. Hoeppner, Dimitris N. Metaxas, Lianyi Han, Wei Fan. Object-Guided Instance Segmentation for Biological Images, 2019.](https://arxiv.org/abs/1911.09199) 

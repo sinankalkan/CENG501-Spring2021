@@ -6,7 +6,23 @@ This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.
 
 [This paper](https://openreview.net/pdf?id=rcQdycl0zyk) was published as a conference paper at ICLR 2021 by Zhang et al. It was among the 8 Outstanding Papers selected by ICLR organizers out of the 860 papers submitted to the conference.
 
-Although the paper's title is intimidating, the main idea behind it is easy to understand. It builds up on top of the work by Parcollet ([2018](https://hal.archives-ouvertes.fr/hal-02107611/document), [2019](https://core.ac.uk/download/pdf/217859026.pdf)) and Tay ([2019](https://arxiv.org/pdf/1906.04393.pdf)). These papers propose various quaternion networks, which greatly reduce the number of parameters while attaining similar performances with their ordinary counterparts. For context, quanternions are an extension for the vanilla complex numbers, a + bi, which are in the form of, a + bi + cj + dk. One particular area where they are utilized to a great extent is computer graphics, where they can be used to model rotations. In machine learning they are used because the Hamilton product used to multiply two quaternions, serves as a great tool for represantation learning. Hamilton product is defined as ... But the problem with quaternion networks is that they can only be used to parametrize certain dimension sizes (4, 8, 12). This limits their potential, which brings us to the said paper.
+Although the paper's title is intimidating, the main idea behind it is easy to understand. It builds up on top of the work by Parcollet ([2018](https://hal.archives-ouvertes.fr/hal-02107611/document), [2019](https://core.ac.uk/download/pdf/217859026.pdf)) and Tay ([2019](https://arxiv.org/pdf/1906.04393.pdf)). These papers propose various quaternion networks, which greatly reduce the number of parameters while attaining similar performances with their ordinary counterparts. 
+
+Quaternions are an extension for the vanilla complex numbers, a + bi, which are in the form of, a + bi + cj + dk. One particular area where they are utilized to a great extent is computer graphics, where they can be used to model rotations. In machine learning they are used because the Hamilton product used to multiply two quaternions, serves as a great tool for representation learning. It introduces a certain form of interaction, a bias, between its inputs. 
+
+These interactions are: ijk = i^2 = j^2 = k^2 = -1, ij = k, jk = i, ki = j, ji = -k, kj = -i, ik = -j.  
+
+For a quaternion Q defined as: ![Q](https://user-images.githubusercontent.com/62503047/127294554-20573947-34a0-4605-8f46-9904517b3816.PNG)
+
+And a P defined similarly, the Hamilton product of Q and P becomes: ![h](https://user-images.githubusercontent.com/62503047/127294777-8f1312b8-fcb1-4270-bc2a-1a87a972d11d.PNG)
+
+Now, to put this into ML perspective, say there is a weight vector W = R + Xi + Yj + Zk and input X = r + xi + yj + zk. Their Hamilton product becomes: ![hh](https://user-images.githubusercontent.com/62503047/127296656-c40eb3d7-9c4d-4055-a052-eb99d34be9d4.PNG)
+
+Which can be expressed as: ![Capture](https://user-images.githubusercontent.com/62503047/127296804-faffb983-8093-4bd0-aa3d-9cb43290715e.PNG)
+
+Putting aside i,j,k this should seem similar. It is a weight matrix V times the input X, the standard linear transformation. However the weight matrix V is created using the weight vector W. Normally the weight matrix V, being a 4x4 matrix, would have 16 degrees of freedom however since it is created using the interaction between the input and vector W, which has 4 degrees of freedom. So, quaternion valued linear transformations enjoy a %75 reduction in parameters while achieving similar performance to their real valued counterparts. You can find more details in the afore 
+
+But the problem with quaternion networks is that they can only be used to parametrize certain dimension sizes (4, 8, 12). This limits their potential, which brings us to the said paper.
 
 ## 1.1. Paper summary
 
@@ -118,7 +134,9 @@ Beam Search Length Penalty Exponent (alpha) | 0.6 | 0.6
 The data is available [here](http://www.statmt.org/wmt14/translation-task.html). We only use the Europarl v7 dataset whereas the authors also used Common Crawl Corpus and the News Commentary.
 
 \* We do early stopping at 5,175 because the model starts to overfit. The training curves for the models can be viewed above. 
+
 \** The authors report a 'hidden size' for the transformer and we used this value both for feed forward network hidden size and the embedding size.
+
 \*** At 50,000 steps we have barely covered the Europarl dataset, which is 1/3 of the authors' dataset. So the model in the paper is presumably trained for much longer although we can't be sure because the batch size is not reported along the training steps. There is a batch size given in the inference task for the LSTM, 256, which is much bigger than our 16. 
 
 
@@ -179,13 +197,13 @@ PHM-Transformer (n=16) | 2.9M | 33.89 | - | -
 
 Our results:
 
-Model | Parameters | BLEU | Inference time for 500 lines (sec)
------------- | ------------- | ------------- | ------------- 
-Transformer | 27,309,056 | 17.91 | 257
-PHM-Transformer (n=2) | 13,579,416 | 17.34 | x
-PHM-Transformer (n=4) | 6,830,272 | 17.30 | x 
-PHM-Transformer (n=8) | 3,463,680 | 18.02 | 553 
-PHM-Transformer (n=16) | 1,844,224 | 17.65 | 980
+Model | Parameters | BLEU | Train time for 10,000 steps (sec) | Inference time for 500 lines (sec)
+------------ | ------------- | ------------- | ------------- | ------------- 
+Transformer | 27,309,056 | 17.91 | 2257 | 257
+PHM-Transformer (n=2) | 13,579,416 | 17.89 | 2604 | 392
+PHM-Transformer (n=4) | 6,830,272 | 17.30 | x | x 
+PHM-Transformer (n=8) | 3,463,680 | 18.02 | - | 553 
+PHM-Transformer (n=16) | 1,844,224 | 17.65 | 5003 | 980
 
 ### For NLI Tasks
 

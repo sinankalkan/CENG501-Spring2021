@@ -9,7 +9,8 @@ In this project, I tried to reproduce the results of “Using noise to probe rec
 ## 1.1. Paper summary
 
 During the lifetime of human brain, its’ synapses can eliminated or added onto dendritic branch via different plasticity methods. In healthy brain this process improves brain’s capacity of perception, memory, behaviour etc [2-4]. The mammalian brain can do organize its’ synapses very efficient by spending ~20 W of energy. However state-of-the-art machine learning (ML) algorithms mostly requires large amount of energy to mimic this process. Yet most of these algorithms still have different pitfall such as failing to transfer, catastrophic forgetting [5]. To reduce the energy requirement, one can implement synaptic elimation into ML algorithms. However, it is not clear that which synapses would be eliminated or added during neuronal activity.
-Additionally, we know that biological systems are very noisy that can affect neuronal and cognitive outputs [6]. Addition of noise would improve the realism of neuron models and ML algorithms [7]. Accordingly, Moore and Chaudhury inserted noise into their neuron model to structure and prune synapses.
+
+Additionally, we know biological systems are very noisy that can affect neuronal and cognitive outputs [6]. Addition of noise would improve the realism of neuron models and ML algorithms [7]. Accordingly, Moore and Chaudhury inserted noise into their neuron model to structure and prune synapses.
 
 # 2. The method and my interpretation
 

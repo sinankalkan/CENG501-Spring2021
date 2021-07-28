@@ -33,20 +33,9 @@ Some implementation details are given in the paper.\
 •	Dataset: CIFAR10 and CIFAR100 \
 •	Optimizer: SGD 
 
-\begin{aligned}
-&\text { Training step: }\\
-&\begin{aligned}
+
 &\mu_{B}=\frac{1}{M^{2}} \sum_{i=1}^{m} x_{i} \\
-&\sigma_{B}^{2}=\frac{1}{m} \sum_{i=1}^{m}\left(x_{i}-\mu_{b}\right)^{2} \\
-&\mu \leftarrow \lambda \mu+(1-\lambda) \mu_{B} \\
-&\sigma^{2} \leftarrow \lambda \sigma^{2}+(1-\lambda) \sigma_{B}^{2} \\
-&\widehat{x}_{i}=\frac{x_{i}-\mu}{\sqrt{\sigma^{2}+e}} \\
-&y_{i}=\gamma \widehat{x}_{i}+\beta \\
-&\mu_{i n f} \leftarrow \tau \mu_{i n f}+(1-\tau) \mu_{B} \\
-&\sigma_{i n f}^{2} \leftarrow \tau \sigma_{i n f}^{2}+(1-\tau) \sigma_{B}^{2} \\
-&\text { Inference step: } y_{i}=\gamma \frac{x_{i}-\mu_{i n f}}{\sqrt{\sigma_{i n f}^{2}+e}}+\beta
-\end{aligned}
-\end{aligned}
+
 
 ## 2.2. My interpretation 
 

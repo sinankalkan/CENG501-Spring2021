@@ -16,7 +16,43 @@ Additionally, we know biological systems are very noisy that can affect neuronal
 
 ## 2.1. The original method
 
-Explain the original method.
+Moore and Chaudhury started to construct their model by forming a linear neural network of the form:
+
+![image](https://user-images.githubusercontent.com/47305046/127342976-49ee1493-7c5f-4fd1-89af-1dd8f4bed322.png)
+
+![image](https://user-images.githubusercontent.com/47305046/127343023-2b94ebfe-962e-49cf-9474-4a1d6c685ff2.png)
+
+The vector x represents the firing rate of N neurons with xi is the firing rate of the i-th neuron. b(t) is the external input to the neuron that is considered as noise, b is an arbitrary vector of constant background input to the network and ξ is a vector of  IID unit variancer Gaussian white noise and σ is the standard deviation of the input noise. D is a diagonal martix representing the intrinsic leak of activity. W is the matrix of weighted connections between the neurons with wij is the connection strength from the j-th neuron to i-th neuron. Then the define a matrix A:
+ 
+![image](https://user-images.githubusercontent.com/47305046/127343074-02de2f20-ea23-49c0-be5b-2f19b6c6d035.png)
+
+Their pruning rule seek to generate a sparse network with corresponding matrix Asparse with two properties:
+  1-	Small number of edges (i.e. number of non-zero entries in Asparse) to create different neuron groups
+  2-	Dynamics of this network seeks to be similar to dynamics of original network:
+  
+  ![image](https://user-images.githubusercontent.com/47305046/127343192-cb8de988-f943-49a1-be30-f9999ef1a7b1.png)
+ 
+This sparse network has made similar by adaptaiton of spectral similarity from graph sparsification [8,9]: 
+
+![image](https://user-images.githubusercontent.com/47305046/127343322-18f2e3f0-66fb-4b44-8791-10f624591e0e.png)
+
+for some small Ɛ > 0. This rule helps to preserve eigenvalues, eigenvectors of matrix A.
+
+Then they activated neurons and calculated pruning probability of neuronal connection:
+
+![image](https://user-images.githubusercontent.com/47305046/127343433-886f4127-b7dc-41a1-9e6e-5d86d4f8b0ca.png)
+
+C is the covariance matrix of firing rates in response to white noise input, C_ii and C_jj are the variances of i-th and j-th neurons and C_ij  are their covariance. K is a proportionality constant. Finally they determine Asparse for i ≠ j:
+
+![image](https://user-images.githubusercontent.com/47305046/127343569-4dc14d0f-65a0-4967-844b-2909ec13e38d.png)
+ 
+For the diagonal terms, they preserved diagonal terms or defined a minimal perturbaiton as,
+
+![image](https://user-images.githubusercontent.com/47305046/127343627-b3dd2892-e98b-4d1f-b3c8-5f03c8916a35.png)
+
+![image](https://user-images.githubusercontent.com/47305046/127343648-be7b3a28-43ac-4750-82b8-cc35d09208ec.png)
+
+Finally, they showed how they obtained their formulas and and obtained numerical results for 3,000 and 10,000 neurons. Finally they described some extensins of their study.
 
 ## 2.2. My interpretation 
 

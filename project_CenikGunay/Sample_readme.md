@@ -12,13 +12,16 @@ The paper presents **Placepedia**, a comprehensive place dataset that contains i
 ## 1.1. Paper summary
 
 We can summarize the paper as below.
-1) They build Placepedia, a large-scale place dataset with comprehensive annotations in multiple aspects. Compared to the other dataset related to place recognition tasks, Placepedia is the largest and the most comprehensive dataset for place understanding as you can see from the Table 1 below, which shows the comparision with the other dataset.
-2) Authors designed four task-spesific benchmarks on Placepedia with respect to multi-faceted information.
-3) They conduct systematic studies on place recognition, which demonstrate important challenges in place understanding as well as the connections between the visual characteristics and underlying socioeconomic or cultural implications.
+
+**1)** They build Placepedia, a large-scale place dataset with comprehensive annotations in multiple aspects. Compared to the other dataset related to place recognition tasks, Placepedia is the largest and the most comprehensive dataset for place understanding as you can see from the Table 1 below, which shows the comparision with the other dataset.
+
+**2)** Authors designed four task-spesific benchmarks on Placepedia with respect to multi-faceted information.
+
+**3)** They conduct systematic studies on place recognition, which demonstrate important challenges in place understanding as well as the connections between the visual characteristics and underlying socioeconomic or cultural implications.
 
 In the related studies, the dataset focuses only the spesific tasks like place categorization, scene recognition, object retrieval or image retrieval. However, Placepedia can be used for all these task due to its much larger amount image and data, containing over 240K places with 35 million images labeled with 3K categories. Moreover, the function information of places may lead to a new task, namely place functio recognition.
 
-**Table 1.** Comparing Placepedia with other existing datasets. Placepedia offers the
+**Table 1.** _Comparing Placepedia with other existing datasets. Placepedia offers the_
 largest number of images and the richest information
 ![comparision](https://user-images.githubusercontent.com/53267971/127357466-9ba97ed1-2ead-4646-8c25-17514200bd3f.PNG)
 
@@ -33,7 +36,7 @@ _**Network Structures**_
 
 - The network structure of PlaceNet is similar to ResNet50. The only difference is that the last convolution/pooling/fc layers are duplicated to five branches, namely, place, category, function, city and country. Each branch contatins two FC layers. 
 
-_**Datasets-Placepedia**_
+_**Dataset-Placepedia**_
 
 - Places-Coarse. They select 200 places for validation and 400 places for testing,
 from 50 famous cities of 34 countries. The remained 25K places are used
@@ -44,9 +47,32 @@ cities of more than 200 countries.
 - Places-Fine. Places-Fine shares the same validation/testing set with PlacesCoarse. For training set, they selected 400 places from the 50 cities of validation/testing places. Different from Places-Coarse, they also double checked
 the annotation of training data. The training/validation/testing set have
 110K/60K/120K images respectively, which are tagged with 50 categories, 10
-functions, 50 cities, and 34 countries.
+functions, 50 cities, and 34 countries. 
+
+- After we downloaded the dataset Placepedia we get the following folders and files that used in our implementations.
+
+i. train: includes the places for training.
+
+ii & iii. valg+valq: includes the places for validation for tasks including place categorization, function categorization, and city/country recognition. For place retrieval task, valg includes the gallery images of validation places and valq includes the query images of validation places.
+
+iv & v. testg+testq: includes the places for testing for tasks including place categorization, function categorization, and city/country recognition. For place retrieval task, testg includes the gallery images of testing places and testq includes the query images of testing places.
+
+Four Category Id Files:
+
+i. type_to_id.json: for place categorization task. Each category is associated with an id.
+
+ii. function_to_id.json: for function categorization task. Each function is associated with an id.
+
+iii. city_to_id.json: for city recognition task. Each city is associated with an id.
+
+iv. country_to_id.json: for country recognition task. Each country is associated with an id.
 
 _**PlaceNet**_
+
+- Below you can see the Pipeline of PlaceNet.
+
+![PlaceNetPipeline](https://user-images.githubusercontent.com/53267971/127476768-47dbd6bc-b209-47da-888c-218609dfa2aa.PNG)
+
 
 - **Loss Functions**. They study three losses for PlaceNet, namely, **softmax loss**, **focal
 loss**, and **triplet loss**. 
@@ -54,6 +80,8 @@ loss**, and **triplet loss**.
 
 - **Pooling Methods**. They also study different pooling methods for PlaceNet,
 namely, **average pooling**, **max pooling**, **spatial pyramid pooling**
+
+
 
 ## 2.2. My interpretation 
 
@@ -67,15 +95,43 @@ Since the batch size is not specified in the training details section of the pap
 
 ## 3.1. Experimental setup
 
-Describe the setup of the original paper and whether you changed any settings.
 
+In original setup authors use Placepedia dataset. Because of lack of disk space in Colab at this part we could only implement one tenth of it to some extent. Moreover, authors provided that they trained the network for 100K iterations which we couldn't train for that long as Colab limits gpu usage so we have presented the results for at most 700 iterations, where iteration training which is significantly lower than the author's setup. All parameters are listed in the table 2 below. 
+  
+  **Table 2.** _Training Parameters of our implementation and authors_
+  
+  ![parameter_tables](https://user-images.githubusercontent.com/53267971/127470144-8fc717cd-cd5e-44a3-98bd-bfae6c551b29.PNG)
+
+  
+  
 ## 3.2. Running the code
 
-Explain your code & directory structure and how other people can run it.
+Readers can easily follow our implemetation given the folder below from the ``` PlaceNet_&_Placepedia.ipynb ``` which gives detailed explanation of the implementations.
+
+```
+project_CenikGunay
+│  loss_graphs
+│  Sample_readme.md 
+│  PlaceNet_&_Placepedia.ipynb
+  
+
+```
+
+* *PlaceNet_&_Placepedia.ipynb* notebook is used for all implemetation used in this report.
+*  *loss_graphs* is generated by how the model PlaceNet works in spite of several constraints and problems.
 
 ## 3.3. Results
 
 Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
+
+**Table 3.** _Comparision of our result with the previous works_
+![Result_tables](https://user-images.githubusercontent.com/53267971/127472734-2f81fac0-d852-42ef-bbdc-7b886c5d43c8.PNG)
+
+In this report, while we reproduce the results given in the paper, what we are trying to show is that the model performs well. As the number of epochs given in the paper is 90, but hardware limitation and many of the images in the dataset are not suitable for training. The training operation is finished without entering the range converged by the loss function, since only one epoch and a limited number of iterations are adhered to. You can see the tendency of the loss curve in 700 iteration with 1 epoch, where it takes more than 1 hour.Therefore, accuracy may seem low at first glance. However, we see that we are still able to approach some performances of other models in the first epoch. This gives an idea about the power of our implementation and the model.
+
+**Figure 2.** _Graph of Loss curve with 700 iterations with 1 epoch_
+![Loss_curve](https://user-images.githubusercontent.com/53267971/127474514-18f123dd-055e-4ca4-9460-67168a87170e.PNG)
+
 
 # 4. Conclusion
 
@@ -87,4 +143,4 @@ Provide your references here.
 
 # Contact
 
-Provide your names & email addresses and any other info with which people can contact you.
+Beril Günay (beril.gunay@metu.edu.tr) & Yalçın Cenik (yalcin.cenik@metu.edu.tr)

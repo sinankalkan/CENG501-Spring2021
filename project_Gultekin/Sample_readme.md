@@ -59,7 +59,11 @@ Explain the parts that were not clearly explained in the original paper and how 
 
 ## 3.1. Experimental setup
 
-Describe the setup of the original paper and whether you changed any settings.
+Their implementation is based on the MMDetection toolbox [6]. The MCNN [5] is selected as the baseline network for density map generation. For object detector, They use Faster R-CNN with Feature Pyramid Network (FPN). Unless specified, they use the default configurations for all the experiments. They use ImageNet [7] pre-trained weights to train the detector. The density threshold is set to 0.08 in both training and testing phases for VisionDrone dataset and 0.03 for UAVDT dataset. The minimal threshold for filtering bounding boxes is set to 70 × 70, which follows the similar setting in [8]. 
+
+The density map generation module is trained for 80 epochs using the SGD optimizer. The initial learning rate is 10−6. The momentum is 0.95 and the weight decay is 0.0005. They only use one GPU to train the density map generation network and no data argumentation is used.
+
+For the object detector, they set the input size to 600 × 1,000 on both datasets. They follow the similar setup in [8] to train and test on the datasets. The detector is trained for 42 epochs on 2 GPUs, each with a batch size of 2. The initial learning rate is 0.005. They decay the learning rate by the factor of 10 at 25 and 35 epochs. The threshold for nonmax suppression in fusion detection is 0.7. The maximum allowed number for bounding boxes after fusion detection is 500. Unless specified, they use MCNN to generate density map and Faster R-CNN with FPN to detect objects for all the experiments. [1]
 
 ## 3.2. Running the code
 
@@ -75,8 +79,16 @@ Discuss the paper in relation to the results in the paper and your results.
 
 # 5. References
 
-Provide your references here.
+[1]  Changlin Li, Taojiannan Yang, Sijie Zhu, Chen Chen, Shanyue Guan, Density Map Guided Object Detection in Aerial Images, CVPR 2020 Workshop 
+[2]  F. Ozge Unel, Burak O. Ozkalayci, and Cevahir Cigla. The power of tiling for small object detection. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, June 2019.
+[3]  Pengfei Zhu, Longyin Wen, Xiao Bian, Haibin Ling, and Qinghua Hu. Vision Meets Drones: A Challenge. Apr 2018
+[4]  Dawei Du, Yuankai Qi, Hongyang Yu, Yifan Yang, Kaiwen Duan, Guorong Li, Weigang Zhang, Qingming Huang, and Qi Tian. The Unmanned Aerial Vehicle Benchmark: Object Detection and Tracking. arXiv e-prints, page arXiv:1804.00518, Mar. 2018.
+[5]  Y. Zhang, D. Zhou, S. Chen, S. Gao, and Y. Ma. Singleimage crowd counting via multi-column convolutional neural network. In 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 589–597, June 2016.
+[6]  Kai Chen, Jiaqi Wang, Jiangmiao Pang, Yuhang Cao, Yu Xiong, Xiaoxiao Li, Shuyang Sun, Wansen Feng, Ziwei Liu, Jiarui Xu, et al. Mmdetection: Open mmlab detection toolbox and benchmark. arXiv preprint arXiv:1906.07155, 2019.
+[7]  Olga Russakovsky, Jia Deng, Hao Su, Jonathan Krause, Sanjeev Satheesh, Sean Ma, Zhiheng Huang, Andrej Karpathy, Aditya Khosla, Michael Bernstein, Alexander C. Berg, and Li Fei-Fei. ImageNet Large Scale Visual Recognition Challenge. International Journal of Computer Vision (IJCV), 115(3):211–252, 2015.
+[8]  Fan Yang, Heng Fan, Peng Chu, Erik Blasch, and Haibin Ling. Clustered object detection in aerial images. In The IEEE International Conference on Computer Vision (ICCV), October 2019.
 
+ 
 # Contact
 
 Provide your names & email addresses and any other info with which people can contact you.

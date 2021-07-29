@@ -34,7 +34,8 @@ Our design for the solution includes preprocessing of word embeddings, Shared Co
 
 **Preprocessing of word embeddings**: 
 
-Below equation is the result for given module. 
+Below equation is the result for given module.
+
 ![image](https://user-images.githubusercontent.com/57533312/127489930-57c347fc-822f-4405-856b-ed1e76ec1cd3.png)
 
 **Bi-LSTM encoders**:
@@ -45,6 +46,7 @@ These are the encoders to get the contextual information with question and answe
 	
 An LSTM decoder and several matrix operations took place to get an attention matrix according to the question and answer embeddings. Related equations were given below
 ![image](https://user-images.githubusercontent.com/57533312/127490011-4c0b67f1-21fe-4580-8067-b7d063a2e2c3.png)	
+
 ![image](https://user-images.githubusercontent.com/57533312/127490053-510e5b3b-b66d-410c-bc3f-9c5060759c18.png)
 
 

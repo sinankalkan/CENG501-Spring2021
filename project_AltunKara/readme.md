@@ -68,9 +68,10 @@ PH2 : [PH2](https://www.fc.up.pt/addi/ph2%20database.html)
 
 ## 2.2. Our interpretation 
 
-First, we wanted to have the same segmentation scores on different networks. We tried to implement the FCN segmentation network using ISBI 2016 dataset. Unfortunately, we couldn't get the segmentation scores yet. The FCN networks which are using ISBI 2016 dataset are included in the FCN codes file.
-In the FCN_Implementation of ISIC_2016 file, we got the results but the problem is the predicted images are fully black. We still try to fix this issue.
-In the FCN_ISIC2016.ipynb file, even though the training is working, it takes so much time, we can't see the results.  
+First, we wanted to have the same segmentation scores on different networks. We tried to implement the FCN segmentation network using ISBI 2016 dataset. Unfortunately, we couldn't get the segmentation scores yet. 
+The FCN networks which are using ISBI 2016 dataset are included in the FCN codes file.
+In the FCN_Implementation of ISIC_2016 file, we got the results but the problem is the predicted images are fully black. We still try to fix this issue.  
+In the FCN_ISIC2016.ipynb file, even though the training is working, it takes so much time, we can't see the results.    
 On the other hand, we successfully implement the U-Net segmentation model to the ISBI 2016 dataset. We used mostly a medium page that explains the U-Net structure [2] and modified it for the datasets. Our modified U-Net code is available as .py and .ipnyb files but there must be a configuration of data sets. We could not upload folders. So, the dataset paths must be changed inside the code. It is the -wrong- implementation of the first training part: U-Net  + BPB 
 
 Afterward, blocks of our algorithm are added. Firstly, it was decided to start with Boundary Preserving Block. For edge detection, Canny Edge Detection is used from the OpenCV library. For constructing the polygon, the points are needed to be sorted in the counter clock-wise order. In the end, we got the polygons but we made a mistake that is realized at the deadline. We took the polygon instead of the points as the output of the algorithm.
@@ -80,8 +81,6 @@ Because we did not realize it, we continued. That polygon was used in the bounda
 In actual implementation, the two parts of the network are not connected, To connect them logically, there is a boundary-aware loss in the first network in addition to SBE's loss in the second part. 
 
 We tried lots of things but that did not work as we said before, we put as it is. The main file is coding22.py.
-
-
 
 # 3. Experiments and results
 

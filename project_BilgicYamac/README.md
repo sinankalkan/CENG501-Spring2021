@@ -103,12 +103,18 @@ The final evaluation is about the length and accuracy. At below, we can see the 
 
 # 4. Conclusion
 
-Discuss the paper in relation to the results in the paper and your results.
+In this project, the paper *Joint Learning of Answer Selection and Answer Summary Generation in Community Question Answering* [1] is tried to be implemented. The original paper has the purpose of answer selection for community questions with abstractive summarization of answers. 
+
+Since there was a lack of data (answer-summary pairs were not clearly provided) one of the two main purposes of the paper could not be reproduced. Besides, the methods and models were customized and the implementation details were not clearly given. Therefore, in our embedding, we were just sticked to the equations and tried to implement same matrix operations. 
 
 # 5. References
 
-Provide your references here.
+[1]: [Deng, Yang, Wai Lam, Yuexiang Xie, Daoyuan Chen, Yaliang Li, Min Yang and Ying Shen. “Joint Learning of Answer Selection and Answer Summary Generation in Community Question Answering.” AAAI (2020).](https://arxiv.org/pdf/1911.09801)
+
+[2]: [Wang, S., & Jiang, J. (2017). A Compare-Aggregate Model for Matching Text Sequences. ArXiv, abs/1611.01747.](https://arxiv.org/pdf/1611.01747)
 
 # Contact
 
-Provide your names & email addresses and any other info with which people can contact you.
+Abdullah Ömer Yamaç - omer.yamac@metu.edu.tr
+
+Alper Bilgiç - alper.bilgic@metu.edu.tr

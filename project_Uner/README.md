@@ -47,6 +47,7 @@ HiearPR blocks are using to refine masks by using uncertainty maps to refine onl
 
 The mask encoding layer is not explained in the article. I interpreted this module as a features extractor that takes the concatenated the features from the recovery branch with the intermediate refined masks. I sent them to the mask encoding layer which consists of the convolutional layers to extract new features which will be used in the next refinement step.
 
+The paper uses DIM dataset for the MOS_H training. Since DIM dataset is not publicly available, I have used combination of the [BIG](https://github.com/hkchengrex/CascadePSP/blob/master/docs/dataset.md), [PhotoMatte85](https://grail.cs.washington.edu/projects/background-matting-v2/#/datasets) and [AlphaMatting](http://www.alphamatting.com/datasets.php) datasets as an alternative to DIM dataset. I have obtained ~350 unique high resolution foregrounds and synthesis each of them 100 times by using randomly selected COCO backgrounds.
 
 # 3. Experiments and results
 

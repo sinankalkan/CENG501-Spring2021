@@ -11,11 +11,11 @@ from lib.eval.helper import get_iu, compute_boundary_acc
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='MOS Evaluation')
     parser.add_argument('-t', '--gt-dir', help='Path to ground truth mask folder', type=str,
-                        default='/home/onur/Desktop/pixery/datasets/HRSOD_release/HRSOD_test_mask')
-                        # default='/home/onur/Desktop/pixery/datasets/DUTS-TE/DUTS-TE-Mask')
+                        default='/home/onur/Desktop/datasets/HRSOD_release/HRSOD_test_mask')
+                        # default='/home/onur/Desktop/datasets/DUTS-TE/DUTS-TE-Mask')
     parser.add_argument('-p', '--pred-dir', help='Path to predicted mask folder', type=str,
-                        default='/home/onur/Desktop/pixery/workspace/mos/saved/outputs/HRSOD/fine_mask')
-                        # default='/home/onur/Desktop/pixery/workspace/mos/saved/outputs/DUTS-TE/coarse_mask')
+                        default='/home/onur/Desktop/workspace/mos/saved/outputs/HRSOD/fine_mask')
+                        # default='/home/onur/Desktop/workspace/mos/saved/outputs/DUTS-TE/coarse_mask')
     args = parser.parse_args()
 
     gt_paths = Path(args.gt_dir).glob("*.png")

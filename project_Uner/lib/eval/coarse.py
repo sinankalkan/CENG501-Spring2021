@@ -47,9 +47,9 @@ def coarse_mask_demo():
     # coarse_image_path = Path('../../saved/outputs/HRSOD_Subset/coarse/')
     # coarse_mask_path = Path('../../saved/outputs/HRSOD_Subset/coarse_mask/')
 
-    img_folder = Path('/home/onur/Desktop/pixery/datasets/DUTS-TE/DUTS-TE-Image')
-    coarse_image_path = Path('/home/onur/Desktop/pixery/workspace/mos/saved/outputs/DUTS-TE/coarse')
-    coarse_mask_path = Path('/home/onur/Desktop/pixery/workspace/mos/saved/outputs/DUTS-TE/coarse_mask')
+    img_folder = Path('/home/onur/Desktop/datasets/DUTS-TE/DUTS-TE-Image')
+    coarse_image_path = Path('/home/onur/Desktop/workspace/mos/saved/outputs/DUTS-TE/coarse')
+    coarse_mask_path = Path('/home/onur/Desktop/workspace/mos/saved/outputs/DUTS-TE/coarse_mask')
 
     # img_folder = Path('/home/onur/Desktop/datasets/HRSOD_release/HRSOD_test')
     # coarse_image_path = Path('/home/onur/Desktop/workspace/mos/saved/outputs/HRSOD/coarse')

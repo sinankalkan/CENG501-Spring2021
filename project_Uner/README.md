@@ -37,11 +37,53 @@ Explain the parts that were not clearly explained in the original paper and how 
 
 ## 3.1. Experimental setup
 
-Describe the setup of the original paper and whether you changed any settings.
+Experiemental setup is not defined in the paper. I have used RTX2080Ti to train network. In the paper they have expressed that their both MOS_L and MOS_H models are trained 60000 iterations with 20 and 24 batch sizes respectively. Since GPU memory can not fit these batch sizes, I have used 4 and 8 batch sizes for MOS_L and MOS_H respectively. I have trained models with ~30000 iterations which less than mentioned in the paper.
 
 ## 3.2. Running the code
+#### Preparation	
+* First download the training datasets by using the [download_training_datasets.py](/scripts/download_training_datasets.py) in the scripts folder.
+* Set up your environment using a [requirements.txt](requirements.txt)
 
-Explain your code & directory structure and how other people can run it.
+#### Folder Structure
+* The "Configs" folder contains the necessary hyperparameters and settings for training.
+* Download training datasets into the datasets folder. Change the path of the datasets in the config files.
+
+#### Training
+
+```
+python train.py --config ./configs/MOS_L.json --device cuda
+```
+
+```
+python train.py --config ./configs/MOS_H.json --device cuda
+```
+
+
+<i>To continue from the saved checkpoint you can use resume argument:</i>
+
+```
+python train.py --config ./configs/MOS_L.json --resume ./saved/MeticulousNet_H/07-28_05-32/checkpoints/checkpoint-epoch30.pth --device cuda
+```
+
+#### Test
+
+<b> Coarse Mask Generation: </b>
+
+```
+python /lib/eval/coarse.py
+```
+
+<b> Fine Mask Generation: </b>
+
+```
+python /lib/eval/fine.py
+```
+
+<b> Calculate Evaluation Metrics: </b>
+
+```
+python /lib/eval/eval_post.py --gt-dir ./dataset/test/mask --pred-dir ./saved/outputs/test/mask
+```
 
 ## 3.3. Results
 
@@ -73,40 +115,57 @@ Table 2: Low resolution foreground segmentation on HRSOD.
 Table 3: High resolution foreground segmentation on HRSOD.
 
 ### Qualitative Results:
+### MOS600 Subset:
 <table>
   <tr>
   <td style="word-wrap: break-word">
       My MOS_L Outputs: </td>
     <td> <img src="saved/outputs/MOS600/coarse/sample1.jpg"alt="1" height=240px></td>
-    <td> <img src="saved/outputs/MOS600/coarse/sample2.jpg"alt="1" height=240px></td>
-    <td> <img src="saved/outputs/MOS600/coarse/sample3.jpg"alt="1" height=240px></td>
-    <td> <img src="saved/outputs/MOS600/coarse/sample4.jpg"alt="1" height=240px></td>
-    <td> <img src="saved/outputs/MOS600/coarse/sample5.jpg"alt="1" height=240px></td>
-    <td> <img src="saved/outputs/MOS600/coarse/sample6.jpg"alt="1" height=240px></td>
+    <td> <img src="saved/outputs/MOS600/coarse/sample2.jpg"alt="2" height=240px></td>
+    <td> <img src="saved/outputs/MOS600/coarse/sample3.jpg"alt="3" height=240px></td>
+    <td> <img src="saved/outputs/MOS600/coarse/sample4.jpg"alt="4" height=240px></td>
+    <td> <img src="saved/outputs/MOS600/coarse/sample5.jpg"alt="5" height=240px></td>
+    <td> <img src="saved/outputs/MOS600/coarse/sample6.jpg"alt="6" height=240px></td>
    </tr> 
    
   <tr>
   <td style="word-wrap: break-word">
       My MOS_H Outputs: </td>
     <td> <img src="saved/outputs/MOS600/fine/sample1.jpg"alt="1" height=240px></td>
-    <td> <img src="saved/outputs/MOS600/fine/sample2.jpg"alt="1" height=240px></td>
-    <td> <img src="saved/outputs/MOS600/fine/sample3.jpg"alt="1" height=240px></td>
-    <td> <img src="saved/outputs/MOS600/fine/sample4.jpg"alt="1" height=240px></td>
-    <td> <img src="saved/outputs/MOS600/fine/sample5.jpg"alt="1" height=240px></td>
-    <td> <img src="saved/outputs/MOS600/fine/sample6.jpg"alt="1" height=240px></td>
+    <td> <img src="saved/outputs/MOS600/fine/sample2.jpg"alt="2" height=240px></td>
+    <td> <img src="saved/outputs/MOS600/fine/sample3.jpg"alt="3" height=240px></td>
+    <td> <img src="saved/outputs/MOS600/fine/sample4.jpg"alt="4" height=240px></td>
+    <td> <img src="saved/outputs/MOS600/fine/sample5.jpg"alt="5" height=240px></td>
+    <td> <img src="saved/outputs/MOS600/fine/sample6.jpg"alt="6" height=240px></td>
    </tr> 
    
   <td style="word-wrap: break-word">
       Paper MOS_H Outputs: </td>
     <td> <img src="saved/outputs/MOS600/gt/sample1_mask.jpg"alt="1" height=240px></td>
-    <td> <img src="saved/outputs/MOS600/gt/sample2_mask.jpg"alt="1" height=240px></td>
-    <td> <img src="saved/outputs/MOS600/gt/sample3_mask.jpg"alt="1" height=240px></td>
-    <td> <img src="saved/outputs/MOS600/gt/sample4_mask.jpg"alt="1" height=240px></td>
-    <td> <img src="saved/outputs/MOS600/gt/sample5_mask.jpg"alt="1" height=240px></td>
-    <td> <img src="saved/outputs/MOS600/gt/sample6_mask.jpg"alt="1" height=240px></td>
+    <td> <img src="saved/outputs/MOS600/gt/sample2_mask.jpg"alt="2" height=240px></td>
+    <td> <img src="saved/outputs/MOS600/gt/sample3_mask.jpg"alt="3" height=240px></td>
+    <td> <img src="saved/outputs/MOS600/gt/sample4_mask.jpg"alt="4" height=240px></td>
+    <td> <img src="saved/outputs/MOS600/gt/sample5_mask.jpg"alt="5" height=240px></td>
+    <td> <img src="saved/outputs/MOS600/gt/sample6_mask.jpg"alt="6" height=240px></td>
    </tr> 
 </table>
 
+### HRSOD-Test Subset:
+
+<table>
+  <tr>
+  <td style="word-wrap: break-word">
+      My MOS_H Outputs on HRSOD: </td>
+    <td> <img src="saved/outputs/HRSOD_Subset/fine/1342827_a898640c38_o.jpg"alt="1" height=240px></td>
+    <td> <img src="saved/outputs/HRSOD_Subset/fine/4923889_ee3a448ece_o.jpg"alt="1" height=240px></td>
+    <td> <img src="saved/outputs/HRSOD_Subset/fine/5242449_0157834540_o.jpg"alt="1" height=240px></td>
+    <td> <img src="saved/outputs/HRSOD_Subset/fine/49026382_ea219c9aeb_o.jpg"alt="1" height=240px></td>
+    <td> <img src="saved/outputs/HRSOD_Subset/fine/147383949_ad0022dbed_o.jpg"alt="1" height=240px></td>
+    <td> <img src="saved/outputs/HRSOD_Subset/fine/187179248_103d2db5ef_o.jpg"alt="1" height=240px></td>
+    <td> <img src="saved/outputs/HRSOD_Subset/fine/255993064_3547a828e0_o.jpg"alt="1" height=240px></td>
+    <td> <img src="saved/outputs/HRSOD_Subset/fine/255996486_5d9c90314d_o.jpg"alt="1" height=240px></td>
+   </tr> 
+</table>
 # 4. Conclusion
 
 Discuss the paper in relation to the results in the paper and your results.
@@ -123,4 +182,4 @@ Discuss the paper in relation to the results in the paper and your results.
 
 # Contact
 
-Provide your names & email addresses and any other info with which people can contact you.
+Onur Can ÜNER - onurcan.uner@gmail.com

@@ -30,7 +30,26 @@ A pointer generator network allows to obtain the final probability distribution 
 
 ## 2.2. My interpretation 
 
-Explain the parts that were not clearly explained in the original paper and how you interpreted them.
+Our design for the solution includes preprocessing of word embeddings, Shared Compare-Aggregate Bi-LSTM Encoder, and Seq2Seq Model with Question-aware Attention. However, the given WikiHowQA dataset doesn't conclude original answer/summary pairs. Therefore, the modules related to summarization could not be added.  In the original paper, the last part of the Seq2Seq Model with Question-aware Attention were not clearly defined to generate summary representation. Since, Question Answer Alignment with Summary Representations requires decoded summary representations, this part could not be reproduced also.
+
+**Preprocessing of word embeddings**: 
+
+Below equations give the result for given module.
+
+![image](https://user-images.githubusercontent.com/57533312/127489930-57c347fc-822f-4405-856b-ed1e76ec1cd3.png)
+
+**Bi-LSTM encoders**:
+	
+These are the encoders to get the contextual information with question and answer word embeddings.
+
+**Seq2Seq Model with Question-aware Attention**:
+	
+An LSTM decoder and several matrix operations took place to get an attention matrix according to the question and answer embeddings. Related equations were given below:
+
+![image](https://user-images.githubusercontent.com/57533312/127490011-4c0b67f1-21fe-4580-8067-b7d063a2e2c3.png)	
+
+&nbsp; &nbsp; &nbsp;![image](https://user-images.githubusercontent.com/57533312/127490053-510e5b3b-b66d-410c-bc3f-9c5060759c18.png)
+
 
 # 3. Experiments and results
 
@@ -66,7 +85,21 @@ project_Acir
 
 ## 3.3. Results
 
-Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
+Evaluation 
+The proposed method compared four aspects: "Answer Selection," "Analysis of the Length of Answer", "Answer Summary Generation" and "Human Evaluation on Summarization".
+
+For the "Answer Selection" part, MRR and MAP evaluation metrics are used. In this evaluation, Siamese BiLSTM (Mueller and Thyagarajan 2016), AttBiLSTM (Tan et al. 2016), AP-LSTM (dos Santos et al. 2016), CA (Compare-Aggregate) (Wang and Jiang 2017), and COALA (Ruckl ¨ e, Moosavi, and Gurevych 2019) methods are compared with the proposed method. The result of this comparison is shown at below, and ASAS, which is the proposed method, gives a better result.
+
+![Table1](https://user-images.githubusercontent.com/45417780/127491683-ff8b2336-a076-4b2d-90d8-a513d192c2ee.PNG "Title")
+
+In terms of text summarization, the proposed method (ASAS) also gives better results in tables shown below.
+![Table2](https://user-images.githubusercontent.com/45417780/127491730-6245d515-b9a4-472b-86f5-7416e7a58965.PNG "Title")
+
+![Table3](https://user-images.githubusercontent.com/45417780/127491752-ab99131a-88dc-42e7-8142-7ba71cebe7ea.PNG "Title")
+
+The final evaluation is about the length and accuracy. At below, we can see the accuracy with respect to answer length. This accuracy is compared with AP-LSTM and Compare-Aggregate Model. ASAS also gives better results in this perspective.
+
+![Figure1](https://user-images.githubusercontent.com/45417780/127491789-ef43b43e-a027-4fe8-8486-027534c8125d.PNG "Title")
 
 # 4. Conclusion
 

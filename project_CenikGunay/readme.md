@@ -34,7 +34,7 @@ They construct a CNN-based model to predict all tasks simultaneously. The traini
 
 _**Network Structures**_
 
-- The network structure of PlaceNet is similar to ResNet50. The only difference is that the last convolution/pooling/fc layers are duplicated to five branches, namely, place, category, function, city and country. Each branch contatins two FC layers. 
+- The network structure of PlaceNet is similar to ResNet50. The only difference is that the last convolution/pooling/fc layers are duplicated to five branches, namely, place, category, function, city and country. Each branch contains two FC layers. 
 
 _**Dataset-Placepedia**_
 
@@ -88,8 +88,8 @@ namely, **average pooling**, **max pooling**, **spatial pyramid pooling**
 ## 2.2. My interpretation 
 
 
-The biggest problem we encountered while implementing the solution proposed in the paper was that the data set was quite large. Also, due to the complexity of the model due to duplication for multiple predictions and hardware constraint, results corresponding to training only a part of the dataset will be presented here. Moreover, the learning rate 0.5 value given in the paper was not suitable as we could not use the entire dataset. That's why we chose the learning rate as 0.0001. All details will be given in the experimental setup.
-Since the batch size is not specified in the training details section of the paper, we have set the batch size as 64. As we observe from the paper, loss functions fatal and softmax give almost the same results. Therefore, we only use softmax loss function as well as avarage pooling. The other problem we encounter is related to dataset image shape. After starting training, after the some point we got the error **output with shape [1, 224, 224] doesn't match the broadcast shape [3, 224, 224]**, which is due to the mismatch of grayscale image to RGB image,which means there is some grayscale images in the dataset and produces an error. Therefore, we have trained our model until we encountered this error without checking whole dataset since it has 240K such images. Our aim is to show that our model works correct and it tends to be more powerful compared to other datasets and models even if we can only train our model such constraints and problems.
+The biggest problem we encountered while implementing the solution proposed in the paper was that the data set was quite large. Also, due to the complexity of the model due to duplication for multiple predictions and hardware constraint, results corresponding to training only a part of the dataset will be presented here. Moreover, the learning rate 0.5 value given in the paper was not suitable as it is too big. That's why we chose the learning rate as 0.0001. All details will be given in the experimental setup.
+Since the batch size is not specified in the training details section of the paper, we have set the batch size as 64. As we observe from the paper, loss functions focal and softmax give almost the same results. Therefore, we only use softmax loss function as well as average pooling. The other problem we encounter is related to dataset image shape. After starting training, after the some point we got the error **output with shape [1, 224, 224] doesn't match the broadcast shape [3, 224, 224]**, which is due to the mismatch of grayscale image to RGB image,which means there is some grayscale images in the dataset and produces an error. Therefore, we have trained our model until we encountered this error without checking whole dataset since it has 240K such images. Our aim is to show that our model works correct and it tends to be more powerful compared to other datasets and models even if we can only train our model such constraints and problems.
 
 
 
@@ -113,7 +113,7 @@ Readers can easily follow our implemetation given the folder below from the ``` 
 ```
 project_CenikGunay
 │  loss_graphs
-│  Sample_readme.md 
+│  readme.md 
 │  PlaceNet_&_Placepedia.ipynb
   
 
@@ -124,7 +124,6 @@ project_CenikGunay
 
 ## 3.3. Results
 
-Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
 
 _**Table 3.** Comparision of our result with the previous works_
 ![Result_tables](https://user-images.githubusercontent.com/53267971/127472734-2f81fac0-d852-42ef-bbdc-7b886c5d43c8.PNG)

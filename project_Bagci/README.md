@@ -64,14 +64,23 @@ The pretrained model is trained for 100 epochs with SGD similar to vanilla train
 | ResNet50-1/2 | 35%      | Student 1 |
 | ResNet50-1/2 | 41%      | Student 2 |
 
+From the loss values in the first stage of training, I thought as the stage progressed to later layers, epoch count could be increased to obtain efficient results.
+
 The loss plot of the described method for `student-2` is below. It indicates layerwise initialization is working very efficiently. The training loss values, accuracy values and loss plot is also inspected from the notebook itself. Notebooks with outputs are added for both students.
 
 ![Loss Plot](loss.png)
 
 # 4. Conclusion
 
-- optimization
-- layerwise increase at later
+Despite conclusive results cannot be obtained due to:
+
+- ImageNet dataset being not used due to huge size.
+- Resnet50-1/2 not being a pretrained model, results for it could not be obtained in vanilla training settings due to high epoch size of 100 needed.
+- Not being able to apply the suggested 90 epoch size on the student model to see if near accuracy to teacher model is obtained due to limited computational resources.
+
+This is partly due to first trying the implementation with the original PyTorch ResNet and resizing the images to `256x256`. After to decrease training time, a implementation of ResNet for `CIFAR-10` is found but not being able to notice early enough that the resize transformation should be changed, unnecessary time has been lost.
+
+Still, from both teoretical analysis of the paper indicating the discrepency decreases with this method and accuracies obtained with a low epoch count indicates the method might be promising for thin network training. And the code generated might be used to generate the results with the original hyperparameters despite some more optimizations might be made on the code.
 
 # 5. References
 

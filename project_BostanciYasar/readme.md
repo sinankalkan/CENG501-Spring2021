@@ -41,8 +41,7 @@ The formulation of the momentum parameter of the MBN for the inference stage is 
 
 <img src="https://latex.codecogs.com/gif.latex?\tau^{\frac{N}{m}}=\tau_{0}^{\frac{N}{m_{0}}}&space;\Rightarrow&space;\tau=\tau_{0}^{\frac{m}{m_{0}}}" title="\tau^{\frac{N}{m}}=\tau_{0}^{\frac{N}{m_{0}}} \Rightarrow \tau=\tau_{0}^{\frac{m}{m_{0}}}" />
 
-The inference momentum parameter is adaptive to batch size. Where <img src="https://latex.codecogs.com/gif.latex?m" title="N" /> denotes the number of samples in other words batch size and <img src="https://latex.codecogs.com/gif.latex?m_{0}" title="m_{0}" /> denotes the ideal batch size which is set to 32 in the original paper and it is preserved in the experiments of this implementation as well. In addition <img src="https://latex.codecogs.com/gif.latex?{\tau&space;_{0}}" title="{\tau _{0}}" /> is an ideal coefficient and in the originial paper authors set it to 0.90 for the inference step. According to the inference step momentum formula, it can be easily seen that smaller batch size makes the inference momentum parameter larger. Therefore, the noise in momentum mean and variance will be kept under control.
-
+The inference momentum parameter is adaptive to batch size. Where <img src="https://latex.codecogs.com/gif.latex?m" title="N" /> denotes the number of samples in other words batch size and <img src="https://latex.codecogs.com/gif.latex?m_{0}" title="m_{0}" /> denotes the ideal batch size which is set to 32 in the original paper and it is preserved in the experiments of this implementation as well. In addition <img src="https://latex.codecogs.com/gif.latex?{\tau&space;_{0}}" title="{\tau _{0}}" /> is an ideal coefficient and in the originial paper authors set it to 0.90 for the inference step. According to the inference step momentum formula, it can be easily seen that smaller batch size makes the inference momentum parameter larger. Therefore, the noise in momentum mean and variance will be kept under control. In MBN implementation to the code Dive Into Deep Learning book batch normalization section is followed [[5]](#5). 
 
 Some implementation details are given in the paper.\
 •	Learning rate: It starts with 0.1*m/64 for both datasets and divide it by 10 for every 60 epochs.\
@@ -139,6 +138,10 @@ In the experiments it is shown that the MBN work stably with different batch siz
 
 ### <a name="tith"></a>[4] Karani, D. (2020, February 7). How Data Augmentation Improves your CNN performance? — An Experiment in PyTorch and Torchvision. Medium. https://medium.com/swlh/how-data-augmentation-improves-your-cnn-performance-an-experiment-in-pytorch-and-torchvision-e5fb36d038fb
 
+
+<a name="5"></a>
+
+### <a name="tith"></a>[5] Zhang A., Lipton Z. C., Li M., Smola A. J. (n.d.). 7.5. Batch Normalization¶. Dive Into Deep Learning. https://d2l.ai/chapter_convolutional-modern/batch-norm.html
 
 
 

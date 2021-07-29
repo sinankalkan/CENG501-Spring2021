@@ -73,7 +73,40 @@ Table 2: Low resolution foreground segmentation on HRSOD.
 Table 3: High resolution foreground segmentation on HRSOD.
 
 ### Qualitative Results:
-
+<table>
+  <tr>
+  <td style="word-wrap: break-word">
+      My MOS_L Outputs: </td>
+    <td> <img src="saved/outputs/MOS600/coarse/sample1.jpg"alt="1" width=160px height=240px></td>
+    <td> <img src="saved/outputs/MOS600/coarse/sample2.jpg"alt="1" width=180px height=240px></td>
+    <td> <img src="saved/outputs/MOS600/coarse/sample3.jpg"alt="1" width=240px height=240px></td>
+    <td> <img src="saved/outputs/MOS600/coarse/sample4.jpg"alt="1" width=240px height=240px></td>
+    <td> <img src="saved/outputs/MOS600/coarse/sample5.jpg"alt="1" width=180px height=240px></td>
+    <td> <img src="saved/outputs/MOS600/coarse/sample6.jpg"alt="1" width=180px height=240px></td>
+   </tr> 
+   
+  <tr>
+  <td style="word-wrap: break-word">
+      My MOS_H Outputs: </td>
+    <td> <img src="saved/outputs/MOS600/fine/sample1.jpg"alt="1" width=160px height=240px></td>
+    <td> <img src="saved/outputs/MOS600/fine/sample2.jpg"alt="1" width=180px height=240px></td>
+    <td> <img src="saved/outputs/MOS600/fine/sample3.jpg"alt="1" width=240px height=240px></td>
+    <td> <img src="saved/outputs/MOS600/fine/sample4.jpg"alt="1" width=240px height=240px></td>
+    <td> <img src="saved/outputs/MOS600/fine/sample5.jpg"alt="1" width=180px height=240px></td>
+    <td> <img src="saved/outputs/MOS600/fine/sample6.jpg"alt="1" width=180px height=240px></td>
+   </tr> 
+   
+     <tr>
+  <td style="word-wrap: break-word">
+      Paper MOS_H Outputs: </td>
+    <td> <img src="saved/outputs/MOS600/gt/sample1_mask.jpg"alt="1" width=160px height=240px></td>
+    <td> <img src="saved/outputs/MOS600/gt/sample2_mask.jpg"alt="1" width=180px height=240px></td>
+    <td> <img src="saved/outputs/MOS600/gt/sample3_mask.jpg"alt="1" width=240px height=240px></td>
+    <td> <img src="saved/outputs/MOS600/gt/sample4_mask.jpg"alt="1" width=240px height=240px></td>
+    <td> <img src="saved/outputs/MOS600/gt/sample5_mask.jpg"alt="1" width=180px height=240px></td>
+    <td> <img src="saved/outputs/MOS600/gt/sample6_mask.jpg"alt="1" width=180px height=240px></td>
+   </tr> 
+</table>
 
 # 4. Conclusion
 

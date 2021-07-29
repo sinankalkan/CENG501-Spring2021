@@ -109,13 +109,12 @@ Since there was a lack of data (answer-summary pairs were not clearly provided) 
 
 # 5. References
 
-[1]: [Deng, Yang, Wai Lam, Yuexiang Xie, Daoyuan Chen, Yaliang Li, Min Yang and Ying Shen. “Joint Learning of Answer Selection and Answer Summary Generation in Community Question Answering.” AAAI (2020).]
-(https://arxiv.org/pdf/1911.09801.pdf)
+[1]: [Deng, Yang, Wai Lam, Yuexiang Xie, Daoyuan Chen, Yaliang Li, Min Yang and Ying Shen. “Joint Learning of Answer Selection and Answer Summary Generation in Community Question Answering.” AAAI (2020).](https://arxiv.org/pdf/1911.09801)
 
-[2]: [Wang, S., & Jiang, J. (2017). A Compare-Aggregate Model for Matching Text Sequences. ArXiv, abs/1611.01747.]
-(https://arxiv.org/pdf/1611.01747.pdf)
+[2]: [Wang, S., & Jiang, J. (2017). A Compare-Aggregate Model for Matching Text Sequences. ArXiv, abs/1611.01747.](https://arxiv.org/pdf/1611.01747)
 
 # Contact
 
 Abdullah Ömer Yamaç - omer.yamac@metu.edu.tr
+
 Alper Bilgiç - alper.bilgic@metu.edu.tr

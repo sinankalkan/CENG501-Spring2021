@@ -34,7 +34,7 @@ They construct a CNN-based model to predict all tasks simultaneously. The traini
 
 _**Network Structures**_
 
-- The network structure of PlaceNet is similar to ResNet50. The only difference is that the last convolution/pooling/fc layers are duplicated to five branches, namely, place, category, function, city and country. Each branch contatins two FC layers. 
+- The network structure of PlaceNet is similar to ResNet50. The only difference is that the last convolution/pooling/fc layers are duplicated to five branches, namely, place, category, function, city and country. Each branch contains two FC layers. 
 
 _**Dataset-Placepedia**_
 
@@ -113,7 +113,7 @@ Readers can easily follow our implemetation given the folder below from the ``` 
 ```
 project_CenikGunay
 │  loss_graphs
-│  Sample_readme.md 
+│  readme.md 
 │  PlaceNet_&_Placepedia.ipynb
   
 

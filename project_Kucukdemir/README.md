@@ -73,6 +73,8 @@ data
   │   │   image files (*.jpg, *.png etc.)
 denoised
 │   │   image files (*.jpg, *.png etc.)
+pretrained
+│   │   pretrained checkpoints for sigma=0.05 and sigma=0.25
 ```
 
 **checkpoints**: This folder contains checkpoints (i.e. metadata of your model) that allow you to resume training your network or to use it for testing purposes. The id of checkpoints show the number of epochs. For example, _checkpoint_00010.pt_ contains metadata of a model trained for 11 epochs.
@@ -83,15 +85,17 @@ denoised
 
 **denoised:** This folder contains denoised images (i.e. the output).
 
+**pretrained:** This folder contains two pretrained networks (sigma=0.05 and sigma=0.25). Unzip and use them, if you do not want to trained the network yourself.
+
 **How to Run**
 
 You should copy training/testing images under data directory according to the file structure shown above <sup>[See here for download links](data/README.md)</sup>. After doing that, simply cd into "code" directory and run 
 ```
-python main.py [test|train] [dataset_id] [save_prob]
+python main.py [test|train] [dataset_id] [save_prob] [checkpoint_path]
 ```
-Default values for these arguments are 'test', 'coco' and '0.0011', respectively. save_prob is used during testing only. For example, if you set it to 0.5, half of the results obtained will be saved under 'denoised' directory. 
+DDefault values for these arguments are 'test', 'coco', '0.0011', '', respectively. save_prob is used during testing only. For example, if you set it to 0.5, half of the results obtained will be saved under 'denoised' directory. 
 
-Note that if there are no checkpoints, you will not be able to run test mode. And if there are checkpoints, you should remove them or copy them elsewhere to train a network from scratch. See get_run_config() method to change network hyperparameters.
+Note that if there are no checkpoints under checkpoints directory and you do not specify one, you will not be able to run test mode. And if there are checkpoints, you should remove them or copy them elsewhere to train a network from scratch. See get_run_config() method to change network hyperparameters.
 
 ## 3.3. Results
 
@@ -158,6 +162,18 @@ _**Table 1.** Average PSNR and SSIM values for the trained network. σ stands fo
   <img src="readme_fig/sn_noisy.png" width="30%" height="30%"> <img src="readme_fig/sn_denoised.png" width="30%" height="30%">
 </p>
 
+<p align="center">
+  <b>Update for σ=0.05</b>
+</p>  
+
+I've trained the network one more time with σ=0.05 for 10 epochs. Kodak dataset is used as the test set and results are as follows: 
+
+|    Network           |    PSNR   |   SSIM   |
+| -------------------- | --------- | -------- |
+| Ours, α=1, σ=0.05    | 33.607694 | 0.954916 |
+| Ours-SN, α=1, σ=0.05 | 31.194548 | 0.900004 |
+
+So, results are quite similar to the original paper. You can see them [here](readme_fig/sigma_0_05) and [here](readme_fig/sigma_0_05_sn), for standard and sn-variation, respectively.
 
 # 4. Conclusion
 

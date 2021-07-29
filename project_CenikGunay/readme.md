@@ -124,7 +124,6 @@ project_CenikGunay
 
 ## 3.3. Results
 
-Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
 
 _**Table 3.** Comparision of our result with the previous works_
 ![Result_tables](https://user-images.githubusercontent.com/53267971/127472734-2f81fac0-d852-42ef-bbdc-7b886c5d43c8.PNG)

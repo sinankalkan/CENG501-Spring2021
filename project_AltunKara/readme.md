@@ -58,11 +58,11 @@ PH2 : [PH2](https://www.fc.up.pt/addi/ph2%20database.html)
 
 ### 2.1.3 Implementation Details
 
--The model is optimized by using an ADAM optimizer.  
--The learning rate was 0.0001 both in the segmentation network and SBE network.  
--They used randomly initialized weights with 8 input batches.  
--For boundary key point maps, they selected 6 points and run the algorithm 40000 times. 
--They integrated the proposed method in several segmentation networks: U-Net, FCN, Dilated-Net. 
+- The model is optimized by using an ADAM optimizer.  
+- The learning rate was 0.0001 both in the segmentation network and SBE network.  
+- They used randomly initialized weights with 8 input batches.  
+- For boundary key point maps, they selected 6 points and run the algorithm 40000 times. 
+- They integrated the proposed method in several segmentation networks: U-Net, FCN, Dilated-Net. 
 - For every iteration, they train the segmentation network 8 times and the SBE network 3 times to train two networks in an adversarial manner.
 
 

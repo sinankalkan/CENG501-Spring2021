@@ -51,21 +51,21 @@ functions, 50 cities, and 34 countries.
 
 - After we downloaded the dataset Placepedia we get the following folders and files that used in our implementations.
 
-i. train: includes the places for training.
+**i. train:** includes the places for training.
 
-ii & iii. valg+valq: includes the places for validation for tasks including place categorization, function categorization, and city/country recognition. For place retrieval task, valg includes the gallery images of validation places and valq includes the query images of validation places.
+**ii & iii.** valg+valq: includes the places for validation for tasks including place categorization, function categorization, and city/country recognition. For place retrieval task, valg includes the gallery images of validation places and valq includes the query images of validation places.
 
-iv & v. testg+testq: includes the places for testing for tasks including place categorization, function categorization, and city/country recognition. For place retrieval task, testg includes the gallery images of testing places and testq includes the query images of testing places.
+**iv & v.** testg+testq: includes the places for testing for tasks including place categorization, function categorization, and city/country recognition. For place retrieval task, testg includes the gallery images of testing places and testq includes the query images of testing places.
 
 Four Category Id Files:
 
-i. type_to_id.json: for place categorization task. Each category is associated with an id.
+**i.** type_to_id.json: for place categorization task. Each category is associated with an id.
 
-ii. function_to_id.json: for function categorization task. Each function is associated with an id.
+**ii.** function_to_id.json: for function categorization task. Each function is associated with an id.
 
-iii. city_to_id.json: for city recognition task. Each city is associated with an id.
+**iii.** city_to_id.json: for city recognition task. Each city is associated with an id.
 
-iv. country_to_id.json: for country recognition task. Each country is associated with an id.
+**iv.** country_to_id.json: for country recognition task. Each country is associated with an id.
 
 _**PlaceNet**_
 

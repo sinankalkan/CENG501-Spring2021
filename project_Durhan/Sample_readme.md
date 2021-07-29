@@ -6,7 +6,6 @@ This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.
 This study was presented at the Machine Learning and the Physical Sciences Workshop at the 34th Conference on Neural Information Processing Systems (NeurIPS) on 
 December, 2020. It aims at approximating the ground state energies and eigenfunctions of quantum mechanical sytems via Neural Networks. My goal was to obtain the 
 same result with the original paper.    
-Introduce the paper (inc. where it is published) and describe your goal (reproducibility). 
 
 ## 1.1. Paper summary
 
@@ -89,18 +88,32 @@ I prepared the code on Google's colab framework. One can easily follow the relev
 Explain your code & directory structure and how other people can run it.
 
 ## 3.3. Results
-The result of the original work can found in Figure 1 (figure adapted from [[6]](#1) ).
+The result of the original work can found be in Figure 1 (figure adapted from [[6]](#1) ). Moreover in the table below, the eigenvalues I get is compared
+with the original study. In the perturbed systems, the finetuning requires more efforts.  
 
 ![fig](https://user-images.githubusercontent.com/47567854/127409056-47dea50d-6179-4d6c-9aa8-d83adbb63c23.png)
 
+System | Original Work | Exact | Mine 
+--- | --- | --- | ---
+Unperturbed | 4.93484 | 4.9348  | 4.9711 
+Perturbed A | 8.79510 | 8.79507 | 8.9710 
+Perturbed B | 2.94583 | 2.94583 | NA 
 
+In Figure 2 the loss curves I obtained during the training are presented
+
+![losses_all](https://user-images.githubusercontent.com/47567854/127466021-c1d0b6b2-1453-4ab6-95f6-39298892026f.png)
+**Figure 2:** Loss curves for three systems. Perturbed systems requires more finetuning.
+
+Finally , the ground state energies I obtained are presented in Figure 3
+![wf_all](https://user-images.githubusercontent.com/47567854/127467107-ad79bdbd-3501-4dfb-8020-e61d39442ffe.png)
+**Figure 2:** Ground state wave functions. Perturbed system requires more finetuning
 
 Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
 
 # 4. Conclusion
-
-The ground state energies and the shape of the ground state wavefunctionsI found were close to the those of the original paper. There was some fractional differences 
-in the wave function.
+In the original work they reached the true values with very high accuricies. On the other hand, the ground state energies and the shape of the ground state 
+wavefunctions I found were close to the those of the original paper. There was some fractional differences between the wave function which is probably due to
+normalizations.
 
 Discuss the paper in relation to the results in the paper and your results. 
 

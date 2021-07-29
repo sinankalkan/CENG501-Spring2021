@@ -21,7 +21,7 @@ We can summarize the paper as below.
 
 In the related studies, the dataset focuses only the spesific tasks like place categorization, scene recognition, object retrieval or image retrieval. However, Placepedia can be used for all these task due to its much larger amount image and data, containing over 240K places with 35 million images labeled with 3K categories. Moreover, the function information of places may lead to a new task, namely place functio recognition.
 
-**Table 1.** _Comparing Placepedia with other existing datasets. Placepedia offers the_
+_**Table 1.** Comparing Placepedia with other existing datasets. Placepedia offers the_
 largest number of images and the richest information
 ![comparision](https://user-images.githubusercontent.com/53267971/127357466-9ba97ed1-2ead-4646-8c25-17514200bd3f.PNG)
 
@@ -72,6 +72,8 @@ _**PlaceNet**_
 - Below you can see the Pipeline of PlaceNet.
 
 ![PlaceNetPipeline](https://user-images.githubusercontent.com/53267971/127476768-47dbd6bc-b209-47da-888c-218609dfa2aa.PNG)
+
+   _**Figure 2.** Pipeline of Placenet_
 
 
 - **Loss Functions**. They study three losses for PlaceNet, namely, **softmax loss**, **focal
@@ -132,11 +134,16 @@ In this report, while we reproduce the results given in the paper, what we are t
 
 ![Loss_curve](https://user-images.githubusercontent.com/53267971/127474514-18f123dd-055e-4ca4-9460-67168a87170e.PNG)
 
-_**Figure 2.** Loss curve with 700 iterations with 1 epoch_
+_**Figure 3.** Loss curve with 700 iterations with 1 epoch_
 
 # 4. Conclusion
 
-Discuss the paper in relation to the results in the paper and your results.
+In this work, we try to reproduce the results given in **[3]** by using a large-scale place dataset which is comprehensively
+annotated with multiple aspects. We observed that it is the largest place-related
+dataset available. To explore place understanding and correct implementations of the solution proposed, we carefully build our model based on the spesifications.Model PlaceNet is very similar to the Resnet50. The only difference is we did in the model and its implementation is multi level prediction. For this purpose, as a proposed solution, we duplicate the last convolution layer of Resnet50 to five branches. Each branch consists of 2 fc layers. All these implementations can be easily followed in ``` PlaceNet_&_Placepedia.ipynb ```. Our experimental experience show us that it is indeed a very complex problem since it is a very difficult task to train such a large data set and make the necessary adjustments.However, we believe that we use all the information we have learned in accordance with the course content and that the effort we spend is not bad compared to the results obtained and the complexity of the problem. The accuracy values obtained for Top1 and Top 5 show an approximation to the accuracy values of other models even in epoch 1 and 700 iterations. This gave us clues that the 90 epoch value PlaceNet model recommended in the paper would give the best performance, and we tried to clearly report this in the report.At the same time, considering the complexity of the problem during training, we determined some parameters that were not mentioned in the paper.However, we did not deviate from the general solution path. We think that the PlaceNet model was created in accordance with the specifications. Our report can be easily followed on the notebook and we see it as an advantage that it is both clear and simple.We think we learned a lot within the scope of the project. In this context, we would like to thank Sinan Hoca and the authors of the paper, who gave us the excitement of making the first paper implementation of our academic life.   
+
+
+
 
 # 5. References
 

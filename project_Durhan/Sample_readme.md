@@ -75,8 +75,6 @@ Riemann's sum,
 
 I prepared the code on Google's colab framework. One can easily follow the relevant cells.  
 
-Explain your code & directory structure and how other people can run it.
-
 ## 3.3. Results
 The ground state wave functions obtained by the original work can found be in Figure 1 (figure adapted from [[6]](#1) ). Moreover, in the table below, I compared the 
 energy eigenvalues of the the original study and those of mine. In the perturbed systems, the finetuning requires more efforts.  

@@ -78,7 +78,7 @@ I prepared the code on Google's colab framework. One can easily follow the relev
 Explain your code & directory structure and how other people can run it.
 
 ## 3.3. Results
-The ground state wave functions obtained by the original work can found be in Figure 1 (figure adapted from [[6]](#1) ). Moreover in the table below, I compared the 
+The ground state wave functions obtained by the original work can found be in Figure 1 (figure adapted from [[6]](#1) ). Moreover, in the table below, I compared the 
 energy eigenvalues of the the original study and those of mine. In the perturbed systems, the finetuning requires more efforts.  
 
 ![fig](https://user-images.githubusercontent.com/47567854/127409056-47dea50d-6179-4d6c-9aa8-d83adbb63c23.png)
@@ -102,7 +102,7 @@ Finally , the ground state energies I obtained are presented in Figure 3.
 # 4. Conclusion
 In the original work they reached the true values with very high accuricies. On the other hand, the ground state energies and the shape of the ground state 
 wavefunctions I found were close to the those of the original paper. Apart from unperturbed system ii, there was some fractional differences between the wave 
-functions which is probably due to normalizations. Unperturbed system ii. 
+functions which is probably due to normalizations. 
 
 # 5. References
 

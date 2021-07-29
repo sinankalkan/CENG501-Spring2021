@@ -1,3 +1,6 @@
+# This code is exactly same as pytorch documentation..
+# You can check the references part in readme.
+
 import warnings
 from collections import namedtuple
 import torch

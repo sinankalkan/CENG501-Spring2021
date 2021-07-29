@@ -74,7 +74,7 @@ The FCN networks which are using ISBI 2016 dataset are included in the FCN codes
 - In the FCN_ISIC2016.ipynb file, even though the training is working, it takes so much time, we can't see the results.  
 
 
-On the other hand, we successfully implement the U-Net segmentation model to the ISBI 2016 dataset. We used mostly a medium page that explains the U-Net structure [3] and modified it for the datasets. Our modified U-Net code is available as .py and .ipnyb files but there must be a configuration of data sets. We could not upload folders. So, the dataset paths must be changed inside the code. It is the -wrong- implementation of the first training part: U-Net  + BPB 
+On the other hand, we implement the U-Net segmentation model to the ISBI 2016 dataset and ran it. We used mostly a medium page that explains the U-Net structure [3] and modified it for the datasets. Our modified U-Net code is available as .py and .ipnyb files but there must be a configuration of data sets. We could not upload folders. So, the dataset paths must be changed inside the code. It is the -wrong- implementation of the first training part: U-Net  + BPB 
 
 Afterward, blocks of our algorithm are added. Firstly, it was decided to start with Boundary Preserving Block. For edge detection, Canny Edge Detection is used from the OpenCV library. For constructing the polygon, the points are needed to be sorted in the counter clock-wise order. In the end, we got the polygons but we made a mistake that is realized at the deadline. We took the polygon instead of the points as the output of the algorithm.
 

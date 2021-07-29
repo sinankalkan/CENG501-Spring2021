@@ -14,11 +14,11 @@ Our aim is to implement the models described in the paper and obtain the accepta
 
 
 
-Computing power in the last decade especially GPUs processing capacities increased remarkably and this improvement directly affected the deep neural networks (DNNs) success.  DNNs are used in various applications; object detection, natural language processing, speech recognition etc. The main secret behind the success of DNNs lies behind the usage of large scale datasets, learning algorithms and considerably higher computational power.
+Computing power in the last decade especially GPUs processing capacities increased remarkably and this improvement directly affected the deep neural networks (DNNs) success.  DNNs are used in various applications; object detection, natural language processing, speech recognition etc. The main secret behind the success of DNNs lies behind the usage of large scale datasets, learning algorithms and considerably higher computational power [[1]](#1).
 
 Normalizing the data and intermediate features in DNNs is one of the key fetaures which affects the success of the architecture. Normalizing the input data improves the training performance and resulting lower training times as well. In literature it is quite common to use Batch Normalization (BN) technique in order to normalize the samples of mini-batches during the training process. It is a well known fact that BN improves training speed and performance. It also allows user to choose higher learning rates while it improves the generalization capacity of the model.
 
-It is not quite certain how BN improves the performance yet, it is argued that BN reduce the Internal Covariance Shift (ICS) but xxxx opposes that there is not an evidence between ICS and BN. However, it is certain that BN adds some noise. In the original paper authors propose a new method which is called Momentum Batch Normalization (MBN). According to the authors the added noise to the mean and variance depends on only the batch-size in conventional BN technique. Smaller batch-sizes increases the noise and this phenomena makes the training more difficult. MBN method can automatically controls the noise level in the training process and this allows a stable training even with smaller batch-sizes when the memory resources are insufficient. 
+It is not quite certain how BN improves the performance yet, it is argued that BN reduce the Internal Covariance Shift (ICS) [[2]](#2) but Santurkar et al. opposes that there is not an evidence between ICS and BN [[3]](#3). However, it is certain that BN adds some noise. In the original paper authors propose a new method which is called Momentum Batch Normalization (MBN). According to the authors the added noise to the mean and variance depends on only the batch-size in conventional BN technique. Smaller batch-sizes increases the noise and this phenomena makes the training more difficult. MBN method can automatically controls the noise level in the training process and this allows a stable training even with smaller batch-sizes when the memory resources are insufficient [[1]](#1).
 
 
 # 2. The method and my interpretation
@@ -61,7 +61,7 @@ Some implementation details are not given in the paper. Therefore, we interprete
 •	Data Augmentation\
 •	Loss Function
 
-Data augmentation is not clearly explained in the paper. In the begining of the experiments there were a gap between our and authors results. Therefore, data augmentation is implemented according to the procedure from the literature [[2]](#2). When it is applied to datasets in our experiments results became closer to the original paper's results so in every experiments conducted in this project this method is used. 
+Data augmentation is not clearly explained in the paper. In the begining of the experiments there were a gap between our and authors results. Therefore, data augmentation is implemented according to the procedure from the literature [[4]](#4). When it is applied to datasets in our experiments results became closer to the original paper's results so in every experiments conducted in this project this method is used. 
 
 It is also not quite certain in the paper that which loss function is used in the experiments. Firstly, the data augmentation method is fixed and the Cross-Entropy Loss function is used in ResNet18 model with CIFAR10 dataset in our experiment. Then the results are compared with the original experiment and it was observed that the obtained results are compatible with the original paper. Therefore, it is assumed that Cross-Entropy Loss function would be reasonable for this problem and in all of the experiments it is used as our loss function. 
 
@@ -121,18 +121,27 @@ In the experiments it is shown that the MBN work stably with different batch siz
 
 
 # 5. References
+<a name="1"></a>
 
+### <a name="tith"></a>[1] Yong, H., Huang, J., Meng, D., Hua, X., & Zhang, L. (2020, August). Momentum batch normalization for deep learning with small batch size. In European Conference on Computer Vision (pp. 224-240). Springer, Cham.
 
 
 <a name="2"></a>
 
-### <a name="tith"></a>[2] https://medium.com/swlh/how-data-augmentation-improves-your-cnn-performance-an-experiment-in-pytorch-and-torchvision-e5fb36d038fb
+### <a name="tith"></a>[2] Ioffe, S., & Szegedy, C. (2015, June). Batch normalization: Accelerating deep network training by reducing internal covariate shift. In International conference on machine learning (pp. 448-456). PMLR.
+
+<a name="2"></a>
+
+### <a name="tith"></a>[3] Santurkar, S., Tsipras, D., Ilyas, A., & Mądry, A. (2018, December). How does batch normalization help optimization?. In Proceedings of the 32nd international conference on neural information processing systems (pp. 2488-2498).
+
+
+<a name="4"></a>
+
+### <a name="tith"></a>[4] Karani, D. (2020, February 7). How Data Augmentation Improves your CNN performance? — An Experiment in PyTorch and Torchvision. Medium. https://medium.com/swlh/how-data-augmentation-improves-your-cnn-performance-an-experiment-in-pytorch-and-torchvision-e5fb36d038fb
 
 
 
 
-
-https://blog.paperspace.com/pytorch-101-building-neural-networks/
 
 # Contact
 

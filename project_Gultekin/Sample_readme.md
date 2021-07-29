@@ -4,11 +4,20 @@ This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.
 
 # 1. Introduction
 
-Introduce the paper (inc. where it is published) and describe your goal (reproducibility).
+In this Project, a CVPR 2020 published paper named Density Map Guided Object Detection in Aerial Images is considered to make implementation. Autors introduce a new cropping strategy in the paper using CNN. 
+My goal is that reproduce Density Map using CNN to use them for cropping strategy and then detect object in aerial images 
+
 
 ## 1.1. Paper summary
 
-Summarize the paper, the method & its contributions in relation with the existing literature.
+Object detection in high-resolution aerial images is a challenging task because of 1) the large variation in object size, and 2) non-uniform distribution of objects [1]. It is hard to detect small objects in aerial images. Cropping images is the method that applied before the object detection algorithm such as uniform cropping [2]. For most of the cases, the method help improve the detection accuracy of small objects. However, these simple strategies  are not able to leverage the semantic information  for cropping, thus resulting in a majority of crops with only background and large objects may be cut into two or more different crops by these strategies.[1]
+
+Density Map Network -DMNet provide semantic cropping. It utilizes object density map to indicate the presence of objects as well as the object density within a region. The distribution of objects enables our cropping module to generate better image crops for further object detection as shown fig.1. 
+
+![univsdensity](https://user-images.githubusercontent.com/48828422/127484682-3f2f07e8-4db2-4e77-9686-0b05914dd644.PNG)
+
+Figure 1: Uniform cropping vs. Density cropping
+
 
 # 2. The method and my interpretation
 

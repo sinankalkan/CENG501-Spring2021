@@ -18,24 +18,36 @@ STAR is a vertex-based LBS model complemented with a learned set of shape and po
 
 STAR parameters;
 
-Pose Parameters: θ ∈ R^72 
+* Pose Parameters: θ ∈ R^72 
 
-Axis angle rotations joints: 24
+* Axis angle rotations joints: 24
 
-Axis angle rotations shape: β ∈ R^10
+* Axis angle rotations shape: β ∈ R^10
 
-The number of mesh vertices: 6890
+* The number of mesh vertices: 6890
 
 
 ## 2.2. My interpretation 
 
 In the article, the where L1 norm and L2 norm loss functions will be applied in the training section are not entirely clear. When the functions are examined, it is seen that the L1 norm function should be applied in the quaternion() and rodrigues() methods. L2 norm function is applied in the loss section and total loss is applied in the trainer section.
 
+Trainer parameters:
+
+* Optimizer: LBFGS
+
+* Learning Rate: 1e-1
+
+* Activation Function: ReLU
+
+* Batch Size: 1
+
+* Loss Function: L1 and L2 norm
+
 # 3. Experiments and results
 
 ## 3.1. Experimental setup
 
-I built my experiments upon Pytorch implementation by Osman et.al (2020). The .npz files required first to create the model are downloaded from https://star.is.tue.mpg.de/. The model includes extracting dicts from the .npz file and applying Linear Blend Skinning with forward(). In the article, CAESAR and SizeUSA datasets are used to train the model. However, access to these data sets was not available. 
+I built my experiments upon Pytorch implementation by Osman et.al (2020). The .npz files required first to create the model are downloaded from https://star.is.tue.mpg.de/. The model includes extracting dicts from the .npz file and applying Linear Blend Skinning (LBS) with forward(). In the article, CAESAR and SizeUSA datasets are used to train the model. However, access to these data sets was not available. 
 
 ## 3.2. Running the code
 

@@ -32,7 +32,7 @@ if __name__ == '__main__':
     parser.add_argument("--model_save_dir", default="./MVR_MS/exp", type=str)
     parser.add_argument("--batch_size", default=80, type=int)
     parser.add_argument("--lr", default=3e-5, type=float)
-    parser.add_argument("--wdecay", default=5e-3, type=float)
+    parser.add_argument("--wdecay", default=5e-4, type=float)
     parser.add_argument("--mvr_reg", default=0.3, type=float)
     parser.add_argument("--bn_freeze", default=False, type=bool)
     parser.add_argument("--emb_dim", default=64, type=int)

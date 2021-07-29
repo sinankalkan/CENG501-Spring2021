@@ -5,6 +5,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torchvision import transforms
+from tqdm import tqdm
 
 from lib.models.meticulousnet import MeticulousNet
 from lib.utils import load_checkpoint
@@ -42,14 +43,23 @@ class CoarseModule(nn.Module):
 def coarse_mask_demo():
     ckpt_path = Path("../../saved/checkpoints/mosl_checkpoint.pth").resolve()
 
-    img_folder = Path('../../datasets/HRSOD_Subset/test_images')
-    coarse_image_path = Path('../../saved/outputs/HRSOD_Subset/coarse/')
-    coarse_mask_path = Path('../../saved/outputs/HRSOD_Subset/coarse_mask/')
+    # img_folder = Path('../../datasets/HRSOD_Subset/test_images')
+    # coarse_image_path = Path('../../saved/outputs/HRSOD_Subset/coarse/')
+    # coarse_mask_path = Path('../../saved/outputs/HRSOD_Subset/coarse_mask/')
+
+    img_folder = Path('/home/onur/Desktop/pixery/datasets/DUTS-TE/DUTS-TE-Image')
+    coarse_image_path = Path('/home/onur/Desktop/pixery/workspace/mos/saved/outputs/DUTS-TE/coarse')
+    coarse_mask_path = Path('/home/onur/Desktop/pixery/workspace/mos/saved/outputs/DUTS-TE/coarse_mask')
+
+    # img_folder = Path('/home/onur/Desktop/datasets/HRSOD_release/HRSOD_test')
+    # coarse_image_path = Path('/home/onur/Desktop/workspace/mos/saved/outputs/HRSOD/coarse')
+    # coarse_mask_path = Path('/home/onur/Desktop/workspace/mos/saved/outputs/HRSOD/coarse_mask')
+
     coarse_image_path.mkdir(parents=True, exist_ok=True)
     coarse_mask_path.mkdir(parents=True, exist_ok=True)
 
     coarse_module = CoarseModule(ckpt_path, input_size=(336, 336), device='cuda')
-    for img_path in img_folder.glob("*.jpg"):
+    for img_path in tqdm(list(img_folder.glob("*.jpg"))):
         img = Image.open(img_path).convert('RGB')
         coarse_mask = coarse_module(img)
         coarse_mask = F.interpolate(coarse_mask, size=(img.size[1], img.size[0]), mode='bilinear', align_corners=False)

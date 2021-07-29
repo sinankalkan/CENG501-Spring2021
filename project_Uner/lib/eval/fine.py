@@ -8,6 +8,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torchvision import transforms
 from torchvision.transforms import functional as TF
+from tqdm import tqdm
 
 from lib.models.meticulousnet import MeticulousNet
 from lib.utils import load_checkpoint
@@ -92,14 +93,17 @@ class FineModule(nn.Module):
 if __name__ == '__main__':
     low_ckpt_path = Path("../../saved/checkpoints/mosl_checkpoint.pth").resolve()
     high_ckpt_path = Path("../../saved/checkpoints/mosh_checkpoint.pth").resolve()
-    fine_image_outputs = Path('../../saved/outputs/HRSOD_Subset/fine')
-    fine_mask_outputs = Path('../../saved/outputs/HRSOD_Subset/fine_mask')
-    img_folder = Path('../../datasets/HRSOD_Subset/test_images')
+    # fine_image_outputs = Path('../../saved/outputs/HRSOD_Subset/fine')
+    # fine_mask_outputs = Path('../../saved/outputs/HRSOD_Subset/fine_mask')
+    # img_folder = Path('../../datasets/HRSOD_Subset/test_images')
+    fine_image_outputs = Path('/home/onur/Desktop/pixery/workspace/mos/saved/outputs/HRSOD/fine')
+    fine_mask_outputs = Path('/home/onur/Desktop/pixery/workspace/mos/saved/outputs/HRSOD/fine_mask')
+    img_folder = Path('/home/onur/Desktop/pixery/datasets/HRSOD_release/HRSOD_test')
 
     fine_image_outputs.mkdir(parents=True, exist_ok=True)
     fine_mask_outputs.mkdir(parents=True, exist_ok=True)
     fine_module = FineModule(low_ckpt_path, high_ckpt_path, low_size=(336, 336), device='cuda')
-    for img_path in natsorted(img_folder.glob("*.jpg"), alg=ns.PATH):
+    for img_path in tqdm(list(natsorted(img_folder.glob("*.jpg"), alg=ns.PATH))):
         img = Image.open(img_path).convert('RGB')
         fine_mask = fine_module(img, step_size=224)
         fine_mask = fine_mask[0, 0]

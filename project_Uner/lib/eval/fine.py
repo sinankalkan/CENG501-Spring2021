@@ -92,15 +92,18 @@ class FineModule(nn.Module):
 if __name__ == '__main__':
     low_ckpt_path = Path("../../saved/checkpoints/mosl_checkpoint.pth").resolve()
     high_ckpt_path = Path("../../saved/checkpoints/mosh_checkpoint.pth").resolve()
-    fine_outputs = Path('../../saved/outputs/MOS600/fine')
-    img_folder = Path('../../datasets/MOS600')
+    fine_image_outputs = Path('../../saved/outputs/HRSOD_Subset/fine')
+    fine_mask_outputs = Path('../../saved/outputs/HRSOD_Subset/fine_mask')
+    img_folder = Path('../../datasets/HRSOD_Subset/test_images')
 
-    fine_outputs.mkdir(parents=True, exist_ok=True)
+    fine_image_outputs.mkdir(parents=True, exist_ok=True)
+    fine_mask_outputs.mkdir(parents=True, exist_ok=True)
     fine_module = FineModule(low_ckpt_path, high_ckpt_path, low_size=(336, 336), device='cuda')
     for img_path in natsorted(img_folder.glob("*.jpg"), alg=ns.PATH):
         img = Image.open(img_path).convert('RGB')
         fine_mask = fine_module(img, step_size=224)
         fine_mask = fine_mask[0, 0]
-
+        fine_mask_out = Image.fromarray((fine_mask.detach().cpu().numpy() * 255).astype('uint8'))
+        fine_mask_out.save((fine_mask_outputs / img_path.name).with_suffix('.png'))
         fine_img = green_background(img, fine_mask[..., None].cpu().numpy())
-        fine_img.save(fine_outputs / img_path.name)
+        fine_img.save(fine_image_outputs / img_path.name)

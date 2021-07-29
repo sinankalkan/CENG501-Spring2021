@@ -42,9 +42,9 @@ class CoarseModule(nn.Module):
 def coarse_mask_demo():
     ckpt_path = Path("../../saved/checkpoints/mosl_checkpoint.pth").resolve()
 
-    img_folder = Path('../../datasets/MOS600/')
-    coarse_image_path = Path('../../saved/outputs/MOS600/coarse/')
-    coarse_mask_path = Path('../../saved/outputs/MOS600/coarse_mask/')
+    img_folder = Path('../../datasets/HRSOD_Subset/test_images')
+    coarse_image_path = Path('../../saved/outputs/HRSOD_Subset/coarse/')
+    coarse_mask_path = Path('../../saved/outputs/HRSOD_Subset/coarse_mask/')
     coarse_image_path.mkdir(parents=True, exist_ok=True)
     coarse_mask_path.mkdir(parents=True, exist_ok=True)
 

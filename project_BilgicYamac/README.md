@@ -40,7 +40,29 @@ All implemented models are trained with pre-trained GloVE embeddings of 100 dime
 
 ## 3.2. Running the code
 
-Explain your code & directory structure and how other people can run it.
+The project structure is given below:
+```
+project_Acir
+│─── code/
+│    │─── main.py
+│    │─── preprocessing.py
+│    │─── seq2seq.py
+│    │─── data
+|         │─── sequence
+|    │─── WikiHowQACorpus
+|    |    │─── summary.txt
+|    |    │─── test.txt
+|    |    │─── train.txt
+|    |    │─── valid.txt
+│    │─── glove
+│  README.md
+```
+
+- WikiHowQACorpus dataset and GloVE should be downloaded from:
+      https://github.com/dengyang17/wikihowQA
+      https://www.kaggle.com/danielwillgeorge/glove6b100dtxt
+- If data/sequence folder is not in your repository. Create empty sequence folder under data/ directory.
+- main.py should be run to start training.
 
 ## 3.3. Results
 

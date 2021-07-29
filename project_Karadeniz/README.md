@@ -51,7 +51,7 @@ For all datasets, images cropped to 224 x 224, with standard preprocessing techn
 
 ## 3.2 Network
 
-For all experiments googleNet is used with batch normalization, pretrained on ILSVRC 2012-CLS. Adam optimizer is also used. Occasionally embedding dimension of 64 is prefered instead of 512.
+For all experiments googleNet is used with batch normalization, pretrained on ILSVRC 2012-CLS. Adam optimizer is also used. Occasionally embedding dimension of 64 is prefered instead of 512. Googlenet implementation is taken from pytorch documentation, see references section.
 
 ## 3.3 My Result
 

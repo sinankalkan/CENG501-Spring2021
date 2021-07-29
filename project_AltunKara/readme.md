@@ -51,6 +51,8 @@ This block is a structure that is used in the training segmentation part. It can
 
 SBE is an evaluator that evaluates the difference boundary key point map with ground-truth segmentation map and predicted segmentation map. Difference with ground-truth segmentation can be thought as real input as in GAN architecture. So, the difference is expected a high score. On the other hand, the difference with a lowly predicted segmentation map gets a low score since the predicted segmentation will not be consistent with the boundary of the image in this situation. So, the netwoek gives feedback to the network by using the bundary key point map to update predicted segmentation map. 
 
+The two networks are trained iteratively.   
+
 ### 2.1.2 Dataset
 The paper used the PH2 and ISBI 2016 datasets. These datasets are publically available for skin lesion segmentation.  ISBI 2016 dataset consists 900 skin lesion images, PH2 includes 200 dermoscopc images. They used ISBI 2016 dataset for training and PH2 for testing. They also used TVUS dataset which is private and collected for experiments.  
 ISBI2016 : [ISBI2016](https://challenge.isic-archive.com/data)  
@@ -64,11 +66,13 @@ PH2 : [PH2](https://www.fc.up.pt/addi/ph2%20database.html)
 -Forboundary key point maps , they selected 6 points and run the algorithm 40000 times. 
 -They integrated the proposed method in several segmentation networks : U-Net , FCN, Dilated-Net. 
 
-
 ## 2.2. Our interpretation 
 
-First , we wanted to have the same segmentation scores on different networks. We tried to implement the FCN segmentation network with using ISBI 2016 dataset. Unfortunately, we couldn't get the segmentation scores yet. The FCN networks which are using ISBI 2016 dataset included on the FCN codes file. 
+First , we wanted to have the same segmentation scores on different networks. We tried to implement the FCN segmentation network with using ISBI 2016 dataset. Unfortunately, we couldn't get the segmentation scores yet. The FCN networks which are using ISBI 2016 dataset included on the FCN codes file.
 In the FCN_Implementation of ISIC_2016 file, we got the results but the problem is the predicted images are fully black. We still try to fix this issue. 
+
+We have implemented the U-net structure and ran it. Then, we started to add the blocks of the 
+
 In FCN_ISIC2016.ipynb file, even though the training is working, it takes so much time, we can't see the results.  
 On the other hand, we succesfully implement the U-Net segmentation model to the ISBI 2016 dataset. 
 

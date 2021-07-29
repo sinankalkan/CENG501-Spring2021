@@ -1,3 +1,5 @@
+This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.metu.edu.tr/~sinan/DL/) project for reproducing a paper without an implementation. See [CENG501 (Spring 2021) Project List](https://github.com/sinankalkan/CENG501-Spring2021) for a complete list of all paper reproduction projects.
+
 ## 1.1. Paper summary
 
 There have been many studies on different tasks in Community question answering (CQA) such as answer selection, question-question relatedness and comment classification. The paper focuses on answer selection and the challenges that CQA brings which are the noise introduced by the redundancy and the lengthiness of answers in CQA. The contributions of the paper can be summarized as follows:

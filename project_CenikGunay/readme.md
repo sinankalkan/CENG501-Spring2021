@@ -23,7 +23,7 @@ We can summarize the paper as below.
 level. Also, the connections between the visual characteristics and the underlying
 economic or cultural implications are studied.
 
-**NOTE** Since the dataset is not provided to the readers for the city embedding part, the implementation of this part is not included in the report.
+**NOTE:** Since the dataset is not provided to the readers for the city embedding part, the implementation of this part is not included in the report.
 
 In the related studies, the dataset focuses only the spesific tasks like place categorization, scene recognition, object retrieval or image retrieval. However, Placepedia can be used for all these task due to its much larger amount image and data, containing over 240K places with 35 million images labeled with 3K categories. Moreover, the function information of places may lead to a new task, namely place functio recognition.
 

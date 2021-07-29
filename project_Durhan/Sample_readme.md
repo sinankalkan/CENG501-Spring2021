@@ -53,6 +53,7 @@ where the energy eigenvalues of the unperturbed system is [[3]](#1), ,
 
 ![render_2](https://user-images.githubusercontent.com/47567854/127366875-5f90533f-07f8-4eb0-8f5a-ed42c5f02176.png)
 
+Here, a is the well width and μ is the mass of the particle which is taken to be 1 in each experiment. ħ is the Planck's constant in natural units.
 As far as the perturbed system is concerned, a perturbation term should be added to the unperturbed Hamiltonian i.e. 
 
 ![add_hams](https://user-images.githubusercontent.com/47567854/127367931-2d522c02-297b-43f6-930f-9c9f88650724.png)
@@ -88,6 +89,11 @@ I prepared the code on Google's colab framework. One can easily follow the relev
 Explain your code & directory structure and how other people can run it.
 
 ## 3.3. Results
+The result of the original work can found in Figure 1 (figure adapted from [[6]](#1) ).
+
+![fig](https://user-images.githubusercontent.com/47567854/127409056-47dea50d-6179-4d6c-9aa8-d83adbb63c23.png)
+
+
 
 Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
 
@@ -108,7 +114,7 @@ Approximating Ground State Energies and Wave Functions of Physical Systems with 
 Provide your references here.
 
 # Contact
-Onur Durhan
-Middle East Technical University, Department of Physics
-email: onur.durhan@metu.edu.tr
+Onur Durhan <br />
+Middle East Technical University, Department of Physics <br />
+email: onur.durhan@metu.edu.tr <br />
 Provide your names & email addresses and any other info with which people can contact you.

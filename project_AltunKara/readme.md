@@ -65,13 +65,21 @@ PH2 : [PH2](https://www.fc.up.pt/addi/ph2%20database.html)
 -They used randomly initialized weights with 8 input batches.  
 -Forboundary key point maps , they selected 6 points and run the algorithm 40000 times. 
 -They integrated the proposed method in several segmentation networks : U-Net , FCN, Dilated-Net. 
-
+- For every iteration, they train the segmentation network 8 times and the SBE network 3 times to train two networks in an adversarial manner.
 ## 2.2. Our interpretation 
 
 First , we wanted to have the same segmentation scores on different networks. We tried to implement the FCN segmentation network with using ISBI 2016 dataset. Unfortunately, we couldn't get the segmentation scores yet. The FCN networks which are using ISBI 2016 dataset included on the FCN codes file.
 In the FCN_Implementation of ISIC_2016 file, we got the results but the problem is the predicted images are fully black. We still try to fix this issue. 
 
-We have implemented the U-net structure and ran it. Then, we started to add the blocks of the 
+We have implemented the U-net structure and ran it. We used mostly this medium page(https://towardsdatascience.com/unet-line-by-line-explanation-9b191c76baf5) and modified for the datasets. Our modified unet code is available as .py and .ipnyb files but there must be a configuration of data sets. I could not upload folders. So, the dataset paths must be changed inside code. Actually, it is the -wrong- implementation of first training part: unet + bpb
+
+Afterwards, blocks of our algorithm are added. Firstly, it is decided to start with Boundary Preserving Block. For edge detection, Canny Edge Detection is used from OpenCV library. For constructing the polygon, the points are needed to be sorted in the counter clock-wise order. At the end, we got the polygons but we made a mistake that is realized at deadline. We took the polygon instead of the points as output of the algorithm.
+
+Because we did not realize, we continued. That polygon was used in the boundary preserving block implementation instead of boundary key points map. This way, unet_plus_bpbm_net ,i.e first part of the network, was implemented. Note that, the boundary key point selection algorithm creates a fixed-sized output. For using these boundary key points for these layers, we needed to downsample them 6 times. bpbm_creator.py is for creating the boundary key points polygon,which should have been points instead, and its downsamples. Also, SBE network was created by looking at the supplementary part of the paper. However, there was an inconsistency while creating the full network. The loss functions were not consistent. After trying a while, i finished my hope and realized my mistake, after a few more time. 
+
+In actual implementation, the two parts of the network are not connected actually, To connect them logically, there is boundary-aware loss in the first network in addition to SBE's own loss in the second part. 
+
+I tried lots of things but thet did not work as i said, i put as it is. The main file is coding22.py.
 
 In FCN_ISIC2016.ipynb file, even though the training is working, it takes so much time, we can't see the results.  
 On the other hand, we succesfully implement the U-Net segmentation model to the ISBI 2016 dataset. 
@@ -80,20 +88,20 @@ On the other hand, we succesfully implement the U-Net segmentation model to the 
 
 ## 3.1. Experimental setup
 
-Describe the setup of the original paper and whether you changed any settings.
+In the implementation details, most of the experimental setup info exists. 
+While training i would have changed the filter sizes. Dataset settings were public ones(ISBI2016 as training and validation, PH2 as testing) in our earlier experiments.
 
 ## 3.2. Running the code
 
-Explain your code & directory structure and how other people can run it.
+coding22.py would have run and we would have seen the the results. But it is broken now. But, it is possible to run the unet_denemeler by changing dataset directories.
 
 ## 3.3. Results
 
-Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
+I did not see the results. However, i implemented the first part of the network(unet_denemeler). When i trained and test it, i saw that there was noise inside the predicted segmentation images inside the lesions and overflows in the segmentation. The first problem may have arised from my mistake of using polygon. So, i added noise to the polygon part of the map via boundary preserving block map trainings. The second problem may have come from lack of SBE that optimizes to catch the boundaries.
 
 # 4. Conclusion
 
-Discuss the paper in relation to the results in the paper and your results.
-As a conclusion, even though we couldn't reach the same results on the paper, we tried to implement a brand new method on existing segmentation network structures. 
+As a conclusion, even though we couldn't reach the conclusion, we tried to implement a brand new method on existing segmentation network structures. We have seen a complex and beneficial thinking of networks.
 
 # 5. References
 

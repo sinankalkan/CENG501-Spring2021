@@ -91,15 +91,19 @@ The proposed method compared four aspects: "Answer Selection," "Analysis of the 
 For the "Answer Selection" part, MRR and MAP evaluation metrics are used. In this evaluation, Siamese BiLSTM (Mueller and Thyagarajan 2016), AttBiLSTM (Tan et al. 2016), AP-LSTM (dos Santos et al. 2016), CA (Compare-Aggregate) (Wang and Jiang 2017), and COALA (Ruckl ¨ e, Moosavi, and Gurevych 2019) methods are compared with the proposed method. The result of this comparison is shown in Table 1, and ASAS, which is the proposed method, gives a better result.
 
 ![Table1](https://user-images.githubusercontent.com/45417780/127491683-ff8b2336-a076-4b2d-90d8-a513d192c2ee.PNG)
+Table 1
 
 In terms of text summarization, the proposed method (ASAS) also gives better results in Table 2 and Table 3.
 ![Table2](https://user-images.githubusercontent.com/45417780/127491730-6245d515-b9a4-472b-86f5-7416e7a58965.PNG)
-![Table3](https://user-images.githubusercontent.com/45417780/127491752-ab99131a-88dc-42e7-8142-7ba71cebe7ea.PNG)
+Table 2
 
+![Table3](https://user-images.githubusercontent.com/45417780/127491752-ab99131a-88dc-42e7-8142-7ba71cebe7ea.PNG)
+Table 3
 
 The final evaluation is about the length and accuracy. In Figure 1, we can see the accuracy with respect to answer length. This accuracy is compared with AP-LSTM and Compare-Aggregate Model. ASAS also gives better results in this perspective.
-![Figure1](https://user-images.githubusercontent.com/45417780/127491789-ef43b43e-a027-4fe8-8486-027534c8125d.PNG)
 
+![Figure1](https://user-images.githubusercontent.com/45417780/127491789-ef43b43e-a027-4fe8-8486-027534c8125d.PNG)
+Figure 1
 
 # 4. Conclusion
 

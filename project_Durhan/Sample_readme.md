@@ -95,7 +95,7 @@ particular, system ii oscillates.
 
 Finally , the ground state energies I obtained are presented in Figure 3.
 ![wf_all](https://user-images.githubusercontent.com/47567854/127467107-ad79bdbd-3501-4dfb-8020-e61d39442ffe.png)
-**Figure 2:** Ground state wave functions. Perturbed system requires more finetuning
+**Figure 3:** Ground state wave functions. Perturbed system requires more finetuning
 
 # 4. Conclusion
 In the original work they reached the true values with very high accuricies. On the other hand, the ground state energies and the shape of the ground state 

@@ -27,12 +27,26 @@ The MOS_H model is trained with the MSRA-10K [3], DUT-OMRON [4], ECSSD [5], and 
 
 MeticulousNet has encoder-decoder architecture. Encoder part can be any feature extraction module from other networks. In this paper, encoder of the PSPNet with ResNet50 is used as the encoder. The main contribution of the paper comes from the decoder part of MeticulousNet.
 
-
+<p align="center">
+<img src="figures/figure4.png" alt="drawing" width="50%"/>
+</p>
  
+The decoder module contains two branches. The first one recovers the resolution of feature maps through deconvolutional layers. The second one refines the coarse outputs coming from the deconvolution branch. Recovering process happens by recursively. Because of this, they called this part as recursive decoder. 
+
+<p align="center">
+<img src="figures/figure5.png" alt="drawing" width="50%"/>
+</p>
+
+HiearPR blocks are using to refine masks by using uncertainty maps to refine only edge regions of the mask. PointRend module have been used in this module. 
+
+<p align="center">
+<img src="figures/figure6.png" alt="drawing" width="50%"/>
+</p>
 
 ## 2.2. My interpretation 
 
-Explain the parts that were not clearly explained in the original paper and how you interpreted them.
+The mask encoding layer is not explained in the article. I interpreted this module as a features extractor that takes the concatenated the features from the recovery branch with the intermediate refined masks. I sent them to the mask encoding layer which consists of the convolutional layers to extract new features which will be used in the next refinement step.
+
 
 # 3. Experiments and results
 

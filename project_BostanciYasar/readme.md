@@ -126,13 +126,7 @@ In the experiments it is shown that the MBN work stably with different batch siz
 
 <a name="2"></a>
 
-### <a name="tith"></a>[2] https://medium.com/swlh/how-data-augmentation-improves-your-cnn-performance-an-experiment-in-pytorch-and-torchvision-e5fb36d038fb
-
-
-
-
-
-https://blog.paperspace.com/pytorch-101-building-neural-networks/
+### <a name="tith"></a>[2] Karani, D. (2020, February 7). How Data Augmentation Improves your CNN performance? — An Experiment in PyTorch and Torchvision. Medium. https://medium.com/swlh/how-data-augmentation-improves-your-cnn-performance-an-experiment-in-pytorch-and-torchvision-e5fb36d038fb
 
 # Contact
 

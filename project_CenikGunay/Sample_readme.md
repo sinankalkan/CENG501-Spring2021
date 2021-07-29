@@ -4,7 +4,7 @@ This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.
 
 # 1. Introduction
 
-The paper presents **Placepedia**, a comprehensive place dataset that contains images for places of interest from all over the world with massive attributes, where it is published in ECCV 2020. The authors of the paper developed **PlaceNet**, a unified framework for multi-level place recognition. It simultaneously predicts place item, category, function, city and country. In the image below, you can see the hierarchical structure of Placepedia with places from all over the world. 
+The paper presents **Placepedia**, a comprehensive place dataset that contains images for places of interest from all over the world with massive attributes, where it is published in _ECCV 2020._ The authors of the paper developed **PlaceNet**, a unified framework for multi-level place recognition. It simultaneously predicts place item, category, function, city and country. In the image below, you can see the hierarchical structure of Placepedia with places from all over the world. 
 
 ![Placepedia](https://user-images.githubusercontent.com/53267971/127356409-e9169861-a7ca-4c34-9d3e-5233e668ef4b.PNG)
 
@@ -86,7 +86,7 @@ namely, **average pooling**, **max pooling**, **spatial pyramid pooling**
 ## 2.2. My interpretation 
 
 
-The biggest problem we encountered while implementing the solution proposed in the paper was that the data set was quite large. Also, due to the complexity of the model due to duplication for multiple predictions and hardware constraint, results corresponding to training only a part of the dataset will be presented here. Moreover, the learning rate 0.5 value given in the paper was not suitable as we could not use the entire dataset. That's why we chose the learning rate as 1e-4. All details will be given in the experimental setup.
+The biggest problem we encountered while implementing the solution proposed in the paper was that the data set was quite large. Also, due to the complexity of the model due to duplication for multiple predictions and hardware constraint, results corresponding to training only a part of the dataset will be presented here. Moreover, the learning rate 0.5 value given in the paper was not suitable as we could not use the entire dataset. That's why we chose the learning rate as 0.0001. All details will be given in the experimental setup.
 Since the batch size is not specified in the training details section of the paper, we have set the batch size as 64. As we observe from the paper, loss functions fatal and softmax give almost the same results. Therefore, we only use softmax loss function as well as avarage pooling. The other problem we encounter is related to dataset image shape. After starting training, after the some point we got the error **output with shape [1, 224, 224] doesn't match the broadcast shape [3, 224, 224]**, which is due to the mismatch of grayscale image to RGB image,which means there is some grayscale images in the dataset and produces an error. Therefore, we have trained our model until we encountered this error without checking whole dataset since it has 240K such images. Our aim is to show that our model works correct and it tends to be more powerful compared to other datasets and models even if we can only train our model such constraints and problems.
 
 
@@ -98,7 +98,7 @@ Since the batch size is not specified in the training details section of the pap
 
 In original setup authors use Placepedia dataset. Because of lack of disk space in Colab at this part we could only implement one tenth of it to some extent. Moreover, authors provided that they trained the network for 100K iterations which we couldn't train for that long as Colab limits gpu usage so we have presented the results for at most 700 iterations, where iteration training which is significantly lower than the author's setup. All parameters are listed in the table 2 below. 
   
-  **Table 2.** _Training Parameters of our implementation and authors_
+  _**Table 2.** Training Parameters of our implementation and authors_
   
   ![parameter_tables](https://user-images.githubusercontent.com/53267971/127470144-8fc717cd-cd5e-44a3-98bd-bfae6c551b29.PNG)
 
@@ -124,14 +124,15 @@ project_CenikGunay
 
 Present your results and compare them to the original paper. Please number your figures & tables as if this is a paper.
 
-**Table 3.** _Comparision of our result with the previous works_
+_**Table 3.** Comparision of our result with the previous works_
 ![Result_tables](https://user-images.githubusercontent.com/53267971/127472734-2f81fac0-d852-42ef-bbdc-7b886c5d43c8.PNG)
 
 In this report, while we reproduce the results given in the paper, what we are trying to show is that the model performs well. As the number of epochs given in the paper is 90, but hardware limitation and many of the images in the dataset are not suitable for training. The training operation is finished without entering the range converged by the loss function, since only one epoch and a limited number of iterations are adhered to. You can see the tendency of the loss curve in 700 iteration with 1 epoch, where it takes more than 1 hour.Therefore, accuracy may seem low at first glance. However, we see that we are still able to approach some performances of other models in the first epoch. This gives an idea about the power of our implementation and the model.
 
-**Figure 2.** _Graph of Loss curve with 700 iterations with 1 epoch_
+
 ![Loss_curve](https://user-images.githubusercontent.com/53267971/127474514-18f123dd-055e-4ca4-9460-67168a87170e.PNG)
 
+_**Figure 2.** Loss curve with 700 iterations with 1 epoch_
 
 # 4. Conclusion
 
@@ -139,7 +140,11 @@ Discuss the paper in relation to the results in the paper and your results.
 
 # 5. References
 
-Provide your references here.
+**[1]** Project Page, https://hahehi.github.io/placepedia.html
+
+**[2]** Github Repo, https://github.com/hahehi/placepedia
+
+**[3]** Placepedia: Comprehensive Place Understanding with Multi-Faceted Annotations,https://arxiv.org/pdf/2007.03777.pdf
 
 # Contact
 

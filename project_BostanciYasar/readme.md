@@ -18,7 +18,7 @@ Computing power in the last decade especially GPUs processing capacities increas
 
 Normalizing the data and intermediate features in DNNs is one of the key fetaures which affects the success of the architecture. Normalizing the input data improves the training performance and resulting lower training times as well. In literature it is quite common to use Batch Normalization (BN) technique in order to normalize the samples of mini-batches during the training process. It is a well known fact that BN improves training speed and performance. It also allows user to choose higher learning rates while it improves the generalization capacity of the model.
 
-It is not quite certain how BN improves the performance yet, it is argued that BN reduce the Internal Covariance Shift (ICS) but xxxx opposes that there is not an evidence between ICS and BN. However, it is certain that BN adds some noise. In the original paper authors propose a new method which is called Momentum Batch Normalization (MBN). According to the authors the added noise to the mean and variance depends on only the batch-size in conventional BN technique. Smaller batch-sizes increases the noise and this phenomena makes the training more difficult. MBN method can automatically controls the noise level in the training process and this allows a stable training even with smaller batch-sizes when the memory resources are insufficient. 
+It is not quite certain how BN improves the performance yet, it is argued that BN reduce the Internal Covariance Shift (ICS) but xxxx opposes that there is not an evidence between ICS and BN. However, it is certain that BN adds some noise. In the original paper authors propose a new method which is called Momentum Batch Normalization (MBN). According to the authors the added noise to the mean and variance depends on only the batch-size in conventional BN technique. Smaller batch-sizes increases the noise and this phenomena makes the training more difficult. MBN method can automatically controls the noise level in the training process and this allows a stable training even with smaller batch-sizes when the memory resources are insufficient. [[1]](#1)
 
 
 # 2. The method and my interpretation
@@ -121,8 +121,9 @@ In the experiments it is shown that the MBN work stably with different batch siz
 
 
 # 5. References
+<a name="1"></a>
 
-
+### <a name="tith"></a>[1] Yong, H., Huang, J., Meng, D., Hua, X., & Zhang, L. (2020, August). Momentum batch normalization for deep learning with small batch size. In European Conference on Computer Vision (pp. 224-240). Springer, Cham.
 
 <a name="2"></a>
 

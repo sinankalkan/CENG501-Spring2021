@@ -16,14 +16,28 @@ Density Map Network -DMNet provide semantic cropping. It utilizes object density
 
 ![univsdensity](https://user-images.githubusercontent.com/48828422/127484682-3f2f07e8-4db2-4e77-9686-0b05914dd644.PNG)
 
-Figure 1: Uniform cropping vs. Density cropping
+Figure 1: Uniform cropping vs. Density cropping [1]
+
+Two popular aerial images datasets VisionDrone [3] and UAVDT [4] was used in the paper.
 
 
 # 2. The method and my interpretation
 
 ## 2.1. The original method
 
-Explain the original method.
+![framework](https://user-images.githubusercontent.com/48828422/127486390-72d82226-2ed0-4b56-a700-23ead73165b0.PNG)
+
+Figure 2: Overview for the DMNet framework. [1]
+
+L() =
+1
+2N
+∗
+N
+Xi
+=1
+kD(Xi;) − Dik2.
+
 
 ## 2.2. My interpretation 
 

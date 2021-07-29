@@ -36,7 +36,9 @@ class Noisier2NoiseDataset(data_utils.Dataset):
         self.noise_std = noise_std
 
         self.root_path = root_path
-        self.img_path = os.listdir(self.root_path)
+        
+        img_ext = ['jpg','jpeg', 'bmp', 'png', 'gif']
+        self.img_path = [fp for fp in os.listdir(self.root_path) if any(fp.endswith(ext) for ext in img_ext)]
 
     def __len__(self):
         return len(self.img_path)
@@ -185,7 +187,7 @@ def get_run_config(checkpoint=None):
         run_config = {}
         run_config['dataset_id'] = 'coco'
         run_config['noise_type'] = 'gaussian'
-        run_config['noise_std'] = 0.25
+        run_config['noise_std'] = 0.05
 
         # NOTE(ff-k): As used in Noise2Noise, see Section 3.1
         run_config['crop_width'] = 256
@@ -219,17 +221,26 @@ def get_run_config(checkpoint=None):
         
     return run_config
 
-def main(mode, force_dataset, save_prob):
-
-    checkpoints_path = '../checkpoints/'
-    checkpoints = sorted(os.listdir(checkpoints_path))
-    if len(checkpoints) > 0:
-        print('Using latest checkpoint: %s' % (checkpoints[len(checkpoints)-1]))
-        if mode == 'train':
-            print('Make sure to clean checkpoints directory if you want to start training from scratch')
-        checkpoint = torch.load(checkpoints_path + checkpoints[len(checkpoints)-1])
+def main(mode, force_dataset, save_prob, checkpoint_path):
+    
+    if checkpoint_path == '':
+        checkpoints_path = '../checkpoints/'
+        checkpoints = sorted([fp for fp in os.listdir(checkpoints_path) if fp.endswith('pt')])
+        if len(checkpoints) > 0:
+            checkpoint_path = checkpoints_path + checkpoints[len(checkpoints)-1]
+            if mode == 'train':
+                print('Make sure to clean checkpoints directory if you want to start training from scratch')
+        else:
+            checkpoint = {}
+            if mode == 'test':
+                print('Could not find a pretrained network. Terminating...')
+                return
     else:
-        checkpoint = {}
+        checkpoint = torch.load(checkpoint_path)
+
+    if checkpoint_path != '':
+        print('Using checkpoint: %s' % (checkpoint_path))
+        checkpoint = torch.load(checkpoint_path)
 
     cfg = get_run_config(checkpoint)
     if force_dataset != '':
@@ -412,9 +423,15 @@ if __name__ == "__main__":
     mode = 'test'
     force_dataset = ''
     save_prob = 0.0011
+    checkpoint_path = ''
 
     argc = len(sys.argv)
-    if argc > 3:
+    if argc > 4:
+        mode = sys.argv[1]
+        force_dataset = sys.argv[2]
+        save_prob = float(sys.argv[3])
+        checkpoint_path = sys.argv[4]
+    elif argc > 3:
         mode = sys.argv[1]
         force_dataset = sys.argv[2]
         save_prob = float(sys.argv[3])
@@ -432,4 +449,4 @@ if __name__ == "__main__":
     random_seed = int(time.time()*1000)%(2**32-1) 
     np.random.seed(random_seed)
     
-    main(mode, force_dataset, save_prob)
+    main(mode, force_dataset, save_prob, checkpoint_path)

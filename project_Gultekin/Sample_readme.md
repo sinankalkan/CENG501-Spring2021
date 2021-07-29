@@ -29,14 +29,26 @@ Two popular aerial images datasets VisionDrone [3] and UAVDT [4] was used in the
 
 Figure 2: Overview for the DMNet framework. [1]
 
-L() =
-1
-2N
-∗
-N
-Xi
-=1
-kD(Xi;) − Dik2.
+DMNet Generation : Density map is of great significance in the context of crowd counting [5] proposes the Multi-column CNN (MCNN) to learn density map for crowd counting tast. Due to the variation of head size per image, single column with fixed receptive field may not capture enough features. Therefore three columns are introduced to enhance feature extraction [1]. Author of the paper adopt MCNN [5] in their approach to generate object density map for image cropping. 
+
+The Loss function for training density map generation network is based on the pixel-wise mean absolute error, which is given as below: 
+
+![loss](https://user-images.githubusercontent.com/48828422/127487939-3e493e57-5037-49e8-97a7-97795fc72ffc.PNG)
+[1]
+
+
+Θ is the parameters of density map generation module. N is the total number of images in the training set. Xi is the input image and Di is the ground truth density map for image Xi. D(Xi;Θ) stands for the generated density map by the density generation network. 
+
+![MCNN](https://user-images.githubusercontent.com/48828422/127489814-c4533ae5-c75c-463c-b4bb-20b759a4acff.PNG)
+
+Figure 3: MCNN framework. [5]
+
+Ground truth object density map : To generate the ground truth object density maps for aerial images in the training stage, they follow geometry-adaptive and geometry-fixed kernel [5].
+
+![ground truth](https://user-images.githubusercontent.com/48828422/127490872-dd2aeedf-8392-47f1-b9a2-ef96f7877778.PNG)
+
+Figure 4: Original images and corresponding crowd density maps obtained by convolving geometry-adaptive Gaussian kernels [5].
+
 
 
 ## 2.2. My interpretation 

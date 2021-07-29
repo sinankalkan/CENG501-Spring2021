@@ -238,7 +238,7 @@ Experiments of figure 3 yielded similar image patches to the ones from the paper
 
 Experiments for figure 4 yielded that first layer weights only differ by the same orthogonal transformation with respect to dataset covariance matrix. This and other small remarks given in section 3.3.3 are directly consistent with the information from paper, even if the data obtained is slightly noisy due to lower amount of training.
 
-The paper claims that a network that is not trained but its weights initialized with the use of datas "covariance" matrix gives close performance to a pretrained network. However, testing this claim gave results that did not agree with the results in the paper. We think that this disagreement might be due to errors in our execution.
+The paper claims that a network that is not trained but its weights initialized with the use of datas "covariance" matrix gives close performance to a pretrained network. However, testing this claim gave results that did not agree with the results in the paper. The experiment results suggest that the covariance matrix does not benefit a network more than initializing it with random weights. We think that this disagreement might be due to errors in our execution.
 
 In general, many claims of the paper are experimented on. It should be noted that, some trainings for these experiments were weeks long with the hardware capacity at hand. For this reason, most of the training parameters and methods were meaningfully scaled down to obtain, evaluate the results (and correct the experiments if necessary in a timely manner). While some of the results of experiment results are not exactly same, the results are similar enough to see meaningful similar paterns in between experiment results and paper figures.
 

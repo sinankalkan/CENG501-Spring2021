@@ -208,7 +208,25 @@ It can be noted that these figures are more noisy with respect to the figures of
 
 ### 3.3.4 Accuracy on downstream tasks with different kinds of upstream training
 
-figure 5 results
+Difference of accuracy on downstream tasks when different kinds of upstream training are performed is given as the next figure in the paper for real labels.
+
+<p align = "center">
+<img src = "figures/Figure5_original.PNG">
+</p>
+<p align = "center">
+Figure-4a - Original Figure5 in the paper
+</p>
+
+The figure given in the paper compares a curve “covariance” to the performance of others as explained in section 3.1. For covariance curve the filters in the convolutional layer are random samples from a Gaussian distribution with mean 0 and the covariance obtained from training on random labels. It can be seen that on the figure from the paper that the "covariance" curve performs as good as the "pretrained" curve. The result of experiments conducted to replicate this is given in the next figure 
+
+<p align = "center">
+<img src = "figures/figure5_1.png.PNG">
+</p>
+<p align = "center">
+Figure-4a - Original Figure5 in the paper
+</p>
+
+In the results obtained for real labels, it can be observed it is not similar to the results of the paper. In the experiment results it can be seen that a pretrained network performs better while the "covariance" network performs close to a network trained from scratch (But with weight scaling). We think that the reason of the discrepancy between "no scale" and the  "from scratch" is due to the difference of "init_scale" used in the paper not being used in this experiment. Other than that, the experiment does not agree with the papers claim that "covariance" network gives close performance to a pretrained network. However, we think that this disagreement is due to possible errors made in the execution of our code.
 
 # 4. Conclusion
 
@@ -220,7 +238,7 @@ Experiments of figure 3 yielded similar image patches to the ones from the paper
 
 Experiments for figure 4 yielded that first layer weights only differ by the same orthogonal transformation with respect to dataset covariance matrix. This and other small remarks given in section 3.3.3 are directly consistent with the information from paper, even if the data obtained is slightly noisy due to lower amount of training.
 
-figure 5 conclusion
+The paper claims that a network that is not trained but its weights initialized with the use of datas "covariance" matrix gives close performance to a pretrained network. However, testing this claim gave results that did not agree with the results in the paper. We think that this disagreement might be due to errors in our execution.
 
 In general, many claims of the paper are experimented on. It should be noted that, some trainings for these experiments were weeks long with the hardware capacity at hand. For this reason, most of the training parameters and methods were meaningfully scaled down to obtain, evaluate the results (and correct the experiments if necessary in a timely manner). While some of the results of experiment results are not exactly same, the results are similar enough to see meaningful similar paterns in between experiment results and paper figures.
 
@@ -233,3 +251,5 @@ In general, many claims of the paper are experimented on. It should be noted tha
 # Contact
 
 Ertuğrul Güngör - ertugungor@gmail.com / https://www.linkedin.com/in/ertugungor
+Bahadır Bilgin  - bahadir.bilg@gmail.com / https://www.linkedin.com/in/bahadır-bilgin/
+

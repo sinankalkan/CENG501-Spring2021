@@ -103,7 +103,9 @@ The final evaluation is about the length and accuracy. At below, we can see the 
 
 # 4. Conclusion
 
-Discuss the paper in relation to the results in the paper and your results.
+In this project, the paper *Joint Learning of Answer Selection and Answer Summary Generation in Community Question Answering* [1] is tried to be implemented. The original paper has the purpose of answer selection for community questions and answers with abstractive summarization of answers. 
+
+Since there was a lack of data (answer-summary pairs were not clearly provided) one of the two main purposes of the paper could not be reproduced. Besides, the methods and models were customized and the implementation details were not clearly given. Therefore, in our embedding, we were just sticked to the equations and tried to implement same matrix operations. 
 
 # 5. References
 

@@ -105,7 +105,7 @@ In conclusion, even though we couldn't conclude the code and reached the results
 
 # 5. References
 
-[1]https://openaccess.thecvf.com/content_CVPR_2020/papers/Lee_Structure_Boundary_Preserving_Segmentation_for_Medical_Image_With_Ambiguous_Boundary_CVPR_2020_paper.pdf  
+[1]Hong Joo Lee, Jung Uk Kim, Sangmin Lee, Hak Gu Kim, Yong Man Ro; Structure Boundary Preserving Segmentation for Medical Image With Ambiguous Boundary, Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2020, pp. 4817-4826 https://openaccess.thecvf.com/content_CVPR_2020/html/Lee_Structure_Boundary_Preserving_Segmentation_for_Medical_Image_With_Ambiguous_Boundary_CVPR_2020_paper.html  
 [2]https://fairyonice.github.io/Learn-about-Fully-Convolutional-Networks-for-semantic-segmentation.html  
 [3]https://towardsdatascience.com/unet-line-by-line-explanation-9b191c76baf5  
 

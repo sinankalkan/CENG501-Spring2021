@@ -1,5 +1,6 @@
 # from BiLSTM import BiLSTM
 from LoadData import LoadData
+from seq2seq import seq2seq
 import torch as torch
 import numpy as np
 
@@ -55,6 +56,9 @@ def train_QASelection(epochs=5):
             answer_tensor = torch.reshape(answer_tensor, (1, 400, 100))
             H_q, c_q = lstm.forward(question_tensor)
             H_a, c_a = lstm.forward(answer_tensor)
+
+            model = seq2seq(H_a.shape[2])
+            a = model(H_a, H_q)
 
 
 def main():

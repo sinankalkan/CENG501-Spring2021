@@ -27,6 +27,7 @@ The MOS_H model is trained with the MSRA-10K [3], DUT-OMRON [4], ECSSD [5], and 
 
 MeticulousNet has encoder-decoder architecture. Encoder part can be any feature extraction module from other networks. In this paper, encoder of the PSPNet with ResNet50 is used as the encoder. The main contribution of the paper comes from the decoder part of MeticulousNet.
 
+
  
 
 ## 2.2. My interpretation 
@@ -115,7 +116,7 @@ Table 2: Low resolution foreground segmentation on HRSOD.
 Table 3: High resolution foreground segmentation on HRSOD.
 
 ### Qualitative Results:
-### MOS600 Subset:
+#### MOS600 Subset Outputs:
 <table>
   <tr>
   <td style="word-wrap: break-word">
@@ -150,7 +151,7 @@ Table 3: High resolution foreground segmentation on HRSOD.
    </tr> 
 </table>
 
-### HRSOD-Test Subset:
+#### HRSOD-Test Subset Outputs:
 
 <table>
   <tr>
@@ -168,7 +169,7 @@ Table 3: High resolution foreground segmentation on HRSOD.
 </table>
 # 4. Conclusion
 
-Discuss the paper in relation to the results in the paper and your results.
+While the method produces qualitatively impressive results, its quantitative results seem very close to those of SOTA results. This may be one reason why this article has not yet been published. It is very difficult to produce such clear and accurate masks on high resolution images, due to the requirement to resize images to fit the GPU. Thanks to the patch-based refinement method used in this study, they were able to overcome this difficulty. Their architecture looks like a good combination of CascadePSP[8] and Pointrend[9].
 
 # 5. References
 
@@ -179,6 +180,8 @@ Discuss the paper in relation to the results in the paper and your results.
 5. Shi, Jianping, et al. "Hierarchical image saliency detection on extended CSSD." _IEEE transactions on pattern analysis and machine intelligence_ 38.4 (2015): 717-729.
 6. Li, Xiang, et al. "Fss-1000: A 1000-class dataset for few-shot segmentation." _Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition_. 2020.
 7. Xu, Ning, et al. "Deep image matting." _Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition_. 2017.
+8. Cheng, Ho Kei, et al. "CascadePSP: toward class-agnostic and very high-resolution segmentation via global and local refinement." Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2020.
+9. Kirillov, Alexander, et al. "Pointrend: Image segmentation as rendering." Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. 2020.
 
 # Contact
 

@@ -1,6 +1,6 @@
 # Semi-supervised Semantic Segmentation via Strong-weak Dual-branch Network
 
-This readme file is an outcome of the CENG501 (Spring 2021) project for reproducing a paper which did not have any implementations. See CENG501 (Spring 2021) Project List for a complete list of all paper reproduction projects.
+This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.metu.edu.tr/~sinan/DL/) project for reproducing a paper without an implementation. See [CENG501 (Spring 2021) Project List](https://github.com/sinankalkan/CENG501-Spring2021) for a complete list of all paper reproduction projects.
 
 # 1. Introduction
 

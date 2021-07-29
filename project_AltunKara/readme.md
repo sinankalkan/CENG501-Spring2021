@@ -97,7 +97,7 @@ coding22.py would have run and we would have seen the results. But it is broken 
 
 ## 3.3. Results
 
-We did not see the results. However, We implemented the first part of the network(unet_denemeler). When We trained and test it, We saw that there was noise inside the predicted segmentation images inside the lesions and overflows in the segmentation. The first problem may have arisen from my mistake of using a polygon. So, We added noise to the polygon part of the map via boundary preserving block map training. The second problem may have come from a lack of SBE that optimizes to catch the boundaries.
+We did not see the results. However, we implemented the first part of the network(unet_denemeler). When we trained and test it, we saw that there was noise inside the predicted segmentation images inside the lesions and overflows in the segmentation. The first problem may have arisen from my mistake of using a polygon. So, we added noise to the polygon part of the map via boundary preserving block map training. The second problem may have come from a lack of SBE that optimizes to catch the boundaries.
 
 # 4. Conclusion
 

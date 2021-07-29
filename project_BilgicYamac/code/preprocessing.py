@@ -54,29 +54,3 @@ class PreProcess(nn.Module):
 
         return H, G
 
-
-def answer_padding(ans, emb, max):
-    # map(add_zeros, map(lambda x: x[1], ans))
-    new_ans = add_zeros(ans, max)
-    return torch.Tensor([torch.Tensor([float(k) for k in emb[int(i)]]) if int(i) != 0 else torch.zeros(100) for i in new_ans])
-
-
-def add_zeros(ans, max):
-    num_zeros = max - len(ans)
-    zeros = torch.zeros(num_zeros)
-    return torch.cat((ans, zeros), 0)
-
-if __name__ == "__main__":
-    PATH_sum = "data/sequence/summary_wikia.t7"
-    PATH_train = "data/sequence/train_wikia.t7"
-    PATH_emb = "data/sequence/initEmb.t7"
-    summ = torch.load(PATH_sum)
-    train = torch.load(PATH_train)
-    emb = torch.load(PATH_emb)
-    # max_ans = max(map(lambda x: max(map(len, x[1])), train))
-    # filt = filter(lambda a: a>13000, [len(x[1]) for x in train])
-    # for i in filt:
-    #     print(i)
-    # a = answer_padding(train[0][1][0], emb, max_ans)
-    # print(summ[0])
-

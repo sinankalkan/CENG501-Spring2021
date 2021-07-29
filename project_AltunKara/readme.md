@@ -111,5 +111,5 @@ In conclusion, even though we couldn't conclude the code and reached the results
 
 # Contact
 
-Murat Kara muratka058@gmail.com
-İlayda Altun altunilayda8@gmail.com
+Murat Kara muratka058@gmail.com  
+İlayda Altun altunilayda8@gmail.com  

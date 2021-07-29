@@ -214,16 +214,16 @@ Difference of accuracy on downstream tasks when different kinds of upstream trai
 <img src = "figures/Figure5_original.PNG">
 </p>
 <p align = "center">
-Figure-4a - Original Figure5 in the paper
+Figure-5a - Original Figure5 in the paper
 </p>
 
 The figure given in the paper compares a curve “covariance” to the performance of others as explained in section 3.1. For covariance curve the filters in the convolutional layer are random samples from a Gaussian distribution with mean 0 and the covariance obtained from training on random labels. It can be seen that on the figure from the paper that the "covariance" curve performs as good as the "pretrained" curve. The result of experiments conducted to replicate this is given in the next figure 
 
 <p align = "center">
-<img src = "figures/figure5_1.png.PNG">
+<img src = "figures/figure5_1.png">
 </p>
 <p align = "center">
-Figure-4a - Original Figure5 in the paper
+Figure-5b - Experiment results
 </p>
 
 In the results obtained for real labels, it can be observed it is not similar to the results of the paper. In the experiment results it can be seen that a pretrained network performs better while the "covariance" network performs close to a network trained from scratch (But with weight scaling). We think that the reason of the discrepancy between "no scale" and the  "from scratch" is due to the difference of "init_scale" used in the paper not being used in this experiment. Other than that, the experiment does not agree with the papers claim that "covariance" network gives close performance to a pretrained network. However, we think that this disagreement is due to possible errors made in the execution of our code.

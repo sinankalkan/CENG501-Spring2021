@@ -30,21 +30,26 @@ The major contribution of this paper on literature is the proposed method can be
 # 2. The method and my interpretation
 
 ## 2.1. The original method
-This section describes the original method used in paper. Also, dataset and some implementation details are given. 
+Original method uses a Google-Net like structure in the train segmentation part and a GAN-like structure in the SBE part.  Actually, these structures are extension to already existing image segmentation algorithms like U-net. In the train segmentation part, existing method is extended by Boundary Preserving Blocks that give some output and have a loss function like in the Google-Net. In the SBE part, there is a discriminator network that discriminates the ground truth segmentation map image as real and predicted segmentation map image as fake by comparing them with boundary preserving map. In this way, network forces taking boundary information into account better in the predicted segmentation map. The SBE part is only used in the training. 
 
-### 2.1.1 BPB & SBE
-In the original method, the boundary preserving segmentation structure consists Boundary Preserving Block (BPB) and Shape Boundary-aware Evaluator(SBE). The BPB and SBE use the boundary key points which are selected from boundary key point selection algorithm.
+### 2.1.1 Building Blocks
+In the original method, the boundary preserving segmentation method has some building blocks. The structure consists of Boundary Key Point Selection Algorithm, Boundary Preserving Block (BPB) and Shape Boundary-aware Evaluator(SBE). 
+
 #### 2.1.1.1 Boundary Key Point Selection Algorithm
-The algorithm select the boundary key points that best fit the ground truth segmentation map. The algorithm works as described below :   
+The algorithm select the boundary key points that best fit the ground truth segmentation map. In this way, we expect these points to describe the boundaries well. The algorithm works as described below :   
 1- Obtain the boundary of the target object using edge detection  
-2- On the boundary, randomly select n points  
+2- On the boundary, randomly select n points.
 3- These n points connected to form a polygon.  
-4- Repeat for T times and select the key point sets which have the highest intersection of union.  
+4- Repeat for T times and select the key point sets which have the highest intersection of union with the ground truth segmentation map. 
+5- To increase the chance of coinciding edge points, we take a disks with points as center and R as radius instead of only points. This is our boundary key point selections.
+
 #### 2.1.1.2 Boundary Preserving Block (BPB)
-This unit can be embedded into any network and it enhances the boundary information of input. Boundary Preserving Block predicts the segmentation map.  This unit consist boundary Point Map Generator, that produce a key point prediction map. The generator consist boundary key point selection module which generates ground truth boundary key point maps. It also consist dilated convolution, so the generator can effectively encode & decode the features with a various range of receptive fields. Generator optimized by cross entropy loss between the estimated boundary key point map and ground truth boundary key point map. 
+
+This block is a structure that is used in the training segmentation part. It can be embedded into any network and it enhances the boundary information of input. This unit is added after some layers. It takes the features of the previous layer and applies different levels of dilation to them. Then, the outputs are concatenated, 1X1 dilation and sigmoid is applied to that concatenated outputs. The benefit of dilated convolution is that the network can effectively encode & decode the features with a various range of receptive fields. Then, the loss is applied with boundary key points(actually disks) selected by boundary key point selection algorithm. The output of this learned parameter is multiplied with features of the previous layer and the features added again (vi = (fi * Mi) + Mi). This value is passed to the next layer.  
 
 #### 2.1.1.3 Shape Boundary-aware Evaluator (SBE)
-SBE is an evaluator which gives feedback to the network by using the bundary key point map. Basically, its inputs are boundary key point map and predicted or ground truth segmentation image, and it evaluates whether the segmentation results are consistent with the boundary key point map or not. 
+
+SBE is an evaluator that evaluates the difference boundary key point map with ground-truth segmentation map and predicted segmentation map. Difference with ground-truth segmentation can be thought as real input as in GAN architecture. So, the difference is expected a high score. On the other hand, the difference with a lowly predicted segmentation map gets a low score since the predicted segmentation will not be consistent with the boundary of the image in this situation. So, the netwoek gives feedback to the network by using the bundary key point map to update predicted segmentation map. 
 
 ### 2.1.2 Dataset
 The paper used the PH2 and ISBI 2016 datasets. These datasets are publically available for skin lesion segmentation.  ISBI 2016 dataset consists 900 skin lesion images, PH2 includes 200 dermoscopc images. They used ISBI 2016 dataset for training and PH2 for testing. They also used TVUS dataset which is private and collected for experiments.  

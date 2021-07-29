@@ -79,13 +79,20 @@ Discuss the paper in relation to the results in the paper and your results.
 
 # 5. References
 
-[1]  Changlin Li, Taojiannan Yang, Sijie Zhu, Chen Chen, Shanyue Guan, Density Map Guided Object Detection in Aerial Images, CVPR 2020 Workshop 
+[1]  Changlin Li, Taojiannan Yang, Sijie Zhu, Chen Chen, Shanyue Guan, Density Map Guided Object Detection in Aerial Images, CVPR 2020 Workshop
+
 [2]  F. Ozge Unel, Burak O. Ozkalayci, and Cevahir Cigla. The power of tiling for small object detection. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, June 2019.
+
 [3]  Pengfei Zhu, Longyin Wen, Xiao Bian, Haibin Ling, and Qinghua Hu. Vision Meets Drones: A Challenge. Apr 2018
+
 [4]  Dawei Du, Yuankai Qi, Hongyang Yu, Yifan Yang, Kaiwen Duan, Guorong Li, Weigang Zhang, Qingming Huang, and Qi Tian. The Unmanned Aerial Vehicle Benchmark: Object Detection and Tracking. arXiv e-prints, page arXiv:1804.00518, Mar. 2018.
+
 [5]  Y. Zhang, D. Zhou, S. Chen, S. Gao, and Y. Ma. Singleimage crowd counting via multi-column convolutional neural network. In 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 589–597, June 2016.
+
 [6]  Kai Chen, Jiaqi Wang, Jiangmiao Pang, Yuhang Cao, Yu Xiong, Xiaoxiao Li, Shuyang Sun, Wansen Feng, Ziwei Liu, Jiarui Xu, et al. Mmdetection: Open mmlab detection toolbox and benchmark. arXiv preprint arXiv:1906.07155, 2019.
+
 [7]  Olga Russakovsky, Jia Deng, Hao Su, Jonathan Krause, Sanjeev Satheesh, Sean Ma, Zhiheng Huang, Andrej Karpathy, Aditya Khosla, Michael Bernstein, Alexander C. Berg, and Li Fei-Fei. ImageNet Large Scale Visual Recognition Challenge. International Journal of Computer Vision (IJCV), 115(3):211–252, 2015.
+
 [8]  Fan Yang, Heng Fan, Peng Chu, Erik Blasch, and Haibin Ling. Clustered object detection in aerial images. In The IEEE International Conference on Computer Vision (ICCV), October 2019.
 
  

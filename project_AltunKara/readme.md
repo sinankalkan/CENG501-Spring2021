@@ -69,10 +69,12 @@ PH2 : [PH2](https://www.fc.up.pt/addi/ph2%20database.html)
 ## 2.2. Our interpretation 
 
 First, we wanted to have the same segmentation scores on different networks. We tried to implement the FCN segmentation network using ISBI 2016 dataset. Unfortunately, we couldn't get the segmentation scores yet. 
-The FCN networks which are using ISBI 2016 dataset are included in the FCN codes file.
-In the FCN_Implementation of ISIC_2016 file, we got the results but the problem is the predicted images are fully black. We still try to fix this issue.  
-In the FCN_ISIC2016.ipynb file, even though the training is working, it takes so much time, we can't see the results.    
-On the other hand, we successfully implement the U-Net segmentation model to the ISBI 2016 dataset. We used mostly a medium page that explains the U-Net structure [2] and modified it for the datasets. Our modified U-Net code is available as .py and .ipnyb files but there must be a configuration of data sets. We could not upload folders. So, the dataset paths must be changed inside the code. It is the -wrong- implementation of the first training part: U-Net  + BPB 
+The FCN networks which are using ISBI 2016 dataset are included in the FCN codes file.  
+- In the FCN_Implementation of ISIC_2016 file, which is a modified version of an FCN network [2]. In this network, there were several classes but in our case, there is only 2 classes. We got the results but the problem is the predicted images are fully black. We believe that is because of two classes exist. So predicted images represent only one class.  We still try to fix this issue.    
+- In the FCN_ISIC2016.ipynb file, even though the training is working, it takes so much time, we can't see the results.  
+
+
+On the other hand, we successfully implement the U-Net segmentation model to the ISBI 2016 dataset. We used mostly a medium page that explains the U-Net structure [3] and modified it for the datasets. Our modified U-Net code is available as .py and .ipnyb files but there must be a configuration of data sets. We could not upload folders. So, the dataset paths must be changed inside the code. It is the -wrong- implementation of the first training part: U-Net  + BPB 
 
 Afterward, blocks of our algorithm are added. Firstly, it was decided to start with Boundary Preserving Block. For edge detection, Canny Edge Detection is used from the OpenCV library. For constructing the polygon, the points are needed to be sorted in the counter clock-wise order. In the end, we got the polygons but we made a mistake that is realized at the deadline. We took the polygon instead of the points as the output of the algorithm.
 
@@ -104,8 +106,9 @@ In conclusion, even though we couldn't conclude the code and reached the results
 # 5. References
 
 Provide your references here.
-[1]https://openaccess.thecvf.com/content_CVPR_2020/papers/Lee_Structure_Boundary_Preserving_Segmentation_for_Medical_Image_With_Ambiguous_Boundary_CVPR_2020_paper.pdf
-[2] https://towardsdatascience.com/unet-line-by-line-explanation-9b191c76baf5
+[1] https://openaccess.thecvf.com/content_CVPR_2020/papers/Lee_Structure_Boundary_Preserving_Segmentation_for_Medical_Image_With_Ambiguous_Boundary_CVPR_2020_paper.pdf
+[2] https://fairyonice.github.io/Learn-about-Fully-Convolutional-Networks-for-semantic-segmentation.html
+[3] https://towardsdatascience.com/unet-line-by-line-explanation-9b191c76baf5
 
 # Contact
 

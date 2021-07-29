@@ -162,6 +162,8 @@ On the  other hand, the paper claims that they could offer an effective method f
 
 [1] P. Singh, V. Verma, P. Mazumder, L. Carin and P. Rai, "Calibrating CNNs for Lifelong Learning", Papers.nips.cc, 2021. [Online]. Available: https://papers.nips.cc/paper/2020/hash/b3b43aeeacb258365cc69cdaf42a68af-Abstract.html.
 
+PS: The paper realased their code (only model implementation) in parallel at [here](https://github.com/pravendra-singh/Calibrating-CNNs-for-Lifelong-Learning), however, i did not benefit from that release and implemented my own codes.
+
 # Contact
 
 **Elif Bilge:** bilge.elif@metu.edu.tr

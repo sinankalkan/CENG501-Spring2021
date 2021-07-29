@@ -167,6 +167,7 @@ Table 3: High resolution foreground segmentation on HRSOD.
     <td> <img src="saved/outputs/HRSOD_Subset/fine/255996486_5d9c90314d_o.jpg"alt="1" height=240px></td>
    </tr> 
 </table>
+
 # 4. Conclusion
 
 While the method produces qualitatively impressive results, its quantitative results seem very close to those of SOTA results. This may be one reason why this article has not yet been published. It is very difficult to produce such clear and accurate masks on high resolution images, due to the requirement to resize images to fit the GPU. Thanks to the patch-based refinement method used in this study, they were able to overcome this difficulty. Their architecture looks like a good combination of CascadePSP[8] and Pointrend[9].

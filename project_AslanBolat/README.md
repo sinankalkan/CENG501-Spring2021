@@ -261,6 +261,16 @@ Nonetheless, we tried different approached and methods for training the models a
 [4] [Samuel R. Bowman, Luke Vilnis, Oriol Vinyals, Andrew M. Dai, Rafal Joze-fowicz, and Samy Bengio. Generating sentences from a continuous space,2016.](https://arxiv.org/pdf/1511.06349.pdf)  
 [5] [Jun Li, Chengjie Niu, and Kai Xu. Learning part generation and assemblyfor structure-aware shape synthesis, 2020.](https://arxiv.org/pdf/1906.06693.pdf)
 
+## 5.1. Used or Inspired Code
+Here we list the sources that we looked while implementing the project, if we directly took and used the code we also wrote it in the code file as a comment.
+
+- https://github.com/eriklindernoren/PyTorch-GAN#wasserstein-gan-gp (Wgan-gp training loop implementation)
+- https://github.com/eriklindernoren/PyTorch-GAN/blob/master/implementations/wgan_gp/wgan_gp.py (Gradient penalty implementation)
+- https://github.com/ry85/VAE-GAN/blob/master/network.py (VAE-GAN implementation)
+- https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html (Dcgan training loop implementation)
+- https://github.com/mikedh/trimesh/issues/947 (Reflective symmetry vector)
+- https://pytorch3d.readthedocs.io/en/latest/_modules/pytorch3d/structures/volumes.html#Volumes (Voxels to pointcloud transformation)
+
 # Contact
 
 Özgür Aslan: ozgraslan17@gmail.com  

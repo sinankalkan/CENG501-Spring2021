@@ -63,7 +63,7 @@ STFT with Kaiser-Bessel window function is applied to the input segmsents with 5
 
 One of the unmentioned information is about input size and this was one of the hardest part of this project. Generated I/Q data is a complex number; therefore, its real part (I) and imaginary part (Q) has to be split such that one segment is in the shape of `(512, 2)` or `(2, 512)`.
 
-## **2.2. My interpretation **
+## **2.2. My interpretation**
 
 ### **2.2.1 Data Generation**
 

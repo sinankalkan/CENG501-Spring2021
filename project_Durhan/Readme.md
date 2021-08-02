@@ -2,6 +2,9 @@
 
 This readme file is an outcome of the [CENG501 (Spring 2021)](http://kovan.ceng.metu.edu.tr/~sinan/DL/) project for reproducing a paper without an implementation. See [CENG501 (Spring 2021) Project List](https://github.com/sinankalkan/CENG501-Spring2021) for a complete list of all paper reproduction projects.
 
+# Disclaimer
+The structure of the code is inspired from the CENG501 course materials.  
+
 # 1. Introduction
 This study was presented at the Machine Learning and the Physical Sciences Workshop at the 34th Conference on Neural Information Processing Systems (NeurIPS) on 
 December, 2020. It aims at approximating the ground state energies and eigenfunctions of quantum mechanical sytems via Neural Networks. My goal was to obtain the 

@@ -21,7 +21,7 @@ As the figure below ( it is taken from the original paper) , we can see the floo
 
 ### 2.1.1 Datasets 
 
-We have two types of datasets which are sythetic and pytorch ready datasets, on the training part of the code you should indicate your dataset as given below, 
+We have two types of datasets which are sythetic and pytorch ready datasets, on the training part of the code you should indicate your dataset as given below, ( For the sythetic datasets mathematical calculations are checked from the example sythetic datasets link : https://github.com/takashiishida/flooding/tree/master/synthetic ) 
 
 * Choose your input size and output size for "input_dim" and "output_dim" parameters. 
 

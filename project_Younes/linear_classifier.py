@@ -1,4 +1,9 @@
-'''This script trains the downstream classifier using gradients (for large datasets).'''
+'''
+This script trains the downstream classifier using gradients (for large datasets).
+
+Reference:
+https://github.com/ae-foster/pytorch-simclr
+'''
 import argparse
 import os
 

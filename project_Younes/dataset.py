@@ -1,3 +1,9 @@
+'''
+Prepare datasets for the model
+
+reference:
+https://github.com/ae-foster/pytorch-simclr
+'''
 import numpy as np
 import torch
 import torchvision

@@ -1,3 +1,9 @@
+'''
+L-BFGS classifier
+
+Reference:
+https://github.com/ae-foster/pytorch-simclr
+'''
 import argparse
 import os
 import math

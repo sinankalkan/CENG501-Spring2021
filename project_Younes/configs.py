@@ -1,3 +1,9 @@
+'''
+import and prepare the dataset
+
+reference:
+https://github.com/ae-foster/pytorch-simclr
+'''
 import json
 
 import torchvision

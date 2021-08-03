@@ -1,3 +1,7 @@
+'''
+Training the model and evaluating it using downstream classifiers
+depending on the used dataset.
+'''
 import argparse
 import os
 import subprocess

@@ -3,6 +3,9 @@ Data augmentation
 
 We feed two augmented versions of each instance
 as in the original paper
+
+reference:
+https://github.com/ae-foster/pytorch-simclr
 '''
 from PIL import ImageFilter
 from torchvision import transforms

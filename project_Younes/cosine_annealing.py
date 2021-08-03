@@ -1,3 +1,9 @@
+'''
+Cosine Annealing scheduler
+
+Reference:
+https://github.com/ae-foster/pytorch-simclr
+'''
 import math
 from torch.optim.lr_scheduler import _LRScheduler
 

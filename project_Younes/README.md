@@ -30,7 +30,7 @@ Three efficient techniques were propsed to tackle this to improve the representa
 
 ## 2.2. My interpretation 
 
-For my PyTorch implementation, I first implemented a self-supervised contrastive learning model inspired by the [recent frameworks](#2) as a backbone for the implementation. After that, I implemented the sggested components (a contrastive prior, and label smoothing) to solve the problems highlighted by the paper. These two components were implemented as follows,
+For my PyTorch implementation, I first implemented a self-supervised contrastive learning model inspired by the [recent frameworks](#2) (and [their respective implementations](https://github.com/ae-foster/pytorch-simclr)) as a backbone for the implementation . After that, I implemented the sggested components (a contrastive prior, and label smoothing) to solve the problems highlighted by the paper. These two components were implemented as follows,
 1. ***For the contrastive prior,*** I trained the randomly initialized network for one epoch while fixing all but BN layers. After that, I assigned the extracted instance features directly to the classification weights.
 
 2. ***For label smoothing.*** Once per epoch, the cosine similarity between the instance the classification weight ![inline1](https://latex.codecogs.com/svg.image?w_i) and all other weights ![inline2](https://latex.codecogs.com/svg.image?w_1,&space;...,&space;w_{i-1},&space;w_{i&plus;1},&space;...,&space;w_N) are comuted, and the top-K similarities are computed. The label of class $j$ is then defined as follows:

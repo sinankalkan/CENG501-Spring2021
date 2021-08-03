@@ -1,6 +1,9 @@
 '''
 The 2-layer ML projection head that follows the
 ResNet Encoder (with non-linearity in between).
+
+Reference:
+https://github.com/ae-foster/pytorch-simclr
 '''
 import torch
 from torch import nn

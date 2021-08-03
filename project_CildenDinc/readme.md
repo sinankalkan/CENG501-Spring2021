@@ -191,12 +191,18 @@ To sum up, we also want to mention some difficulties and constraints which put s
 
 [1]  Wenfeng L., Meng Y., Semi-supervised Semantic Segmentation via Strong-weak Dual-branch Network, ECCV 2020,
 https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123500766-supp.pdf 
+
 [2] Huang et. al., Weakly-Supervised Semantic Semantic Segmentation Network with Deep Seeded Region Growing, CVPR 2018, http://openaccess.thecvf.com/content_cvpr_2018/papers/Huang_Weakly-Supervised_Semantic_Segmentation_CVPR_2018_paper.pdf 
+
 [3] PASCAL VOC 2012 Dataset: 
 https://deepai.org/dataset/pascal-voc, https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/PascalVOC_IJCV2009.pdf 
+
 [4] Semantic Boundaries Dataset: http://home.bharathh.info/pubs/codes/SBD/download.html
+
 [5] DSRG PyTorch implementation: https://github.com/terenceylchow124/DSRG_PyTorch/
+
 [6] Main source for the dataset implementations:  https://github.com/DevikalyanDas/Semantic-Segmentation-of-pascal-voc-dataset-using-Pytorch/blob/main/Pascal_VOC_Segmentation.ipynb  
+
 [7] Our DSRG fork (originally taken from https://github.com/terenceylchow124/DSRG_PyTorch and revised for our project) for training DSRG and generating the weak dataset is available as a separate zip file named "DSRG_PyTorch-main"
 
 
